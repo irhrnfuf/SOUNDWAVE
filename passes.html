@@ -215,18 +215,25 @@
           </div>
 
           <div class="form-grid-2">
-            <div class="field-group">
+            <div class="field-group" style="grid-column: span 2;">
               <label for="pass-tier">Wristband Tier</label>
-              <select id="pass-tier" name="passTier" onchange="updatePassCanvas()">
+              <select id="pass-tier" name="passTier" onchange="updatePassCanvas()" style="font-size: 0.9rem; padding: 9px 12px;">
                 <option value="General Admission ($129)">3-Day GA &ndash; $129</option>
                 <option value="VIP Gold Pass ($249)" selected>3-Day VIP &ndash; $249</option>
                 <option value="Backstage All-Access ($499)">3-Day Platinum &ndash; $499</option>
               </select>
             </div>
+          </div>
 
+          <div class="form-grid-2">
             <div class="field-group">
               <label for="ticket-qty">Quantity (1&ndash;10)</label>
               <input type="number" id="ticket-qty" name="ticketQty" min="1" max="10" value="1" />
+            </div>
+
+            <div class="field-group">
+              <label for="arrival-date-quick">Check-In</label>
+              <input type="text" id="arrival-date-quick" value="Dec 18, 2026" readonly style="background:#eee; font-weight:700;" />
             </div>
           </div>
 

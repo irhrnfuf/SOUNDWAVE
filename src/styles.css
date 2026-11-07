@@ -875,14 +875,19 @@ input[type="number"],
 select,
 textarea {
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
   background-color: #fffdf7;
   color: #111111;
   border: 2px solid #111111;
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 8px 6px 8px 8px;
   font-family: inherit;
   font-weight: 600;
-  font-size: 0.86rem;
+  font-size: 0.81rem;
+  letter-spacing: -0.01em;
+  text-overflow: clip;
 }
 
 input:focus,
