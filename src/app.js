@@ -482,3 +482,43 @@ function switchFestivalTab(panelId, tabBtnElement) {
     if (matchingBtn) matchingBtn.classList.add("active-tab");
   }
 }
+
+// --- Split Reel Switcher (Official 4K vs Fan Cam VHS) ---
+function switchReelMode(mode) {
+  const video = document.getElementById("festival-video");
+  const officialBtn = document.getElementById("btn-mode-official");
+  const fanBtn = document.getElementById("btn-mode-fan");
+  const recText = document.getElementById("hud-rec-text");
+  const channelTag = document.getElementById("hud-channel-tag");
+  const timecode = document.getElementById("hud-timecode");
+  const desc = document.getElementById("reel-description");
+
+  if (!video) return;
+
+  const isOfficial = mode === "official";
+
+  if (officialBtn && fanBtn) {
+    officialBtn.classList.toggle("active", isOfficial);
+    fanBtn.classList.toggle("active", !isOfficial);
+  }
+
+  if (isOfficial) {
+    video.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
+    video.poster = "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80";
+    if (recText) recText.textContent = "REC [4K 60FPS]";
+    if (channelTag) channelTag.textContent = "CH 01 • SOUNDSTAGE A";
+    if (timecode) timecode.textContent = "SP 00:03:42";
+    if (desc) desc.innerHTML = "✨ <b>Official Cinematic:</b> Multi-camera 4K stage production, pyro drops, and soundboard audio.";
+  } else {
+    // Fan Cam / Artisan Highlights Reel
+    video.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4";
+    video.poster = "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=80";
+    if (recText) recText.textContent = "REC [VHS HI-8]";
+    if (channelTag) channelTag.textContent = "CH 04 • CROWD & LAWN";
+    if (timecode) timecode.textContent = "LP 01:14:09";
+    if (desc) desc.innerHTML = "📼 <b>Fan Cam &amp; Community Reel:</b> Raw crowd perspectives, lawn jam sessions, night lasers, and artisan bazaars.";
+  }
+
+  video.load();
+}
+

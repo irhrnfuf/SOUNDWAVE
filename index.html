@@ -437,12 +437,53 @@
       </div>
 
       <div class="media-split">
-        <div>
-          <h3 style="margin-top: 0;">Watch the 4K Cinematic Aftermovie</h3>
-          <video id="festival-video" controls poster="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80">
-            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
-            Your browser does not support HTML5 video.
-          </video>
+        <div class="video-showcase-wrap">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <h3 style="margin: 0;">4K Festival Cinema &amp; Fan Reels</h3>
+            
+            <!-- Reel Mode Switcher (Option 4) -->
+            <div class="video-mode-switcher" role="tablist" aria-label="Reel Mode Switcher">
+              <button type="button" class="video-mode-btn active" id="btn-mode-official" onclick="switchReelMode('official')">
+                <span style="font-size: 0.85rem;">🎬</span> Official 4K
+              </button>
+              <button type="button" class="video-mode-btn" id="btn-mode-fan" onclick="switchReelMode('fan')">
+                <span style="font-size: 0.85rem;">📼</span> Fan Cam (VHS)
+              </button>
+            </div>
+          </div>
+
+          <!-- Retro Camcorder HUD Frame (Option 1) -->
+          <div class="camcorder-frame">
+            <div class="camcorder-corners"></div>
+            
+            <div class="camcorder-hud">
+              <div class="camcorder-hud-top">
+                <div class="rec-indicator">
+                  <span class="rec-dot"></span>
+                  <span id="hud-rec-text">REC [4K 60FPS]</span>
+                </div>
+                <div class="hud-tag" id="hud-channel-tag">CH 01 &bull; SOUNDSTAGE A</div>
+                <div class="rec-indicator">
+                  <span>BAT 98% 🔋</span>
+                </div>
+              </div>
+
+              <div class="camcorder-hud-bottom">
+                <div class="hud-tag" id="hud-timecode">SP 00:03:42</div>
+                <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem;">WIDE ANGLE 18mm &bull; STEREO HI-FI</div>
+                <div class="hud-tag" style="background: rgba(255, 42, 133, 0.35); border-color: #ff2a85;">SOUNDWAVE &rsquo;25 ARCHIVE</div>
+              </div>
+            </div>
+
+            <video id="festival-video" controls poster="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80">
+              <source id="video-source" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+
+          <div style="font-size: 0.82rem; color: #57554f; display: flex; justify-content: space-between; align-items: center; padding: 0 4px;">
+            <span id="reel-description">✨ <b>Official Cinematic:</b> Multi-camera 4K stage production, pyro drops, and soundboard audio.</span>
+          </div>
         </div>
 
         <div class="audio-panel">
