@@ -1950,6 +1950,11 @@ a:hover {
   stroke: #161415 !important;
 }
 
+.lolla-wordmark-svg .wordmark-wave {
+  fill: #ff2a85 !important;
+  stroke: #161415 !important;
+}
+
 .lolla-wordmark-svg rect {
   fill: #f7b2d4 !important;
 }
