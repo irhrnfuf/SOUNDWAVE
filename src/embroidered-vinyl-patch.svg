@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <!-- Thread displacement filter for embroidered tactile texture -->
+    <filter id="vinyl-stitch-filter" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.25 0.8" numOctaves="3" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G" result="stitched" />
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#111111" flood-opacity="0.25" />
+    </filter>
+
+    <filter id="patch-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1.5" dy="2.5" stdDeviation="2" flood-color="#161415" flood-opacity="0.3" />
+    </filter>
+
+    <!-- Linen cloth weave for felt background -->
+    <pattern id="linen-base" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="#ede8dc" />
+      <circle cx="1" cy="1" r="0.6" fill="#ded7c6" />
+      <circle cx="3" cy="3" r="0.6" fill="#ded7c6" />
+    </pattern>
+  </defs>
+
+  <!-- Linen Fabric Backing (#ede8dc rounded patch badge) -->
+  <rect width="100" height="100" rx="16" fill="url(#linen-base)" />
+
+  <!-- Outer Merrowed Embroidery Border -->
+  <g filter="url(#patch-shadow)">
+    <!-- Die-Cut Patch Border -->
+    <circle cx="50" cy="50" r="43" fill="#f7f3e8" stroke="#d4ccb8" stroke-width="2" />
+    <!-- Merrowed Thread Edge in Dark Charcoal -->
+    <circle cx="50" cy="50" r="41.5" fill="none" stroke="#161415" stroke-width="3" stroke-dasharray="2.5 1.5" />
+  </g>
+
+  <!-- Hand-Stitched Black Vinyl Record Disk -->
+  <g filter="url(#vinyl-stitch-filter)">
+    <!-- Black Vinyl Disk Base (Heavy Embroidered Satin Thread) -->
+    <circle cx="50" cy="50" r="37.5" fill="#161415" />
+    
+    <!-- Outer Record Rim Stitching -->
+    <circle cx="50" cy="50" r="36" fill="none" stroke="#2a2729" stroke-width="1.8" stroke-dasharray="3 1" />
+
+    <!-- Vinyl Sound Grooves (Concentric Tactile Stitches) -->
+    <circle cx="50" cy="50" r="32" fill="none" stroke="#363234" stroke-width="1" stroke-dasharray="5 2.5" />
+    <circle cx="50" cy="50" r="28" fill="none" stroke="#252224" stroke-width="1.2" stroke-dasharray="4 2" />
+    <circle cx="50" cy="50" r="24" fill="none" stroke="#3a3538" stroke-width="0.9" stroke-dasharray="6 3" />
+    <circle cx="50" cy="50" r="20" fill="none" stroke="#252224" stroke-width="1.1" stroke-dasharray="3.5 1.5" />
+
+    <!-- Vinyl Light Glint Reflections (Subtle Thread Sheen) -->
+    <path d="M 22 36 A 34 34 0 0 1 36 22" fill="none" stroke="#4a4448" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 2" />
+    <path d="M 64 78 A 34 34 0 0 1 78 64" fill="none" stroke="#4a4448" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 2" />
+
+    <!-- Center Record Label (Hot Magenta #ff2a85 Ring + Pastel Pink Center) -->
+    <circle cx="50" cy="50" r="14.5" fill="#161415" stroke="#ff2a85" stroke-width="2.5" stroke-dasharray="3 1.2" />
+    <circle cx="50" cy="50" r="12" fill="#ff2a85" />
+    <circle cx="50" cy="50" r="9.5" fill="#f7b2d4" />
+    
+    <!-- Center Label Text Ring & Spindle Hole -->
+    <circle cx="50" cy="50" r="6" fill="none" stroke="#161415" stroke-width="1" stroke-dasharray="1.5 1" />
+    <!-- Spindle Hole with Merrowed Stitch -->
+    <circle cx="50" cy="50" r="3.2" fill="#ede8dc" stroke="#161415" stroke-width="1.8" />
+  </g>
+</svg>
