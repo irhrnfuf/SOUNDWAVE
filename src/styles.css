@@ -1835,11 +1835,11 @@ a.gallery-item:hover .gallery-explore-cta {
 }
 
 .lineup-hype-day-card {
-  background-color: #fff9db;
-  border: 2px solid #111111;
+  background-color: #fdf0f6;
+  border: 2px solid #161415;
   border-radius: 12px;
   padding: 0.75rem 0.85rem;
-  box-shadow: 4px 4px 0px #111111;
+  box-shadow: 4px 4px 0px #161415;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1848,15 +1848,15 @@ a.gallery-item:hover .gallery-explore-cta {
 .lineup-hype-day-tag {
   display: inline-block;
   align-self: flex-start;
-  background-color: #d81b60;
-  color: #ffffff;
+  background-color: #161415;
+  color: #f7b2d4;
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   padding: 2px 7px;
   border-radius: 5px;
-  border: 1.5px solid #111111;
+  border: 1.5px solid #161415;
   margin-bottom: 0.35rem;
 }
 
@@ -1876,10 +1876,10 @@ a.gallery-item:hover .gallery-explore-cta {
 .lineup-hype-cta-banner {
   background-color: #161415;
   color: #fffdf7;
-  border: 2.5px solid #111111;
+  border: 2.5px solid #161415;
   border-radius: 14px;
   padding: 0.85rem 1.1rem;
-  box-shadow: 5px 5px 0px #d81b60;
+  box-shadow: 5px 5px 0px #f7b2d4;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1901,7 +1901,288 @@ a.gallery-item:hover .gallery-explore-cta {
 
 .lineup-hype-cta-text span {
   font-size: 0.8rem;
-  color: #e6e1d6;
+  color: #fce8f3;
+}
+
+/* ==========================================================================
+   GLOBAL SOUNDWAVE POSTER PALETTE THEME
+   Charcoal Xerox Black (#161415) & Dusty Pastel Club Pink (#f7b2d4)
+   Applied to Page Backgrounds, Navigations, Hero Gradients & UI Accents
+   ========================================================================== */
+
+/* 1. Page Background */
+body {
+  background-color: #f5bdd9;
+  background-image:
+    radial-gradient(rgba(22, 20, 21, 0.08) 1px, transparent 0),
+    linear-gradient(180deg, #f7b2d4 0%, #fce8f3 48%, #f3b2d2 100%);
+  background-size: 5px 5px, 100% 100%;
+  color: #161415;
+}
+
+h1 {
+  color: #161415;
+  text-shadow: 3px 3px 0px #f7b2d4;
+}
+
+a:hover {
+  color: #c2185b;
+}
+
+/* 2. Top Marquee & Sticky Navigation Bar */
+.marquee-strip {
+  background-color: #161415;
+  color: #f7b2d4;
+  border-bottom: 2px solid #f7b2d4;
+}
+
+.sticky-navbar {
+  background-color: #161415;
+  background-image: radial-gradient(rgba(247, 178, 212, 0.12) 1px, transparent 0);
+  background-size: 5px 5px;
+  border-bottom: 3px solid #f7b2d4;
+  box-shadow: 0 4px 0px rgba(22, 20, 21, 0.35);
+}
+
+.lolla-wordmark-svg text:first-of-type {
+  fill: #f7b2d4 !important;
+  stroke: #161415 !important;
+}
+
+.lolla-wordmark-svg rect {
+  fill: #f7b2d4 !important;
+}
+
+.lolla-wordmark-svg text:last-of-type {
+  fill: #161415 !important;
+}
+
+.sticky-navbar ul li a {
+  color: #f7b2d4;
+  border: 2px solid transparent;
+}
+
+.sticky-navbar ul li:first-child a {
+  background-color: #262023;
+  color: #f7b2d4;
+  border-color: rgba(247, 178, 212, 0.45);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.sticky-navbar ul li a[style*="background-color"],
+.sticky-navbar ul li a:hover {
+  background-color: #f7b2d4 !important;
+  color: #161415 !important;
+  border-color: #f7b2d4 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+.nav-cta-btn {
+  background-color: #f7b2d4 !important;
+  color: #161415 !important;
+  border: 2px solid #161415 !important;
+  box-shadow: 3px 3px 0px #161415 !important;
+  font-weight: 800 !important;
+}
+
+.sticky-navbar .nav-cta-btn {
+  background-color: #d81b60 !important;
+  color: #ffffff !important;
+  border: 2px solid #f7b2d4 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+.nav-cta-btn:hover,
+.sticky-navbar .nav-cta-btn:hover {
+  background-color: #f7b2d4 !important;
+  color: #161415 !important;
+  border-color: #161415 !important;
+}
+
+/* 3. Hero Banner Gradient (#top-banner) & Hero Cards */
+#top-banner {
+  background:
+    radial-gradient(rgba(247, 178, 212, 0.14) 1px, transparent 0),
+    linear-gradient(180deg, #161415 0%, #2a1d24 52%, #f7b2d4 100%);
+  background-size: 5px 5px, 100% 100%;
+  border-bottom: 3px solid #161415;
+}
+
+.logo-patch-img {
+  mix-blend-mode: normal;
+  background-color: #fffdf7;
+  border: 3px solid #f7b2d4;
+  box-shadow: 6px 6px 0px #161415;
+}
+
+.hero-card-block {
+  background-color: #fff9fc;
+  border: 3px solid #161415;
+  box-shadow: 7px 7px 0px #161415;
+}
+
+.event-meta-row {
+  background-color: #f7b2d4;
+  color: #161415;
+  border: 2px solid #161415;
+}
+
+.banner-stats-box {
+  background-color: #161415;
+  color: #f7b2d4;
+  border: 3px solid #f7b2d4;
+  box-shadow: 7px 7px 0px #161415;
+}
+
+.banner-stats-box h3 {
+  color: #f7b2d4;
+}
+
+.stat-line {
+  background-color: #241e22;
+  color: #fce8f3;
+  border: 1px solid rgba(247, 178, 212, 0.3);
+}
+
+/* 4. Stage Switcher Navigation Pills, Portal Cards, Tables & Footer */
+.stage-switcher-pills,
+.workspace-tab-bar {
+  background-color: #161415;
+  border: 3px solid #f7b2d4;
+  box-shadow: 5px 5px 0px #161415;
+}
+
+.stage-pill-link,
+.workspace-tab-btn {
+  background-color: #fff9fc;
+  color: #161415 !important;
+  border: 2px solid #161415;
+}
+
+.stage-pill-link:hover,
+.workspace-tab-btn:hover {
+  background-color: #f7b2d4;
+  color: #161415 !important;
+}
+
+.stage-pill-link.active-stage-pill,
+.workspace-tab-btn.active-tab {
+  background-color: #f7b2d4;
+  color: #161415 !important;
+  border-color: #ffffff;
+  box-shadow: 3px 3px 0px #000000;
+}
+
+.portal-card:hover {
+  background-color: #fdf0f6;
+}
+
+.portal-card-cta,
+.gallery-explore-cta,
+.gallery-badge,
+.back-to-top-btn,
+.draggable-chip {
+  background-color: #f7b2d4;
+  color: #161415;
+  border-color: #161415;
+}
+
+.portal-card:hover .portal-card-cta,
+a.gallery-item:hover .gallery-explore-cta,
+.draggable-chip:hover {
+  background-color: #161415;
+  color: #f7b2d4;
+}
+
+.schedule-table thead {
+  background-color: #161415;
+  color: #f7b2d4;
+}
+
+.schedule-table tbody tr:nth-child(even) {
+  background-color: #fdf0f6;
+}
+
+.schedule-table tbody tr:hover {
+  background-color: #f7b2d4;
+}
+
+.audio-panel,
+.price-summary-box,
+.milestone-card {
+  background-color: #fdf0f6;
+}
+
+.milestone-year {
+  background-color: #161415;
+  color: #f7b2d4;
+}
+
+.checkout-header-band {
+  background-color: #161415;
+  color: #f7b2d4;
+}
+
+.checkout-header-band h2 {
+  color: #f7b2d4;
+}
+
+button.primary-checkout-btn {
+  background-color: #f7b2d4;
+  color: #161415;
+}
+
+button.primary-checkout-btn:hover,
+button.secondary-btn:hover,
+button:hover {
+  background-color: #161415;
+  color: #f7b2d4;
+}
+
+.box-model-pass {
+  outline-color: #f7b2d4;
+}
+
+.tier-header-strip {
+  background-color: #f7b2d4;
+  color: #161415;
+}
+
+.box-model-pass.vip-featured {
+  background-color: #fdf0f6;
+  outline-color: #161415;
+}
+
+.box-model-pass.vip-featured .tier-header-strip {
+  background-color: #161415;
+  color: #f7b2d4;
+}
+
+.box-model-pass.vip-featured .tier-header-strip h4 {
+  color: #f7b2d4;
+}
+
+.box-model-pass.platinum-tier {
+  outline-color: #d81b60;
+}
+
+.box-model-pass.platinum-tier .tier-header-strip {
+  background-color: #d81b60;
+  color: #ffffff;
+}
+
+.box-model-pass.platinum-tier .tier-header-strip h4 {
+  color: #ffffff;
+}
+
+#footer {
+  background-color: #161415;
+  color: #f7b2d4;
+  border-top: 4px solid #f7b2d4;
+}
+
+#footer a {
+  color: #ffffff;
 }
 
 @media (max-width: 1120px) {
