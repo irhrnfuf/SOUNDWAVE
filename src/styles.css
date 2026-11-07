@@ -1495,3 +1495,242 @@ a.gallery-item:hover .gallery-explore-cta {
     display: block !important;
   }
 }
+
+
+/* ==========================================================================
+   DIY ZINE / RISOGRAPH SCREENPRINT POSTER (UNPLUGGED STYLE + SPEAKER WALL)
+   ========================================================================== */
+.poster-showcase-container {
+  display: grid;
+  grid-template-columns: 510px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.zine-poster-canvas {
+  background-color: #ffea00;
+  color: #111111;
+  border: 4px solid #111111;
+  border-radius: 6px;
+  box-shadow: 10px 10px 0px #111111;
+  padding: 1.25rem 1.3rem 1.35rem;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Space Grotesk', Impact, sans-serif;
+}
+
+.zine-poster-canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(17, 17, 17, 0.09) 1px, transparent 0);
+  background-size: 5px 5px;
+  z-index: 2;
+}
+
+.zine-poster-inner {
+  position: relative;
+  z-index: 3;
+}
+
+.zine-title-giant {
+  font-family: 'Syne', Impact, 'Arial Black', sans-serif;
+  font-weight: 800;
+  font-size: 3.85rem;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  color: #111111;
+  margin: 0;
+  text-align: center;
+  transform: scaleY(1.18);
+  transform-origin: top center;
+}
+
+.zine-sub-headline {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #111111;
+  margin: 0.65rem 0 0.35rem;
+}
+
+.zine-pink-tape-banner {
+  background-color: #ff1e8a;
+  color: #111111;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 5px 10px;
+  margin: 0 -0.4rem 0.9rem;
+  transform: rotate(-1.2deg);
+  box-shadow: 3px 3px 0px #111111;
+  border: 2px solid #111111;
+}
+
+.zine-mid-split {
+  display: grid;
+  grid-template-columns: 118px 1fr;
+  gap: 0.7rem;
+  align-items: start;
+  margin-bottom: 0.85rem;
+}
+
+.zine-date-stack {
+  transform: rotate(-4deg);
+  text-align: left;
+  padding-top: 0.15rem;
+}
+
+.zine-date-stack .zine-month {
+  font-family: 'Syne', Impact, sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  line-height: 0.95;
+  display: block;
+}
+
+.zine-date-stack .zine-days-big {
+  font-family: 'Syne', Impact, sans-serif;
+  font-weight: 800;
+  font-size: 2.55rem;
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  display: block;
+  margin: 2px 0;
+}
+
+.zine-date-stack .zine-venue-small {
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-transform: uppercase;
+  display: block;
+}
+
+.zine-tape-strips-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.zine-day-block {
+  background-color: rgba(255, 255, 255, 0.55);
+  border: 2px solid #111111;
+  padding: 6px 9px;
+  box-shadow: 3px 3px 0px #111111;
+}
+
+.zine-day-block:nth-child(odd) {
+  transform: rotate(0.7deg);
+}
+
+.zine-day-block:nth-child(even) {
+  transform: rotate(-0.7deg);
+}
+
+.zine-day-pill {
+  display: inline-block;
+  background-color: #111111;
+  color: #ffea00;
+  font-weight: 800;
+  font-size: 0.68rem;
+  padding: 1px 7px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.zine-headliner-tape {
+  display: block;
+  background-color: #ff1e8a;
+  color: #111111;
+  font-family: 'Syne', Impact, sans-serif;
+  font-weight: 800;
+  font-size: 0.9rem;
+  line-height: 1.15;
+  padding: 3px 6px;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  border: 1.5px solid #111111;
+}
+
+.zine-support-line {
+  font-size: 0.73rem;
+  font-weight: 800;
+  line-height: 1.22;
+  color: #111111;
+  text-transform: uppercase;
+}
+
+.zine-undercard-line {
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #222222;
+  text-transform: uppercase;
+}
+
+.zine-bottom-speakers-row {
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  gap: 0.65rem;
+  align-items: end;
+  margin-top: 0.65rem;
+}
+
+.zine-qr-sticker {
+  background-color: #ff1e8a;
+  border: 2.5px solid #111111;
+  padding: 7px;
+  box-shadow: 4px 4px 0px #111111;
+  transform: rotate(-2deg);
+  text-align: center;
+}
+
+.zine-qr-sticker .zine-rsvp-tag {
+  background-color: #111111;
+  color: #ffea00;
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 3px 5px;
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.zine-speaker-wall-wrap {
+  position: relative;
+  border: 3px solid #111111;
+  background-color: #ffffff;
+  box-shadow: 5px 5px 0px #111111;
+  overflow: hidden;
+}
+
+.zine-speaker-wall-wrap img {
+  width: 100%;
+  height: 245px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.zine-corner-note {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: #ffea00;
+  border: 2px solid #111111;
+  padding: 4px 8px;
+  font-size: 0.63rem;
+  font-weight: 800;
+  line-height: 1.15;
+  transform: rotate(-3deg);
+  box-shadow: 3px 3px 0px #111111;
+}

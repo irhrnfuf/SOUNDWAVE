@@ -1,66 +1,136 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 180" width="220" height="180">
   <defs>
-    <!-- Felt / Linen Texture Filter -->
-    <filter id="felt-texture" x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
-      <feColorMatrix type="matrix" values="0 0 0 0 0.98  0 0 0 0 0.97  0 0 0 0 0.94  0 0 0 0.08 0" result="col" />
-      <feComposite in="SourceGraphic" in2="col" operator="over" />
+    <!-- Realistic Embroidery Thread & Satin Stitch Texture Filter -->
+    <filter id="satin-stitch" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.15 0.95" numOctaves="3" result="threadNoise" />
+      <feDisplacementMap in="SourceGraphic" in2="threadNoise" scale="1.8" xChannelSelector="R" yChannelSelector="G" result="stitched" />
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#111111" flood-opacity="0.28" />
     </filter>
+
+    <filter id="patch-shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-color="#1a1815" flood-opacity="0.32" />
+    </filter>
+
+    <!-- Dense Parallel Satin Stitch Pattern for Single-Color Crimson Drum Shell -->
+    <pattern id="crimson-satin-threads" width="6" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(8)">
+      <rect width="6" height="4" fill="#d81b60" />
+      <line x1="0" y1="1" x2="6" y2="1" stroke="#ad1457" stroke-width="1.1" />
+      <line x1="0" y1="3" x2="6" y2="3" stroke="#f06292" stroke-width="0.7" opacity="0.65" />
+    </pattern>
+
+    <!-- Cream Twill Satin Stitch Pattern for Drumhead -->
+    <pattern id="cream-twill-threads" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)">
+      <rect width="5" height="5" fill="#f5efe0" />
+      <line x1="0" y1="2" x2="5" y2="2" stroke="#e2d9c5" stroke-width="1.2" />
+      <line x1="0" y1="4" x2="5" y2="4" stroke="#ffffff" stroke-width="0.8" />
+    </pattern>
+
+    <!-- Warm Beige Felt Backing Pattern -->
+    <pattern id="felt-weave" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="#fcfaf2" />
+      <circle cx="1" cy="1" r="0.6" fill="#ede6d3" />
+      <circle cx="3" cy="3" r="0.6" fill="#ede6d3" />
+    </pattern>
   </defs>
 
-  <!-- Warm Off-White Rounded Fabric Patch Base -->
-  <rect x="8" y="8" width="144" height="144" rx="28" fill="#fffdf7" stroke="#111111" stroke-width="3" filter="url(#felt-texture)" />
-  
-  <!-- Outer Hand-Stitched Running Thread Border -->
-  <rect x="14" y="14" width="132" height="132" rx="22" fill="none" stroke="#ff3366" stroke-width="2.5" stroke-dasharray="6,4" />
+  <!-- Warm Linen Background matching thread-icons.jpg (#fcfaf2) -->
+  <rect width="220" height="180" rx="18" fill="#fcfaf2" />
 
-  <!-- Single-Color Drum Set (Snare Drum + Crossed Drumsticks + Cymbals in monochromatic Crimson #ff3366) -->
-  <g transform="translate(80, 80)">
-    <!-- High-Hat / Cymbal Stand & Disc -->
-    <line x1="-36" y1="-12" x2="-36" y2="42" stroke="#111111" stroke-width="3.5" stroke-linecap="round" />
-    <path d="M-52 -14 Q-36 -24 -20 -14 Z" fill="#ff3366" stroke="#111111" stroke-width="2.5" />
-    <!-- Cymbal Hand-Stitched Highlight -->
-    <path d="M-46 -15 Q-36 -21 -26 -15" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-dasharray="3,2" />
+  <!-- Outer Die-Cut Cream Felt Patch Base with Soft Cast Shadow (Exactly like the Ticket & Tent patches) -->
+  <g filter="url(#patch-shadow)">
+    <rect x="16" y="14" width="188" height="152" rx="28" fill="#f3ebd8" stroke="#dfd4bc" stroke-width="3" />
+    <!-- Merrowed Overlock Cream Thread Border -->
+    <rect x="20" y="18" width="180" height="144" rx="24" fill="#faf6eb" stroke="#c8bca2" stroke-width="3.5" stroke-dasharray="3,2.5" />
+    <!-- Inner Black Stitched Frame Line -->
+    <rect x="27" y="25" width="166" height="130" rx="18" fill="none" stroke="#1e1c1a" stroke-width="3.5" stroke-dasharray="5,2.5" />
+  </g>
 
-    <!-- Crash Cymbal -->
-    <line x1="38" y1="-18" x2="38" y2="42" stroke="#111111" stroke-width="3.5" stroke-linecap="round" />
-    <path d="M22 -20 Q38 -32 54 -20 Z" fill="#ff3366" stroke="#111111" stroke-width="2.5" />
-    <path d="M28 -21 Q38 -29 48 -21" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-dasharray="3,2" />
+  <!-- Hand-Stitched Embroidered Single-Color Drum Kit & Crossed Drumsticks -->
+  <g filter="url(#satin-stitch)">
+    <!-- Crossed Wooden Drumsticks Behind Snare (Cream & Dark Charcoal Thread) -->
+    <g stroke-linecap="round">
+      <!-- Stick 1 -->
+      <line x1="54" y1="38" x2="164" y2="136" stroke="#1e1c1a" stroke-width="11" />
+      <line x1="54" y1="38" x2="164" y2="136" stroke="#e9dec5" stroke-width="6" stroke-dasharray="4,1.5" />
+      <ellipse cx="52" cy="36" rx="6" ry="4.5" transform="rotate(42 52 36)" fill="#d81b60" stroke="#1e1c1a" stroke-width="2.5" />
 
-    <!-- Crossed Drumsticks (Behind Main Snare) -->
-    <line x1="-34" y1="-32" x2="34" y2="34" stroke="#ffffff" stroke-width="5" stroke-linecap="round" />
-    <line x1="-34" y1="-32" x2="34" y2="34" stroke="#111111" stroke-width="3" stroke-linecap="round" />
-    <circle cx="-34" cy="-32" r="3.5" fill="#111111" />
+      <!-- Stick 2 -->
+      <line x1="166" y1="38" x2="56" y2="136" stroke="#1e1c1a" stroke-width="11" />
+      <line x1="166" y1="38" x2="56" y2="136" stroke="#e9dec5" stroke-width="6" stroke-dasharray="4,1.5" />
+      <ellipse cx="168" cy="36" rx="6" ry="4.5" transform="rotate(-42 168 36)" fill="#d81b60" stroke="#1e1c1a" stroke-width="2.5" />
+    </g>
 
-    <line x1="34" y1="-32" x2="-34" y2="34" stroke="#ffffff" stroke-width="5" stroke-linecap="round" />
-    <line x1="34" y1="-32" x2="-34" y2="34" stroke="#111111" stroke-width="3" stroke-linecap="round" />
-    <circle cx="34" cy="-32" r="3.5" fill="#111111" />
+    <!-- Snare / Tom Drum Cylinder Body (Single Color Deep Raspberry-Crimson Satin Thread) -->
+    <path
+      d="M52 72 L168 72 L162 124 C162 138, 58 138, 58 124 Z"
+      fill="url(#crimson-satin-threads)"
+      stroke="#1e1c1a"
+      stroke-width="4.5"
+      stroke-linejoin="round"
+    />
 
-    <!-- Main Snare Drum Body (Single Color Crimson/Dark Pink #ff3366) -->
-    <path d="M-30 0 L30 0 L26 28 L-26 28 Z" fill="#ff3366" stroke="#111111" stroke-width="3.5" stroke-linejoin="round" />
-    
-    <!-- Snare Rim Top Oval -->
-    <ellipse cx="0" cy="0" rx="30" ry="11" fill="#ffffff" stroke="#111111" stroke-width="3.5" />
-    <!-- Embroidered Drumhead Stitches -->
-    <ellipse cx="0" cy="0" rx="24" ry="8" fill="none" stroke="#ff3366" stroke-width="2" stroke-dasharray="4,3" />
+    <!-- Embroidered Zigzag Tension Lugs Across the Drum Shell -->
+    <polyline
+      points="60,86 74,120 90,88 110,122 130,88 146,120 160,86"
+      fill="none"
+      stroke="#1e1c1a"
+      stroke-width="4"
+      stroke-linejoin="round"
+      stroke-linecap="round"
+    />
+    <polyline
+      points="60,86 74,120 90,88 110,122 130,88 146,120 160,86"
+      fill="none"
+      stroke="#faf6eb"
+      stroke-width="2"
+      stroke-dasharray="3,2"
+      stroke-linejoin="round"
+    />
 
-    <!-- Snare Tension Rods (Vertical Embroidery Thread Lines) -->
-    <line x1="-20" y1="9" x2="-18" y2="28" stroke="#111111" stroke-width="2.5" />
-    <circle cx="-19" cy="18" r="2" fill="#ffffff" stroke="#111111" stroke-width="1.2" />
+    <!-- Bottom Drum Hoop Rim -->
+    <path
+      d="M56 121 C56 137, 164 137, 164 121"
+      fill="none"
+      stroke="#1e1c1a"
+      stroke-width="6"
+      stroke-linecap="round"
+    />
+    <path
+      d="M58 121 C58 135, 162 135, 162 121"
+      fill="none"
+      stroke="#d81b60"
+      stroke-width="2.5"
+      stroke-dasharray="4,2"
+    />
 
-    <line x1="0" y1="11" x2="0" y2="28" stroke="#111111" stroke-width="2.5" />
-    <circle cx="0" cy="19" r="2" fill="#ffffff" stroke="#111111" stroke-width="1.2" />
-
-    <line x1="20" y1="9" x2="18" y2="28" stroke="#111111" stroke-width="2.5" />
-    <circle cx="19" cy="18" r="2" fill="#ffffff" stroke="#111111" stroke-width="1.2" />
-
-    <!-- Tripod Base Legs -->
-    <line x1="0" y1="28" x2="0" y2="46" stroke="#111111" stroke-width="3.5" />
-    <line x1="0" y1="46" x2="-18" y2="54" stroke="#111111" stroke-width="3" stroke-linecap="round" />
-    <line x1="0" y1="46" x2="18" y2="54" stroke="#111111" stroke-width="3" stroke-linecap="round" />
-
-    <!-- Decorative Hand-Stitched Little Music Star / Sparkle in Top Left -->
-    <path d="M-42 -38 L-40 -34 L-36 -33 L-40 -31 L-41 -27 L-43 -31 L-47 -32 L-43 -34 Z" fill="#ff3366" stroke="#111111" stroke-width="1" />
-    <path d="M42 -36 L43 -32 L47 -31 L43 -29 L42 -25 L40 -29 L36 -30 L40 -32 Z" fill="#ff3366" stroke="#111111" stroke-width="1" />
+    <!-- Top Drumhead Oval (Cream Twill Embroidery with Stitched Inner Ring) -->
+    <ellipse
+      cx="110"
+      cy="72"
+      rx="58"
+      ry="20"
+      fill="url(#cream-twill-threads)"
+      stroke="#1e1c1a"
+      stroke-width="4.5"
+    />
+    <!-- Inner Stitched Bullseye Ring on Drumhead (Single Color Crimson Thread) -->
+    <ellipse
+      cx="110"
+      cy="72"
+      rx="44"
+      ry="13"
+      fill="none"
+      stroke="#d81b60"
+      stroke-width="2.8"
+      stroke-dasharray="5,3"
+    />
+    <!-- Center Embroidered Star / Beat Emblem on Drumhead -->
+    <polygon
+      points="110,63 113,69 120,70 115,74 116,80 110,77 104,80 105,74 100,70 107,69"
+      fill="#d81b60"
+      stroke="#1e1c1a"
+      stroke-width="1.8"
+      stroke-linejoin="round"
+    />
   </g>
 </svg>
