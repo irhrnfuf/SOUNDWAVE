@@ -1141,6 +1141,31 @@ button.primary-checkout-btn:hover {
 .stage-patch-vinyl   { background-position: 3% 96%; }  /* Wooden Turntable & Botanical Leaves */
 .stage-patch-vip     { background-position: 97% 96%; } /* Golden Crown & Pink Flamingo Cocktail */
 
+/* Hand-Stitched Embroidered Festival Wristband Patch */
+.wristband-patch-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 14px;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(4px 4px 0px rgba(17, 17, 17, 0.25));
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.wristband-patch-img:hover {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.wristband-patch-hero {
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  border: 3px solid #111111;
+  box-shadow: 4px 4px 0px #111111;
+  background-color: #fffdf7;
+}
+
 /* 4 Handcrafted Experience & Culture Patches (2x2 Sprite: experience-patches.jpg) */
 .exp-patch-sprite {
   display: inline-block;
