@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SoundWave 2026 Personal Schedule Builder & Camping Guide — HTML5 Drag & Drop Festival Planner with LocalStorage" />
+  <title>My Schedule &amp; Camping Planner &mdash; SoundWave 2026</title>
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+
+  <!-- Top Marquee Strip -->
+  <div class="marquee-strip" aria-label="Planner Feed">
+    <div class="marquee-track">
+      ★ MY SOUNDWAVE SCHEDULE ★ DRAG &amp; DROP ARTISTS INTO YOUR PERSONAL WEEKEND ITINERARY ★ SAVED AUTOMATICALLY IN YOUR BROWSER LOCALSTORAGE ★ CAMPING CHECK-IN OPENS THURSDAY 2PM ★
+    </div>
+  </div>
+
+  <!-- Sticky Navbar -->
+  <nav class="sticky-navbar" aria-label="Schedule Navigation">
+    <div class="nav-inner">
+      <a href="./index.html" class="brand-link" aria-label="SoundWave 2026 Welcome Hub">
+        <img src="./src/soundwave-logo-patch.jpg" alt="SoundWave 2026 Patch Logo" class="nav-logo-patch" />
+        <svg class="lolla-wordmark-svg" viewBox="0 0 310 68" xmlns="http://www.w3.org/2000/svg">
+          <text x="8" y="46" font-family="'Shrikhand', Impact, cursive" font-size="40" fill="#ffffff" stroke="#111111" stroke-width="7" paint-order="stroke fill" letter-spacing="1">SoundWave</text>
+          <rect x="218" y="46" width="76" height="19" rx="9" fill="#111111" />
+          <text x="256" y="59" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="11" fill="#ffe600" letter-spacing="2">MIAMI &rsquo;26</text>
+        </svg>
+      </a>
+
+      <ul>
+        <li><a href="./index.html">&larr; Welcome Hub</a></li>
+        <li><a href="./lineup.html">Lineup &amp; Poster</a></li>
+        <li><a href="./schedule-builder.html" style="background-color: #ffe600; color: #111111; border: 2px solid #111111; box-shadow: 2px 2px 0px #111111;">My Schedule</a></li>
+        <li><a href="./stages.html">All Stages &amp; Media</a></li>
+        <li><a href="./passes.html">Passes &amp; Checkout</a></li>
+        <li><a href="./shuttles-orders.html">Shuttles &amp; Orders</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Banner -->
+  <header id="top-banner">
+    <div class="banner-container">
+      <div class="hero-logo-Totem">
+        <img src="./src/soundwave-logo-patch.jpg" alt="SoundWave Logo Patch" class="logo-patch-img" />
+      </div>
+
+      <div class="hero-card-block">
+        <div class="event-meta-row">UNIT II HTML5 DRAG &amp; DROP &bull; PERSONAL ITINERARY BUILDER</div>
+        <h1 style="margin: 0.2rem 0 0.45rem;">My Weekend Schedule &amp; Camping Planner</h1>
+        <p style="margin: 0; font-size: 0.95rem;">
+          Drag and drop your must-see acts into your personalized schedule builder. All entries persist across sessions in your browser's <code>localStorage</code>.
+        </p>
+      </div>
+
+      <aside class="banner-stats-box">
+        <h3>Campground Pulse</h3>
+        <div class="stat-line">
+          <span>TENT VILLAGE</span>
+          <span>82% Reserved</span>
+        </div>
+        <div class="stat-line">
+          <span>CAMPING SHOWERS</span>
+          <span>24/7 Solar Heated</span>
+        </div>
+        <div class="stat-line">
+          <span>MORNING YOGA</span>
+          <span>Daily 9:00 AM</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <div class="stage-page-container">
+
+    <!-- Interactive Drag & Drop Planner Section -->
+    <section class="ui-panel active-panel" style="margin-bottom: 2rem;">
+      <div class="panel-header">
+        <div class="section-title-with-patch">
+          <span class="thread-patch-sprite patch-camping" title="Hand-Embroidered Camping Tent Patch"></span>
+          <div>
+            <h2>Drag-and-Drop Personal Weekend Scheduler</h2>
+            <small style="font-weight: 700; color: #57554f;">Grab any artist set card on the left and drag it into your schedule box on the right</small>
+          </div>
+        </div>
+        <button type="button" class="secondary-btn" onclick="clearSavedLineup()">Reset Schedule</button>
+      </div>
+
+      <div class="itinerary-workspace">
+        <!-- Draggable Pool of Artist Chips -->
+        <div id="artist-pool">
+          <p style="margin: 0 0 0.5rem; font-size: 0.84rem;"><b>Draggable Sets (Click and hold to drag):</b></p>
+          <span id="drag-artist-1" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="Neon Pulse — Horizon Arena (Sun 10:00 PM)">&#9776; Neon Pulse (Sun 10:00 PM)</span>
+          <span id="drag-artist-2" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="Aurora Echoes — Horizon Arena (Fri 09:30 PM)">&#9776; Aurora Echoes (Fri 09:30 PM)</span>
+          <span id="drag-artist-3" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="DJ Solaris — Analog Dome (Fri 09:30 PM)">&#9776; DJ Solaris (Fri 09:30 PM)</span>
+          <span id="drag-artist-4" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="The Midnight Chords — Vinyl Lawn (Fri 06:00 PM)">&#9776; The Midnight Chords (Fri 06:00 PM)</span>
+          <span id="drag-artist-5" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="Static Velocity — Horizon Arena (Sat 07:00 PM)">&#9776; Static Velocity (Sat 07:00 PM)</span>
+          <span id="drag-artist-6" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="Luna & The Strings — Vinyl Lawn (Sat 06:00 PM)">&#9776; Luna &amp; The Strings (Sat 06:00 PM)</span>
+        </div>
+
+        <!-- Dropzone Container -->
+        <div id="lineup-dropzone" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
+          <div>
+            <h3 style="margin-top: 0;">My Saved Weekend Schedule</h3>
+            <ul id="saved-lineup-list" class="styled-list">
+              <li>Drag artists from the left column and drop them here to build your personal schedule.</li>
+            </ul>
+          </div>
+          <small style="font-weight: 700;">Automatically saved in browser <code>localStorage</code></small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Camping & Tent Village Information (Unit I, III Lists & Dl) -->
+    <section class="ui-panel active-panel" style="margin-bottom: 2rem;">
+      <div class="panel-header">
+        <div class="section-title-with-patch">
+          <span class="thread-patch-sprite patch-lodge" title="Embroidered Lodge Patch"></span>
+          <div>
+            <h2>Camping, Glamping &amp; Overnight Village Guide</h2>
+            <small style="font-weight: 700; color: #57554f;">Everything you need to know about sleeping under the Miami stars at Waterfront Park</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="lists-three-col" style="margin-top: 0; padding-top: 0; border: none;">
+        <div>
+          <h3>Camping Options</h3>
+          <ul class="styled-list">
+            <li><b>Standard Car Camping:</b> 20x20ft plot for 1 car and up to 2 tents ($45 add-on).</li>
+            <li><b>Lakeside Glamping Safari:</b> Pre-pitched canvas tent with memory foam bed and AC.</li>
+            <li><b>RV Oasis:</b> 30-amp and 50-amp power hookups with water refilling.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Campground Amenities</h3>
+          <ol class="styled-steps" type="1">
+            <li>Free filtered drinking water stations across all camp hubs.</li>
+            <li>Solar-heated showers, grooming stations and phone-charging stations.</li>
+            <li>General Camp Store stocking ice, sunscreen, snacks and camping gear.</li>
+          </ol>
+        </div>
+
+        <div>
+          <h3>Campground Hours &amp; Access</h3>
+          <dl class="zone-dl">
+            <dt>Thursday Check-In:</dt>
+            <dd>Camp gates open Thursday at 2:00 PM for early bird campers.</dd>
+            <dt>Quiet Hours:</dt>
+            <dd>2:00 AM &ndash; 7:30 AM daily in designated quiet family zones.</dd>
+            <dt>Monday Check-Out:</dt>
+            <dd>All campgrounds close Monday at 12:00 PM noon.</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer id="footer">
+    <p>
+      &copy; 2026 SOUNDWAVE MUSIC FESTIVAL &nbsp;&bull;&nbsp; PERSONAL SCHEDULE &amp; CAMPING &nbsp;&bull;&nbsp;
+      <a href="./index.html">Return to Welcome Hub</a>
+    </p>
+  </footer>
+
+  <script src="./src/app.js"></script>
+</body>
+</html>

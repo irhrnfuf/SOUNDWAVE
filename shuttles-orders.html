@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SoundWave 2026 Shuttles, Geolocation & Live Firebase Orders — Realtime Cloud Database Wristband Ledger" />
+  <title>Shuttles, GPS &amp; Live Orders &mdash; SoundWave 2026</title>
+
+  <!-- Browser Import Map for Firebase & SQL Connect SDK -->
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js",
+        "firebase/auth": "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js",
+        "firebase/data-connect": "https://www.gstatic.com/firebasejs/11.4.0/firebase-data-connect.js",
+        "@dataconnect/generated": "./src/dataconnect-generated/esm/index.esm.js"
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+
+  <!-- Top Marquee Strip -->
+  <div class="marquee-strip" aria-label="Shuttle Feed">
+    <div class="marquee-track">
+      ★ EXPRESS SHUTTLES RUN EVERY 10 MINUTES ★ FREE PARK &amp; RIDE AT DOWNTOWN TRANSIT HUB ★ LIVE FIREBASE SQL CONNECT WRISTBAND REGISTRY ★
+    </div>
+  </div>
+
+  <!-- Sticky Navbar -->
+  <nav class="sticky-navbar" aria-label="Orders Navigation">
+    <div class="nav-inner">
+      <a href="./index.html" class="brand-link" aria-label="SoundWave 2026 Welcome Hub">
+        <img src="./src/soundwave-logo-patch.jpg" alt="SoundWave 2026 Patch Logo" class="nav-logo-patch" />
+        <svg class="lolla-wordmark-svg" viewBox="0 0 310 68" xmlns="http://www.w3.org/2000/svg">
+          <text x="8" y="46" font-family="'Shrikhand', Impact, cursive" font-size="40" fill="#ffffff" stroke="#111111" stroke-width="7" paint-order="stroke fill" letter-spacing="1">SoundWave</text>
+          <rect x="218" y="46" width="76" height="19" rx="9" fill="#111111" />
+          <text x="256" y="59" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="11" fill="#ffe600" letter-spacing="2">MIAMI &rsquo;26</text>
+        </svg>
+      </a>
+
+      <ul>
+        <li><a href="./index.html">&larr; Welcome Hub</a></li>
+        <li><a href="./lineup.html">Lineup &amp; Poster</a></li>
+        <li><a href="./schedule-builder.html">My Schedule</a></li>
+        <li><a href="./stages.html">All Stages &amp; Media</a></li>
+        <li><a href="./passes.html">Passes &amp; Checkout</a></li>
+        <li><a href="./shuttles-orders.html" style="background-color: #ffe600; color: #111111; border: 2px solid #111111; box-shadow: 2px 2px 0px #111111;">Shuttles &amp; Orders</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Banner -->
+  <header id="top-banner">
+    <div class="banner-container">
+      <div class="hero-logo-Totem">
+        <img src="./src/soundwave-logo-patch.jpg" alt="SoundWave Logo Patch" class="logo-patch-img" />
+      </div>
+
+      <div class="hero-card-block">
+        <div class="event-meta-row">VENUE LOGISTICS &bull; GPS LOCATOR &bull; CLOUD DATABASE SYNC</div>
+        <h1 style="margin: 0.2rem 0 0.45rem;">Shuttles, GPS &amp; Live Firebase Registry</h1>
+        <p style="margin: 0; font-size: 0.95rem;">
+          Locate the nearest shuttle stop using browser Geolocation, run multi-threaded acoustic modeling with HTML5 Web Workers, and view live festival wristband orders retrieved directly from Firebase SQL Connect.
+        </p>
+      </div>
+
+      <aside class="banner-stats-box">
+        <h3>Transit Status</h3>
+        <div class="stat-line">
+          <span>EXPRESS BUSES</span>
+          <span>45 Continuous Fleet</span>
+        </div>
+        <div class="stat-line">
+          <span>AVERAGE WAIT</span>
+          <span>4 &ndash; 7 Minutes</span>
+        </div>
+        <div class="stat-line">
+          <span>FIREBASE SYNC</span>
+          <span>Online / Live</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <div class="stage-page-container">
+
+    <!-- Venue Map & Location Section (Unit II Iframe, Geolocation, Web Worker) -->
+    <section class="ui-panel active-panel" style="margin-bottom: 2rem;">
+      <div class="panel-header">
+        <div class="section-title-with-patch">
+          <span class="thread-patch-sprite patch-shuttle" title="Hand-Embroidered Shuttle Bus Patch"></span>
+          <div>
+            <h2>Waterfront Park Arena Location &amp; Shuttle Terminals</h2>
+            <small style="font-weight: 700; color: #57554f;">Embedded OpenStreetMap navigation &bull; Free Park &amp; Ride lot coordinates</small>
+          </div>
+        </div>
+        <span id="sse-ticker" style="background:#111111; color:#ffe600; border-radius:8px; padding:4px 10px; font-size: 0.78rem; font-weight: 700;">Connecting to stage feed...</span>
+      </div>
+
+      <iframe
+        title="Waterfront Park Arena Location Map"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-80.195%2C25.770%2C-80.180%2C25.782&amp;layer=mapnik"
+        width="100%"
+        height="260"
+        style="border: 3px solid #111111; border-radius: 14px; box-shadow: 4px 4px 0px #111111;"
+      ></iframe>
+
+      <!-- Unit II Browser APIs (Geolocation, Web Worker, BOM/DOM) -->
+      <div class="lists-three-col" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 3px solid #111111;">
+        <div>
+          <h3>GPS Shuttle Finder</h3>
+          <p style="font-size: 0.82rem; margin: 0 0 0.5rem;">Compute your distance and estimated shuttle arrival from your current coordinates:</p>
+          <button type="button" class="secondary-btn" onclick="findMyFestivalDistance()">Check My Coordinates</button>
+          <p id="geolocation-output" style="font-size: 0.82rem; margin: 6px 0 0; font-weight: 700;">Click to calculate GPS distance.</p>
+        </div>
+
+        <div>
+          <h3>Stage Acoustic Worker</h3>
+          <p style="font-size: 0.82rem; margin: 0 0 0.5rem;">Multi-threaded Web Worker calculates sound pressure and line-array requirements:</p>
+          <button type="button" class="secondary-btn" onclick="runAcousticWorker()">Run Acoustic Model</button>
+          <p id="worker-output" style="font-size: 0.82rem; margin: 6px 0 0; font-weight: 700;">Multi-threaded Web Worker ready.</p>
+        </div>
+
+        <div>
+          <h3>Browser &amp; DOM Audit</h3>
+          <p id="bom-inspector-output" style="font-size: 0.78rem; margin: 0 0 4px;"></p>
+          <p id="dom-tagname-output" style="font-size: 0.78rem; font-weight: 700; margin: 0; color: #ff3366;"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Firebase SQL Connect Orders Table -->
+    <section class="ui-panel active-panel" style="margin-bottom: 2rem;">
+      <div class="panel-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <h2 style="margin: 0;">Live Firebase Wristband Orders Registry</h2>
+          <span id="firebase-connection-badge" style="background:#00e676; border:2px solid #111111; border-radius:999px; padding:2px 10px; font-size: 0.76rem; font-weight:700;">Connecting to Firebase...</span>
+        </div>
+        <a href="./passes.html" class="nav-cta-btn" style="text-decoration: none; padding: 6px 14px;">Register New Wristband &rarr;</a>
+      </div>
+
+      <p style="font-size: 0.85rem; color: #57554f; margin-top: 0;">
+        Below is the real-time order ledger retrieved directly from the <strong>Firebase SQL Connect (PostgreSQL)</strong> database (<code>johan-html-app-2026</code>). Every ticket submitted through our registration form is persisted here immediately:
+      </p>
+
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Wristband ID</th>
+            <th>Attendee Name</th>
+            <th>Tier Selected</th>
+            <th>Festival Days</th>
+            <th>Qty</th>
+            <th>Total Paid</th>
+            <th>Favorite Artist</th>
+          </tr>
+        </thead>
+        <tbody id="firebase-passes-tbody">
+          <tr>
+            <td colspan="7">Loading wristband orders from Firebase SQL Connect...</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <footer id="footer">
+    <p>
+      &copy; 2026 SOUNDWAVE MUSIC FESTIVAL &nbsp;&bull;&nbsp; SHUTTLES &amp; CLOUD DATABASE &nbsp;&bull;&nbsp;
+      <a href="./index.html">Return to Welcome Hub</a>
+    </p>
+  </footer>
+
+  <script src="./src/app.js"></script>
+  <script type="module" src="./src/firebase.js"></script>
+</body>
+</html>

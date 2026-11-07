@@ -4,51 +4,94 @@
   <!-- Unit I: Head, Meta, Character Set, Title -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SoundWave 2026 — Official 3-Day Music Festival Wristbands, Lineup & Stage Schedule" />
+  <meta name="description" content="SoundWave 2026 — Welcome to Miami's Premier 3-Day Music, Art & Cultural Festival at Waterfront Park" />
   <meta name="author" content="Johan Sanju" />
-  <title>SoundWave 2026 &#9835; | Official Wristbands, Lineup &amp; Schedule</title>
+  <title>SoundWave 2026 &#9835; | An Invitation to Music, Art &amp; Whimsy</title>
 
-  <!-- Browser Import Map for Firebase & SQL Connect SDK -->
-  <script type="importmap">
-    {
-      "imports": {
-        "firebase/app": "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js",
-        "firebase/auth": "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js",
-        "firebase/data-connect": "https://www.gstatic.com/firebasejs/11.4.0/firebase-data-connect.js",
-        "@dataconnect/generated": "./src/dataconnect-generated/esm/index.esm.js"
-      }
-    }
-  </script>
-
-  <!-- Unit III: External CSS Stylesheet -->
   <link rel="stylesheet" href="./src/styles.css" />
 
-  <!-- Unit III: Internal CSS (<style> tag) -->
   <style>
-    .promo-highlight {
-      background-color: #ffe600;
-      color: #111111;
-      border: 1px solid #111111;
-      border-radius: 6px;
-      padding: 1px 6px;
-      font-weight: 700;
+    .welcome-hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .culture-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .culture-card {
+      background-color: #fffdf7;
+      border: 3px solid #111111;
+      border-radius: 16px;
+      box-shadow: 6px 6px 0px #111111;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .culture-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .invitation-quote-box {
+      background: linear-gradient(135deg, #ffe600 0%, #ff8800 100%);
+      border: 3px solid #111111;
+      border-radius: 18px;
+      box-shadow: 8px 8px 0px #111111;
+      padding: 1.75rem 2rem;
+      margin: 2rem 0;
+      position: relative;
+    }
+
+    .impact-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .impact-stat-card {
+      background-color: #111111;
+      color: #ffffff;
+      border: 3px solid #111111;
+      border-radius: 14px;
+      padding: 1.25rem;
+      text-align: center;
+      box-shadow: 5px 5px 0px #ffe600;
+    }
+
+    .impact-stat-number {
+      font-family: 'Shrikhand', cursive;
+      font-size: 2.3rem;
+      color: #ffe600;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Lollapalooza-Style Top Scrolling Ticker -->
-  <div class="marquee-strip" aria-label="Live Festival Feed">
+  <!-- Top Marquee Ticker -->
+  <div class="marquee-strip" aria-label="Welcome Festival Feed">
     <div class="marquee-track">
-      ★ SOUNDWAVE FESTIVAL 2026 ★ DEC 18&ndash;20 AT WATERFRONT PARK ARENA ★ 3-DAY WRISTBANDS ON SALE NOW ★ ENTER PROMO CODE SOUND20 AT CHECKOUT FOR 20% OFF ★
+      ★ WELCOME TO SOUNDWAVE 2026 ★ DEC 18&ndash;20 AT WATERFRONT PARK MIAMI ★ 12 YEARS OF MUSIC, ART &amp; SUSTAINABILITY ★ 4 STAGES • ARTISAN BAZAAR • GOURMET FOOD TRUCKS • KINETIC SCULPTURES ★
     </div>
   </div>
 
-  <!-- Unit V: Sticky Lolla Header Navigation Bar with Custom Bubble Wordmark Logo -->
+  <!-- Sticky Navbar -->
   <nav class="sticky-navbar" aria-label="Primary App Navigation">
     <div class="nav-inner">
-      <!-- Unit II: Hand-Stitched Embroidered SoundWave Patch + Custom Wordmark Logo -->
-      <a href="#top-banner" class="brand-link" aria-label="SoundWave 2026 Home">
+      <a href="./index.html" class="brand-link" aria-label="SoundWave 2026 Home">
         <img
           src="./src/soundwave-logo-patch.jpg"
           alt="SoundWave 2026 Hand-Embroidered Thread Patch Logo"
@@ -72,26 +115,20 @@
       </a>
 
       <ul>
-        <li><a href="#schedule" onclick="switchFestivalTab('schedule')">Passes</a></li>
-        <li><a href="#lineup" onclick="switchFestivalTab('lineup')">Lineup</a></li>
-        <li><a href="#drag-drop-planner" onclick="switchFestivalTab('drag-drop-planner')">My Camp Schedule</a></li>
-        <li><a href="#gallery" onclick="switchFestivalTab('gallery')">Stages &amp; Media</a></li>
-        <li><a href="#venue" onclick="switchFestivalTab('venue')">Shuttles &amp; Orders</a></li>
-        <li>
-          <a href="https://www.google.com/search?q=SoundWave%20Music%20Festival%202026" target="_blank" rel="noopener">
-            News &rarr;
-          </a>
-        </li>
-        <li><a href="#book-pass" class="nav-cta-btn">Get Wristband &rarr;</a></li>
+        <li><a href="./index.html" style="background-color: #ffe600; color: #111111; border: 2px solid #111111; box-shadow: 2px 2px 0px #111111;">Welcome Hub</a></li>
+        <li><a href="./lineup.html">Lineup &amp; Poster</a></li>
+        <li><a href="./schedule-builder.html">My Schedule</a></li>
+        <li><a href="./stages.html">All Stages &amp; Media</a></li>
+        <li><a href="./passes.html">Passes &amp; Checkout</a></li>
+        <li><a href="./shuttles-orders.html">Shuttles &amp; Orders</a></li>
+        <li><a href="./passes.html" class="nav-cta-btn">Get Passes &rarr;</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Unit II: Semantic <header> + Stacked Lolla-Style Totem Logo + Hero Block -->
+  <!-- Hero Header: Hand-Stitched Logo & Welcome Invitation -->
   <header id="top-banner">
     <div class="banner-container">
-
-      <!-- Hand-Stitched Embroidered SoundWave 2026 FEST Thread Patch Logo -->
       <div class="hero-logo-Totem">
         <img
           src="./src/soundwave-logo-patch.jpg"
@@ -100,735 +137,354 @@
         />
       </div>
 
-      <!-- Center Hero Message -->
       <div class="hero-card-block">
         <div class="event-meta-row">
           <time datetime="2026-12-18">DEC 18<sup>th</sup></time>&ndash;<time datetime="2026-12-20">20<sup>th</sup>, 2026</time>
-          &nbsp;&bull;&nbsp; WATERFRONT PARK &nbsp;&bull;&nbsp; <small>H<sub>2</sub>O Clean Power</small>
+          &nbsp;&bull;&nbsp; WATERFRONT PARK, MIAMI &nbsp;&bull;&nbsp; <small>H<sub>2</sub>O Clean Power</small>
         </div>
-        <h1>Three Days of Music, Art &amp; Whimsy &trade;</h1>
-        <p style="margin: 0; font-size: 0.96rem;">
-          <strong>Explore the festival tabs below without the clutter!</strong>
-          Pick your 3-Day Wristband tier, switch tabs to browse the lineup or build your camp schedule, and check out seamlessly on the right.
-          <mark class="promo-highlight">Early Bird:</mark> Was <del>$199</del> now <ins><b>$129</b></ins> (<u>Promo Code: <b>SOUND20</b></u>).
+        <h1>An Open Invitation to SoundWave 2026</h1>
+        <p style="margin: 0; font-size: 0.98rem; line-height: 1.55;">
+          <strong>Whether you are joining us for the very first time or returning for your 12th year,</strong> SoundWave is more than a music festival. It is a three-day celebration of human expression, handcrafted artisan markets, culinary wonders, immersive kinetic art installations, and community ocean stewardship along Biscayne Bay.
         </p>
       </div>
 
-      <!-- Right Compact Telemetry Box (Unit II <progress>, <meter>, <details>) -->
       <aside class="banner-stats-box">
-        <h3>Wristband Pulse</h3>
+        <h3>Festival Heartbeat</h3>
         <div class="stat-line">
-          <span>PASSES CLAIMED</span>
-          <span><progress id="ticket-progress" value="78" max="100">78%</progress> 78%</span>
+          <span>THEME FOR 2026</span>
+          <span>&ldquo;Threads of Rhythm&rdquo;</span>
         </div>
         <div class="stat-line">
-          <span>MAIN STAGE SPL</span>
-          <span><meter id="bass-meter" min="0" max="120" low="60" high="100" optimum="95" value="102">102 dB</meter> 102 dB</span>
+          <span>CLEAN ENERGY</span>
+          <span>100% Solar &amp; H<sub>2</sub>O</span>
         </div>
-        <details style="background: #fffdf7; color: #111111; border: 2px solid #111111; border-radius: 10px; padding: 6px 10px; font-size: 0.78rem;">
-          <summary style="font-weight: 700;">FESTIVAL GATE RULES</summary>
-          <p style="margin: 4px 0 0;">RFID wristbands ship free or can be picked up at Waterfront Will-Call.</p>
-        </details>
+        <div class="stat-line">
+          <span>LOCAL ARTISANS</span>
+          <span>60+ Independent Stalls</span>
+        </div>
       </aside>
     </div>
   </header>
 
-  <!-- DE-CLUTTERED TWO-COLUMN WORKSPACE: Left = Tabbed Experience Explorer, Right = Sticky Checkout -->
-  <main class="app-workspace">
+  <!-- Main Container -->
+  <div class="stage-page-container">
 
-    <!-- ==================== LEFT TABBED WORKSPACE COLUMN ==================== -->
-    <div class="workspace-left">
-
-      <!-- Clean 5-Step Tab Switcher Bar (Eliminates vertical scroll clutter!) -->
-      <div class="workspace-tab-bar" role="tablist" aria-label="Festival Explorer Tabs">
-        <button
-          type="button"
-          class="workspace-tab-btn active-tab"
-          data-target="schedule"
-          onclick="switchFestivalTab('schedule', this)"
-        >&#127915; 1. Passes &amp; Guide</button>
-
-        <button
-          type="button"
-          class="workspace-tab-btn"
-          data-target="lineup"
-          onclick="switchFestivalTab('lineup', this)"
-        >&#127928; 2. Lineup &amp; Times</button>
-
-        <button
-          type="button"
-          class="workspace-tab-btn"
-          data-target="drag-drop-planner"
-          onclick="switchFestivalTab('drag-drop-planner', this)"
-        >&#9978; 3. My Camp Schedule</button>
-
-        <button
-          type="button"
-          class="workspace-tab-btn"
-          data-target="gallery"
-          onclick="switchFestivalTab('gallery', this)"
-        >&#127916; 4. Stages &amp; Media</button>
-
-        <button
-          type="button"
-          class="workspace-tab-btn"
-          data-target="venue"
-          onclick="switchFestivalTab('venue', this)"
-        >&#128652; 5. Shuttles &amp; Orders</button>
+    <!-- FAST PORTAL TO DEDICATED FEATURE PAGES -->
+    <section style="margin-top: 1.5rem;">
+      <div class="panel-header" style="border-bottom: none; margin-bottom: 0.5rem; padding-bottom: 0;">
+        <div>
+          <h2>Explore Dedicated Festival Portals</h2>
+          <small style="font-weight: 700; color: #57554f;">Every festival tool now lives in its own dedicated experience page:</small>
+        </div>
       </div>
 
-      <!-- TAB PANEL 1 (DEFAULT ACTIVE): Passes (Unit IV Box Model) + Hand-Stitched Thread Guide (Unit V Sprites) -->
-      <section id="schedule" class="ui-panel active-panel">
-        <div class="panel-header">
-          <div class="section-title-with-patch">
-            <span class="thread-patch-sprite patch-ticket" title="Hand-Embroidered Festival Pass Patch"></span>
-            <div>
-              <h2>Festival Passes &amp; 3-Day Wristbands</h2>
-              <small style="font-weight: 700; color: #57554f;">&#9432; Service fees shown in checkout &bull; Click any pass card to load checkout</small>
-            </div>
-          </div>
-        </div>
-
-        <!-- Unit IV: CSS Box Model Cards (Margin, Border, Outline, Padding) -->
-        <div class="pass-tier-grid">
-          <div class="box-model-pass" onclick="selectPassTierFromCard('General Admission ($129)')">
-            <div>
-              <div class="tier-header-strip">
-                <h4 style="margin:0; font-size:1.25rem;">3-Day GA</h4>
+      <div class="portal-card-grid">
+        <a href="./lineup.html" class="portal-card">
+          <div>
+            <div class="portal-card-header">
+              <span class="stage-patch-sprite stage-patch-sm stage-patch-horizon"></span>
+              <div>
+                <h3 style="margin: 0; font-size: 1.1rem;">Official Lineup &amp; Poster</h3>
+                <small style="color: #ff3366; font-weight: 700;">Coachella &amp; Lolla Style</small>
               </div>
-              <p class="pass-price">$129</p>
-              <p style="font-size: 0.85rem; margin: 0;">Full access to Horizon Arena, Analog Dome, Vinyl Lawn &amp; food village.</p>
             </div>
-            <button type="button" class="secondary-btn tier-select-btn">Select GA ($129) &rarr;</button>
+            <p style="font-size: 0.84rem; margin: 0;">View the official 3-day screenprint billing poster, filter acts by genre, and explore the timetable.</p>
           </div>
+          <div class="portal-card-cta">
+            <span>Explore Lineup</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
 
-          <div class="box-model-pass vip-featured" onclick="selectPassTierFromCard('VIP Gold Pass ($249)')">
-            <div>
-              <div class="tier-header-strip">
-                <h4 style="margin:0; font-size:1.25rem;">★ 3-Day VIP</h4>
+        <a href="./passes.html" class="portal-card">
+          <div>
+            <div class="portal-card-header">
+              <span class="thread-patch-sprite thread-patch-sm patch-ticket"></span>
+              <div>
+                <h3 style="margin: 0; font-size: 1.1rem;">Passes &amp; Checkout</h3>
+                <small style="color: #ff3366; font-weight: 700;">Live Firebase Sync</small>
               </div>
-              <p class="pass-price">$249</p>
-              <p style="font-size: 0.85rem; margin: 0;">Elevated front-row viewing decks, express VIP entry lanes &amp; shaded lounge bar.</p>
             </div>
-            <button type="button" class="tier-select-btn">Select VIP ($249) &rarr;</button>
+            <p style="font-size: 0.84rem; margin: 0;">Compare 3-Day GA ($129), VIP ($249), and Platinum ($499) tiers with our digital wallet canvas.</p>
           </div>
+          <div class="portal-card-cta">
+            <span>Register Wristband</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
 
-          <div class="box-model-pass platinum-tier" onclick="selectPassTierFromCard('Backstage All-Access ($499)')">
-            <div>
-              <div class="tier-header-strip">
-                <h4 style="margin:0; font-size:1.25rem;">3-Day Platinum</h4>
+        <a href="./stages.html" class="portal-card">
+          <div>
+            <div class="portal-card-header">
+              <span class="thread-patch-sprite thread-patch-sm patch-lodge"></span>
+              <div>
+                <h3 style="margin: 0; font-size: 1.1rem;">The 4 Stages &amp; Sightlines</h3>
+                <small style="color: #ff3366; font-weight: 700;">Interactive Blueprint Maps</small>
               </div>
-              <p class="pass-price">$499</p>
-              <p style="font-size: 0.85rem; margin: 0;">Side-stage viewing, golf-cart stage shuttles, complimentary dining &amp; artist lounge.</p>
             </div>
-            <button type="button" class="secondary-btn tier-select-btn">Select Platinum ($499) &rarr;</button>
+            <p style="font-size: 0.84rem; margin: 0;">Inspect Horizon Arena, Analog Dome, Vinyl Lawn &amp; VIP Cabanas with 12-year history archives.</p>
           </div>
-        </div>
-
-        <!-- Unit V: Hand-Embroidered Thread Patch CSS Image Sprites -->
-        <h3 style="margin-top: 1.75rem; margin-bottom: 0.25rem;">Explore Festival Experiences (Hand-Stitched Thread Patches)</h3>
-        <p style="margin: 0 0 0.5rem; font-size: 0.84rem; color: #57554f;">Click any hand-embroidered patch below to jump to that festival experience:</p>
-        <div class="sprite-list">
-          <div class="sprite-card" onclick="selectPassTierFromCard('VIP Gold Pass ($249)')">
-            <span class="thread-patch-sprite patch-ticket" aria-hidden="true"></span>
-            <div><b>Festival Passes</b><br /><small>GA, VIP &amp; Platinum</small></div>
+          <div class="portal-card-cta">
+            <span>Inspect 4 Stages</span>
+            <span>&rarr;</span>
           </div>
-          <div class="sprite-card" onclick="switchFestivalTab('drag-drop-planner')">
-            <span class="thread-patch-sprite patch-camping" aria-hidden="true"></span>
-            <div><b>Camping</b><br /><small>Tent Village &amp; Planner</small></div>
-          </div>
-          <div class="sprite-card" onclick="switchFestivalTab('venue')">
-            <span class="thread-patch-sprite patch-shuttle" aria-hidden="true"></span>
-            <div><b>Parking &amp; Shuttles</b><br /><small>Arena Express Bus</small></div>
-          </div>
-          <div class="sprite-card" onclick="switchFestivalTab('gallery')">
-            <span class="thread-patch-sprite patch-lodge" aria-hidden="true"></span>
-            <div><b>Stages &amp; Lodges</b><br /><small>Zones &amp; Aftermovie</small></div>
-          </div>
-        </div>
-      </section>
+        </a>
 
-      <!-- TAB PANEL 2: Lineup Poster, Genre Filter (Unit VI Objects/Arrays) + Stage Timetable (Unit I & III Table) -->
-      <section id="lineup" class="ui-panel">
-        <div class="panel-header">
-          <h2>Official 2026 Lineup &amp; Stage Set Times</h2>
-          <div class="artist-filter-bar">
-            <button type="button" onclick="filterArtistsByGenre('ALL')">All Artists</button>
-            <button type="button" class="secondary-btn" onclick="filterArtistsByGenre('Electronic')">Electronic</button>
-            <button type="button" class="secondary-btn" onclick="filterArtistsByGenre('Rock')">Rock</button>
-            <button type="button" class="secondary-btn" onclick="filterArtistsByGenre('Acoustic')">Acoustic</button>
-          </div>
-        </div>
-
-        <div class="lolla-poster-banner">
-          <div class="headliner-line">Neon Pulse &bull; Aurora Echoes &bull; DJ Solaris</div>
-          <div class="sub-line">THE MIDNIGHT CHORDS &bull; STATIC VELOCITY &bull; LUNA &amp; THE STRINGS &bull; BASSLINE SYNDICATE</div>
-        </div>
-
-        <p style="margin: 0 0 0.5rem; font-size: 0.82rem; font-weight: 700;" id="js-artist-count">Loading lineup...</p>
-        <div id="js-artist-results" class="js-panel-grid"></div>
-
-        <!-- Unit I & III: Stage Timetable Table -->
-        <h3 style="margin-top: 1.75rem;">Weekend Stage Timetable</h3>
-        <table class="schedule-table">
-          <thead>
-            <tr>
-              <th>Day &amp; Time</th>
-              <th>Horizon Arena</th>
-              <th>Analog Dome</th>
-              <th>Vinyl Lawn</th>
-              <th>Wristband Access</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><b>FRI &ndash; 06:00 PM</b></td>
-              <td>The Midnight Chords</td>
-              <td>Bassline Syndicate</td>
-              <td>Luna &amp; The Strings</td>
-              <td>GA / VIP / Platinum</td>
-            </tr>
-            <tr>
-              <td><b>FRI &ndash; 09:30 PM</b></td>
-              <td><b>AURORA ECHOES</b></td>
-              <td>DJ Solaris</td>
-              <td>Evening Quartet</td>
-              <td>GA / VIP / Platinum</td>
-            </tr>
-            <tr>
-              <td><b>SAT &ndash; 07:00 PM</b></td>
-              <td>Static Velocity</td>
-              <td>Modular Ensemble</td>
-              <td>Vinyl Pressing Live</td>
-              <td>GA / VIP / Platinum</td>
-            </tr>
-            <tr>
-              <td><b>SUN &ndash; 10:00 PM</b></td>
-              <td><b>NEON PULSE (CLOSING)</b></td>
-              <td>Afterhours B2B</td>
-              <td><i>Backstage Jam</i></td>
-              <td><mark class="promo-highlight">VIP &amp; PLATINUM</mark></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="5">Gates open daily at 4:00 PM EST.</td>
-            </tr>
-          </tfoot>
-        </table>
-      </section>
-
-      <!-- TAB PANEL 3: Camping & Drag-and-Drop Personal Schedule (Unit II Drag/Drop + Unit I/III Lists) -->
-      <section id="drag-drop-planner" class="ui-panel">
-        <div class="panel-header">
-          <div class="section-title-with-patch">
-            <span class="thread-patch-sprite patch-camping" title="Hand-Embroidered Camping Tent Patch"></span>
-            <div>
-              <h2>Camping &amp; Personal Weekend Schedule</h2>
-              <small style="font-weight: 700; color: #57554f;">&#9432; Drag your favorite acts into your personal schedule box</small>
-            </div>
-          </div>
-          <button type="button" class="secondary-btn" onclick="clearSavedLineup()">Reset Schedule</button>
-        </div>
-
-        <div class="itinerary-workspace">
-          <div id="artist-pool">
-            <p style="margin: 0 0 0.5rem; font-size: 0.84rem;"><b>Drag sets from here:</b></p>
-            <span
-              id="drag-artist-1"
-              class="draggable-chip"
-              draggable="true"
-              ondragstart="handleDragStart(event)"
-              data-artist="Neon Pulse — Horizon Arena (Sun 10:00 PM)"
-            >&#9776; Neon Pulse (Sun 10:00 PM)</span>
-
-            <span
-              id="drag-artist-2"
-              class="draggable-chip"
-              draggable="true"
-              ondragstart="handleDragStart(event)"
-              data-artist="Aurora Echoes — Horizon Arena (Fri 09:30 PM)"
-            >&#9776; Aurora Echoes (Fri 09:30 PM)</span>
-
-            <span
-              id="drag-artist-3"
-              class="draggable-chip"
-              draggable="true"
-              ondragstart="handleDragStart(event)"
-              data-artist="DJ Solaris — Analog Dome (Fri 09:30 PM)"
-            >&#9776; DJ Solaris (Fri 09:30 PM)</span>
-
-            <span
-              id="drag-artist-4"
-              class="draggable-chip"
-              draggable="true"
-              ondragstart="handleDragStart(event)"
-              data-artist="The Midnight Chords — Vinyl Lawn (Fri 06:00 PM)"
-            >&#9776; The Midnight Chords (Fri 06:00 PM)</span>
-          </div>
-
-          <div
-            id="lineup-dropzone"
-            ondragover="handleDragOver(event)"
-            ondrop="handleDrop(event)"
-          >
-            <div>
-              <h3 style="margin-top: 0;">My Saved Weekend Schedule</h3>
-              <ul id="saved-lineup-list" class="styled-list">
-                <li>Drag artists from the left column and drop them here to build your personal schedule.</li>
-              </ul>
-            </div>
-            <small style="font-weight: 700;">Automatically saved in browser <code>localStorage</code></small>
-          </div>
-        </div>
-
-        <!-- Unit I & III: Unordered, Ordered, and Description Lists -->
-        <div class="lists-three-col">
+        <a href="./schedule-builder.html" class="portal-card">
           <div>
-            <h3>Headliner Billing</h3>
-            <ul class="styled-list">
-              <li><b>Neon Pulse</b> &ndash; Synth &amp; Electro</li>
-              <li><b>Aurora Echoes</b> &ndash; Alternative Rock</li>
-              <li><b>DJ Solaris</b> &ndash; Club &amp; Bass</li>
-              <li><b>The Midnight Chords</b> &ndash; Indie Folk</li>
-            </ul>
+            <div class="portal-card-header">
+              <span class="thread-patch-sprite thread-patch-sm patch-camping"></span>
+              <div>
+                <h3 style="margin: 0; font-size: 1.1rem;">My Schedule &amp; Camping</h3>
+                <small style="color: #ff3366; font-weight: 700;">Drag &amp; Drop Scheduler</small>
+              </div>
+            </div>
+            <p style="font-size: 0.84rem; margin: 0;">Build your personal weekend set list with HTML5 Drag &amp; Drop, saved to your phone's browser.</p>
           </div>
+          <div class="portal-card-cta">
+            <span>Build Schedule</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </section>
 
+    <!-- SECTION 1: THE STORY, HISTORY & CULTURAL IMPACT OF SOUNDWAVE -->
+    <section class="ui-panel active-panel" style="margin-top: 1.75rem;">
+      <div class="panel-header">
+        <div class="section-title-with-patch">
+          <span class="stage-patch-sprite stage-patch-horizon" title="Horizon Arena Patch"></span>
           <div>
-            <h3>Wristband Steps</h3>
-            <ol class="styled-steps" type="1">
-              <li>Select your <strong>3-Day Tier</strong>.</li>
-              <li>Complete the <em>Express Wristband Form</em>.</li>
-              <li>Scan your <b>Pass Barcode</b> at Gate A.</li>
-            </ol>
-          </div>
-
-          <div>
-            <h3>Stage Zones</h3>
-            <dl class="zone-dl">
-              <dt>Horizon Arena</dt>
-              <dd>Main festival lawn &amp; headliner stage.</dd>
-              <dt>Analog Dome</dt>
-              <dd>360&deg; electronic dance &amp; laser tent.</dd>
-              <dt>Vinyl Lawn</dt>
-              <dd>Shaded acoustic stage &amp; food village.</dd>
-            </dl>
+            <h2>The SoundWave Story: A Decade of Rhythm &amp; Community (2014&ndash;2026)</h2>
+            <small style="font-weight: 700; color: #57554f;">How a grassroots 12,000-person gathering on the bay blossomed into an international cultural beacon</small>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- TAB PANEL 4: Stages Gallery (Unit V Opacity) + Clickable Stage History & Sightline Pages + Video & Audio Media (Unit II) -->
-      <section id="gallery" class="ui-panel clearfix">
-        <div class="panel-header">
-          <div class="section-title-with-patch">
-            <span class="thread-patch-sprite patch-lodge" title="Hand-Embroidered Stage Lodge Patch"></span>
-            <div>
-              <h2>4 Festival Stages &mdash; Click Any Stage for History &amp; Ticket Sightline Map</h2>
-              <span id="gallery-event-status" style="font-size: 0.82rem; font-weight: 700; color: #ff3366;">Click any of the 4 stages below to open its dedicated History, Attendance &amp; Ticket-Holder Position Page!</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="gallery-grid">
-          <a
-            href="./stage-horizon.html"
-            class="gallery-item"
-            onmouseover="previewGalleryStage('Horizon Arena (Est. 2014)', '48,500 capacity • Click to view 12-year history & GA/VIP/Platinum standing map')"
-            onmouseout="resetGalleryStage()"
-          >
-            <span class="gallery-badge">Est. 2014 &bull; 48.5K Cap</span>
-            <img
-              src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=600&q=80"
-              alt="Horizon Arena stage lights"
-            />
-            <div class="gallery-caption" style="display:flex; align-items:center; justify-content:space-between;">
-              <span>HORIZON ARENA</span>
-              <span class="stage-patch-sprite stage-patch-sm stage-patch-horizon" title="Embroidered Guitar & Pyro Patch"></span>
-            </div>
-            <div class="gallery-explore-cta">
-              <span>History &amp; Sightline Map</span>
-              <span>&rarr;</span>
-            </div>
-          </a>
-
-          <a
-            href="./stage-analog.html"
-            class="gallery-item"
-            onmouseover="previewGalleryStage('Analog Dome (Est. 2016)', '22,000 capacity • Click to view 360° laser dome history & ticket zone map')"
-            onmouseout="resetGalleryStage()"
-          >
-            <span class="gallery-badge">Est. 2016 &bull; 22K Cap</span>
-            <img
-              src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80"
-              alt="Analog Dome crowd"
-            />
-            <div class="gallery-caption" style="display:flex; align-items:center; justify-content:space-between;">
-              <span>ANALOG DOME</span>
-              <span class="stage-patch-sprite stage-patch-sm stage-patch-analog" title="Embroidered Modular Synth Patch"></span>
-            </div>
-            <div class="gallery-explore-cta">
-              <span>History &amp; Sightline Map</span>
-              <span>&rarr;</span>
-            </div>
-          </a>
-
-          <a
-            href="./stage-vinyl.html"
-            class="gallery-item"
-            onmouseover="previewGalleryStage('Vinyl Lawn (Est. 2015)', '14,500 capacity • Click to view oak grove acoustic history & lawn zone map')"
-            onmouseout="resetGalleryStage()"
-          >
-            <span class="gallery-badge">Est. 2015 &bull; 14.5K Cap</span>
-            <img
-              src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=600&q=80"
-              alt="Vinyl Lawn stage"
-            />
-            <div class="gallery-caption" style="display:flex; align-items:center; justify-content:space-between;">
-              <span>VINYL LAWN</span>
-              <span class="stage-patch-sprite stage-patch-sm stage-patch-vinyl" title="Embroidered Botanical Turntable Patch"></span>
-            </div>
-            <div class="gallery-explore-cta">
-              <span>History &amp; Sightline Map</span>
-              <span>&rarr;</span>
-            </div>
-          </a>
-
-          <a
-            href="./stage-vip.html"
-            class="gallery-item"
-            onmouseover="previewGalleryStage('VIP Cabanas & SkyDeck (Est. 2018)', '3,200 capacity • Click to view elevated luxury deck history & cabana map')"
-            onmouseout="resetGalleryStage()"
-          >
-            <span class="gallery-badge">Est. 2018 &bull; 3.2K Cap</span>
-            <img
-              src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=600&q=80"
-              alt="VIP Terrace view"
-            />
-            <div class="gallery-caption" style="display:flex; align-items:center; justify-content:space-between;">
-              <span>VIP CABANAS</span>
-              <span class="stage-patch-sprite stage-patch-sm stage-patch-vip" title="Embroidered Crown & Flamingo Patch"></span>
-            </div>
-            <div class="gallery-explore-cta">
-              <span>History &amp; Sightline Map</span>
-              <span>&rarr;</span>
-            </div>
-          </a>
-        </div>
-
-        <div id="media-preview" class="media-split" style="margin-top: 1.5rem;">
-          <div>
-            <video
-              id="festival-video"
-              controls
-              poster="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80"
-            >
-              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
-              Your browser does not support HTML5 video.
-            </video>
-          </div>
-
-          <div class="audio-panel">
-            <div>
-              <h3>Headliner Anthem: &ldquo;Neon Horizon&rdquo;</h3>
-              <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Stream the official festival anthem:</p>
-              <audio id="festival-audio" controls>
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
-                Your browser does not support HTML5 audio.
-              </audio>
-            </div>
-
-            <!-- Unit II: <figure> & <figcaption> -->
-            <figure style="margin: 0.75rem 0 0;">
-              <img
-                src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=700&q=80"
-                alt="SoundWave main stage crowd"
-                style="width: 100%; height: 85px; object-fit: cover; border: 2px solid #111111; border-radius: 8px;"
-              />
-              <figcaption style="font-size: 0.75rem; font-weight: 700; margin-top: 3px;">Main Horizon Stage during Sunday finale.</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <!-- Unit V: Float Box & ::first-letter Drop-Cap -->
-        <article id="about" style="margin-top: 1.25rem; padding-top: 1rem; border-top: 3px solid #111111;">
-          <div class="float-spotlight-box">
-            <b>RFID CASHLESS</b><br />
-            Link your wristband at checkout for tap-to-pay food, merch, and fast-track entry.
-          </div>
-          <p class="intro-lead" style="margin: 0; font-size: 0.92rem;">
-            SoundWave 2026 transforms Waterfront Park into an open-air playground of live music, culinary pop-ups,
-            and interactive art installations.
+      <div class="welcome-hero-grid">
+        <div>
+          <h3 style="font-size: 1.35rem; margin-top: 0;">From a Wooden Pier into a Living Canvas</h3>
+          <p class="intro-lead" style="font-size: 0.94rem;">
+            Twelve years ago, in the summer of 2014, a collective of Miami musicians, sculptors, and sound engineers came together with a radical dream: to build a festival where the art was as vital as the acoustics, and where the community was woven into every seam.
           </p>
-        </article>
-      </section>
+          <p style="font-size: 0.92rem;">
+            What started as a single timber stage with 12,400 people dancing to indie guitars as the sun set over the ocean has blossomed into an 88,000-capacity cultural celebration that welcomes travelers from over 45 countries every December.
+          </p>
 
-      <!-- TAB PANEL 5: Parking & Shuttles Map (Iframe), Geolocation, Worker & Live Firebase Orders -->
-      <section id="venue" class="ui-panel">
-        <div class="panel-header">
-          <div class="section-title-with-patch">
-            <span class="thread-patch-sprite patch-shuttle" title="Hand-Embroidered Shuttle Bus Patch"></span>
-            <div>
-              <h2>Parking, Shuttles &amp; Live Firebase Registry</h2>
-              <small style="font-weight: 700; color: #57554f;">&#9432; Continuous express shuttles &bull; Live cloud wristband database</small>
+          <div style="background: #fff9db; border: 2px solid #111111; border-radius: 12px; padding: 1rem; margin-top: 1rem;">
+            <b>2026 Festival Theme: &ldquo;Threads of Rhythm&rdquo;</b>
+            <p style="font-size: 0.85rem; margin: 4px 0 0;">
+              This year's aesthetic honors traditional tactile craftsmanship. Inspired by hand-stitched embroidered patches, fiber art tapestries, and vibrant tactile stitching, we celebrate the physical threads that connect our diverse musical subcultures.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <!-- Archival Photo Split: Horizon Amphitheater -->
+          <div class="stage-history-photo history-photo-horizon" style="height: 260px;" role="img" aria-label="Archival photo of SoundWave main stage crowd"></div>
+          <p style="font-size: 0.8rem; font-weight: 700; margin: 0.5rem 0 0; color: #57554f;">
+            &#128247; The Waterfront Amphitheater at dusk &mdash; over 1.42 million music lovers have gathered here since 2014.
+          </p>
+        </div>
+      </div>
+
+      <!-- Cultural Impact Stats -->
+      <div class="impact-stat-grid">
+        <div class="impact-stat-card">
+          <div class="impact-stat-number">12</div>
+          <div style="font-size: 0.82rem; font-weight: 700;">Years of Cultural History (Est. 2014)</div>
+        </div>
+        <div class="impact-stat-card">
+          <div class="impact-stat-number">1.4M+</div>
+          <div style="font-size: 0.82rem; font-weight: 700;">Cumulative Attendees Welcomed</div>
+        </div>
+        <div class="impact-stat-card">
+          <div class="impact-stat-number">$18.5M</div>
+          <div style="font-size: 0.82rem; font-weight: 700;">Generated for Local Miami Arts &amp; Food</div>
+        </div>
+        <div class="impact-stat-card">
+          <div class="impact-stat-number">0%</div>
+          <div style="font-size: 0.82rem; font-weight: 700;">Landfill Waste (100% Compost &amp; Reuse)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: EVERYTHING BEYOND THE MUSIC — MERCH, FOOD, ART & ECO-IMPACT -->
+    <section class="ui-panel active-panel" style="margin-top: 2rem;">
+      <div class="panel-header">
+        <div class="section-title-with-patch">
+          <span class="exp-patch-sprite exp-patch-art" title="Hand-Stitched Art Patch"></span>
+          <div>
+            <h2>What To Expect Beyond The Stages: Markets, Culinary &amp; Kinetic Art</h2>
+            <small style="font-weight: 700; color: #57554f;">Discover the artisan bazaars, interactive light sculptures, and culinary delights waiting for you</small>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size: 0.95rem; margin-top: 0;">
+        First time attending? Here is everything waiting for you across the 40-acre Waterfront Park grounds apart from the artist performances:
+      </p>
+
+      <div class="culture-card-grid">
+
+        <!-- 1. Artisan Merch & Vinyl Bazaar -->
+        <div class="culture-card">
+          <div>
+            <div class="culture-card-header">
+              <span class="exp-patch-sprite exp-patch-merch" title="Embroidered Merch & Vinyl Patch"></span>
+              <div>
+                <h3 style="margin: 0; font-size: 1.2rem;">1. Artisan Merch, Vintage &amp; Vinyl Bazaar</h3>
+                <small style="font-weight: 700; color: #ff3366;">Hand-Embroidered Apparel &bull; Live Acetate Lathe</small>
+              </div>
             </div>
+            <div class="culture-photo culture-photo-merch" role="img" aria-label="SoundWave artisan merchandise and vinyl market"></div>
+            <p style="font-size: 0.88rem; margin: 0.75rem 0 0;">
+              Over 35 independent artisans bring limited-edition festival jackets, custom-sewn embroidered patches, screenprinted artist posters, and vintage vinyl crates. At Vinyl Lawn, watch sound engineers cut festival sets straight to master lacquer records.
+            </p>
           </div>
-          <span id="sse-ticker" style="background:#111111; color:#ffe600; border-radius:8px; padding:4px 10px; font-size: 0.78rem; font-weight: 700;">Connecting to stage feed...</span>
+          <ul class="styled-list" style="margin-top: 0.75rem; font-size: 0.82rem;">
+            <li>Exclusive SoundWave 2026 embroidered souvenir jackets</li>
+            <li>Live custom embroidery station to personalize your tote or denim</li>
+            <li>Over 10,000 rare vinyl records curated by local independent record stores</li>
+          </ul>
         </div>
 
-        <iframe
-          title="Waterfront Park Arena Location Map"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=-80.195%2C25.770%2C-80.180%2C25.782&amp;layer=mapnik"
-          width="100%"
-          height="210"
-          style="border: 3px solid #111111; border-radius: 12px;"
-        ></iframe>
-
-        <div class="lists-three-col">
+        <!-- 2. Culinary & Gourmet Food Truck Oasis -->
+        <div class="culture-card">
           <div>
-            <h3>GPS Shuttle Finder</h3>
-            <button type="button" class="secondary-btn" onclick="findMyFestivalDistance()">Check My Coordinates</button>
-            <p id="geolocation-output" style="font-size: 0.82rem; margin: 6px 0 0;">Verify distance to Waterfront Park gates.</p>
+            <div class="culture-card-header">
+              <span class="exp-patch-sprite exp-patch-food" title="Embroidered Food Truck & Matcha Patch"></span>
+              <div>
+                <h3 style="margin: 0; font-size: 1.2rem;">2. Culinary Oasis &amp; Craft Beverage Grove</h3>
+                <small style="font-weight: 700; color: #ff3366;">28 Gourmet Food Trucks &bull; Zero Food Waste</small>
+              </div>
+            </div>
+            <div class="culture-photo culture-photo-food" role="img" aria-label="Festival food trucks and picnic grove under fairy lights"></div>
+            <p style="font-size: 0.88rem; margin: 0.75rem 0 0;">
+              Curated by top South Florida chefs, the Culinary Oasis brings street food favorites from around the globe: wood-fired artisan pizzas, bao buns, birria tacos, vegan soft-serve, and ceremonial matcha cold-brew under canopy bistro lights.
+            </p>
           </div>
-
-          <div>
-            <h3>Stage Acoustic Worker</h3>
-            <button type="button" class="secondary-btn" onclick="runAcousticWorker()">Run Sound Array Check</button>
-            <p id="worker-output" style="font-size: 0.82rem; margin: 6px 0 0;">Multi-threaded Web Worker ready.</p>
-          </div>
-
-          <div>
-            <h3>Browser &amp; DOM Stats</h3>
-            <p id="bom-inspector-output" style="font-size: 0.78rem; margin: 0 0 4px;"></p>
-            <p id="dom-tagname-output" style="font-size: 0.78rem; font-weight: 700; margin: 0;"></p>
-          </div>
+          <ul class="styled-list" style="margin-top: 0.75rem; font-size: 0.82rem;">
+            <li>Dedicated 100% vegan, gluten-free, and halal food alleys</li>
+            <li>Craft cocktail lounges featuring botanical local mocktails &amp; microbrews</li>
+            <li>Free hydration stations with clean chilled electrolyte water</li>
+          </ul>
         </div>
 
-        <!-- Live Firebase SQL Connect Pass Registry -->
-        <div id="firebase-registry" style="margin-top: 1.75rem; padding-top: 1.25rem; border-top: 3px solid #111111;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:0.75rem;">
-            <h3 style="margin:0;">Live Firebase Wristband Orders</h3>
-            <span id="firebase-connection-badge" style="background:#00e676; border:2px solid #111111; border-radius:999px; padding:2px 10px; font-size: 0.76rem; font-weight:700;">Connecting to Firebase...</span>
+        <!-- 3. Giant Kinetic Art & Interactive Neon Prisms -->
+        <div class="culture-card">
+          <div>
+            <div class="culture-card-header">
+              <span class="exp-patch-sprite exp-patch-art" title="Embroidered Kinetic Light Sculpture Patch"></span>
+              <div>
+                <h3 style="margin: 0; font-size: 1.2rem;">3. Giant Kinetic Art &amp; Illuminated Light Sculptures</h3>
+                <small style="font-weight: 700; color: #ff3366;">Interactive Lightwalk &bull; 14 Installation Sites</small>
+              </div>
+            </div>
+            <div class="culture-photo culture-photo-art" role="img" aria-label="Giant kinetic light sculptures and neon geometric installations"></div>
+            <p style="font-size: 0.88rem; margin: 0.75rem 0 0;">
+              Wander through dreamlike installations created by world-renowned contemporary sculptors. Touch sound-reactive laser prisms, lie beneath 30-foot bioluminescent textile flowers, and experience architectural projection mapping across historic park banyan trees.
+            </p>
+          </div>
+          <ul class="styled-list" style="margin-top: 0.75rem; font-size: 0.82rem;">
+            <li>The &ldquo;Resonance Grove&rdquo;: 50 sound-activated interactive light pillars</li>
+            <li>Ambient chillout domes featuring 3D spatial surround soundscapes</li>
+            <li>Nightly lighted kinetic creature parade led by community dancers</li>
+          </ul>
+        </div>
+
+        <!-- 4. Sustainability & Ocean Stewardship -->
+        <div class="culture-card">
+          <div>
+            <div class="culture-card-header">
+              <span class="exp-patch-sprite exp-patch-eco" title="Embroidered Ocean Wave & Sun Patch"></span>
+              <div>
+                <h3 style="margin: 0; font-size: 1.2rem;">4. Ocean Stewardship &amp; Clean Power Sanctuary</h3>
+                <small style="font-weight: 700; color: #ff3366;">100% Solar &amp; Hydrogen &bull; Biscayne Bay Cleanup</small>
+              </div>
+            </div>
+            <div class="culture-photo culture-photo-eco" role="img" aria-label="Oceanfront eco-sanctuary with solar canopies and palm tree hammocks"></div>
+            <p style="font-size: 0.88rem; margin: 0.75rem 0 0;">
+              SoundWave is committed to leaving Waterfront Park cleaner than we found it. Powered by an on-site solar battery array and hydrogen fuel generators, the festival eliminates all single-use plastics and partners with local marine conservationists.
+            </p>
+          </div>
+          <ul class="styled-list" style="margin-top: 0.75rem; font-size: 0.82rem;">
+            <li>Bring your own reusable water bottle or receive our free commemorative cup</li>
+            <li>Volunteer for the Morning Bay Cleanup in exchange for VIP festival upgrades</li>
+            <li>Relax in shaded solar-powered charging hammocks right by the bay</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: MULTIMEDIA SHOWCASE — ANTHEM STREAM & OFFICIAL AFTERMOVIE -->
+    <section class="ui-panel active-panel" style="margin-top: 2rem;">
+      <div class="panel-header">
+        <div class="section-title-with-patch">
+          <span class="thread-patch-sprite patch-ticket" title="Festival Anthem Patch"></span>
+          <div>
+            <h2>Feel the Energy: Official SoundWave Anthem &amp; 4K Cinematic Reel</h2>
+            <small style="font-weight: 700; color: #57554f;">Listen to the festival soundtrack and get a glimpse of the unforgettable atmosphere</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="media-split">
+        <div>
+          <h3 style="margin-top: 0;">Watch the 4K Cinematic Aftermovie</h3>
+          <video id="festival-video" controls poster="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80">
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+
+        <div class="audio-panel">
+          <div>
+            <h3>Official Festival Anthem: &ldquo;Neon Horizon&rdquo;</h3>
+            <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Stream the official festival soundtrack recorded live at SoundWave:</p>
+            <audio id="festival-audio" controls>
+              <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+              Your browser does not support HTML5 audio.
+            </audio>
           </div>
 
-          <table class="schedule-table">
-            <thead>
-              <tr>
-                <th>Wristband ID</th>
-                <th>Attendee</th>
-                <th>Tier</th>
-                <th>Days</th>
-                <th>Qty</th>
-                <th>Total</th>
-                <th>Headliner Pick</th>
-              </tr>
-            </thead>
-            <tbody id="firebase-passes-tbody">
-              <tr>
-                <td colspan="7">Loading wristband orders from Firebase SQL Connect...</td>
-              </tr>
-            </tbody>
-          </table>
+          <div style="background: #ffffff; border: 2px solid #111111; border-radius: 10px; padding: 0.85rem; margin-top: 1rem;">
+            <b style="font-size: 0.86rem;">Ready to be a part of SoundWave 2026?</b>
+            <p style="font-size: 0.82rem; margin: 4px 0 0.65rem;">
+              Wristbands are currently 78% reserved. Lock in your 3-day wristband pass today to ensure gate access.
+            </p>
+            <a href="./passes.html" class="nav-cta-btn" style="display: block; text-align: center; text-decoration: none; padding: 8px 12px;">Reserve Wristband Online &rarr;</a>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
+    <!-- SECTION 4: INVITATION CALLOUT BANNER -->
+    <div class="invitation-quote-box">
+      <h2 style="font-family: 'Shrikhand', cursive; font-size: 2rem; margin: 0 0 0.5rem; color: #111111;">
+        &ldquo;Come as a stranger, leave as part of the tapestry.&rdquo;
+      </h2>
+      <p style="font-size: 1rem; margin: 0 0 1rem; max-width: 820px; font-weight: 600;">
+        Whether you are grooving on the open lawn of Horizon Arena, dancing under the lasers of Analog Dome, resting with acoustic strings on Vinyl Lawn, or enjoying champagne on the SkyDeck, SoundWave 2026 welcomes you with open arms.
+      </p>
+      <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+        <a href="./passes.html" class="nav-cta-btn" style="text-decoration: none; padding: 10px 20px; font-size: 1rem;">Claim Your 3-Day Wristband &rarr;</a>
+        <a href="./lineup.html" class="secondary-btn" style="text-decoration: none; padding: 10px 18px; font-size: 0.95rem; background: #ffffff;">View Official Lineup Poster &rarr;</a>
+      </div>
     </div>
 
-    <!-- ==================== RIGHT STICKY STREAMLINED WRISTBAND CHECKOUT ==================== -->
-    <aside id="book-pass" class="workspace-right-sticky" aria-label="Wristband Express Checkout">
-      <div class="checkout-header-band">
-        <h2>Express Wristband</h2>
-        <span style="background:#ffe600; color:#111111; border:2px solid #111111; border-radius:999px; padding:2px 8px; font-size:0.7rem; font-weight:700;">FIREBASE LIVE</span>
-      </div>
+  </div>
 
-      <!-- Unit II: Live HTML5 <canvas> Digital Wristband Credential Preview -->
-      <div style="margin-bottom: 0.85rem; border: 3px solid #111111; border-radius: 10px; overflow: hidden; box-shadow: 4px 4px 0px #111111;">
-        <canvas
-          id="vip-pass-canvas"
-          width="390"
-          height="125"
-          style="width: 100%; height: auto; display: block;"
-        >
-          Your browser does not support the HTML5 canvas tag.
-        </canvas>
-      </div>
-
-      <!-- Streamlined Unit I, II & VI Registration Form -->
-      <form id="pass-registration-form" action="#" method="post" oninput="updatePassCanvas()" novalidate>
-        <fieldset>
-          <div class="form-grid-2">
-            <div class="field-group">
-              <label for="attendee-name">Full Name *</label>
-              <input
-                type="text"
-                id="attendee-name"
-                name="attendeeName"
-                placeholder="Johan Sanju"
-                required
-                autocomplete="name"
-              />
-            </div>
-
-            <div class="field-group">
-              <label for="attendee-email">Email Address *</label>
-              <input
-                type="email"
-                id="attendee-email"
-                name="attendeeEmail"
-                placeholder="johan@example.com"
-                required
-                autocomplete="email"
-              />
-            </div>
-          </div>
-
-          <div class="form-grid-2">
-            <div class="field-group">
-              <label for="pass-tier">Wristband Tier</label>
-              <select id="pass-tier" name="passTier" onchange="updatePassCanvas()">
-                <option value="General Admission ($129)">3-Day GA &ndash; $129</option>
-                <option value="VIP Gold Pass ($249)">3-Day VIP &ndash; $249</option>
-                <option value="Backstage All-Access ($499)">3-Day Platinum &ndash; $499</option>
-              </select>
-            </div>
-
-            <div class="field-group">
-              <label for="ticket-qty">Quantity (1&ndash;10)</label>
-              <input type="number" id="ticket-qty" name="ticketQty" min="1" max="10" value="1" />
-            </div>
-          </div>
-
-          <div class="option-group-row">
-            <b>Festival Days</b>
-            <input type="radio" id="day-all" name="festivalDay" value="All 3 Days" checked />
-            <label for="day-all">All 3 Days</label> &nbsp;
-            <input type="radio" id="day-1" name="festivalDay" value="Day 1 Only" />
-            <label for="day-1">Fri Only</label> &nbsp;
-            <input type="radio" id="day-3" name="festivalDay" value="Day 3 Finale" />
-            <label for="day-3">Sun Finale</label>
-          </div>
-
-          <div class="option-group-row" style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
-            <div>
-              <b>Camping &amp; Shuttle Add-Ons</b>
-              <input type="checkbox" id="addon-camping" name="addons" value="Camping Spot" />
-              <label for="addon-camping">Camping (+$45)</label> &nbsp;
-              <input type="checkbox" id="addon-merch" name="addons" value="Merch Bundle" />
-              <label for="addon-merch">Shuttle (+$35)</label>
-            </div>
-            <span class="thread-patch-sprite thread-patch-sm patch-camping" title="Embroidered Camping Patch"></span>
-          </div>
-
-          <!-- De-cluttered Collapsible Drawer for Secondary Inputs (Promo Code, Phone, Date, Color, Artist, Notes) -->
-          <details class="checkout-extras-accordion">
-            <summary>Promo Code, Band Color &amp; Preferences</summary>
-            <div style="margin-top: 0.65rem;">
-              <div class="form-grid-2">
-                <div class="field-group">
-                  <label for="promo-code">Promo Code</label>
-                  <input type="text" id="promo-code" name="promoCode" placeholder="Enter SOUND20" />
-                </div>
-
-                <div class="field-group">
-                  <label for="attendee-phone">Mobile Phone</label>
-                  <input
-                    type="tel"
-                    id="attendee-phone"
-                    name="attendeePhone"
-                    placeholder="+1-555-234-5678"
-                    pattern="[0-9+\-\s()]{7,18}"
-                  />
-                </div>
-              </div>
-
-              <div class="form-grid-2">
-                <div class="field-group">
-                  <label for="arrival-date">Check-In Date</label>
-                  <input
-                    type="date"
-                    id="arrival-date"
-                    name="arrivalDate"
-                    value="2026-12-18"
-                    min="2026-12-18"
-                    max="2026-12-20"
-                  />
-                </div>
-
-                <div class="field-group">
-                  <label for="favorite-artist">Headliner Pick</label>
-                  <input
-                    type="text"
-                    id="favorite-artist"
-                    name="favoriteArtist"
-                    list="artist-suggestions"
-                    placeholder="Pick artist..."
-                  />
-                  <datalist id="artist-suggestions">
-                    <option value="Neon Pulse"></option>
-                    <option value="Aurora Echoes"></option>
-                    <option value="DJ Solaris"></option>
-                    <option value="The Midnight Chords"></option>
-                    <option value="Static Velocity"></option>
-                  </datalist>
-                </div>
-              </div>
-
-              <div class="form-grid-2">
-                <div class="field-group">
-                  <label for="hype-level">Stage Hype: <output id="hype-output" for="hype-level">90%</output></label>
-                  <input
-                    type="range"
-                    id="hype-level"
-                    name="hypeLevel"
-                    min="1"
-                    max="100"
-                    value="90"
-                    oninput="document.getElementById('hype-output').value = this.value + '%'"
-                  />
-                </div>
-
-                <div class="field-group">
-                  <label for="wristband-color">Wristband Color</label>
-                  <input type="color" id="wristband-color" name="wristbandColor" value="#ff3366" style="height: 34px; padding: 2px; width: 100%;" />
-                </div>
-              </div>
-
-              <div class="field-group" style="margin-bottom: 0;">
-                <label for="special-notes">Order Notes</label>
-                <textarea id="special-notes" name="specialNotes" rows="1" placeholder="ADA access or will-call notes..."></textarea>
-              </div>
-            </div>
-          </details>
-
-          <div id="live-price-breakdown" class="price-summary-box">
-            Calculating total...
-          </div>
-
-          <div id="form-validation-feedback" class="validation-box" role="alert"></div>
-
-          <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-            <button type="submit" id="submit-pass-btn" class="primary-checkout-btn">Buy Wristband &amp; Save &rarr;</button>
-            <button type="reset" class="secondary-btn" onclick="setTimeout(updatePassCanvas, 50)">Clear</button>
-          </div>
-        </fieldset>
-      </form>
-    </aside>
-
-  </main>
-
-  <!-- Unit V: Fixed Back to Top Link -->
-  <a href="#top-banner" class="back-to-top-btn" title="Back to top">&uarr; Top</a>
-
-  <!-- Unit II: Semantic <footer> + Unit I Entities & Mailto -->
+  <!-- Footer -->
   <footer id="footer">
     <p>
       &copy; 2026 SOUNDWAVE MUSIC FESTIVAL &nbsp;&bull;&nbsp;
       PRESENTED BY JOHAN SANJU &hearts; &nbsp;&bull;&nbsp;
-      BOX OFFICE: <a href="mailto:tickets@soundwave2026.com?subject=Festival%20Pass%20Inquiry">tickets@soundwave2026.com</a>
+      BOX OFFICE: <a href="mailto:tickets@soundwave2026.com?subject=Festival%20Inquiry">tickets@soundwave2026.com</a>
     </p>
   </footer>
 
-  <!-- External JavaScript & Firebase SQL Connect Module -->
   <script src="./src/app.js"></script>
-  <script type="module" src="./src/firebase.js"></script>
 </body>
 </html>

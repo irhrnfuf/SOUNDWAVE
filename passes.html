@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SoundWave 2026 Passes & Wristband Checkout — 3-Day GA, VIP Gold & Backstage Platinum with Live Firebase Sync" />
+  <title>Festival Passes &amp; Wristband Checkout &mdash; SoundWave 2026</title>
+
+  <!-- Browser Import Map for Firebase & SQL Connect SDK -->
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js",
+        "firebase/auth": "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js",
+        "firebase/data-connect": "https://www.gstatic.com/firebasejs/11.4.0/firebase-data-connect.js",
+        "@dataconnect/generated": "./src/dataconnect-generated/esm/index.esm.js"
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+
+  <!-- Top Marquee -->
+  <div class="marquee-strip" aria-label="Live Ticket Feed">
+    <div class="marquee-track">
+      ★ SOUNDWAVE 2026 WRISTBANDS ★ 3-DAY GA $129 • VIP GOLD $249 • PLATINUM $499 ★ USE PROMO CODE SOUND20 FOR 20% OFF ★ RFID CHIP WRISTBANDS INCLUDED ★
+    </div>
+  </div>
+
+  <!-- Sticky Navbar -->
+  <nav class="sticky-navbar" aria-label="Passes Navigation">
+    <div class="nav-inner">
+      <a href="./index.html" class="brand-link" aria-label="SoundWave 2026 Welcome Hub">
+        <img src="./src/soundwave-logo-patch.jpg" alt="SoundWave 2026 Patch Logo" class="nav-logo-patch" />
+        <svg class="lolla-wordmark-svg" viewBox="0 0 310 68" xmlns="http://www.w3.org/2000/svg">
+          <text x="8" y="46" font-family="'Shrikhand', Impact, cursive" font-size="40" fill="#ffffff" stroke="#111111" stroke-width="7" paint-order="stroke fill" letter-spacing="1">SoundWave</text>
+          <rect x="218" y="46" width="76" height="19" rx="9" fill="#111111" />
+          <text x="256" y="59" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="11" fill="#ffe600" letter-spacing="2">MIAMI &rsquo;26</text>
+        </svg>
+      </a>
+
+      <ul>
+        <li><a href="./index.html">&larr; Welcome Hub</a></li>
+        <li><a href="./lineup.html">Lineup &amp; Poster</a></li>
+        <li><a href="./schedule-builder.html">My Schedule</a></li>
+        <li><a href="./stages.html">All Stages &amp; Media</a></li>
+        <li><a href="./passes.html" style="background-color: #ffe600; color: #111111; border: 2px solid #111111; box-shadow: 2px 2px 0px #111111;">Passes &amp; Checkout</a></li>
+        <li><a href="./shuttles-orders.html">Shuttles &amp; Orders</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header Banner -->
+  <header id="top-banner">
+    <div class="banner-container">
+      <div class="hero-logo-Totem">
+        <img src="./src/soundwave-logo-patch.jpg" alt="SoundWave Logo Patch" class="logo-patch-img" />
+      </div>
+
+      <div class="hero-card-block">
+        <div class="event-meta-row">OFFICIAL 3-DAY PASSES &bull; TICKET RESERVATION &bull; ZERO HIDDEN FEES</div>
+        <h1 style="margin: 0.2rem 0 0.45rem;">Festival Passes &amp; Wristband Registration</h1>
+        <p style="margin: 0; font-size: 0.95rem;">
+          Select your 3-day wristband tier, personalize your RFID credential on the live interactive ticket canvas, and reserve directly with our <strong>live Firebase SQL Connect backend</strong>.
+        </p>
+      </div>
+
+      <aside class="banner-stats-box">
+        <h3>Tier Allocation</h3>
+        <div class="stat-line">
+          <span>GA LAWN BOWL</span>
+          <span>78% Claimed</span>
+        </div>
+        <div class="stat-line">
+          <span>VIP GOLD TERRACE</span>
+          <span>89% Claimed</span>
+        </div>
+        <div class="stat-line">
+          <span>PLATINUM BACKSTAGE</span>
+          <span>Last 45 Remaining</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <!-- Two Column Layout: Left Tier Comparison, Right Checkout Form -->
+  <main class="app-workspace">
+
+    <div class="workspace-left">
+
+      <section class="ui-panel active-panel" style="margin-bottom: 1.5rem;">
+        <div class="panel-header">
+          <div class="section-title-with-patch">
+            <span class="thread-patch-sprite patch-ticket" title="Embroidered Festival Pass Patch"></span>
+            <div>
+              <h2>Compare 3-Day Wristband Tiers</h2>
+              <small style="font-weight: 700; color: #57554f;">Click any card below to automatically select it in the express checkout form on the right</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier Grid (Unit IV Box Model) -->
+        <div class="pass-tier-grid">
+          <div class="box-model-pass" onclick="selectPassTierFromCard('General Admission ($129)')">
+            <div>
+              <div class="tier-header-strip">
+                <h4 style="margin:0; font-size:1.25rem;">3-Day GA</h4>
+              </div>
+              <p class="pass-price">$129</p>
+              <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Full access to Horizon Arena, Analog Dome, Vinyl Lawn &amp; artisanal food market.</p>
+              <ul class="styled-list" style="font-size: 0.8rem; padding-left: 1rem;">
+                <li>Free hydration stations</li>
+                <li>Panoramic amphitheater lawn view</li>
+                <li>RFID cashless wristband</li>
+              </ul>
+            </div>
+            <button type="button" class="secondary-btn tier-select-btn">Select GA ($129) &rarr;</button>
+          </div>
+
+          <div class="box-model-pass vip-featured" onclick="selectPassTierFromCard('VIP Gold Pass ($249)')">
+            <div>
+              <div class="tier-header-strip">
+                <h4 style="margin:0; font-size:1.25rem;">★ 3-Day VIP</h4>
+              </div>
+              <p class="pass-price">$249</p>
+              <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Elevated front-row viewing decks, express VIP entry lanes &amp; shaded air-conditioned lounge bar.</p>
+              <ul class="styled-list" style="font-size: 0.8rem; padding-left: 1rem;">
+                <li>Front-wave pit at all 4 stages</li>
+                <li>Exclusive craft cocktails &amp; sommelier bar</li>
+                <li>Luxury private air-conditioned restrooms</li>
+              </ul>
+            </div>
+            <button type="button" class="tier-select-btn">Select VIP ($249) &rarr;</button>
+          </div>
+
+          <div class="box-model-pass platinum-tier" onclick="selectPassTierFromCard('Backstage All-Access ($499)')">
+            <div>
+              <div class="tier-header-strip">
+                <h4 style="margin:0; font-size:1.25rem;">3-Day Platinum</h4>
+              </div>
+              <p class="pass-price">$499</p>
+              <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Side-stage viewing wings, private golf-cart shuttles, complimentary all-day dining &amp; artist lounge.</p>
+              <ul class="styled-list" style="font-size: 0.8rem; padding-left: 1rem;">
+                <li>Side-stage viewing right beside artists</li>
+                <li>Private golf-cart shuttles between stages</li>
+                <li>All-inclusive gourmet food &amp; premium drinks</li>
+              </ul>
+            </div>
+            <button type="button" class="secondary-btn tier-select-btn">Select Platinum ($499) &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Stage View Check Link -->
+        <div style="margin-top: 1.5rem; background: #fff9db; border: 2px solid #111111; border-radius: 12px; padding: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <b>Want to see exactly where each pass places you on stage?</b>
+            <div style="font-size: 0.84rem; color: #57554f;">Check the interactive sightline maps for Horizon Arena, Analog Dome, Vinyl Lawn &amp; VIP Cabanas.</div>
+          </div>
+          <a href="./stages.html" class="secondary-btn" style="padding: 7px 14px; text-decoration: none;">Explore Stage Sightline Maps &rarr;</a>
+        </div>
+      </section>
+
+      <!-- Unit III: FAQ & Policies -->
+      <section class="ui-panel active-panel">
+        <div class="panel-header">
+          <h3>Wristband Shipping &amp; Box Office Guidelines</h3>
+        </div>
+        <div class="lists-three-col" style="margin-top: 0; padding-top: 0; border: none;">
+          <div>
+            <h4 style="margin-top: 0;">Wristband Shipping</h4>
+            <p style="font-size: 0.85rem;">All RFID wristbands ship complimentary via tracked courier 3 weeks prior to the event. International orders can be picked up with ID at Waterfront Will-Call.</p>
+          </div>
+          <div>
+            <h4 style="margin-top: 0;">RFID Cashless Linking</h4>
+            <p style="font-size: 0.85rem;">Link any debit or credit card to your festival wristband for quick tap-and-pay transactions at food trucks, cocktail bars, and official artist merch tents.</p>
+          </div>
+          <div>
+            <h4 style="margin-top: 0;">Age &amp; Re-entry Policy</h4>
+            <p style="font-size: 0.85rem;">SoundWave 2026 is an all-ages event (kids under 8 enter free with adult). Full re-entry allowed all weekend long for registered wristband holders.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Right Sticky Checkout Drawer -->
+    <aside id="book-pass" class="workspace-right-sticky" aria-label="Wristband Express Checkout">
+      <div class="checkout-header-band">
+        <h2>Express Wristband</h2>
+        <span style="background:#ffe600; color:#111111; border:2px solid #111111; border-radius:999px; padding:2px 8px; font-size:0.7rem; font-weight:700;">FIREBASE LIVE</span>
+      </div>
+
+      <!-- Unit II: Live HTML5 <canvas> Digital Wristband Credential Preview -->
+      <div style="margin-bottom: 0.85rem; border: 3px solid #111111; border-radius: 10px; overflow: hidden; box-shadow: 4px 4px 0px #111111;">
+        <canvas id="vip-pass-canvas" width="390" height="125" style="width: 100%; height: auto; display: block;">
+          Your browser does not support HTML5 canvas.
+        </canvas>
+      </div>
+
+      <!-- Registration Form (Units I, II, VI) -->
+      <form id="pass-registration-form" action="#" method="post" oninput="updatePassCanvas()" novalidate>
+        <fieldset>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label for="attendee-name">Full Name *</label>
+              <input type="text" id="attendee-name" name="attendeeName" placeholder="Johan Sanju" required autocomplete="name" />
+            </div>
+
+            <div class="field-group">
+              <label for="attendee-email">Email Address *</label>
+              <input type="email" id="attendee-email" name="attendeeEmail" placeholder="johan@example.com" required autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label for="pass-tier">Wristband Tier</label>
+              <select id="pass-tier" name="passTier" onchange="updatePassCanvas()">
+                <option value="General Admission ($129)">3-Day GA &ndash; $129</option>
+                <option value="VIP Gold Pass ($249)" selected>3-Day VIP &ndash; $249</option>
+                <option value="Backstage All-Access ($499)">3-Day Platinum &ndash; $499</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="ticket-qty">Quantity (1&ndash;10)</label>
+              <input type="number" id="ticket-qty" name="ticketQty" min="1" max="10" value="1" />
+            </div>
+          </div>
+
+          <div class="option-group-row">
+            <b>Festival Days</b>
+            <input type="radio" id="day-all" name="festivalDay" value="All 3 Days" checked />
+            <label for="day-all">All 3 Days</label> &nbsp;
+            <input type="radio" id="day-1" name="festivalDay" value="Day 1 Only" />
+            <label for="day-1">Fri Only</label> &nbsp;
+            <input type="radio" id="day-3" name="festivalDay" value="Day 3 Finale" />
+            <label for="day-3">Sun Finale</label>
+          </div>
+
+          <div class="option-group-row" style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+            <div>
+              <b>Camping &amp; Shuttle Add-Ons</b>
+              <input type="checkbox" id="addon-camping" name="addons" value="Camping Spot" />
+              <label for="addon-camping">Camping (+$45)</label> &nbsp;
+              <input type="checkbox" id="addon-merch" name="addons" value="Merch Bundle" />
+              <label for="addon-merch">Shuttle (+$35)</label>
+            </div>
+            <span class="thread-patch-sprite thread-patch-sm patch-camping" title="Embroidered Camping Patch"></span>
+          </div>
+
+          <!-- Collapsible Extras Accordion -->
+          <details class="checkout-extras-accordion">
+            <summary>Promo Code, Band Color &amp; Preferences</summary>
+            <div style="margin-top: 0.65rem;">
+              <div class="form-grid-2">
+                <div class="field-group">
+                  <label for="promo-code">Promo Code</label>
+                  <input type="text" id="promo-code" name="promoCode" placeholder="Enter SOUND20" />
+                </div>
+
+                <div class="field-group">
+                  <label for="attendee-phone">Mobile Phone</label>
+                  <input type="tel" id="attendee-phone" name="attendeePhone" placeholder="+1-555-234-5678" pattern="[0-9+\-\s()]{7,18}" />
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="field-group">
+                  <label for="arrival-date">Check-In Date</label>
+                  <input type="date" id="arrival-date" name="arrivalDate" value="2026-12-18" min="2026-12-18" max="2026-12-20" />
+                </div>
+
+                <div class="field-group">
+                  <label for="favorite-artist">Headliner Pick</label>
+                  <input type="text" id="favorite-artist" name="favoriteArtist" list="artist-suggestions" placeholder="Pick artist..." />
+                  <datalist id="artist-suggestions">
+                    <option value="Neon Pulse"></option>
+                    <option value="Aurora Echoes"></option>
+                    <option value="DJ Solaris"></option>
+                    <option value="The Midnight Chords"></option>
+                    <option value="Static Velocity"></option>
+                  </datalist>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="field-group">
+                  <label for="hype-level">Stage Hype: <output id="hype-output" for="hype-level">90%</output></label>
+                  <input type="range" id="hype-level" name="hypeLevel" min="1" max="100" value="90" oninput="document.getElementById('hype-output').value = this.value + '%'" />
+                </div>
+
+                <div class="field-group">
+                  <label for="wristband-color">Wristband Color</label>
+                  <input type="color" id="wristband-color" name="wristbandColor" value="#ff3366" style="height: 34px; padding: 2px; width: 100%;" />
+                </div>
+              </div>
+
+              <div class="field-group" style="margin-bottom: 0;">
+                <label for="special-notes">Order Notes</label>
+                <textarea id="special-notes" name="specialNotes" rows="1" placeholder="ADA access or will-call notes..."></textarea>
+              </div>
+            </div>
+          </details>
+
+          <div id="live-price-breakdown" class="price-summary-box">Calculating total...</div>
+          <div id="form-validation-feedback" class="validation-box" role="alert"></div>
+
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+            <button type="submit" id="submit-pass-btn" class="primary-checkout-btn">Buy Wristband &amp; Save &rarr;</button>
+            <button type="reset" class="secondary-btn" onclick="setTimeout(updatePassCanvas, 50)">Clear</button>
+          </div>
+        </fieldset>
+      </form>
+    </aside>
+
+  </main>
+
+  <footer id="footer">
+    <p>
+      &copy; 2026 SOUNDWAVE MUSIC FESTIVAL &nbsp;&bull;&nbsp; OFFICIAL PASS REGISTRATION &nbsp;&bull;&nbsp;
+      <a href="./index.html">Return to Welcome Hub</a>
+    </p>
+  </footer>
+
+  <script src="./src/app.js"></script>
+  <script type="module" src="./src/firebase.js"></script>
+</body>
+</html>
