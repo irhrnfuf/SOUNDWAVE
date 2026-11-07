@@ -1,0 +1,26 @@
+# Stage 6: SoundWave 2026 — Authorized Mutations
+mutation BookFestivalPass(
+  $passCode: String!,
+  $attendeeName: String!,
+  $email: String!,
+  $passTier: String!,
+  $festivalDay: String!,
+  $quantity: Int!,
+  $totalPrice: Float!,
+  $favoriteArtist: String
+) @auth(level: PUBLIC) {
+  festivalPass_insert(data: {
+    passCode: $passCode,
+    attendeeName: $attendeeName,
+    email: $email,
+    passTier: $passTier,
+    festivalDay: $festivalDay,
+    quantity: $quantity,
+    totalPrice: $totalPrice,
+    favoriteArtist: $favoriteArtist
+  })
+}
+
+mutation CancelFestivalPass($id: UUID!) @auth(level: PUBLIC) {
+  festivalPass_delete(id: $id)
+}

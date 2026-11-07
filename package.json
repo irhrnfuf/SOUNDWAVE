@@ -1,0 +1,10 @@
+{
+  "name": "johan-html-app",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@dataconnect/generated": "file:src/dataconnect-generated",
+    "firebase": "^11.4.0"
+  }
+}

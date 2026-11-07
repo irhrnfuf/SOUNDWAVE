@@ -1,0 +1,13 @@
+# Stage 6: SoundWave 2026 — Firebase SQL Connect Schema
+type FestivalPass @table {
+  id: UUID! @default(expr: "uuidV4()")
+  passCode: String!
+  attendeeName: String!
+  email: String!
+  passTier: String!
+  festivalDay: String!
+  quantity: Int! @default(value: 1)
+  totalPrice: Float!
+  favoriteArtist: String
+  createdAt: Timestamp! @default(expr: "request.time")
+}

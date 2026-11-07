@@ -1,0 +1,23 @@
+# Local Prototype Seed Data for SoundWave 2026
+mutation SeedSoundWavePasses @transaction {
+  pass1: festivalPass_insert(data: {
+    passCode: "SW26-NEON01-100",
+    attendeeName: "Johan Sanju",
+    email: "johansanju00@gmail.com",
+    passTier: "Backstage All-Access ($499)",
+    festivalDay: "All 3 Days",
+    quantity: 2,
+    totalPrice: 810.50,
+    favoriteArtist: "Neon Pulse"
+  })
+  pass2: festivalPass_insert(data: {
+    passCode: "SW26-VIP77A-101",
+    attendeeName: "Aria Montgomery",
+    email: "aria@soundwave2026.com",
+    passTier: "VIP Gold Pass ($249)",
+    festivalDay: "Day 3 Finale",
+    quantity: 1,
+    totalPrice: 261.50,
+    favoriteArtist: "DJ Solaris"
+  })
+}

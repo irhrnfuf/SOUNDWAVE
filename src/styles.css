@@ -1,0 +1,1345 @@
+/* ==========================================================================
+   SOUNDWAVE 2026 — WHIMSICAL LOLLAPALOOZA-STYLE TABBED FESTIVAL INTERFACE
+   Covers Syllabus Units III, IV (CSS Box Model), and V (Advanced CSS)
+   Features: Custom Artsy SVG Cursors, Groovy Display Type, De-cluttered Tab UX
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Custom Artsy Guitar-Pick & Sparkle Cursor */
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M5 3 C16 2, 26 8, 23 19 C20 27, 11 29, 7 21 C3 13, 2 5, 5 3 Z' fill='%23FFE600' stroke='%23111111' stroke-width='2.5'/><circle cx='13' cy='13' r='3' fill='%23FF3366' stroke='%23111111' stroke-width='1.5'/><path d='M25 3 L27 7 L31 8 L27 10 L26 14 L24 10 L20 9 L24 7 Z' fill='%2300E5FF' stroke='%23111111' stroke-width='1'/></svg>") 4 3, auto;
+}
+
+/* Custom Artsy Vinyl / Music Note Pointer Cursor for Interactive Elements */
+a,
+button,
+select,
+summary,
+input[type="radio"],
+input[type="checkbox"],
+input[type="color"],
+input[type="range"],
+.box-model-pass,
+.sprite-card,
+.gallery-item,
+.workspace-tab-btn,
+.draggable-chip {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='34' height='34' viewBox='0 0 34 34'><circle cx='16' cy='16' r='13' fill='%23FF3366' stroke='%23111111' stroke-width='2.5'/><circle cx='16' cy='16' r='5' fill='%23FFE600' stroke='%23111111' stroke-width='2'/><circle cx='16' cy='16' r='1.8' fill='%23111111'/><path d='M26 2 L28 6 L32 7 L28 9 L27 13 L25 9 L21 8 L25 6 Z' fill='%23FFE600' stroke='%23111111' stroke-width='1.2'/></svg>") 16 16, pointer !important;
+}
+
+/* Unit III: Backgrounds, Color Values & Typography */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fffdf7;
+  color: #111111;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+/* Unit V: Grouping Selectors — Whimsical Artsy Festival Typography */
+h1, h2, h3, h4 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  color: #111111;
+  margin-top: 0;
+  letter-spacing: -0.02em;
+}
+
+.whimsy-title {
+  font-family: 'Shrikhand', cursive;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+h1 {
+  font-family: 'Shrikhand', cursive;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 4.2vw, 3.35rem);
+  line-height: 1.08;
+  margin: 0.35rem 0 0.65rem;
+  color: #111111;
+  text-shadow: 3px 3px 0px #ffe600;
+}
+
+h2 {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  line-height: 1.15;
+  margin: 0;
+}
+
+h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Unit III: Links (a:link, a:visited, a:hover, a:active) */
+a:link {
+  color: #111111;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+a:visited {
+  color: #111111;
+}
+
+a:hover {
+  color: #ff3366;
+}
+
+a:active {
+  color: #00b8d4;
+}
+
+/* Lollapalooza Top Scrolling Marquee Bar */
+.marquee-strip {
+  background-color: #111111;
+  color: #ffe600;
+  border-bottom: 3px solid #111111;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 6px 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.marquee-track {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marqueeScroll 26s linear infinite;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Unit V: Sticky Lolla-Style Header Navigation Bar */
+.sticky-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #0088ff;
+  border-bottom: 3px solid #111111;
+  padding: 0.55rem 1.75rem;
+}
+
+.sticky-navbar .nav-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.lolla-wordmark-svg {
+  height: 46px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(3px 3px 0px #111111);
+  transition: transform 0.2s ease;
+}
+
+.brand-link:hover .lolla-wordmark-svg {
+  transform: scale(1.04) rotate(-2deg);
+}
+
+.sticky-navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.sticky-navbar ul li {
+  display: inline-block;
+}
+
+.sticky-navbar ul li a {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  transition: all 0.15s ease;
+}
+
+.sticky-navbar ul li:first-child a {
+  background-color: #ffe600;
+  color: #111111;
+  border-color: #111111;
+  box-shadow: 2px 2px 0px #111111;
+}
+
+.sticky-navbar ul li a:hover {
+  background-color: #ffe600;
+  border-color: #111111;
+  color: #111111;
+  box-shadow: 3px 3px 0px #111111;
+  transform: translate(-1px, -1px);
+}
+
+.nav-cta-btn {
+  background-color: #ff3366 !important;
+  color: #ffffff !important;
+  border: 2px solid #111111 !important;
+  box-shadow: 3px 3px 0px #111111 !important;
+  padding: 0.48rem 1.15rem !important;
+}
+
+.nav-cta-btn:hover {
+  background-color: #00e676 !important;
+  color: #111111 !important;
+}
+
+/* Whimsical Lollapalooza Hero Banner (#top-banner) */
+#top-banner {
+  background: linear-gradient(180deg, #0088ff 0%, #00c8ff 65%, #fffdf7 100%);
+  border-bottom: 3px solid #111111;
+  padding: 2rem 1.75rem;
+}
+
+.banner-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 280px 1fr 310px;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.hero-logo-Totem {
+  text-align: center;
+}
+
+.hero-logo-Totem svg {
+  width: 100%;
+  max-width: 265px;
+  height: auto;
+  filter: drop-shadow(5px 5px 0px #111111);
+}
+
+.hero-card-block {
+  background-color: #fffdf7;
+  border: 3px solid #111111;
+  border-radius: 18px;
+  box-shadow: 7px 7px 0px #111111;
+  padding: 1.5rem 1.85rem;
+}
+
+.event-meta-row {
+  display: inline-block;
+  background-color: #ffe600;
+  border: 2px solid #111111;
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.banner-stats-box {
+  background-color: #ff3366;
+  color: #ffffff;
+  border: 3px solid #111111;
+  border-radius: 18px;
+  box-shadow: 7px 7px 0px #111111;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.banner-stats-box h3 {
+  font-family: 'Shrikhand', cursive;
+  font-weight: 400;
+  color: #ffe600;
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.stat-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111111;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 7px 11px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   DE-CLUTTERED TWO-COLUMN WORKSPACE WITH TABBED MODULE SWITCHER
+   ========================================================================== */
+main.app-workspace {
+  width: 100%;
+  max-width: 1360px;
+  min-height: 78vh;
+  margin: 1.75rem auto;
+  padding: 0 1.75rem;
+  display: grid;
+  grid-template-columns: 1fr 430px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.workspace-left {
+  min-width: 0;
+}
+
+/* Interactive Section Switcher Bar (De-clutters the Left Column!) */
+.workspace-tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  background-color: #f4efe0;
+  border: 3px solid #111111;
+  border-radius: 16px;
+  padding: 0.55rem;
+  box-shadow: 5px 5px 0px #111111;
+}
+
+.workspace-tab-btn {
+  flex: 1 1 auto;
+  background-color: #fffdf7;
+  color: #111111;
+  border: 2px solid #111111;
+  border-radius: 12px;
+  padding: 0.65rem 0.9rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-transform: none;
+  box-shadow: 2px 2px 0px #111111;
+  transition: all 0.15s ease;
+}
+
+.workspace-tab-btn:hover {
+  background-color: #ffe600;
+  color: #111111;
+}
+
+.workspace-tab-btn.active-tab {
+  background-color: #ff3366;
+  color: #ffffff;
+  box-shadow: 3px 3px 0px #111111;
+  transform: translate(-1px, -1px);
+}
+
+/* Tabbed Panels: Only the active tab is shown on screen so the user is never overwhelmed */
+.ui-panel {
+  display: none;
+  background-color: #ffffff;
+  border: 3px solid #111111;
+  border-radius: 18px;
+  box-shadow: 7px 7px 0px #111111;
+  padding: 1.85rem;
+  animation: tabFadeIn 0.22s ease;
+}
+
+.ui-panel.active-panel {
+  display: block;
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.35rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 3px solid #111111;
+}
+
+/* Sticky Right Checkout Drawer */
+.workspace-right-sticky {
+  position: sticky;
+  top: 76px;
+  background-color: #ffffff;
+  border: 3px solid #111111;
+  border-radius: 18px;
+  box-shadow: 8px 8px 0px #111111;
+  padding: 1.4rem;
+}
+
+/* ==========================================================================
+   LOLLAPALOOZA TICKET TIER CARDS (Unit IV CSS Box Model: Margin, Border, Outline, Padding)
+   ========================================================================== */
+.pass-tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.15rem;
+}
+
+.box-model-pass {
+  background-color: #fffdf7;
+  margin: 6px;                /* Unit IV: Margin */
+  padding: 20px;              /* Unit IV: Padding */
+  border: 3px solid #111111;  /* Unit IV: Border */
+  outline: 3px solid #00e5ff; /* Unit IV: Outline */
+  outline-offset: 3px;        /* Unit IV: Outline Offset */
+  border-radius: 14px;
+  box-shadow: 5px 5px 0px #111111;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.box-model-pass:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0px #111111;
+}
+
+.tier-header-strip {
+  background-color: #00e5ff;
+  border: 2px solid #111111;
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-bottom: 0.75rem;
+}
+
+.box-model-pass.vip-featured {
+  background-color: #ffe600;
+  outline-color: #ff3366;
+}
+
+.box-model-pass.vip-featured .tier-header-strip {
+  background-color: #ff3366;
+  color: #ffffff;
+}
+
+.box-model-pass.vip-featured .tier-header-strip h4 {
+  color: #ffffff;
+}
+
+.box-model-pass.platinum-tier {
+  outline-color: #00e676;
+}
+
+.box-model-pass.platinum-tier .tier-header-strip {
+  background-color: #00e676;
+}
+
+.pass-price {
+  font-family: 'Shrikhand', cursive;
+  font-size: 2.35rem;
+  line-height: 1.05;
+  color: #111111;
+  margin: 0.25rem 0 0.6rem;
+}
+
+.tier-select-btn {
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* ==========================================================================
+   LOLLAPALOOZA LINEUP POSTER BILL & INTERACTIVE GENRE FILTER (Unit VI)
+   ========================================================================== */
+.lolla-poster-banner {
+  background: linear-gradient(180deg, #ff3366 0%, #ff8800 52%, #ffe600 100%);
+  border: 3px solid #111111;
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  box-shadow: 5px 5px 0px #111111;
+}
+
+.lolla-poster-banner .headliner-line {
+  font-family: 'Shrikhand', cursive;
+  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+  color: #ffffff;
+  text-shadow: 3px 3px 0px #111111;
+  line-height: 1.2;
+}
+
+.lolla-poster-banner .sub-line {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #111111;
+  background-color: #fffdf7;
+  border: 2px solid #111111;
+  border-radius: 999px;
+  display: inline-block;
+  padding: 4px 14px;
+  margin-top: 0.65rem;
+}
+
+.artist-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.js-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+.js-card {
+  background-color: #fffdf7;
+  border: 2px solid #111111;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0px #111111;
+  padding: 1rem;
+}
+
+.js-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.js-card p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* Unit II: Drag & Drop Personal Schedule Builder */
+.itinerary-workspace {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1.25rem;
+}
+
+.draggable-chip {
+  display: block;
+  margin-bottom: 0.6rem;
+  padding: 0.65rem 0.95rem;
+  background-color: #ffe600;
+  border: 2px solid #111111;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0px #111111;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #111111;
+  transition: transform 0.1s ease;
+}
+
+.draggable-chip:hover {
+  background-color: #00e5ff;
+  transform: translate(-2px, -2px);
+}
+
+#lineup-dropzone {
+  background-color: #fffdf7;
+  border: 3px dashed #111111;
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Unit III: Table Styling (Stage Schedule & Firebase Registry) */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid #111111;
+  font-size: 0.88rem;
+}
+
+.schedule-table thead {
+  background-color: #111111;
+  color: #ffe600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 11px 12px;
+  border: 2px solid #111111;
+  text-align: left;
+}
+
+.schedule-table tbody tr:nth-child(even) {
+  background-color: #fff9db;
+}
+
+.schedule-table tbody tr:hover {
+  background-color: #00e5ff;
+}
+
+.schedule-table tfoot td {
+  background-color: #111111;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Unit V: Image Gallery, Opacity & Relative/Absolute Positioning */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.9rem;
+}
+
+.gallery-item {
+  position: relative;
+  border: 3px solid #111111;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0px #111111;
+  background-color: #111111;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 155px;
+  object-fit: cover;
+  opacity: 0.75; /* Unit V: Image Opacity */
+  transition: opacity 0.25s ease, transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  opacity: 1.0;  /* Unit V: Full Opacity on Hover */
+  transform: scale(1.05);
+}
+
+.gallery-badge {
+  position: absolute; /* Unit V: Absolute Positioning */
+  top: 8px;
+  left: 8px;
+  background-color: #ffe600;
+  color: #111111;
+  border: 2px solid #111111;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+}
+
+.gallery-caption {
+  background-color: #ffffff;
+  color: #111111;
+  border-top: 2px solid #111111;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+/* Unit V: Hand-Embroidered Thread Patch CSS Image Sprites (Coachella-Style Thread Art) */
+.thread-patch-sprite {
+  display: inline-block;
+  width: 86px;
+  height: 70px;
+  flex-shrink: 0;
+  background-image: url("./thread-icons.jpg");
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  mix-blend-mode: multiply;
+  transition: transform 0.2s ease;
+}
+
+.thread-patch-sprite:hover {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.thread-patch-sm {
+  width: 58px;
+  height: 48px;
+}
+
+.patch-ticket  { background-position: 2% 6%; }
+.patch-camping { background-position: 98% 6%; }
+.patch-shuttle { background-position: 2% 96%; }
+.patch-lodge   { background-position: 98% 96%; }
+
+.section-title-with-patch {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.sprite-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.sprite-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+  background-color: #fffdf7;
+  border: 2px solid #111111;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0px #111111;
+  padding: 0.75rem 0.5rem;
+  transition: transform 0.15s ease;
+}
+
+.sprite-card:hover {
+  transform: translate(-2px, -2px);
+  background-color: #fff9db;
+}
+
+/* Media Split & Float Box */
+.media-split {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.25rem;
+}
+
+.media-split video {
+  width: 100%;
+  border: 3px solid #111111;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0px #111111;
+  display: block;
+  background: #111111;
+}
+
+.audio-panel {
+  background-color: #ffe600;
+  border: 3px solid #111111;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0px #111111;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.audio-panel audio {
+  width: 100%;
+}
+
+/* Unit V: Float & Clearfix + ::first-letter */
+.float-spotlight-box {
+  float: right;
+  width: 240px;
+  margin: 0 0 0.75rem 1.25rem;
+  padding: 0.85rem 1rem;
+  background-color: #00e676;
+  border: 2px solid #111111;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0px #111111;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.intro-lead::first-letter {
+  font-family: 'Shrikhand', cursive;
+  font-size: 2.5rem;
+  color: #ff3366;
+  float: left;
+  line-height: 0.9;
+  margin: 2px 8px 0 0;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Unit III: Three-Column Lists */
+.lists-three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 3px solid #111111;
+}
+
+ul.styled-list {
+  list-style-type: square;
+  padding-left: 1.15rem;
+  margin: 0.4rem 0;
+  font-size: 0.88rem;
+}
+
+ol.styled-steps {
+  padding-left: 1.2rem;
+  margin: 0.4rem 0;
+  font-size: 0.88rem;
+}
+
+ul.styled-list li,
+ol.styled-steps li {
+  margin-bottom: 0.35rem;
+}
+
+dl.zone-dl {
+  margin: 0.4rem 0;
+  font-size: 0.86rem;
+}
+
+dl.zone-dl dt {
+  font-weight: 700;
+  margin-top: 0.4rem;
+}
+
+dl.zone-dl dd {
+  margin-left: 0;
+  color: #333333;
+}
+
+/* ==========================================================================
+   STREAMLINED STICKY RIGHT WRISTBAND CHECKOUT DRAWER
+   ========================================================================== */
+.checkout-header-band {
+  background-color: #ff3366;
+  color: #ffffff;
+  border: 2px solid #111111;
+  border-radius: 10px;
+  padding: 0.55rem 0.85rem;
+  margin-bottom: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-header-band h2 {
+  font-family: 'Shrikhand', cursive;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+#pass-registration-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.field-group {
+  margin-bottom: 0.6rem;
+}
+
+.field-group label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 3px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  background-color: #fffdf7;
+  color: #111111;
+  border: 2px solid #111111;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  background-color: #ffe600;
+  outline: 2px solid #ff3366;
+  outline-offset: 1px;
+}
+
+.option-group-row {
+  background-color: #fffdf7;
+  border: 2px solid #111111;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.option-group-row b {
+  display: block;
+  font-size: 0.74rem;
+  margin-bottom: 3px;
+}
+
+/* Collapsible Extras Accordion to keep Checkout De-Cluttered */
+.checkout-extras-accordion {
+  background-color: #f4efe0;
+  border: 2px solid #111111;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
+.checkout-extras-accordion summary {
+  font-size: 0.8rem;
+  font-weight: 700;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-extras-accordion summary::after {
+  content: "+ Customize";
+  background-color: #ffe600;
+  border: 1px solid #111111;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 0.72rem;
+}
+
+.checkout-extras-accordion[open] summary::after {
+  content: "− Hide";
+}
+
+button {
+  background-color: #111111;
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 700;
+  padding: 9px 14px;
+  border: 2px solid #111111;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0px #111111;
+  font-size: 0.82rem;
+  transition: transform 0.1s ease, background-color 0.12s ease;
+}
+
+button:hover {
+  background-color: #ff3366;
+  color: #ffffff;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #111111;
+}
+
+button.secondary-btn {
+  background-color: #ffffff;
+  color: #111111;
+}
+
+button.secondary-btn:hover {
+  background-color: #ffe600;
+  color: #111111;
+}
+
+button.primary-checkout-btn {
+  width: 100%;
+  background-color: #00e676;
+  color: #111111;
+  padding: 11px 16px;
+  font-size: 0.92rem;
+}
+
+button.primary-checkout-btn:hover {
+  background-color: #ffe600;
+  color: #111111;
+}
+
+.price-summary-box {
+  margin: 0.65rem 0;
+  padding: 0.8rem 0.95rem;
+  background-color: #fff9db;
+  border: 2px solid #111111;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0px #111111;
+  font-size: 0.82rem;
+}
+
+.validation-box {
+  margin: 0.6rem 0;
+  padding: 0.7rem 0.85rem;
+  border: 2px solid #111111;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: none;
+}
+
+.validation-box.error {
+  display: block;
+  background-color: #ff3366;
+  color: #ffffff;
+}
+
+.validation-box.success {
+  display: block;
+  background-color: #00e676;
+  color: #111111;
+}
+
+/* Unit V: Fixed Back to Top Button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  background-color: #ffe600;
+  color: #111111 !important;
+  border: 2px solid #111111;
+  border-radius: 999px;
+  box-shadow: 4px 4px 0px #111111;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+}
+
+/* Unit III: Footer */
+#footer {
+  margin-top: 3rem;
+  background-color: #111111;
+  color: #fffdf7;
+  border-top: 4px solid #ff3366;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  font-size: 0.86rem;
+}
+
+#footer a {
+  color: #ffe600;
+}
+
+/* Unit V: Media Types (@media screen & @media print) */
+@media screen and (max-width: 1080px) {
+  main.app-workspace {
+    grid-template-columns: 1fr;
+  }
+  .workspace-right-sticky {
+    position: static;
+  }
+  .banner-container,
+  .itinerary-workspace,
+  .media-split,
+  .lists-three-col,
+  .pass-tier-grid,
+  .js-panel-grid,
+  .gallery-grid,
+  .sprite-list,
+  .stage-map-grid,
+  .stage-history-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   HAND-STITCHED EMBROIDERED SOUNDWAVE LOGO PATCH & 4 DEDICATED STAGE PAGES
+   ========================================================================== */
+
+/* Hand-Embroidered SoundWave 2026 FEST Logo Patch (Hero & Navbar) */
+.logo-patch-img {
+  width: 100%;
+  max-width: 265px;
+  height: auto;
+  display: inline-block;
+  border-radius: 18px;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(5px 5px 0px rgba(17, 17, 17, 0.35));
+  transition: transform 0.22s ease;
+}
+
+.logo-patch-img:hover {
+  transform: scale(1.04) rotate(-2deg);
+}
+
+.nav-logo-patch {
+  height: 54px;
+  width: auto;
+  border-radius: 10px;
+  border: 2px solid #111111;
+  box-shadow: 3px 3px 0px #111111;
+  background-color: #fffdf7;
+  transition: transform 0.2s ease;
+}
+
+.brand-link:hover .nav-logo-patch {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+/* 4 Brand-New Hand-Stitched Embroidered Stage Icons (2x2 Sprite Sheet: stage-patches.jpg)
+   DOES NOT REUSE thread-icons.jpg */
+.stage-patch-sprite {
+  display: inline-block;
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  background-image: url("./stage-patches.jpg");
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  mix-blend-mode: multiply;
+  transition: transform 0.22s ease;
+}
+
+.stage-patch-sprite:hover {
+  transform: scale(1.09) rotate(-4deg);
+}
+
+.stage-patch-sm {
+  width: 58px;
+  height: 58px;
+}
+
+.stage-patch-lg {
+  width: 125px;
+  height: 125px;
+}
+
+/* Quadrant positions for the 4 brand-new embroidered stage patches */
+.stage-patch-horizon { background-position: 3% 4%; }   /* Electric Guitar & Pyrotechnic Starburst */
+.stage-patch-analog  { background-position: 97% 4%; }  /* Retro Modular Synthesizer & Neon Prism */
+.stage-patch-vinyl   { background-position: 3% 96%; }  /* Wooden Turntable & Botanical Leaves */
+.stage-patch-vip     { background-position: 97% 96%; } /* Golden Crown & Pink Flamingo Cocktail */
+
+/* 4 Generated Archival Stage History Photos (2x2 Grid: stage-history-photos.jpg) */
+.stage-history-photo {
+  width: 100%;
+  height: 290px;
+  background-image: url("./stage-history-photos.jpg");
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
+  border: 3px solid #111111;
+  border-radius: 16px;
+  box-shadow: 6px 6px 0px #111111;
+}
+
+.history-photo-horizon { background-position: 0% 0%; }
+.history-photo-analog  { background-position: 100% 0%; }
+.history-photo-vinyl   { background-position: 0% 100%; }
+.history-photo-vip     { background-position: 100% 100%; }
+
+/* Clickable Stage Cards on Main Page */
+a.gallery-item {
+  display: block;
+  text-decoration: none;
+  color: #111111;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+a.gallery-item:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px #111111;
+}
+
+.gallery-explore-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffe600;
+  color: #111111;
+  border-top: 2px solid #111111;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+a.gallery-item:hover .gallery-explore-cta {
+  background-color: #ff3366;
+  color: #ffffff;
+}
+
+/* Dedicated Stage Page Layout & Interactive Sightline Map */
+.stage-page-container {
+  max-width: 1320px;
+  margin: 1.75rem auto;
+  padding: 0 1.75rem;
+}
+
+.stage-switcher-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+  background-color: #f4efe0;
+  border: 3px solid #111111;
+  border-radius: 16px;
+  padding: 0.65rem 0.85rem;
+  box-shadow: 5px 5px 0px #111111;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stage-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.95rem;
+  background-color: #fffdf7;
+  color: #111111 !important;
+  border: 2px solid #111111;
+  border-radius: 12px;
+  box-shadow: 2px 2px 0px #111111;
+  font-size: 0.84rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.stage-pill-link:hover {
+  background-color: #ffe600;
+  transform: translate(-1px, -1px);
+}
+
+.stage-pill-link.active-stage-pill {
+  background-color: #ff3366;
+  color: #ffffff !important;
+  box-shadow: 3px 3px 0px #111111;
+}
+
+.stage-map-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.svg-map-container {
+  background-color: #16181d;
+  border: 3px solid #111111;
+  border-radius: 16px;
+  box-shadow: 6px 6px 0px #111111;
+  padding: 1rem;
+  color: #ffffff;
+}
+
+.svg-map-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tier-selector-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.tier-zone-btn {
+  background-color: #fffdf7;
+  color: #111111;
+  border: 2px solid #111111;
+  border-radius: 10px;
+  padding: 0.65rem 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 3px 3px 0px #111111;
+}
+
+.tier-zone-btn.active-zone-btn {
+  background-color: #ffe600;
+  color: #111111;
+  outline: 3px solid #ff3366;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #111111;
+}
+
+.sightline-detail-card {
+  background-color: #fffdf7;
+  border: 3px solid #111111;
+  border-radius: 16px;
+  box-shadow: 6px 6px 0px #111111;
+  padding: 1.35rem;
+}
+
+.sightline-metric-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.55rem 0;
+  border-bottom: 2px dashed #d6d3c9;
+  font-size: 0.86rem;
+}
+
+.stage-history-split {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 1.75rem;
+  align-items: start;
+  margin-top: 1.75rem;
+}
+
+.milestone-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+.milestone-card {
+  background-color: #fff9db;
+  border: 2px solid #111111;
+  border-radius: 12px;
+  box-shadow: 4px 4px 0px #111111;
+  padding: 0.85rem;
+}
+
+.milestone-year {
+  display: inline-block;
+  background-color: #111111;
+  color: #ffe600;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+}
+
+@media print {
+  .sticky-navbar,
+  .marquee-strip,
+  .workspace-tab-bar,
+  .back-to-top-btn,
+  #media-preview,
+  #drag-drop-planner,
+  iframe {
+    display: none !important;
+  }
+  .ui-panel {
+    display: block !important;
+  }
+}

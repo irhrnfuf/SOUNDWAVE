@@ -1,0 +1,11 @@
+specVersion: "v1"
+serviceId: "johan-html-app-service"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "johan-html-app-fdc"
+connectorDirs: ["./connector"]

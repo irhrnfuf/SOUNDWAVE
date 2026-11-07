@@ -1,0 +1,30 @@
+# Stage 6: SoundWave 2026 — Authorized Queries
+query ListFestivalPasses @auth(level: PUBLIC) {
+  festivalPasses(orderBy: [{ createdAt: DESC }], limit: 25) {
+    id
+    passCode
+    attendeeName
+    email
+    passTier
+    festivalDay
+    quantity
+    totalPrice
+    favoriteArtist
+    createdAt
+  }
+}
+
+query GetFestivalPass($id: UUID!) @auth(level: PUBLIC) {
+  festivalPass(id: $id) {
+    id
+    passCode
+    attendeeName
+    email
+    passTier
+    festivalDay
+    quantity
+    totalPrice
+    favoriteArtist
+    createdAt
+  }
+}
