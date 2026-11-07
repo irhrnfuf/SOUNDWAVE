@@ -1932,8 +1932,9 @@ a:hover {
 /* 2. Top Marquee & Sticky Navigation Bar */
 .marquee-strip {
   background-color: #161415;
-  color: #f7b2d4;
-  border-bottom: 2px solid #f7b2d4;
+  color: #ff2a85;
+  border-bottom: 2px solid #ff2a85;
+  text-shadow: 0 0 8px rgba(255, 42, 133, 0.4);
 }
 
 .sticky-navbar {
