@@ -66,7 +66,7 @@ h1 {
   line-height: 1.08;
   margin: 0.35rem 0 0.65rem;
   color: #111111;
-  text-shadow: 3px 3px 0px #ffe600;
+  text-shadow: 3px 3px 0px rgba(194, 24, 91, 0.25);
 }
 
 h2 {
@@ -92,21 +92,21 @@ a:visited {
 }
 
 a:hover {
-  color: #ff3366;
+  color: #c2185b;
 }
 
 a:active {
-  color: #00b8d4;
+  color: #880e4f;
 }
 
 /* Lollapalooza Top Scrolling Marquee Bar */
 .marquee-strip {
   background-color: #111111;
-  color: #ffe600;
+  color: #ffffff;
   border-bottom: 3px solid #111111;
   overflow: hidden;
   white-space: nowrap;
-  padding: 6px 0;
+  padding: 7px 0;
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -123,12 +123,12 @@ a:active {
   100% { transform: translateX(-100%); }
 }
 
-/* Unit V: Sticky Lolla-Style Header Navigation Bar */
+/* Elegant Dark Pink Sticky Navigation Bar */
 .sticky-navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: #0088ff;
+  background-color: #c2185b;
   border-bottom: 3px solid #111111;
   padding: 0.55rem 1.75rem;
 }
@@ -188,22 +188,22 @@ a:active {
 }
 
 .sticky-navbar ul li:first-child a {
-  background-color: #ffe600;
-  color: #111111;
+  background-color: #ffffff;
+  color: #c2185b;
   border-color: #111111;
   box-shadow: 2px 2px 0px #111111;
 }
 
 .sticky-navbar ul li a:hover {
-  background-color: #ffe600;
+  background-color: #ffffff;
   border-color: #111111;
-  color: #111111;
+  color: #c2185b;
   box-shadow: 3px 3px 0px #111111;
   transform: translate(-1px, -1px);
 }
 
 .nav-cta-btn {
-  background-color: #ff3366 !important;
+  background-color: #880e4f !important;
   color: #ffffff !important;
   border: 2px solid #111111 !important;
   box-shadow: 3px 3px 0px #111111 !important;
@@ -211,13 +211,13 @@ a:active {
 }
 
 .nav-cta-btn:hover {
-  background-color: #00e676 !important;
-  color: #111111 !important;
+  background-color: #ffffff !important;
+  color: #c2185b !important;
 }
 
-/* Whimsical Lollapalooza Hero Banner (#top-banner) */
+/* Refined Dark Pink Gradient Hero Banner (#top-banner) */
 #top-banner {
-  background: linear-gradient(180deg, #0088ff 0%, #00c8ff 65%, #fffdf7 100%);
+  background: linear-gradient(180deg, #c2185b 0%, #ad1457 55%, #fffdf7 100%);
   border-bottom: 3px solid #111111;
   padding: 2rem 1.75rem;
 }
@@ -252,17 +252,19 @@ a:active {
 
 .event-meta-row {
   display: inline-block;
-  background-color: #ffe600;
+  background-color: #c2185b;
+  color: #ffffff;
   border: 2px solid #111111;
   border-radius: 999px;
-  padding: 3px 12px;
-  font-size: 0.82rem;
-  font-weight: 700;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
   margin-bottom: 0.35rem;
 }
 
 .banner-stats-box {
-  background-color: #ff3366;
+  background-color: #880e4f;
   color: #ffffff;
   border: 3px solid #111111;
   border-radius: 18px;
@@ -276,7 +278,7 @@ a:active {
 .banner-stats-box h3 {
   font-family: 'Shrikhand', cursive;
   font-weight: 400;
-  color: #ffe600;
+  color: #ffffff;
   margin: 0;
   font-size: 1.3rem;
 }
@@ -945,6 +947,7 @@ textarea:focus {
   content: "− Hide";
 }
 
+/* Buttons & Key Accents */
 button {
   background-color: #111111;
   color: #ffffff;
@@ -959,7 +962,7 @@ button {
 }
 
 button:hover {
-  background-color: #ff3366;
+  background-color: #c2185b;
   color: #ffffff;
   transform: translate(-1px, -1px);
   box-shadow: 4px 4px 0px #111111;
@@ -971,21 +974,81 @@ button.secondary-btn {
 }
 
 button.secondary-btn:hover {
-  background-color: #ffe600;
-  color: #111111;
+  background-color: #fce4ec;
+  color: #c2185b;
 }
 
 button.primary-checkout-btn {
   width: 100%;
-  background-color: #00e676;
-  color: #111111;
+  background-color: #c2185b;
+  color: #ffffff;
   padding: 11px 16px;
   font-size: 0.92rem;
 }
 
 button.primary-checkout-btn:hover {
-  background-color: #ffe600;
-  color: #111111;
+  background-color: #880e4f;
+  color: #ffffff;
+}
+
+.checkout-header-band {
+  background-color: #c2185b;
+  color: #ffffff;
+  border: 2px solid #111111;
+  border-radius: 10px;
+  padding: 0.55rem 0.85rem;
+  margin-bottom: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box-model-pass.vip-featured {
+  background-color: #fce4ec;
+  outline-color: #c2185b;
+}
+
+.box-model-pass.vip-featured .tier-header-strip {
+  background-color: #c2185b;
+  color: #ffffff;
+}
+
+.box-model-pass.vip-featured .tier-header-strip h4 {
+  color: #ffffff;
+}
+
+.tier-zone-btn.active-zone-btn {
+  background-color: #c2185b;
+  color: #ffffff;
+  outline: 3px solid #880e4f;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #111111;
+}
+
+.stage-pill-link.active-stage-pill {
+  background-color: #c2185b;
+  color: #ffffff !important;
+  box-shadow: 3px 3px 0px #111111;
+}
+
+.portal-card:hover .portal-card-cta {
+  background-color: #c2185b;
+  color: #ffffff;
+}
+
+.invitation-quote-box {
+  background: linear-gradient(135deg, #c2185b 0%, #880e4f 100%);
+  color: #ffffff;
+  border: 3px solid #111111;
+  border-radius: 18px;
+  box-shadow: 8px 8px 0px #111111;
+  padding: 1.75rem 2rem;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.invitation-quote-box h2 {
+  color: #ffffff !important;
 }
 
 .price-summary-box {
