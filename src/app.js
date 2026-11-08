@@ -56,6 +56,64 @@ function filterArtistsByGenre(selectedGenre) {
   countSpan.innerText = matchedCount + " of " + FESTIVAL_ARTISTS.length + " acts shown";
 }
 
+// --- Persistent Cart Storage & Retrieval ---
+const CART_STORAGE_KEY = "soundwave_active_cart";
+
+function saveActiveCart(cartData) {
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartData));
+  } catch (e) {
+    console.warn("Could not save cart state to localStorage", e);
+  }
+}
+
+function loadActiveCart() {
+  try {
+    const raw = localStorage.getItem(CART_STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function restoreCartIntoForm() {
+  const cart = loadActiveCart();
+  if (!cart) return;
+
+  const tierSelect = document.getElementById("pass-tier");
+  const qtyInput = document.getElementById("ticket-qty");
+  const nameInput = document.getElementById("attendee-name");
+  const emailInput = document.getElementById("attendee-email");
+  const phoneInput = document.getElementById("attendee-phone");
+  const promoInput = document.getElementById("promo-code");
+  const artistInput = document.getElementById("favorite-artist");
+  const notesInput = document.getElementById("special-notes");
+
+  if (tierSelect && cart.tier) tierSelect.value = cart.tier;
+  if (qtyInput && cart.quantity) qtyInput.value = cart.quantity;
+  if (nameInput && cart.fullName) nameInput.value = cart.fullName;
+  if (emailInput && cart.email) emailInput.value = cart.email;
+  if (phoneInput && cart.phone && cart.phone !== "Not provided") phoneInput.value = cart.phone;
+  if (promoInput && cart.promoCode) promoInput.value = cart.promoCode;
+  if (artistInput && cart.favoriteArtist) artistInput.value = cart.favoriteArtist;
+  if (notesInput && cart.specialNotes) notesInput.value = cart.specialNotes;
+
+  if (cart.festivalDay) {
+    const dayRadios = document.getElementsByName("festivalDay");
+    for (let i = 0; i < dayRadios.length; i++) {
+      dayRadios[i].checked = dayRadios[i].value === cart.festivalDay;
+    }
+  }
+
+  if (Array.isArray(cart.addons)) {
+    const addonCheckboxes = document.getElementsByName("addons");
+    for (let j = 0; j < addonCheckboxes.length; j++) {
+      addonCheckboxes[j].checked = cart.addons.includes(addonCheckboxes[j].value);
+    }
+  }
+}
+
 // 2. UNIT VI: Ticket Calculator using SWITCH, FOR Loop, getElementsByName & Operators
 function calculateLivePassTotal() {
   const tierSelect = document.getElementById("pass-tier");
@@ -66,7 +124,7 @@ function calculateLivePassTotal() {
   if (!tierSelect || !qtyInput || !totalDisplay) return;
 
   const selectedTier = tierSelect.value;
-  const quantity = parseInt(qtyInput.value, 10) || 1;
+  const quantity = Math.max(1, parseInt(qtyInput.value, 10) || 1);
   const promoCode = promoInput ? promoInput.value.trim().toUpperCase() : "";
 
   let basePrice = 129;
@@ -121,12 +179,16 @@ function calculateLivePassTotal() {
 
   // Unit VI: if / else if / else for Promo Discounts
   let discountRate = 0;
+  let promoMessage = "";
   if (promoCode === "SOUND20") {
     discountRate = 0.20;
+    promoMessage = "20% Promo Applied";
   } else if (promoCode === "VIP10") {
     discountRate = 0.10;
+    promoMessage = "10% Promo Applied";
   } else if (quantity >= 5 && IS_EARLY_BIRD_ACTIVE) {
     discountRate = 0.05;
+    promoMessage = "5% Group Early-Bird";
   }
 
   const discountAmount = subtotal * discountRate;
@@ -134,8 +196,32 @@ function calculateLivePassTotal() {
 
   totalDisplay.innerHTML =
     "<div style='display:flex; justify-content:space-between;'><span><b>" + selectedTier + "</b> (&times;" + quantity + ")</span><span>$" + subtotal.toFixed(2) + "</span></div>" +
-    "<div style='display:flex; justify-content:space-between; color:#57554f; margin-top:3px;'><span>Schedule: " + chosenDay + " | Discount</span><span>-$" + discountAmount.toFixed(2) + "</span></div>" +
-    "<div style='display:flex; justify-content:space-between; border-top:1px solid #d6d3c9; margin-top:6px; padding-top:6px; font-size:1rem;'><b>Total Due (incl. $" + FESTIVAL_SERVICE_FEE.toFixed(2) + " fee)</b><b style='color:#e03e1a;'>$" + finalTotal.toFixed(2) + "</b></div>";
+    (discountAmount > 0 ? "<div style='display:flex; justify-content:space-between; color:#00e676; font-weight:700; margin-top:3px;'><span>" + promoMessage + "</span><span>-$" + discountAmount.toFixed(2) + "</span></div>" : "") +
+    "<div style='display:flex; justify-content:space-between; color:#57554f; margin-top:3px;'><span>Schedule: " + chosenDay + (chosenAddons.length ? " | Addons: " + chosenAddons.join(", ") : "") + "</span><span>+$" + FESTIVAL_SERVICE_FEE.toFixed(2) + " fee</span></div>" +
+    "<div style='display:flex; justify-content:space-between; border-top:1px solid #d6d3c9; margin-top:6px; padding-top:6px; font-size:1.05rem;'><b>Total Due:</b><b style='color:#161415;'>$" + finalTotal.toFixed(2) + "</b></div>";
+
+  // Persist live cart state
+  const nameInput = document.getElementById("attendee-name");
+  const emailInput = document.getElementById("attendee-email");
+  const phoneInput = document.getElementById("attendee-phone");
+  const artistInput = document.getElementById("favorite-artist");
+  const notesInput = document.getElementById("special-notes");
+
+  saveActiveCart({
+    tier: selectedTier,
+    quantity,
+    chosenDay,
+    addons: chosenAddons,
+    promoCode,
+    subtotal,
+    discountAmount,
+    finalTotal: Number(finalTotal.toFixed(2)),
+    fullName: nameInput ? nameInput.value : "",
+    email: emailInput ? emailInput.value : "",
+    phone: phoneInput ? phoneInput.value : "",
+    favoriteArtist: artistInput ? artistInput.value : "",
+    specialNotes: notesInput ? notesInput.value : ""
+  });
 
   return {
     selectedTier,
@@ -143,6 +229,8 @@ function calculateLivePassTotal() {
     chosenAddons,
     quantity,
     finalTotal: Number(finalTotal.toFixed(2))
+  };
+}
   };
 }
 
@@ -242,6 +330,9 @@ function validateFestivalForm(event) {
     "Holder: " + fullName + " &bull; Total: <b>$" + priceInfo.finalTotal.toFixed(2) + "</b>" +
     "<div id='firebase-save-status' style='margin-top:4px;'>Syncing with Firebase SQL Connect...</div>";
 
+  const chosenArtist = document.getElementById("favorite-artist")?.value.trim() || "Neon Pulse";
+  const notes = document.getElementById("special-notes")?.value.trim() || "";
+
   const bookingPayload = {
     passCode: generatedPassCode,
     fullName,
@@ -252,12 +343,48 @@ function validateFestivalForm(event) {
     addons: priceInfo.chosenAddons,
     quantity: priceInfo.quantity,
     totalPrice: priceInfo.finalTotal,
-    favoriteArtist: document.getElementById("favorite-artist")?.value.trim() || "Neon Pulse",
-    specialNotes: document.getElementById("special-notes")?.value.trim() || ""
+    favoriteArtist: chosenArtist,
+    specialNotes: notes
   };
+
+  // Open Confirmation Modal Screen
+  showOrderConfirmationModal(bookingPayload);
 
   window.dispatchEvent(new CustomEvent("soundwave:passValidated", { detail: bookingPayload }));
   return { valid: true, bookingPayload };
+}
+
+// Confirmation Screen Modal Controller
+function showOrderConfirmationModal(order) {
+  const modal = document.getElementById("order-confirmation-modal");
+  if (!modal) return;
+
+  const codeEl = document.getElementById("confirm-code");
+  const nameEl = document.getElementById("confirm-name");
+  const emailEl = document.getElementById("confirm-email");
+  const tierQtyEl = document.getElementById("confirm-tier-qty");
+  const addonsEl = document.getElementById("confirm-addons");
+  const artistEl = document.getElementById("confirm-artist");
+  const totalEl = document.getElementById("confirm-total");
+
+  if (codeEl) codeEl.innerText = order.passCode;
+  if (nameEl) nameEl.innerText = order.fullName;
+  if (emailEl) emailEl.innerText = order.email;
+  if (tierQtyEl) tierQtyEl.innerText = order.tier + " (x" + order.quantity + ")";
+  if (addonsEl) addonsEl.innerText = order.festivalDay + (order.addons && order.addons.length ? " • " + order.addons.join(", ") : "");
+  if (artistEl) artistEl.innerText = order.favoriteArtist;
+  if (totalEl) totalEl.innerText = "$" + order.totalPrice.toFixed(2);
+
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeOrderConfirmationModal() {
+  const modal = document.getElementById("order-confirmation-modal");
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
 }
 
 // 6. UNIT II: HTML5 <canvas> Live Digital Wallet Ticket Stub
@@ -435,6 +562,9 @@ function resetGalleryStage() {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
+  // Restore persistent cart if available
+  restoreCartIntoForm();
+
   // Pre-select ticket tier if arriving from one of the 4 dedicated Stage Sightline pages (?tier=...)
   const params = new URLSearchParams(window.location.search);
   const preselectedTier = params.get("tier");

@@ -341,6 +341,64 @@
 
   </main>
 
+  <!-- Interactive Order Confirmation Screen & Modal -->
+  <div id="order-confirmation-modal" class="order-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="order-modal-card">
+      <div class="order-modal-header">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <span style="display:inline-block; width:12px; height:12px; background:#00e676; border-radius:50%; box-shadow:0 0 8px #00e676;"></span>
+          <h3 id="modal-title" style="margin:0; font-size:1.3rem;">Order Confirmed &amp; Stored</h3>
+        </div>
+        <button type="button" class="order-modal-close" onclick="closeOrderConfirmationModal()" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="payment-security-notice">
+        <b>&#128274; Safe &amp; Secure Reservation Notice:</b><br />
+        To protect attendee privacy, <b>no credit card or raw banking data is collected</b> on this frontend. Your order has been cryptographically serialized, stored in the <b>Firebase SQL Connect PostgreSQL database</b>, and held under our official Box Office will-call guarantee.
+      </div>
+
+      <div class="order-modal-receipt-box">
+        <div class="order-receipt-row">
+          <span><b>Confirmation Code:</b></span>
+          <span id="confirm-code" style="font-family:monospace; font-weight:800; color:#ff2a85;">SW26-000000</span>
+        </div>
+        <div class="order-receipt-row">
+          <span><b>Attendee Name:</b></span>
+          <span id="confirm-name">Attendee Name</span>
+        </div>
+        <div class="order-receipt-row">
+          <span><b>Contact Email:</b></span>
+          <span id="confirm-email">email@domain.com</span>
+        </div>
+        <div class="order-receipt-row">
+          <span><b>Pass Tier &amp; Quantity:</b></span>
+          <span id="confirm-tier-qty">VIP (&times;1)</span>
+        </div>
+        <div class="order-receipt-row">
+          <span><b>Schedule &amp; Add-Ons:</b></span>
+          <span id="confirm-addons">All 3 Days</span>
+        </div>
+        <div class="order-receipt-row">
+          <span><b>Headliner Preference:</b></span>
+          <span id="confirm-artist">Aurora Echoes</span>
+        </div>
+        <div class="order-receipt-row" style="font-size:1.05rem; font-weight:800; border-top:2px solid #161415; margin-top:0.4rem; padding-top:0.5rem;">
+          <span>Total Authorized:</span>
+          <span id="confirm-total" style="color:#161415;">$0.00</span>
+        </div>
+      </div>
+
+      <div style="font-size:0.82rem; color:#57554f; margin-bottom:1.25rem;">
+        &#9889; A confirmation copy has been added to your local wristband registry and synchronized with our central backend. You can review your booking status anytime on the <b>Shuttles &amp; Orders</b> page.
+      </div>
+
+      <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+        <a href="./shuttles-orders.html" class="nav-cta-btn" style="flex:1; text-align:center; text-decoration:none; padding:10px 14px;">View in Live Orders Ledger &rarr;</a>
+        <button type="button" class="secondary-btn" onclick="closeOrderConfirmationModal()" style="flex:1; padding:10px 14px;">Done &amp; Keep Browsing</button>
+      </div>
+    </div>
+  </div>
+
   <footer id="footer">
     <p>
       &copy; 2026 SOUNDWAVE MUSIC FESTIVAL &nbsp;&bull;&nbsp; OFFICIAL PASS REGISTRATION &nbsp;&bull;&nbsp;

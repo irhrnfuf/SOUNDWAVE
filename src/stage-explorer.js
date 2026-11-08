@@ -103,7 +103,7 @@ function selectStageViewingTier(tierKey) {
     perksEl.innerHTML = cfg.perks.map(p => "<li>" + p + "</li>").join("");
   }
   if (bookLink) {
-    bookLink.href = "./index.html?tier=" + encodeURIComponent(cfg.checkoutValue) + "#book-pass";
+    bookLink.href = "./passes.html?tier=" + encodeURIComponent(cfg.checkoutValue) + "#book-pass";
     bookLink.innerText = "Lock In " + cfg.name + " at Checkout →";
   }
 }
