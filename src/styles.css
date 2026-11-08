@@ -624,7 +624,7 @@ main.app-workspace {
 .gallery-item img {
   display: block;
   width: 100%;
-  height: 320px;
+  height: 155px;
   object-fit: cover;
   opacity: 0.75; /* Unit V: Image Opacity */
   transition: opacity 0.25s ease, transform 0.3s ease;
@@ -3075,6 +3075,7 @@ img {
     grid-template-columns: 1fr !important;
   }
 }
+
 
 
 
