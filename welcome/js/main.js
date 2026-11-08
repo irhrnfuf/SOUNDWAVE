@@ -72,6 +72,251 @@ function playSubtlePulse(freq = 65, duration = 0.4) {
   }
 }
 
+// --- VINTAGE PASSES MARKUP GENERATOR ---
+function getTicketMarkup(component, size = '13.5px') {
+  switch (component) {
+    case 'ticket-pink':
+      return `
+        <article class="vintage-ticket ticket-pink" style="--mem-size: ${size}">
+          <div class="ticket-pink__stub-left">
+            <span class="v-num">3940</span>
+            <span class="v-meta">SEC GEN</span>
+            <span class="v-meta">NOV 25, 1992</span>
+          </div>
+          <div class="ticket-pink__body">
+            <div class="ticket-pink__promoter">ROCKWAY PRESENTS · A BENEFICIO DE BANDESIR</div>
+            <h3 class="ticket-pink__title ink-worn">SOUNDWAVE</h3>
+            <div class="ticket-pink__venue">ESTACIONAMIENTO DEL POLIEDRO</div>
+            <div class="ticket-pink__date">25 DE NOVIEMBRE · 9:00 PM</div>
+          </div>
+          <div class="ticket-pink__stub-right">
+            <span class="v-price">BS. 2,500.00</span>
+            <span class="v-num">3940</span>
+          </div>
+        </article>
+      `;
+    case 'ticket-magenta':
+      return `
+        <article class="vintage-ticket ticket-magenta" style="--mem-size: ${size}">
+          <div class="ticket-magenta__left">
+            <span class="v-code">22759</span>
+            <span class="v-gate">PUERTA 9</span>
+          </div>
+          <div class="ticket-magenta__body">
+            <div class="ticket-magenta__banner">
+              <h3 class="ticket-magenta__title ink-worn">SOUNDWAVE</h3>
+            </div>
+            <div class="ticket-magenta__venue">ESTADIO DEL TECNOLÓGICO</div>
+            <div class="ticket-magenta__boxes">
+              <div class="ticket-magenta__box"><span>FEB. 16, 1990</span><b>$70,000.⁰⁰</b></div>
+              <div class="ticket-magenta__box"><span>GUADALAJARA</span><b>VIERNES 8 P.M.</b></div>
+            </div>
+          </div>
+          <div class="ticket-magenta__right">
+            <span class="v-price">NO REFUND</span>
+            <span class="v-price">$70,000.⁰⁰</span>
+          </div>
+        </article>
+      `;
+    case 'ticket-orange':
+      return `
+        <article class="vintage-ticket ticket-orange" style="--mem-size: ${size}">
+          <div class="ticket-orange__left">
+            <span class="t-lead">SOUNDWAVE</span>
+            <span class="t-venue">OLYMPIAHALLE</span>
+            <div class="t-prices">
+              <div>VVK DM 16,-</div>
+              <div>AK DM 19,-</div>
+            </div>
+          </div>
+          <div class="ticket-orange__center">
+            <span class="ticket-orange__promoter">ABENDZEITUNG PRESENTS · IN CONCERT</span>
+            <h3 class="ticket-orange__title ink-worn">SOUNDWAVE</h3>
+            <span class="ticket-orange__sub">ARENA · FESTIVAL GROUNDS</span>
+          </div>
+          <div class="ticket-orange__right">
+            <span class="ticket-orange__giant-num">21</span>
+            <div class="ticket-orange__seats">
+              <div><span>R</span><b>39</b></div>
+              <div><span>S</span><b>15</b></div>
+            </div>
+          </div>
+        </article>
+      `;
+    case 'ticket-green':
+      return `
+        <article class="vintage-ticket ticket-green" style="--mem-size: ${size}">
+          <div class="ticket-green__stub-left">
+            <span class="v-num">000611</span>
+          </div>
+          <div class="ticket-green__body">
+            <div class="ticket-green__masthead">JOHN BAUER CONCERTS PRESENTS</div>
+            <h3 class="ticket-green__title ink-worn">SOUNDWAVE</h3>
+            <div class="ticket-green__mid">
+              <div class="ticket-green__date-badge">
+                <span class="d-month">SEPT'BR</span>
+                <span class="d-day">11</span>
+                <span class="d-yr">1975</span>
+              </div>
+              <div class="ticket-green__details">
+                <span class="t-venue">SPOKANE COLISEUM</span>
+                <span>THURSDAY 7:30 P.M.</span>
+                <span class="t-price">ADVANCE $6.00 · NO REFUNDS</span>
+              </div>
+            </div>
+          </div>
+          <div class="ticket-green__stub-right">
+            <span class="v-date">SEPT'BR 11</span>
+            <span class="v-price">$6.00</span>
+          </div>
+        </article>
+      `;
+    case 'ticket-blue':
+      return `
+        <article class="vintage-ticket ticket-blue" style="--mem-size: ${size}">
+          <div class="ticket-blue__stub-left">
+            <span>FLOOR</span>
+            <span>SEC 9</span>
+            <span>ROW S</span>
+          </div>
+          <div class="ticket-blue__body">
+            <div class="ticket-blue__promo">CONCERTS WEST PRESENTS</div>
+            <h3 class="ticket-blue__title ink-worn">★ SOUNDWAVE ★</h3>
+            <div class="ticket-blue__arena">CONVENTION CENTER ARENA</div>
+            <div class="ticket-blue__footer">
+              <span>SEPT 5, 1977</span>
+              <span>FT. WORTH, TX</span>
+              <span>8:00 P.M.</span>
+            </div>
+          </div>
+          <div class="ticket-blue__stub-right">
+            <span class="v-price">$8.00</span>
+            <span class="v-sec">SEC 9</span>
+          </div>
+        </article>
+      `;
+    case 'ticket-yellow':
+      return `
+        <article class="vintage-ticket ticket-yellow" style="--mem-size: ${size}">
+          <div class="ticket-yellow__stub-left">
+            <span>02154</span>
+            <span>GEN. ADM.</span>
+          </div>
+          <div class="ticket-yellow__body">
+            <div class="ticket-yellow__promo">BE BOP PRODUCTIONS PRESENTS</div>
+            <h3 class="ticket-yellow__title ink-worn">SOUNDWAVE</h3>
+            <div class="ticket-yellow__mid">
+              <div class="ticket-yellow__cal">
+                <span class="c-mo">JULY</span>
+                <span class="c-day">1</span>
+                <span class="c-yr">1975</span>
+              </div>
+              <div class="ticket-yellow__info">
+                <b>JACKSON COLISEUM</b>
+                <span>JACKSON, MISS. · TUES. EVE. 8:00 P.M.</span>
+              </div>
+            </div>
+          </div>
+          <div class="ticket-yellow__stub-right">
+            <div class="v-price-box">
+              <span>ADV.</span>
+              <b>$5.00</b>
+            </div>
+            <span>02154</span>
+          </div>
+        </article>
+      `;
+    case 'ticket-red-cobo':
+      return `
+        <article class="vintage-ticket ticket-red-cobo" style="--mem-size: ${size}">
+          <span class="cobo-hole cobo-hole--left"></span>
+          <span class="cobo-hole cobo-hole--right"></span>
+          <div class="ticket-red-cobo__col-1">
+            <span>A18 N 6</span>
+          </div>
+          <div class="ticket-red-cobo__col-2">
+            <div class="c-venue">COBO ARENA · DETROIT</div>
+            <h3 class="ticket-red-cobo__title ink-worn">SOUNDWAVE</h3>
+            <div class="c-date">NOV. 9 · THU. EVE. 8:00 P.M.</div>
+            <div class="c-tax">Admission $9.50 · City Tax .50 · Total $10.00</div>
+          </div>
+          <div class="ticket-red-cobo__col-3">
+            <span class="c-badge">GOOD ONLY</span>
+            <span class="c-giant-day">9</span>
+            <span class="c-price">$10.00</span>
+          </div>
+          <div class="ticket-red-cobo__col-4">
+            <span>A18 N 6</span>
+          </div>
+        </article>
+      `;
+    case 'ticket-metallica':
+      return `
+        <article class="vintage-ticket ticket-metallica" style="--mem-size: ${size}">
+          <div class="ticket-metallica__body">
+            <div class="ticket-metallica__badge">METAL HAMMER PRESENTS</div>
+            <h3 class="ticket-metallica__title foil">SOUNDWAVE</h3>
+            <div class="ticket-metallica__sub">STAGE BARRIER ALL-ACCESS</div>
+            <div class="ticket-metallica__footer">BONHAM · WARRIOR SOUL · MESSEHALLE</div>
+          </div>
+          <div class="ticket-metallica__stub">
+            <span class="m-date">19. MAI 1990</span>
+            <span class="m-price">DM 45,-</span>
+            <span class="m-serial">#3708</span>
+          </div>
+        </article>
+      `;
+    case 'ticket-zeppelin':
+      return `
+        <article class="vintage-ticket ticket-zeppelin mem-paper" style="--mem-size: ${size}">
+          <div class="ticket-zeppelin__stub-left">
+            <span>No. 027447</span>
+            <span>GEN. ADM.</span>
+          </div>
+          <div class="ticket-zeppelin__body">
+            <div class="ticket-zeppelin__promo">S & L ENTERTAINMENT PRESENTS · AN EVENING WITH</div>
+            <div class="ticket-zeppelin__title-wrap">
+              <h3 class="ticket-zeppelin__title ink-worn">SOUNDWAVE</h3>
+              <span class="ticket-zeppelin__seal">KINGDOME</span>
+            </div>
+            <div class="ticket-zeppelin__venue">— AT THE KINGDOME —</div>
+            <div class="ticket-zeppelin__date">SUNDAY, JULY 17, 1977 · 8:00 P.M. · $10.00</div>
+          </div>
+          <div class="ticket-zeppelin__stub-right">
+            <span>No. 027447</span>
+          </div>
+        </article>
+      `;
+    case 'ticket-fleetwood':
+      return `
+        <article class="vintage-ticket ticket-fleetwood" style="--mem-size: ${size}">
+          <div class="ticket-fleetwood__body">
+            <div class="ticket-fleetwood__promo">BEAVER PRODUCTIONS PRESENTS</div>
+            <h3 class="ticket-fleetwood__title ink-worn">SOUNDWAVE</h3>
+            <div class="ticket-fleetwood__venue">RUPP ARENA — LEXINGTON CENTER</div>
+            <div class="ticket-fleetwood__mid">
+              <span class="ticket-fleetwood__big-day">24</span>
+              <div class="ticket-fleetwood__date-info">
+                <b>THURSDAY 8:00 P.M.</b>
+                <span>LEXINGTON, KY · 5% STATE TAX</span>
+              </div>
+            </div>
+          </div>
+          <div class="ticket-fleetwood__strip">
+            <span>$8.50</span>
+          </div>
+          <div class="ticket-fleetwood__stub">
+            <span>SEC 222</span>
+            <span>ROW T</span>
+            <span>SEAT 7</span>
+          </div>
+        </article>
+      `;
+    default:
+      return '';
+  }
+}
+
 // --- INITIALIZE THE ARCHIVIST'S TABLE (Scene 02) ---
 function renderArchiveTable() {
   if (!elements.archiveGrid) return;
@@ -96,13 +341,6 @@ function renderArchiveTable() {
         </div>
         <span class="archive-card-tag">${item.edition} · ${item.title}</span>
       `;
-    } else if (item.type === 'ticket-image') {
-      card.innerHTML = `
-        <div class="archive-card-image-wrap ticket-card-image-wrap">
-          <img src="${item.thumb}" alt="${item.title}" loading="lazy" />
-        </div>
-        <span class="archive-card-tag">${item.edition} · ${item.title}</span>
-      `;
     } else if (item.type === 'ticket-html') {
       if (item.component === 'pass-crew') {
         card.innerHTML = `
@@ -115,6 +353,12 @@ function renderArchiveTable() {
             <div class="pass-crew__fields">Zone: Analog Dome<br/>Access: All areas</div>
           </article>
           <span class="archive-card-tag">Crew Pass · ${item.title}</span>
+        `;
+      } else {
+        const ticketHtml = getTicketMarkup(item.component, '13.5px');
+        card.innerHTML = `
+          ${ticketHtml}
+          <span class="archive-card-tag">${item.edition} · ${item.title}</span>
         `;
       }
     } else if (item.isDiscovery) {
@@ -246,7 +490,29 @@ function openArchiveDetail(item) {
   elements.modalDesc.textContent = item.description || '';
   elements.modalCurator.textContent = item.curatorNotes ? `CURATOR NOTE: ${item.curatorNotes}` : 'Art-directed fictional archive specimen for SOUNDWAVE 2026.';
 
-  if (item.full) {
+  if (item.type === 'ticket-html') {
+    if (item.component === 'pass-crew') {
+      elements.modalMedia.innerHTML = `
+        <div style="display:flex; justify-content:center; align-items:center; width:100%; min-height:260px; padding:1.5rem 0;">
+          <article class="mem pass-crew mem-paper" style="--mem-size: 20px;">
+            <span class="pass-crew__hole"></span>
+            <div class="pass-crew__band"><span>ED. 08</span><span>2021</span></div>
+            <p class="pass-crew__title ink-worn">CREW</p>
+            <p class="pass-crew__brand">SOUNDWAVE</p>
+            <span class="pass-crew__number">#047</span>
+            <div class="pass-crew__fields">Zone: Analog Dome<br/>Access: All areas</div>
+          </article>
+        </div>
+      `;
+    } else {
+      const modalMarkup = getTicketMarkup(item.component, '20px');
+      elements.modalMedia.innerHTML = `
+        <div style="display:flex; justify-content:center; align-items:center; width:100%; min-height:220px; padding:1.5rem 0;">
+          ${modalMarkup}
+        </div>
+      `;
+    }
+  } else if (item.full) {
     elements.modalMedia.innerHTML = `<img src="${item.full}" alt="${item.title}" />`;
   } else {
     // For HTML objects without standalone images, present a clear styled preview

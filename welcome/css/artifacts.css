@@ -726,6 +726,1038 @@
 .sheet img { display: block; width: 100%; height: auto; }
 
 /* Respect reduced motion: no foil shimmer transitions */
+
+/* ==========================================================================
+   VINTAGE CSS REPLICATED PASSES (10 HISTORICAL STYLES)
+   Replicating authentic vintage textures, paper stocks, and period typography
+   ========================================================================== */
+
+.vintage-ticket {
+  position: relative;
+  width: 24em;
+  height: 9.8em;
+  display: flex;
+  border-radius: 0.35em;
+  overflow: hidden;
+  box-shadow: 0 0.18em 0.35em rgba(0, 0, 0, 0.45), 0 0.85em 1.4em rgba(0, 0, 0, 0.55);
+  font-size: var(--mem-size, 14px);
+  user-select: none;
+}
+
+.vintage-ticket * {
+  box-sizing: border-box;
+}
+
+/* 1. PINK STUB (Cream paper tone with subtle dark ink grain & rose stubs) */
+.ticket-pink {
+  background-color: #f7efe1;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(85, 45, 20, 0.15) 100%),
+    var(--tex-age),
+    var(--tex-paper);
+  background-size: 100% 100%, 300px 300px, 180px 180px;
+  border: 1px solid rgba(60, 40, 30, 0.28);
+  color: #2b221d;
+}
+.ticket-pink__stub-left {
+  width: 4.8em;
+  background: #e691a3;
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0.12), transparent 40%),
+    var(--tex-paper);
+  border-right: 0.12em dashed rgba(120, 30, 50, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.3em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+  color: #3b111b;
+  text-transform: uppercase;
+}
+.ticket-pink__stub-left .v-num {
+  font-weight: 700;
+  font-size: 1.3em;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.15em;
+}
+.ticket-pink__stub-left .v-meta {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+}
+.ticket-pink__body {
+  flex: 1;
+  padding: 0.7em 0.9em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.ticket-pink__promoter {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.52em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6a554a;
+}
+.ticket-pink__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.5em;
+  letter-spacing: 0.04em;
+  line-height: 0.92;
+  margin: 0.05em 0;
+  color: #1a1715;
+}
+.ticket-pink__venue {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.68em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #3d322b;
+}
+.ticket-pink__date {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.56em;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  padding: 0.25em 0.5em;
+  border-top: 1px solid rgba(60, 40, 30, 0.2);
+  border-bottom: 1px solid rgba(60, 40, 30, 0.2);
+  color: #8c2536;
+}
+.ticket-pink__stub-right {
+  width: 4.8em;
+  background: #e691a3;
+  background-image:
+    linear-gradient(-90deg, rgba(0,0,0,0.12), transparent 40%),
+    var(--tex-paper);
+  border-left: 0.12em dashed rgba(120, 30, 50, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.3em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+  color: #3b111b;
+}
+.ticket-pink__stub-right .v-price {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  background: #f7efe1;
+  padding: 0.4em 0.15em;
+  border: 1px solid rgba(80, 20, 30, 0.3);
+}
+.ticket-pink__stub-right .v-num {
+  font-weight: 700;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.15em;
+}
+
+/* 2. MAGENTA STUB (Soft faded red/rose paper with rich crimson type) */
+.ticket-magenta {
+  background-color: #e57896;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(255, 230, 240, 0.2) 0%, transparent 70%),
+    var(--tex-age),
+    var(--tex-paper);
+  background-size: 100% 100%, 300px 300px, 180px 180px;
+  border: 1px solid #b84566;
+  color: #63081e;
+}
+.ticket-magenta__left {
+  width: 4.4em;
+  background: #db6585;
+  border-right: 0.12em dashed rgba(100, 10, 30, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.3em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+}
+.ticket-magenta__left .v-code {
+  font-weight: 700;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.15em;
+}
+.ticket-magenta__left .v-gate {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.1em;
+}
+.ticket-magenta__body {
+  flex: 1;
+  padding: 0.6em 0.8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.ticket-magenta__banner {
+  border: 2px solid #7a0c26;
+  border-radius: 4px;
+  padding: 0.15em 0.5em;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 0 4px rgba(120, 10, 35, 0.2);
+}
+.ticket-magenta__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.2em;
+  line-height: 0.95;
+  letter-spacing: 0.08em;
+  color: #700a22;
+  margin: 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.ticket-magenta__venue {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #4a0615;
+}
+.ticket-magenta__boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+  font-family: "Space Grotesk", sans-serif;
+}
+.ticket-magenta__box {
+  border: 1px solid #8f1230;
+  padding: 0.2em 0.4em;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 0.58em;
+}
+.ticket-magenta__box b {
+  display: block;
+  font-size: 1.25em;
+  font-family: "Anton", sans-serif;
+  letter-spacing: 0.05em;
+  color: #5c071a;
+}
+.ticket-magenta__right {
+  width: 4.4em;
+  background: #db6585;
+  border-left: 0.12em dashed rgba(100, 10, 30, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.3em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+  text-transform: uppercase;
+}
+.ticket-magenta__right .v-price {
+  font-weight: 700;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.12em;
+  color: #4a0615;
+}
+
+/* 3. ORANGE PASS (Warm aged peach tone) */
+.ticket-orange {
+  background-color: #f0a37c;
+  background-image:
+    linear-gradient(90deg, #f0a37c 0%, #fad1b6 55%, #eea078 100%),
+    var(--tex-age),
+    var(--tex-paper);
+  background-size: 100% 100%, 300px 300px, 180px 180px;
+  border: 1px solid #c77b55;
+  color: #2b170f;
+}
+.ticket-orange__left {
+  width: 7.2em;
+  border-right: 0.12em solid rgba(80, 40, 20, 0.25);
+  padding: 0.6em 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.54em;
+}
+.ticket-orange__left .t-lead { font-weight: 700; text-transform: uppercase; opacity: 0.8; }
+.ticket-orange__left .t-venue { font-weight: 700; font-size: 1.05em; color: #1e110b; }
+.ticket-orange__left .t-prices {
+  border-top: 1px solid rgba(80, 40, 20, 0.2);
+  padding-top: 0.3em;
+  line-height: 1.3;
+}
+.ticket-orange__center {
+  flex: 1;
+  padding: 0.6em 0.8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+.ticket-orange__promoter {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.55em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4d2b1c;
+}
+.ticket-orange__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.5em;
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: #24140d;
+  margin: 0.05em 0;
+}
+.ticket-orange__sub {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4a2717;
+}
+.ticket-orange__right {
+  width: 5.6em;
+  border-left: 0.12em dashed rgba(80, 40, 20, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 0.4em;
+}
+.ticket-orange__giant-num {
+  font-family: "Anton", sans-serif;
+  font-size: 3.4em;
+  line-height: 0.85;
+  color: #bf3426;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.ticket-orange__seats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2em;
+  border: 1px solid rgba(80, 40, 20, 0.3);
+  background: rgba(255, 255, 255, 0.25);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.54em;
+  text-align: center;
+  padding: 0.15em;
+}
+.ticket-orange__seats b { display: block; font-size: 1.2em; color: #1e110b; }
+
+/* 4. GREEN PASS (Faded sage green cardstock with dark forest ink) */
+.ticket-green {
+  background-color: #8faea4;
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 60%),
+    var(--tex-age),
+    var(--tex-paper);
+  background-size: 100% 100%, 300px 300px, 180px 180px;
+  border: 1px solid #6b8a80;
+  color: #0e2019;
+}
+.ticket-green__stub-left {
+  width: 3.8em;
+  border-right: 0.12em dashed rgba(10, 35, 25, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.56em;
+}
+.ticket-green__stub-left .v-num {
+  font-weight: 700;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.2em;
+}
+.ticket-green__body {
+  flex: 1;
+  padding: 0.6em 0.8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ticket-green__masthead {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.55em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1a3a2f;
+}
+.ticket-green__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.3em;
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+  color: #0b1c15;
+  margin: 0.04em 0;
+}
+.ticket-green__mid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8em;
+  align-items: center;
+}
+.ticket-green__date-badge {
+  border: 2px solid #0f2b20;
+  border-radius: 4px;
+  padding: 0.2em 0.45em;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  background: rgba(255, 255, 255, 0.2);
+}
+.ticket-green__date-badge .d-month { font-size: 0.52em; font-weight: 700; letter-spacing: 0.1em; display: block; }
+.ticket-green__date-badge .d-day { font-family: "Anton", sans-serif; font-size: 1.8em; line-height: 0.85; color: #0a1f16; }
+.ticket-green__date-badge .d-yr { font-size: 0.52em; font-weight: 700; display: block; }
+.ticket-green__details {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.58em;
+  line-height: 1.3;
+}
+.ticket-green__details .t-venue { font-weight: 700; text-transform: uppercase; font-size: 1.1em; display: block; }
+.ticket-green__details .t-price { font-family: "IBM Plex Mono", monospace; font-size: 0.95em; color: #164032; font-weight: 700; }
+.ticket-green__stub-right {
+  width: 4.6em;
+  border-left: 0.12em dashed rgba(10, 35, 25, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.56em;
+}
+.ticket-green__stub-right .v-date {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+.ticket-green__stub-right .v-price {
+  font-family: "Anton", sans-serif;
+  font-size: 1.35em;
+  color: #0b1d15;
+}
+
+/* 5. BLUE PASS (Sky-cyan ticket stock with deep slate blue lettering) */
+.ticket-blue {
+  background-color: #6bb0ce;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.25) 0%, transparent 75%),
+    var(--tex-age),
+    var(--tex-paper);
+  background-size: 100% 100%, 300px 300px, 180px 180px;
+  border: 1px solid #4a8ca8;
+  color: #0f2b3e;
+}
+.ticket-blue__stub-left {
+  width: 4.4em;
+  background: #5ea4c2;
+  border-right: 0.12em dashed rgba(15, 45, 65, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+  text-transform: uppercase;
+}
+.ticket-blue__stub-left span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.14em;
+  font-weight: 600;
+}
+.ticket-blue__body {
+  flex: 1;
+  padding: 0.6em 0.8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.ticket-blue__promo {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.55em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #173b52;
+}
+.ticket-blue__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.4em;
+  line-height: 0.92;
+  letter-spacing: 0.05em;
+  color: #0c2435;
+  margin: 0.04em 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.ticket-blue__arena {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.65em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #14354a;
+}
+.ticket-blue__footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid rgba(15, 45, 65, 0.25);
+  padding-top: 0.25em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.56em;
+  font-weight: 700;
+  color: #0a1f2d;
+}
+.ticket-blue__stub-right {
+  width: 4.4em;
+  background: #5ea4c2;
+  border-left: 0.12em dashed rgba(15, 45, 65, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+}
+.ticket-blue__stub-right .v-price {
+  font-family: "Anton", sans-serif;
+  font-size: 1.4em;
+  color: #0a202e;
+}
+
+/* 6. YELLOW PASS (Vintage yellowed ledger paper with charcoal type) */
+.ticket-yellow {
+  background-color: #f5e478;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 60%, rgba(100, 80, 20, 0.15) 100%),
+    var(--tex-age),
+    var(--tex-paper);
+  background-size: 100% 100%, 300px 300px, 180px 180px;
+  border: 1px solid #d4c259;
+  color: #212121;
+}
+.ticket-yellow__stub-left {
+  width: 4.4em;
+  background: #e8d76a;
+  border-right: 0.12em dashed rgba(50, 45, 20, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.56em;
+}
+.ticket-yellow__stub-left span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+.ticket-yellow__body {
+  flex: 1;
+  padding: 0.6em 0.8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ticket-yellow__promo {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.54em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4a452a;
+}
+.ticket-yellow__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.45em;
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  color: #171717;
+  margin: 0.04em 0;
+}
+.ticket-yellow__mid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8em;
+  align-items: center;
+}
+.ticket-yellow__cal {
+  border: 2px solid #2b2b2b;
+  border-radius: 3px;
+  padding: 0.2em 0.45em;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  background: rgba(255, 255, 255, 0.4);
+}
+.ticket-yellow__cal .c-mo { font-size: 0.52em; font-weight: 700; display: block; }
+.ticket-yellow__cal .c-day { font-family: "Anton", sans-serif; font-size: 1.8em; line-height: 0.85; }
+.ticket-yellow__cal .c-yr { font-size: 0.52em; font-weight: 700; display: block; }
+.ticket-yellow__info {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.58em;
+  line-height: 1.35;
+}
+.ticket-yellow__info b { display: block; font-size: 1.1em; }
+.ticket-yellow__stub-right {
+  width: 4.6em;
+  background: #e8d76a;
+  border-left: 0.12em dashed rgba(50, 45, 20, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.56em;
+}
+.ticket-yellow__stub-right .v-price-box {
+  border: 1px solid #333;
+  padding: 0.2em 0.3em;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+}
+.ticket-yellow__stub-right .v-price-box b { font-family: "Anton", sans-serif; font-size: 1.3em; display: block; }
+
+/* 7. RED COBO ARENA (Deep crimson paper with dark security stamp tones & punch holes) */
+.ticket-red-cobo {
+  background-color: #ba2323;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 70%),
+    linear-gradient(90deg, rgba(0,0,0,0.15) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.2) 100%),
+    var(--tex-age),
+    var(--tex-paper);
+  background-size: 100% 100%, 100% 100%, 300px 300px, 180px 180px;
+  border: 1px solid #911616;
+  color: #fff;
+  display: grid;
+  grid-template-columns: 4.4em 1fr 5.4em 4.4em;
+}
+.cobo-hole {
+  position: absolute;
+  top: 1.4em;
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: 50%;
+  background: #0f0e0c;
+  box-shadow: inset 0 0.1em 0.2em rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  z-index: 10;
+  pointer-events: none;
+}
+.cobo-hole--left { left: 4.8em; }
+.cobo-hole--right { right: 4.8em; }
+
+.ticket-red-cobo__col-1 {
+  border-right: 0.12em dashed rgba(255, 255, 255, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+}
+.ticket-red-cobo__col-1 span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+.ticket-red-cobo__col-2 {
+  padding: 0.6em 0.8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.ticket-red-cobo__col-2 .c-venue {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.54em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffcccc;
+}
+.ticket-red-cobo__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.3em;
+  line-height: 0.92;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  margin: 0.04em 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.ticket-red-cobo__col-2 .c-date {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.64em;
+  letter-spacing: 0.1em;
+  color: #ffd6d6;
+}
+.ticket-red-cobo__col-2 .c-tax {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.48em;
+  letter-spacing: 0.1em;
+  opacity: 0.85;
+}
+.ticket-red-cobo__col-3 {
+  border-left: 0.12em solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.3em;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+}
+.ticket-red-cobo__col-3 .c-badge {
+  font-size: 0.48em;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #ffb8b8;
+}
+.ticket-red-cobo__col-3 .c-giant-day {
+  font-family: "Anton", sans-serif;
+  font-size: 2.6em;
+  line-height: 0.85;
+  color: #ffffff;
+}
+.ticket-red-cobo__col-3 .c-price {
+  font-family: "Anton", sans-serif;
+  font-size: 1.1em;
+  color: #ffd6d6;
+}
+.ticket-red-cobo__col-4 {
+  border-left: 0.12em dashed rgba(255, 255, 255, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+}
+.ticket-red-cobo__col-4 span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+
+/* 8. METALLICA / HEAVY PASS (Black cardstock with gold metallic lettering) */
+.ticket-metallica {
+  background-color: #0d0c0e;
+  background-image:
+    radial-gradient(ellipse at 35% 50%, rgba(247, 200, 68, 0.08) 0%, transparent 60%),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.04) 40%, transparent 42%),
+    var(--tex-paper);
+  background-size: 100% 100%, 100% 100%, 180px 180px;
+  border: 1px solid rgba(247, 200, 68, 0.4);
+  color: #f7dd99;
+}
+.ticket-metallica__body {
+  flex: 1;
+  padding: 0.7em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.ticket-metallica__badge {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.54em;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(247, 200, 68, 0.8);
+}
+.ticket-metallica__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.6em;
+  line-height: 0.9;
+  letter-spacing: 0.08em;
+  margin: 0.04em 0;
+  background: linear-gradient(180deg, #fff7d6 0%, #f7c844 45%, #b58219 80%, #f7c844 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 8px rgba(247, 200, 68, 0.5));
+}
+.ticket-metallica__sub {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e65c2b;
+  text-shadow: 0 0 6px rgba(230, 92, 43, 0.6);
+}
+.ticket-metallica__footer {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.52em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247, 221, 153, 0.75);
+  border-top: 1px solid rgba(247, 200, 68, 0.25);
+  padding-top: 0.25em;
+}
+.ticket-metallica__stub {
+  width: 5.6em;
+  background: #f4edd8;
+  background-image: var(--tex-paper);
+  border-left: 0.12em dashed rgba(247, 200, 68, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.3em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.56em;
+  color: #1a1614;
+}
+.ticket-metallica__stub .m-date {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.ticket-metallica__stub .m-price {
+  font-family: "Anton", sans-serif;
+  font-size: 1.3em;
+  color: #0e0c0b;
+}
+.ticket-metallica__stub .m-serial {
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+/* 9. ZEPPELIN KINGDOME (Antique aged ivory paper with rust-red wireframe lettering) */
+.ticket-zeppelin {
+  background-color: #f6eedb;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(130, 85, 30, 0.18) 100%),
+    var(--tex-age),
+    var(--tex-paper);
+  background-size: 100% 100%, 300px 300px, 180px 180px;
+  border: 1px solid #d9cbab;
+  color: #2b231b;
+}
+.ticket-zeppelin__stub-left {
+  width: 4.4em;
+  border-right: 0.12em dashed rgba(80, 50, 20, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+}
+.ticket-zeppelin__stub-left span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+.ticket-zeppelin__body {
+  flex: 1;
+  padding: 0.6em 0.8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.ticket-zeppelin__promo {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.52em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5c4738;
+}
+.ticket-zeppelin__title-wrap {
+  position: relative;
+  display: inline-block;
+  margin: 0.05em 0;
+}
+.ticket-zeppelin__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.5em;
+  line-height: 0.9;
+  letter-spacing: 0.08em;
+  color: transparent;
+  -webkit-text-stroke: 0.035em #b83828;
+  text-shadow: 0.03em 0.03em 0 rgba(184, 56, 40, 0.65);
+}
+.ticket-zeppelin__seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  font-family: "Anton", sans-serif;
+  font-size: 0.9em;
+  letter-spacing: 0.15em;
+  color: rgba(184, 56, 40, 0.45);
+  border: 0.12em solid rgba(184, 56, 40, 0.45);
+  border-radius: 50%;
+  width: 5em;
+  height: 5em;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.ticket-zeppelin__venue {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3b2e23;
+}
+.ticket-zeppelin__date {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.56em;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #8c281c;
+  border-top: 1px solid rgba(80, 50, 20, 0.2);
+  padding-top: 0.25em;
+}
+.ticket-zeppelin__stub-right {
+  width: 4.4em;
+  border-left: 0.12em dashed rgba(80, 50, 20, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58em;
+}
+.ticket-zeppelin__stub-right span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+
+/* 10. FLEETWOOD MAC RUPP (Salmon-tinted paper with deep ink lettering) */
+.ticket-fleetwood {
+  background-color: #e8ada0;
+  background-image:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 60%),
+    var(--tex-age),
+    var(--tex-paper);
+  background-size: 100% 100%, 300px 300px, 180px 180px;
+  border: 1px solid #c2887b;
+  color: #1f1816;
+}
+.ticket-fleetwood__body {
+  flex: 1;
+  padding: 0.6em 0.8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.ticket-fleetwood__promo {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.54em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4a342e;
+}
+.ticket-fleetwood__title {
+  font-family: "Anton", Impact, sans-serif;
+  font-size: 2.3em;
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+  color: #171210;
+  margin: 0.04em 0;
+}
+.ticket-fleetwood__venue {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.62em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3b2823;
+}
+.ticket-fleetwood__mid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8em;
+  align-items: center;
+  border-top: 1px solid rgba(60, 40, 30, 0.2);
+  padding-top: 0.25em;
+}
+.ticket-fleetwood__big-day {
+  font-family: "Anton", sans-serif;
+  font-size: 2.2em;
+  line-height: 0.85;
+  color: #1f1816;
+}
+.ticket-fleetwood__date-info {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.54em;
+  line-height: 1.35;
+}
+.ticket-fleetwood__date-info b { display: block; font-size: 1.05em; color: #171210; }
+.ticket-fleetwood__strip {
+  width: 2.6em;
+  background: #c8325a;
+  background-image: var(--tex-paper);
+  border-left: 0.12em dashed rgba(80, 20, 40, 0.4);
+  border-right: 0.12em dashed rgba(80, 20, 40, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  font-size: 0.72em;
+}
+.ticket-fleetwood__strip span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.15em;
+}
+.ticket-fleetwood__stub {
+  width: 3.8em;
+  background: #df9f92;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6em 0.2em;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.56em;
+}
+.ticket-fleetwood__stub span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .foil { transition: none; }
 }
