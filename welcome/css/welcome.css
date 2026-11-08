@@ -353,9 +353,23 @@ html, body {
 
 .archive-card-image-wrap {
   position: relative;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-  border-radius: 3px;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+  border-radius: 8px;
   overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.archive-card-image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 20px rgba(20, 18, 16, 0.45);
+}
+
+.archive-card:hover .archive-card-image-wrap {
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.8), 0 0 15px rgba(244, 237, 224, 0.1);
 }
 
 .archive-card-image-wrap img {
@@ -363,6 +377,12 @@ html, body {
   height: 240px;
   width: auto;
   object-fit: cover;
+  filter: saturate(0.96) contrast(1.02);
+  transition: filter 0.3s ease;
+}
+
+.archive-card:hover .archive-card-image-wrap img {
+  filter: saturate(1.06) contrast(1.05);
 }
 
 .archive-card-tag {
@@ -428,10 +448,26 @@ html, body {
 .photo-cell {
   position: relative;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 12px;
   background: #141312;
   cursor: pointer;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.photo-cell:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.85), 0 0 20px var(--sw-red-glow);
+}
+
+.photo-cell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 35px rgba(12, 11, 10, 0.7);
+  transition: opacity 0.3s ease;
 }
 
 .photo-cell img {
@@ -439,13 +475,13 @@ html, body {
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: saturate(0.92) contrast(1.05);
+  filter: saturate(0.95) contrast(1.05);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
 .photo-cell:hover img {
   transform: scale(1.05);
-  filter: saturate(1.08) contrast(1.08);
+  filter: saturate(1.12) contrast(1.1);
 }
 
 .photo-cell-overlay {

@@ -170,23 +170,23 @@ export const ARCHIVE_ITEMS = [
 export const PEOPLE_GALLERY = [
   {
     id: "photo-crowd-dusk",
-    title: "Dusk Gathering at Waterfront Park",
-    caption: "Waterfront Park · 19:42 · Biscayne Bay",
-    location: "Horizon Arena Outer Lawn",
+    title: "Memories Inside Horizon",
+    caption: "Sunset Dusk Sky · Golden crimson horizon over the arena crowd",
+    location: "Horizon Arena",
     thumb: "assets/archive/photos/photo-crowd-dusk-sm.jpg",
     full: "assets/archive/photos/photo-crowd-dusk.jpg",
-    orientation: "landscape",
+    orientation: "portrait",
     size: "large", // spans 2 cols / hero in gallery
     timestamp: "DEC 19 · 19:42"
   },
   {
     id: "photo-stage-silhouettes",
-    title: "Frequency & Haze Beams",
-    caption: "Analog Dome · 23:15 · Red laser array",
+    title: "Deep Cuts with Deep Souls",
+    caption: "Warehouse & Balcony Rave · Neon light beams cutting through haze",
     location: "Analog Dome",
     thumb: "assets/archive/photos/photo-stage-silhouettes-sm.jpg",
     full: "assets/archive/photos/photo-stage-silhouettes.jpg",
-    orientation: "portrait",
+    orientation: "square",
     size: "tall",
     timestamp: "DEC 19 · 23:15"
   },
@@ -214,9 +214,9 @@ export const PEOPLE_GALLERY = [
   },
   {
     id: "photo-light-installation",
-    title: "The Harmonic Monolith",
-    caption: "Bayfront Promenade · 21:05 · Kinetic neon spire",
-    location: "Promenade Art Path",
+    title: "Liberation with Will",
+    caption: "Open Air Red Flare · Fiery nocturnal celebration atop the sound stage",
+    location: "Waterfront Lawn",
     thumb: "assets/archive/photos/photo-light-installation-sm.jpg",
     full: "assets/archive/photos/photo-light-installation.jpg",
     orientation: "portrait",
