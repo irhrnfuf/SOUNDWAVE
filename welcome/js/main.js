@@ -96,39 +96,15 @@ function renderArchiveTable() {
         </div>
         <span class="archive-card-tag">${item.edition} · ${item.title}</span>
       `;
+    } else if (item.type === 'ticket-image') {
+      card.innerHTML = `
+        <div class="archive-card-image-wrap ticket-card-image-wrap">
+          <img src="${item.thumb}" alt="${item.title}" loading="lazy" />
+        </div>
+        <span class="archive-card-tag">${item.edition} · ${item.title}</span>
+      `;
     } else if (item.type === 'ticket-html') {
-      if (item.component === 'ticket-ga') {
-        card.innerHTML = `
-          <article class="mem mem-paper ticket-ga" style="--mem-size: 15px">
-            <div class="ticket-ga__main mem-crease" style="--crease-at: 40%">
-              <div class="ink-worn">
-                <p class="ticket-ga__brand">SOUNDWAVE</p>
-              </div>
-              <span class="ticket-ga__admit ink-worn">ADMIT ONE</span>
-              <div class="ticket-ga__meta ink-worn">
-                <span>Edition<b>02</b></span>
-                <span>Year<b>2015</b></span>
-                <span>Entry<b>Gate B</b></span>
-              </div>
-            </div>
-            <div class="ticket-ga__stub">
-              <span class="ticket-ga__stub-no">Nº 004127</span>
-              <div class="mem-barcode"></div>
-            </div>
-            <span class="ticket-ga__stain"></span>
-          </article>
-          <span class="archive-card-tag">Ticket · ${item.title}</span>
-        `;
-      } else if (item.component === 'ticket-vip') {
-        card.innerHTML = `
-          <article class="mem ticket-vip" style="--mem-size: 14.5px">
-            <div class="ticket-vip__top"><span>Edition 06 · 2019</span><span>All Stages</span></div>
-            <p class="ticket-vip__brand foil">SOUNDWAVE<span class="foil">VIP</span></p>
-            <div class="ticket-vip__bottom"><span>Nº 0612 — 0388<br/>Non-transferable</span><span class="ticket-vip__seal">VI</span></div>
-          </article>
-          <span class="archive-card-tag">VIP Pass · ${item.title}</span>
-        `;
-      } else if (item.component === 'pass-crew') {
+      if (item.component === 'pass-crew') {
         card.innerHTML = `
           <article class="mem pass-crew mem-paper" style="--mem-size: 14.5px">
             <span class="pass-crew__hole"></span>
@@ -139,26 +115,6 @@ function renderArchiveTable() {
             <div class="pass-crew__fields">Zone: Analog Dome<br/>Access: All areas</div>
           </article>
           <span class="archive-card-tag">Crew Pass · ${item.title}</span>
-        `;
-      }
-    } else if (item.type === 'wristband-html') {
-      if (item.component === 'band-woven') {
-        card.innerHTML = `
-          <article class="mem band-woven" style="--mem-size: 13.5px">
-            <div class="band-woven__fabric"><span>SOUNDWAVE</span><span>ED·10</span><span>SOUNDWAVE</span></div>
-            <span class="band-woven__bead"></span>
-            <div class="band-woven__fabric band-woven__tail"></div>
-          </article>
-          <span class="archive-card-tag">Wristband · ${item.title}</span>
-        `;
-      } else if (item.component === 'band-rfid') {
-        card.innerHTML = `
-          <article class="mem band-rfid" style="--mem-size: 13.5px">
-            <span class="band-rfid__chip"></span>
-            <span class="band-rfid__deboss">SOUNDWAVE</span>
-            <span class="band-rfid__id">SW11·7F3A</span>
-          </article>
-          <span class="archive-card-tag">RFID Band · ${item.title}</span>
         `;
       }
     } else if (item.isDiscovery) {

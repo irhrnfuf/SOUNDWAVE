@@ -422,6 +422,18 @@ html, body {
   transition: filter 0.3s ease;
 }
 
+.ticket-card-image-wrap {
+  border-radius: 4px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7);
+}
+
+.ticket-card-image-wrap img {
+  height: 95px;
+  width: auto;
+  object-fit: contain;
+  filter: contrast(1.06) brightness(0.98);
+}
+
 .archive-card:hover .archive-card-image-wrap img {
   filter: saturate(1.06) contrast(1.05);
 }
