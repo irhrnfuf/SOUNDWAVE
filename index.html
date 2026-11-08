@@ -430,92 +430,39 @@
         <div class="section-title-with-patch">
           <span class="thread-patch-sprite patch-ticket" title="Festival Anthem Patch"></span>
           <div>
-            <h2>Feel the Energy: Official SoundWave Anthem &amp; 4K Cinematic Reel</h2>
-            <small style="font-weight: 700; color: #57554f;">Listen to the festival soundtrack and get a glimpse of the unforgettable atmosphere</small>
+            <h2>Feel the Energy: Official SoundWave Festival Soundtrack</h2>
+            <small style="font-weight: 700; color: #57554f;">Stream the live analog master recording from the festival soundstage</small>
           </div>
         </div>
       </div>
 
-      <div class="media-split">
-        <div class="video-showcase-wrap">
-          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-            <h3 style="margin: 0;">4K Festival Cinema &amp; Fan Reels</h3>
-            
-            <!-- Reel Mode Switcher (Option 4) -->
-            <div class="video-mode-switcher" role="tablist" aria-label="Reel Mode Switcher">
-              <button type="button" class="video-mode-btn active" id="btn-mode-official" onclick="switchReelMode('official')">
-                <span style="font-size: 0.85rem;">🎬</span> Official 4K
-              </button>
-              <button type="button" class="video-mode-btn" id="btn-mode-fan" onclick="switchReelMode('fan')">
-                <span style="font-size: 0.85rem;">📼</span> Fan Cam (VHS)
-              </button>
-            </div>
-          </div>
-
-          <!-- Retro Camcorder HUD Frame (Option 1) -->
-          <div class="camcorder-frame">
-            <div class="camcorder-corners"></div>
-            
-            <div class="camcorder-hud">
-              <div class="camcorder-hud-top">
-                <div class="rec-indicator">
-                  <span class="rec-dot"></span>
-                  <span id="hud-rec-text">REC [4K 60FPS]</span>
-                </div>
-                <div class="hud-tag" id="hud-channel-tag">CH 01 &bull; SOUNDSTAGE A</div>
-                <div class="rec-indicator">
-                  <span>BAT 98% 🔋</span>
-                </div>
-              </div>
-
-              <div class="camcorder-hud-bottom">
-                <div class="hud-tag" id="hud-timecode">SP 00:03:42</div>
-                <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem;">WIDE ANGLE 18mm &bull; STEREO HI-FI</div>
-                <div class="hud-tag" style="background: rgba(255, 42, 133, 0.35); border-color: #ff2a85;">SOUNDWAVE &rsquo;25 ARCHIVE</div>
-              </div>
-            </div>
-
-            <video id="festival-video" controls poster="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=900&q=80">
-              <source id="video-source" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
-              Your browser does not support HTML5 video.
-            </video>
-          </div>
-
-          <div style="font-size: 0.82rem; color: #57554f; display: flex; justify-content: space-between; align-items: center; padding: 0 4px;">
-            <span id="reel-description">✨ <b>Official Cinematic:</b> Multi-camera 4K stage production, pyro drops, and soundboard audio.</span>
-          </div>
-        </div>
-
-        <div class="audio-panel">
+      <!-- STREAMLINED SOUNDTRACK & PASS HIGHLIGHT (CINEMATIC/REELS REMOVED) -->
+      <div style="background: #ffffff; border: 3px solid #161415; border-radius: 16px; padding: 1.5rem; box-shadow: 6px 6px 0px #161415; margin-top: 1rem;">
+        <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.75rem; align-items: center;">
           <div>
-            <h3>Official Festival Anthem: &ldquo;Neon Horizon&rdquo;</h3>
-            <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Stream the official festival soundtrack recorded live at SoundWave:</p>
-            <audio id="festival-audio" controls>
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+              <span style="display: inline-block; width: 10px; height: 10px; background: #ff2a85; border-radius: 50%; box-shadow: 0 0 8px #ff2a85;"></span>
+              <span style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #ff2a85;">Official Festival Anthem &bull; 45 RPM Master</span>
+            </div>
+            <h3 style="margin: 0 0 0.5rem; font-size: 1.4rem;">&ldquo;Neon Horizon&rdquo; &mdash; Performed Live by Neon Pulse</h3>
+            <p style="font-size: 0.88rem; line-height: 1.5; color: #3a3835; margin: 0 0 1rem;">
+              Recorded directly on the Vinyl Lawn using our 100% solar analog console with acoustic string orchestra accompaniments. Tune into the pulse of SoundWave 2026:
+            </p>
+            <audio id="festival-audio" controls style="width: 100%;">
               <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
               Your browser does not support HTML5 audio.
             </audio>
-
-            <!-- Track Info & Live Recording Badges (Fills the gap) -->
-            <div style="margin-top: 0.85rem; padding: 0.75rem; background: rgba(22, 20, 21, 0.05); border: 2px dashed #161415; border-radius: 10px;">
-              <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.4rem;">
-                <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #161415;">
-                  <span style="display: inline-block; width: 8px; height: 8px; background: #ff2a85; border-radius: 50%; box-shadow: 0 0 6px #ff2a85;"></span>
-                  LIVE MASTER LACQUER RECORDING
-                </span>
-                <span style="font-size: 0.72rem; font-weight: 800; background: #161415; color: #f7b2d4; padding: 1px 6px; border-radius: 4px;">45 RPM</span>
-              </div>
-              <div style="font-size: 0.79rem; line-height: 1.35; color: #2c2b29;">
-                <b>Performed by:</b> Neon Pulse &bull; Featuring live Strings recorded directly on Vinyl Lawn with our 100% solar analog console.
-              </div>
-            </div>
           </div>
 
-          <div style="background: #ffffff; border: 2px solid #111111; border-radius: 10px; padding: 0.85rem; margin-top: 1rem;">
-            <b style="font-size: 0.86rem;">Ready to be a part of SoundWave 2026?</b>
-            <p style="font-size: 0.82rem; margin: 4px 0 0.65rem;">
-              Wristbands are currently 78% reserved. Lock in your 3-day wristband pass today to ensure gate access.
+          <div style="background: rgba(247, 178, 212, 0.22); border: 2px solid #161415; border-radius: 12px; padding: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <b style="font-size: 0.95rem; color: #161415;">Experience it Live</b>
+              <span style="font-size: 0.72rem; font-weight: 800; background: #161415; color: #f7b2d4; padding: 2px 7px; border-radius: 999px;">78% RESERVED</span>
+            </div>
+            <p style="font-size: 0.84rem; margin: 0 0 0.85rem; color: #2c2b29; line-height: 1.4;">
+              Wristbands grant full 3-day access across all 3 festival stages, artisan food markets, and vinyl listening lawns.
             </p>
-            <a href="./passes.html" class="nav-cta-btn" style="display: block; text-align: center; text-decoration: none; padding: 8px 12px;">Reserve Wristband Online &rarr;</a>
+            <a href="./passes.html" class="nav-cta-btn" style="display: block; text-align: center; text-decoration: none; padding: 9px 14px; font-size: 0.88rem;">Reserve Wristband Pass &rarr;</a>
           </div>
         </div>
       </div>
