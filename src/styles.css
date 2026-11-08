@@ -1036,8 +1036,6 @@ button.primary-checkout-btn:hover {
 }
 
 /* Unit III: Modern Cohesive Global Footer (see consolidated block at end of file) */
-  }
-}
 
 /* Unit V: Media Types (@media screen & @media print) */
 @media screen and (max-width: 1080px) {
@@ -2524,3 +2522,263 @@ button:hover {
 }
 
 
+
+
+/* ==========================================================================
+   Enhanced Schedule Planner & Drag-and-Drop Workspace (Step 3)
+   ========================================================================== */
+.itinerary-workspace {
+  display: grid;
+  grid-template-columns: 1.15fr 1.35fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.schedule-day-pill {
+  background-color: #fffdf7;
+  color: #111111;
+  border: 2px solid #111111;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #111111;
+  transition: all 0.15s ease;
+}
+
+.schedule-day-pill:hover,
+.schedule-day-pill.active-day-pill {
+  background-color: #ffe600;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #111111;
+}
+
+.draggable-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.55rem;
+  padding: 0.65rem 0.85rem;
+  background-color: #fffdf7;
+  border: 2px solid #111111;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0px #111111;
+  cursor: grab;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+.draggable-chip:active {
+  cursor: grabbing;
+}
+
+.draggable-chip:hover {
+  background-color: #fff9db;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px #111111;
+}
+
+.draggable-chip.dragging {
+  opacity: 0.45;
+  transform: scale(0.97);
+}
+
+.chip-main {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.chip-drag-handle {
+  font-size: 1.1rem;
+  color: #888;
+}
+
+.chip-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #111111;
+}
+
+.chip-meta {
+  color: #555;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.chip-add-btn {
+  background-color: #00e676;
+  color: #111111;
+  border: 2px solid #111111;
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease;
+}
+
+.chip-add-btn:hover {
+  background-color: #ffe600;
+  transform: scale(1.1);
+}
+
+.planner-dropzone {
+  background-color: #fffdf7;
+  border: 3px dashed #111111;
+  border-radius: 16px;
+  padding: 1.25rem;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 0px #111111;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.planner-dropzone.drag-active {
+  background-color: #e8f9ff;
+  border-color: #0088ff;
+  border-style: solid;
+}
+
+.dropzone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #111111;
+  margin-bottom: 0.85rem;
+}
+
+.schedule-counter-badge {
+  background-color: #ff3366;
+  color: #ffffff;
+  border: 2px solid #111111;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  box-shadow: 2px 2px 0px #111111;
+}
+
+.schedule-conflict-alert {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 2px solid #ffeeba;
+  border-left: 5px solid #ff9800;
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.84rem;
+  margin-bottom: 0.85rem;
+  animation: pulseWarning 2s infinite;
+}
+
+@keyframes pulseWarning {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.01); }
+  100% { transform: scale(1); }
+}
+
+.schedule-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.scheduled-artist-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffe600;
+  border: 2px solid #111111;
+  border-radius: 10px;
+  padding: 0.65rem 0.85rem;
+  box-shadow: 3px 3px 0px #111111;
+  animation: slideInSchedule 0.2s ease-out;
+}
+
+@keyframes slideInSchedule {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.scheduled-artist-card.has-conflict {
+  background-color: #ffcc80;
+  border-color: #e65100;
+}
+
+.scheduled-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.scheduled-item-title {
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: #111111;
+}
+
+.scheduled-item-details {
+  font-size: 0.78rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.remove-scheduled-btn {
+  background-color: #ffffff;
+  color: #ff3366;
+  border: 2px solid #111111;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0px #111111;
+  transition: all 0.12s ease;
+}
+
+.remove-scheduled-btn:hover {
+  background-color: #ff3366;
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.empty-schedule-prompt {
+  text-align: center;
+  color: #666;
+  padding: 3rem 1.5rem;
+  border: 2px dashed #ddd;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.dropzone-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.85rem;
+  border-top: 2px solid #111111;
+  margin-top: 0.85rem;
+}
+
+.schedule-status-msg {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #555;
+}

@@ -446,49 +446,217 @@ function updatePassCanvas() {
   calculateLivePassTotal();
 }
 
-// 7. UNIT II: HTML5 Drag & Drop + Web Storage
-const STORAGE_KEY = "soundwave_saved_lineup";
+// 7. UNIT II: Drag & Drop Personal Weekend Schedule Builder
+let activeScheduleItems = [];
 
 function loadSavedLineup() {
-  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-  renderLineupList(saved);
+  renderLineupList();
+  setupDragAndDropListeners();
 }
 
-function renderLineupList(items) {
-  const ul = document.getElementById("saved-lineup-list");
-  if (!ul) return;
-  if (items.length === 0) {
-    ul.innerHTML = "<li>Drag artists from the left column and drop them here to build your personal schedule.</li>";
-    return;
+function filterScheduleChips(day, btnElement) {
+  const pills = document.querySelectorAll(".schedule-day-pill");
+  pills.forEach(p => p.classList.remove("active-day-pill"));
+  if (btnElement) btnElement.classList.add("active-day-pill");
+
+  const chips = document.querySelectorAll("#chips-scroll-container .draggable-chip");
+  chips.forEach(chip => {
+    const chipDay = chip.getAttribute("data-day");
+    if (day === "ALL" || chipDay === day) {
+      chip.style.display = "flex";
+    } else {
+      chip.style.display = "none";
+    }
+  });
+}
+
+function setupDragAndDropListeners() {
+  const chips = document.querySelectorAll(".draggable-chip");
+  chips.forEach(chip => {
+    chip.removeEventListener("dragstart", onChipDragStart);
+    chip.removeEventListener("dragend", onChipDragEnd);
+    chip.addEventListener("dragstart", onChipDragStart);
+    chip.addEventListener("dragend", onChipDragEnd);
+  });
+
+  const dropzone = document.getElementById("lineup-dropzone");
+  if (dropzone) {
+    dropzone.removeEventListener("dragover", onDropzoneDragOver);
+    dropzone.removeEventListener("dragleave", onDropzoneDragLeave);
+    dropzone.removeEventListener("drop", onDropzoneDrop);
+
+    dropzone.addEventListener("dragover", onDropzoneDragOver);
+    dropzone.addEventListener("dragleave", onDropzoneDragLeave);
+    dropzone.addEventListener("drop", onDropzoneDrop);
   }
-  ul.innerHTML = items.map(item => "<li><b>" + item + "</b></li>").join("");
 }
 
-function handleDragStart(event) {
-  const artist = event.target.getAttribute("data-artist");
-  event.dataTransfer.setData("text/plain", artist);
-}
-
-function handleDragOver(event) {
-  event.preventDefault();
-}
-
-function handleDrop(event) {
-  event.preventDefault();
-  const artist = event.dataTransfer.getData("text/plain");
+function onChipDragStart(event) {
+  const artist = event.currentTarget.getAttribute("data-artist");
   if (!artist) return;
-  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-  if (!saved.includes(artist)) {
-    saved.push(artist);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+  event.dataTransfer.setData("text/plain", artist);
+  event.dataTransfer.effectAllowed = "copyMove";
+  event.currentTarget.classList.add("dragging");
+
+  const dropzone = document.getElementById("lineup-dropzone");
+  if (dropzone) dropzone.classList.add("drag-active");
+}
+
+function onChipDragEnd(event) {
+  event.currentTarget.classList.remove("dragging");
+  const dropzone = document.getElementById("lineup-dropzone");
+  if (dropzone) dropzone.classList.remove("drag-active");
+}
+
+function onDropzoneDragOver(event) {
+  event.preventDefault();
+  event.dataTransfer.dropEffect = "copy";
+  const dropzone = document.getElementById("lineup-dropzone");
+  if (dropzone) dropzone.classList.add("drag-active");
+}
+
+function onDropzoneDragLeave(event) {
+  const dropzone = document.getElementById("lineup-dropzone");
+  if (dropzone && !dropzone.contains(event.relatedTarget)) {
+    dropzone.classList.remove("drag-active");
   }
-  renderLineupList(saved);
+}
+
+function onDropzoneDrop(event) {
+  event.preventDefault();
+  const dropzone = document.getElementById("lineup-dropzone");
+  if (dropzone) dropzone.classList.remove("drag-active");
+
+  const artistData = event.dataTransfer.getData("text/plain");
+  if (artistData) {
+    addArtistDirectly(artistData);
+  }
+}
+
+function addArtistDirectly(artistStr) {
+  if (!artistStr) return;
+  if (!activeScheduleItems.includes(artistStr)) {
+    activeScheduleItems.push(artistStr);
+    renderLineupList();
+    showScheduleFeedback("Added: " + artistStr.split("—")[0].trim() + " ?");
+  } else {
+    showScheduleFeedback("Already in your schedule!");
+  }
+}
+
+function removeArtistFromSchedule(index) {
+  if (index >= 0 && index < activeScheduleItems.length) {
+    const removed = activeScheduleItems.splice(index, 1)[0];
+    renderLineupList();
+    showScheduleFeedback("Removed: " + removed.split("—")[0].trim());
+  }
 }
 
 function clearSavedLineup() {
-  localStorage.removeItem(STORAGE_KEY);
-  renderLineupList([]);
+  activeScheduleItems = [];
+  renderLineupList();
+  showScheduleFeedback("Schedule reset");
 }
+
+function checkScheduleConflicts() {
+  const timeMap = {};
+  let conflictFound = false;
+
+  activeScheduleItems.forEach(item => {
+    // Expect format: "Artist Name — Stage (Day Time)"
+    const match = item.match(/\((.*?)\)/);
+    if (match && match[1]) {
+      const slot = match[1].trim(); // e.g. "Fri 09:30 PM"
+      if (!timeMap[slot]) {
+        timeMap[slot] = [item];
+      } else {
+        timeMap[slot].push(item);
+        conflictFound = true;
+      }
+    }
+  });
+
+  const conflictBanner = document.getElementById("schedule-conflict-banner");
+  if (conflictBanner) {
+    if (conflictFound) {
+      conflictBanner.style.display = "block";
+    } else {
+      conflictBanner.style.display = "none";
+    }
+  }
+
+  return timeMap;
+}
+
+function renderLineupList() {
+  const ul = document.getElementById("saved-lineup-list");
+  const countBadge = document.getElementById("schedule-count-badge");
+  if (!ul) return;
+
+  const count = activeScheduleItems.length;
+  if (countBadge) {
+    countBadge.textContent = count === 1 ? "1 Act Added" : count + " Acts Added";
+  }
+
+  if (count === 0) {
+    ul.innerHTML = `
+      <li class="empty-schedule-prompt">
+        <span style="font-size: 2.2rem; display: block; margin-bottom: 0.5rem;">&#127911;</span>
+        <b>Your festival weekend schedule is empty!</b><br />
+        Drag artists from the left column or tap the (+) button to build your custom itinerary.
+      </li>
+    `;
+    const conflictBanner = document.getElementById("schedule-conflict-banner");
+    if (conflictBanner) conflictBanner.style.display = "none";
+    return;
+  }
+
+  const timeMap = checkScheduleConflicts();
+
+  ul.innerHTML = activeScheduleItems.map((item, idx) => {
+    const parts = item.split("—");
+    const name = parts[0] ? parts[0].trim() : item;
+    const details = parts[1] ? parts[1].trim() : "";
+    const match = item.match(/\((.*?)\)/);
+    const slot = match && match[1] ? match[1].trim() : "";
+    const isConflict = timeMap[slot] && timeMap[slot].length > 1;
+
+    return `
+      <li class="scheduled-artist-card ${isConflict ? "has-conflict" : ""}">
+        <div class="scheduled-item-info">
+          <span class="scheduled-item-title">${name} ${isConflict ? "<small style='color: #d84315; font-weight: 800;'>[CONFLICT]</small>" : ""}</span>
+          <span class="scheduled-item-details">${details}</span>
+        </div>
+        <button type="button" class="remove-scheduled-btn" title="Remove Set" onclick="removeArtistFromSchedule(${idx})">&times;</button>
+      </li>
+    `;
+  }).join("");
+}
+
+function showScheduleFeedback(msg) {
+  const el = document.getElementById("schedule-feedback");
+  if (el) {
+    el.textContent = msg;
+    el.style.color = "#0088ff";
+    setTimeout(() => {
+      el.textContent = "Drop items here to schedule";
+      el.style.color = "#555";
+    }, 2500);
+  }
+}
+
+function exportPersonalSchedule() {
+  if (activeScheduleItems.length === 0) {
+    alert("Please add at least one performance to your schedule before exporting.");
+    return;
+  }
+  window.print();
+}
+
+// Inline fallback handlers for HTML ondrag attributes if invoked
+function handleDragStart(event) { onChipDragStart(event); }
+function handleDragOver(event) { onDropzoneDragOver(event); }
+function handleDrop(event) { onDropzoneDrop(event); }
 
 // 8. UNIT II: Geolocation, Web Worker & SSE Ticker
 function findMyFestivalDistance() {
@@ -587,7 +755,13 @@ window.addEventListener("DOMContentLoaded", function () {
   if (form) {
     form.addEventListener("submit", validateFestivalForm);
   }
-  window.addEventListener("resize", updateBomAndDomInspector);
+  window.addEventListener('resize', updateBomAndDomInspector);
+  // Keyboard Escape listener to dismiss modal
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      closeOrderConfirmationModal();
+    }
+  });
 });
 
 // Switch active workspace tab so the UI stays clean and de-cluttered
@@ -651,4 +825,6 @@ function switchReelMode(mode) {
 
   video.load();
 }
+
+
 

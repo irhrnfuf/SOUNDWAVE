@@ -74,40 +74,234 @@
 
   <div class="stage-page-container">
 
-    <!-- Interactive Drag & Drop Planner Section -->
+        <!-- Interactive Drag & Drop Planner Section -->
     <section class="ui-panel active-panel" style="margin-bottom: 2rem;">
       <div class="panel-header">
         <div class="section-title-with-patch">
           <span class="thread-patch-sprite patch-camping" title="Hand-Embroidered Camping Tent Patch"></span>
           <div>
-            <h2>Drag-and-Drop Personal Weekend Scheduler</h2>
-            <small style="font-weight: 700; color: #57554f;">Grab any artist set card on the left and drag it into your schedule box on the right</small>
+            <h2>Personal Weekend Schedule Builder</h2>
+            <small style="font-weight: 700; color: #57554f;">Drag or click (+) to add any artist set into your personalized festival itinerary</small>
           </div>
         </div>
-        <button type="button" class="secondary-btn" onclick="clearSavedLineup()">Reset Schedule</button>
+        <div style="display: flex; gap: 0.65rem; align-items: center; flex-wrap: wrap;">
+          <button type="button" class="secondary-btn" id="btn-export-schedule" onclick="exportPersonalSchedule()">Export / Print Itinerary</button>
+          <button type="button" class="secondary-btn" onclick="clearSavedLineup()" style="background-color: #ff3366; color: #ffffff; border-color: #111111;">Reset Schedule</button>
+        </div>
+      </div>
+
+      <!-- Schedule Filter Pills by Day -->
+      <div class="schedule-day-filter-bar" style="margin: 0.75rem 0 1.25rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button type="button" class="schedule-day-pill active-day-pill" onclick="filterScheduleChips('ALL', this)">All Weekend (40+ Acts)</button>
+        <button type="button" class="schedule-day-pill" onclick="filterScheduleChips('FRI', this)">Friday 12/18</button>
+        <button type="button" class="schedule-day-pill" onclick="filterScheduleChips('SAT', this)">Saturday 12/19</button>
+        <button type="button" class="schedule-day-pill" onclick="filterScheduleChips('SUN', this)">Sunday 12/20</button>
       </div>
 
       <div class="itinerary-workspace">
         <!-- Draggable Pool of Artist Chips -->
         <div id="artist-pool">
-          <p style="margin: 0 0 0.5rem; font-size: 0.84rem;"><b>Draggable Sets (Click and hold to drag):</b></p>
-          <span id="drag-artist-1" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="Neon Pulse â€” Horizon Arena (Sun 10:00 PM)">&#9776; Neon Pulse (Sun 10:00 PM)</span>
-          <span id="drag-artist-2" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="Aurora Echoes â€” Horizon Arena (Fri 09:30 PM)">&#9776; Aurora Echoes (Fri 09:30 PM)</span>
-          <span id="drag-artist-3" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="DJ Solaris â€” Analog Dome (Fri 09:30 PM)">&#9776; DJ Solaris (Fri 09:30 PM)</span>
-          <span id="drag-artist-4" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="The Midnight Chords â€” Vinyl Lawn (Fri 06:00 PM)">&#9776; The Midnight Chords (Fri 06:00 PM)</span>
-          <span id="drag-artist-5" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="Static Velocity â€” Horizon Arena (Sat 07:00 PM)">&#9776; Static Velocity (Sat 07:00 PM)</span>
-          <span id="drag-artist-6" class="draggable-chip" draggable="true" ondragstart="handleDragStart(event)" data-artist="Luna & The Strings â€” Vinyl Lawn (Sat 06:00 PM)">&#9776; Luna &amp; The Strings (Sat 06:00 PM)</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
+            <p style="margin: 0; font-size: 0.88rem; font-weight: 700;"><b>Available Performances:</b></p>
+            <small style="color: #666; font-size: 0.78rem;">Drag card or click <b>+</b></small>
+          </div>
+
+          <div id="chips-scroll-container" style="max-height: 480px; overflow-y: auto; padding-right: 6px;">
+            <!-- Friday Sets -->
+            <div class="draggable-chip" draggable="true" data-day="FRI" data-time="06:00 PM" data-stage="Horizon Arena" data-artist="The Velvet Suns — Horizon Arena (Fri 06:00 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">The Velvet Suns</div>
+                  <small class="chip-meta">FRI 06:00 PM &bull; Horizon Arena</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('The Velvet Suns — Horizon Arena (Fri 06:00 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="FRI" data-time="06:00 PM" data-stage="Analog Dome" data-artist="Bassline Syndicate — Analog Dome (Fri 06:00 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">Bassline Syndicate</div>
+                  <small class="chip-meta">FRI 06:00 PM &bull; Analog Dome</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('Bassline Syndicate — Analog Dome (Fri 06:00 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="FRI" data-time="06:00 PM" data-stage="Vinyl Lawn" data-artist="The Midnight Chords — Vinyl Lawn (Fri 06:00 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">The Midnight Chords</div>
+                  <small class="chip-meta">FRI 06:00 PM &bull; Vinyl Lawn</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('The Midnight Chords — Vinyl Lawn (Fri 06:00 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="FRI" data-time="09:30 PM" data-stage="Horizon Arena" data-artist="Aurora Echoes — Horizon Arena (Fri 09:30 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">Aurora Echoes</div>
+                  <small class="chip-meta">FRI 09:30 PM &bull; Horizon Arena</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('Aurora Echoes — Horizon Arena (Fri 09:30 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="FRI" data-time="09:30 PM" data-stage="Analog Dome" data-artist="DJ Solaris — Analog Dome (Fri 09:30 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">DJ Solaris</div>
+                  <small class="chip-meta">FRI 09:30 PM &bull; Analog Dome</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('DJ Solaris — Analog Dome (Fri 09:30 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="FRI" data-time="09:30 PM" data-stage="Vinyl Lawn" data-artist="Evening String Quartet — Vinyl Lawn (Fri 09:30 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">Evening String Quartet</div>
+                  <small class="chip-meta">FRI 09:30 PM &bull; Vinyl Lawn</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('Evening String Quartet — Vinyl Lawn (Fri 09:30 PM)')">+</button>
+            </div>
+
+            <!-- Saturday Sets -->
+            <div class="draggable-chip" draggable="true" data-day="SAT" data-time="06:00 PM" data-stage="Vinyl Lawn" data-artist="Luna & The Strings — Vinyl Lawn (Sat 06:00 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">Luna &amp; The Strings</div>
+                  <small class="chip-meta">SAT 06:00 PM &bull; Vinyl Lawn</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('Luna & The Strings — Vinyl Lawn (Sat 06:00 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="SAT" data-time="07:00 PM" data-stage="Horizon Arena" data-artist="Static Velocity — Horizon Arena (Sat 07:00 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">Static Velocity</div>
+                  <small class="chip-meta">SAT 07:00 PM &bull; Horizon Arena</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('Static Velocity — Horizon Arena (Sat 07:00 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="SAT" data-time="07:00 PM" data-stage="Analog Dome" data-artist="Modular Ensemble — Analog Dome (Sat 07:00 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">Modular Ensemble</div>
+                  <small class="chip-meta">SAT 07:00 PM &bull; Analog Dome</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('Modular Ensemble — Analog Dome (Sat 07:00 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="SAT" data-time="10:30 PM" data-stage="Horizon Arena" data-artist="Glass Harbor — Horizon Arena (Sat 10:30 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">Glass Harbor</div>
+                  <small class="chip-meta">SAT 10:30 PM &bull; Horizon Arena</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('Glass Harbor — Horizon Arena (Sat 10:30 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="SAT" data-time="10:30 PM" data-stage="Analog Dome" data-artist="Acid Cathedral (Live 303) — Analog Dome (Sat 10:30 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">Acid Cathedral (Live 303)</div>
+                  <small class="chip-meta">SAT 10:30 PM &bull; Analog Dome</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('Acid Cathedral (Live 303) — Analog Dome (Sat 10:30 PM)')">+</button>
+            </div>
+
+            <!-- Sunday Sets -->
+            <div class="draggable-chip" draggable="true" data-day="SUN" data-time="07:30 PM" data-stage="Vinyl Lawn" data-artist="The Sunbirds — Vinyl Lawn (Sun 07:30 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">The Sunbirds</div>
+                  <small class="chip-meta">SUN 07:30 PM &bull; Vinyl Lawn</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('The Sunbirds — Vinyl Lawn (Sun 07:30 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="SUN" data-time="10:00 PM" data-stage="Horizon Arena" data-artist="Neon Pulse (Closing) — Horizon Arena (Sun 10:00 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">Neon Pulse (Closing)</div>
+                  <small class="chip-meta">SUN 10:00 PM &bull; Horizon Arena</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('Neon Pulse (Closing) — Horizon Arena (Sun 10:00 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="SUN" data-time="10:00 PM" data-stage="Analog Dome" data-artist="DJ Solaris 360 Finale — Analog Dome (Sun 10:00 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">DJ Solaris 360 Finale</div>
+                  <small class="chip-meta">SUN 10:00 PM &bull; Analog Dome</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('DJ Solaris 360 Finale — Analog Dome (Sun 10:00 PM)')">+</button>
+            </div>
+
+            <div class="draggable-chip" draggable="true" data-day="SUN" data-time="10:00 PM" data-stage="VIP Cabanas & SkyDeck" data-artist="All-Star Backstage Jam — VIP Cabanas & SkyDeck (Sun 10:00 PM)">
+              <div class="chip-main">
+                <span class="chip-drag-handle">&#9776;</span>
+                <div>
+                  <div class="chip-title">All-Star Backstage Jam</div>
+                  <small class="chip-meta">SUN 10:00 PM &bull; VIP Cabanas</small>
+                </div>
+              </div>
+              <button type="button" class="chip-add-btn" title="Add to Schedule" onclick="addArtistDirectly('All-Star Backstage Jam — VIP Cabanas & SkyDeck (Sun 10:00 PM)')">+</button>
+            </div>
+          </div>
         </div>
 
         <!-- Dropzone Container -->
-        <div id="lineup-dropzone" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
-          <div>
-            <h3 style="margin-top: 0;">My Saved Weekend Schedule</h3>
-            <ul id="saved-lineup-list" class="styled-list">
-              <li>Drag artists from the left column and drop them here to build your personal schedule.</li>
-            </ul>
+        <div id="lineup-dropzone" class="planner-dropzone">
+          <div class="dropzone-header">
+            <h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif;">My Festival Schedule</h3>
+            <span id="schedule-count-badge" class="schedule-counter-badge">0 Acts Added</span>
           </div>
-          <small style="font-weight: 700;">Automatically saved in browser <code>localStorage</code></small>
+
+          <!-- Conflict Warning Banner (Hidden by default) -->
+          <div id="schedule-conflict-banner" class="schedule-conflict-alert" style="display: none;">
+            &#9888; <b>Schedule Conflict Detected:</b> You have overlapping sets booked at the same time!
+          </div>
+
+          <!-- Active List of Scheduled Items -->
+          <ul id="saved-lineup-list" class="schedule-items-list">
+            <li class="empty-schedule-prompt">
+              <span style="font-size: 2.2rem; display: block; margin-bottom: 0.5rem;">&#127911;</span>
+              <b>Your festival weekend schedule is empty!</b><br />
+              Drag artists from the left column or tap the (+) button to build your custom itinerary.
+            </li>
+          </ul>
+
+          <div class="dropzone-footer">
+            <div id="schedule-feedback" class="schedule-status-msg">Drop items here to schedule</div>
+            <a href="./passes.html" class="nav-cta-btn" style="text-decoration: none; padding: 6px 14px; font-size: 0.84rem;">Lock Passes &rarr;</a>
+          </div>
         </div>
       </div>
     </section>
@@ -189,6 +383,7 @@
   <script src="./src/app.js"></script>
 </body>
 </html>
+
 
 
 
