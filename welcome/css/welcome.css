@@ -909,3 +909,539 @@ html, body {
     display: none;
   }
 }
+
+
+/* ==========================================================================
+   RETRO CRT TV GATEWAY & PIXEL REMOTE PORTAL
+   ========================================================================== */
+
+.tv-gateway {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #181512 0%, #080706 70%, #000000 100%);
+  overflow: hidden;
+  transition: opacity 0.4s ease;
+  user-select: none;
+}
+
+.tv-gateway.portal-dismissed {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+/* Up and Down Splitting Shutters */
+.tv-shutter {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  background: #000000;
+  z-index: 10020;
+  pointer-events: none;
+  transform: translateY(0);
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.tv-shutter--top {
+  top: 0;
+  border-bottom: 3px solid rgba(255, 42, 133, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+}
+
+.tv-shutter--bottom {
+  bottom: 0;
+  border-top: 3px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.9);
+}
+
+/* Split Open animation: Up shutter slides up, bottom shutter slides down */
+.tv-gateway.shutter-open .tv-shutter--top {
+  transform: translateY(-101%);
+}
+
+.tv-gateway.shutter-open .tv-shutter--bottom {
+  transform: translateY(101%);
+}
+
+/* Ambient glow in room behind TV */
+.tv-ambient-glow {
+  position: absolute;
+  width: 70vw;
+  height: 70vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(255, 42, 133, 0.04) 40%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+/* TV Unit Container - takes up ~50vw on desktop, centered */
+.tv-unit {
+  position: relative;
+  width: clamp(340px, 48vw, 680px);
+  max-height: 85vh;
+  cursor: pointer;
+  outline: none;
+  z-index: 10005;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  transform-origin: center center;
+}
+
+.tv-unit:hover {
+  transform: scale(1.02);
+}
+
+.tv-unit:focus-visible {
+  filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.6));
+}
+
+/* Fast Deep Zoom into the TV Screen */
+.tv-unit.tv-zooming {
+  transform: scale(9.5) !important;
+  transition: transform 0.85s cubic-bezier(0.85, 0, 0.15, 1) !important;
+}
+
+/* Rabbit Ear Antennas */
+.tv-antennas {
+  position: absolute;
+  top: -46px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 50px;
+  pointer-events: none;
+}
+
+.antenna {
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 80px;
+  background: linear-gradient(180deg, #d6d9e0, #616670);
+  border-radius: 2px;
+  transform-origin: bottom center;
+}
+
+.antenna::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -4px;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle at 35% 35%, #fff, #888);
+  border-radius: 50%;
+}
+
+.antenna--left {
+  left: 55px;
+  transform: rotate(-38deg);
+}
+
+.antenna--right {
+  right: 55px;
+  transform: rotate(38deg);
+}
+
+.antenna-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 12px;
+  background: #2b1f18;
+  border-radius: 6px 6px 0 0;
+  border: 2px solid #140d0a;
+}
+
+/* 90s CRT Box TV Wooden Cabinet */
+.tv-cabinet {
+  position: relative;
+  background: linear-gradient(180deg, #5c3a21 0%, #422916 45%, #2a180b 100%);
+  border: 8px solid #22140a;
+  border-radius: 26px;
+  box-shadow:
+    inset 0 2px 6px rgba(255, 255, 255, 0.25),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.7),
+    0 24px 60px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(0, 240, 255, 0.12);
+  display: grid;
+  grid-template-columns: 1fr 110px;
+  gap: 16px;
+  padding: 22px 20px 24px 24px;
+}
+
+/* TV Screen Beveled Outer Frame */
+.tv-screen-bezel {
+  background: #18191c;
+  border: 10px solid #2b2e36;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.9),
+    0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+/* CRT Curved Glass Phosphor Screen */
+.tv-screen {
+  position: relative;
+  background: #060b11;
+  border-radius: 14px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 40px rgba(0, 240, 255, 0.25);
+}
+
+/* CRT Scanlines */
+.tv-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.45) 0px,
+    rgba(0, 0, 0, 0.45) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Subtle Animated Static Noise */
+.tv-static {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.95' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>");
+  animation: staticJitter 0.12s infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes staticJitter {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 3px); }
+  50% { transform: translate(3px, -2px); }
+  75% { transform: translate(-1px, -3px); }
+  100% { transform: translate(2px, 1px); }
+}
+
+.tv-vignette {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.85) 100%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* TV Screen Graphic Elements */
+.tv-screen-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 85%;
+}
+
+.tv-ch-badge {
+  font-family: var(--sw-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #00ff66;
+  text-shadow: 0 0 6px rgba(0, 255, 102, 0.8);
+  letter-spacing: 0.18em;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.tv-logo-pixel {
+  font-family: var(--sw-cond);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  line-height: 0.95;
+  letter-spacing: 0.08em;
+  color: #fffdf7;
+  text-shadow:
+    3px 0 0 rgba(255, 42, 133, 0.8),
+    -3px 0 0 rgba(0, 240, 255, 0.8),
+    0 0 15px rgba(255, 255, 255, 0.5);
+  animation: textGlitch 3s infinite alternate;
+}
+
+@keyframes textGlitch {
+  0%, 92% {
+    transform: none;
+    text-shadow:
+      3px 0 0 rgba(255, 42, 133, 0.8),
+      -3px 0 0 rgba(0, 240, 255, 0.8),
+      0 0 15px rgba(255, 255, 255, 0.5);
+  }
+  94% {
+    transform: skewX(-4deg);
+    text-shadow:
+      5px 0 0 rgba(255, 42, 133, 0.9),
+      -5px 0 0 rgba(0, 240, 255, 0.9);
+  }
+  96% {
+    transform: skewX(3deg);
+    text-shadow:
+      -4px 0 0 rgba(255, 42, 133, 0.9),
+      4px 0 0 rgba(0, 240, 255, 0.9);
+  }
+  98%, 100% {
+    transform: none;
+    text-shadow:
+      3px 0 0 rgba(255, 42, 133, 0.8),
+      -3px 0 0 rgba(0, 240, 255, 0.8);
+  }
+}
+
+.tv-edition-tag {
+  font-family: var(--sw-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: #f7a8b8;
+  text-transform: uppercase;
+}
+
+.tv-prompt-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(229, 57, 53, 0.25);
+  border: 1px solid #e53935;
+  color: #fff;
+  font-family: var(--sw-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(229, 57, 53, 0.6);
+  animation: pulsePill 1.4s infinite ease-in-out;
+}
+
+@keyframes pulsePill {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(229, 57, 53, 0.5); }
+  50% { transform: scale(1.05); box-shadow: 0 0 18px rgba(229, 57, 53, 0.9); }
+}
+
+.tv-blink-dot {
+  color: #ff2a85;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* TV Right Control Panel */
+.tv-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #1f140c;
+  border: 4px solid #140d0a;
+  border-radius: 12px;
+  padding: 12px 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.tv-brand-plate {
+  font-family: var(--sw-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #c99363;
+  border: 1px solid #5a3c22;
+  padding: 2px 6px;
+  border-radius: 2px;
+  background: #110905;
+}
+
+.tv-speaker-slats {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 75%;
+}
+
+.tv-speaker-slats span {
+  height: 2px;
+  background: #0c0805;
+  border-radius: 1px;
+}
+
+.tv-knob {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #424751, #1e2025 70%);
+  border: 3px solid #121316;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.knob-marker {
+  position: absolute;
+  top: 4px;
+  width: 3px;
+  height: 10px;
+  background: #fff;
+  border-radius: 1px;
+}
+
+.tv-knob small {
+  position: absolute;
+  bottom: -16px;
+  font-family: var(--sw-mono);
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: #9c8470;
+}
+
+.tv-led-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.led-light {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff2a85;
+  box-shadow: 0 0 8px #ff2a85, 0 0 16px rgba(255, 42, 133, 0.8);
+  animation: ledBlink 1.8s infinite;
+}
+
+@keyframes ledBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.tv-led-indicator small {
+  font-family: var(--sw-mono);
+  font-size: 0.48rem;
+  font-weight: 700;
+  color: #c99363;
+}
+
+/* TV Legs */
+.tv-legs {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 60px;
+  margin-top: -6px;
+}
+
+.tv-leg {
+  width: 18px;
+  height: 24px;
+  background: #190e07;
+  transform: skewX(-14deg);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+}
+
+.tv-leg--right {
+  transform: skewX(14deg);
+}
+
+/* Pixelated Hand & TV Remote Wrapper (Bottom-right popup on click) */
+.tv-remote-hand-wrapper {
+  position: fixed;
+  bottom: -400px;
+  right: 5vw;
+  width: 300px;
+  height: 380px;
+  z-index: 10015;
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tv-remote-hand-wrapper.active {
+  transform: translateY(-380px);
+}
+
+.pixel-hand-remote {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.9));
+}
+
+.remote-ir-flash {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.remote-ir-flash.firing {
+  opacity: 1;
+}
+
+.pixel-thumb-press {
+  transform-origin: 140px 240px;
+  transition: transform 0.15s ease;
+}
+
+.pixel-thumb-press.pressed {
+  transform: translateY(6px) scale(0.97);
+}
+
+/* Direct Skip Button for Keyboard / Screen Readers */
+.tv-direct-skip {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: rgba(20, 18, 16, 0.8);
+  border: 1px solid var(--sw-border);
+  color: var(--sw-cream-dim);
+  font-family: var(--sw-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  z-index: 10030;
+  transition: all 0.2s ease;
+}
+
+.tv-direct-skip:hover {
+  background: var(--sw-surface);
+  color: var(--sw-cream);
+  border-color: var(--sw-cream-dim);
+}
+
+@media (max-width: 640px) {
+  .tv-cabinet {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px;
+  }
+  .tv-controls {
+    flex-direction: row;
+    height: 48px;
+    padding: 6px 12px;
+  }
+  .tv-speaker-slats { display: none; }
+  .tv-knob { width: 34px; height: 34px; }
+  .tv-remote-hand-wrapper { right: 0; width: 240px; }
+}

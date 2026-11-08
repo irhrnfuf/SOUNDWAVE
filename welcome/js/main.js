@@ -664,8 +664,128 @@ function setupEnterTransition() {
   }
 }
 
+// --- 8-BIT RETRO TV SYNTHESIS SOUNDS ---
+function playTvPowerSound() {
+  if (!state.audioCtx) return;
+  try {
+    const ctx = state.audioCtx;
+    // Retro 8-bit beep chime: short high blip into resonant CRT whine
+    const osc1 = ctx.createOscillator();
+    const gain1 = ctx.createGain();
+    osc1.type = 'square';
+    osc1.frequency.setValueAtTime(440, ctx.currentTime);
+    osc1.frequency.setValueAtTime(880, ctx.currentTime + 0.08);
+    osc1.frequency.setValueAtTime(1760, ctx.currentTime + 0.16);
+
+    gain1.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.28);
+
+    osc1.connect(gain1);
+    gain1.connect(ctx.destination);
+    osc1.start();
+    osc1.stop(ctx.currentTime + 0.3);
+
+    // High frequency phosphor degauss whine (15.7 kHz TV hum sensation simulated at 2400Hz)
+    const osc2 = ctx.createOscillator();
+    const gain2 = ctx.createGain();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(180, ctx.currentTime + 0.15);
+    osc2.frequency.exponentialRampToValueAtTime(1400, ctx.currentTime + 0.65);
+
+    gain2.gain.setValueAtTime(0.001, ctx.currentTime + 0.15);
+    gain2.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 0.35);
+    gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.75);
+
+    osc2.connect(gain2);
+    gain2.connect(ctx.destination);
+    osc2.start(ctx.currentTime + 0.15);
+    osc2.stop(ctx.currentTime + 0.75);
+  } catch (e) {
+    console.warn("TV sound synthesis error:", e);
+  }
+}
+
+// --- INTERACTIVE RETRO TV GATEWAY CONTROLLER ---
+function setupTvGateway() {
+  const gateway = document.getElementById('tv-gateway');
+  const tvUnit = document.getElementById('tv-unit');
+  const handWrapper = document.getElementById('tv-remote-hand-wrapper');
+  const thumb = document.querySelector('.pixel-thumb-press');
+  const irFlash = document.querySelector('.remote-ir-flash');
+  const skipBtn = document.getElementById('tv-direct-skip');
+
+  if (!gateway || !tvUnit) return;
+
+  let isActivating = false;
+
+  function dismissGateway() {
+    gateway.classList.add('portal-dismissed');
+    document.body.classList.remove('tv-portal-active');
+  }
+
+  function activateTvSequence() {
+    if (isActivating) return;
+    isActivating = true;
+
+    // Wake audio context
+    initAudio();
+    playTvPowerSound();
+
+    // Step 1: Pixel hand & remote pops in from bottom-right
+    if (handWrapper) {
+      handWrapper.classList.add('active');
+    }
+
+    // Step 2: Thumb clicks red power button (infrared flash)
+    setTimeout(() => {
+      if (thumb) thumb.classList.add('pressed');
+      if (irFlash) irFlash.classList.add('firing');
+
+      setTimeout(() => {
+        if (thumb) thumb.classList.remove('pressed');
+        if (irFlash) irFlash.classList.remove('firing');
+      }, 180);
+    }, 280);
+
+    // Step 3: Fast zoom deep into the TV screen
+    setTimeout(() => {
+      tvUnit.classList.add('tv-zooming');
+    }, 450);
+
+    // Step 4: TV screen divides into two (up and down shutter split wipe)
+    setTimeout(() => {
+      gateway.classList.add('shutter-open');
+    }, 850);
+
+    // Step 5: Full transition into Scene 01 (The Signal)
+    setTimeout(() => {
+      dismissGateway();
+      // Smooth pulse to celebrate entrance
+      playSubtlePulse(88, 0.4);
+    }, 1450);
+  }
+
+  // Click & Enter / Space Key triggers on the TV
+  tvUnit.addEventListener('click', activateTvSequence);
+  tvUnit.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      activateTvSequence();
+    }
+  });
+
+  // Direct Skip Button
+  if (skipBtn) {
+    skipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissGateway();
+    });
+  }
+}
+
 // --- DOM BOOT ---
 window.addEventListener('DOMContentLoaded', () => {
+  setupTvGateway();
   renderArchiveTable();
   renderPeopleGallery();
   initFrequencyCanvas();

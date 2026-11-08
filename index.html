@@ -21,6 +21,35 @@
   <link rel="stylesheet" href="./src/styles.css" />
 
   <style>
+    /* Elegant Split Shutter Reveal on Entry */
+    .entrance-curtain {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 50vh;
+      background: #141312;
+      z-index: 999999;
+      pointer-events: none;
+      transform: translateY(0);
+      transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .entrance-curtain--top {
+      top: 0;
+      border-bottom: 2px solid #ff2a85;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+    .entrance-curtain--bottom {
+      bottom: 0;
+      border-top: 2px solid #00f0ff;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+    }
+    body.curtains-opened .entrance-curtain--top {
+      transform: translateY(-101%);
+    }
+    body.curtains-opened .entrance-curtain--bottom {
+      transform: translateY(101%);
+    }
+
     .welcome-hero-grid {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
@@ -527,7 +556,19 @@
     </div>
   </footer>
 
+  <!-- Split Shutter Curtains matching the TV Screen / Archive transition -->
+  <div class="entrance-curtain entrance-curtain--top" aria-hidden="true"></div>
+  <div class="entrance-curtain entrance-curtain--bottom" aria-hidden="true"></div>
+
   <script src="./src/app.js"></script>
+  <script>
+    // Reveal homepage by opening shutters up and down
+    window.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        document.body.classList.add('curtains-opened');
+      }, 60);
+    });
+  </script>
 </body>
 </html>
 
