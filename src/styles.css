@@ -1290,7 +1290,7 @@ button.primary-checkout-btn:hover {
 .history-photo-horizon { background-image: url('./festival-history-montreux.jpg'); background-size: cover !important; background-position: center center !important; height: 290px !important; }
 .history-photo-analog  { background-image: url("./analog-dome-red-lasers.jpg") !important; background-size: cover !important; background-position: center center !important; }
 .history-photo-vinyl   { background-image: url('./vinyl-lawn-sunset-trees.jpg') !important; background-size: cover !important; background-position: center center !important; height: 290px !important; }
-.history-photo-vip     { background-position: 100% 100%; }
+.history-photo-vip     { background-image: url('./vip-cabanas-skydeck-dj.jpg') !important; background-size: cover !important; background-position: center 25% !important; height: 290px !important; }
 
 /* Clickable Stage Cards on Main Page */
 a.gallery-item {
@@ -3075,5 +3075,6 @@ img {
     grid-template-columns: 1fr !important;
   }
 }
+
 
 
