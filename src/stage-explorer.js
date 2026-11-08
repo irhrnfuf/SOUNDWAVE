@@ -18,7 +18,7 @@ const STAGE_TIER_CONFIG = {
       "Direct access to shade sails and misting towers"
     ],
     pinX: 280,
-    pinY: 260,
+    pinY: 275,
     zoneId: "zone-ga"
   },
   VIP: {
