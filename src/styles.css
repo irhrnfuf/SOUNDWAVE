@@ -1202,7 +1202,7 @@ button.primary-checkout-btn:hover {
 }
 
 .culture-photo-merch { background-position: 0% 0%; }
-.culture-photo-food  { background-image: url('./culinary-oasis-picnic.jpg'); background-size: cover; background-position: center 30%; }
+.culture-photo-food { background-image: url('./culinary-oasis-picnic.jpg'); background-size: cover; background-position: center top; height: 420px; }
 .culture-photo-art   { background-position: 0% 100%; }
 .culture-photo-eco   { background-position: 100% 100%; }
 
