@@ -262,17 +262,20 @@ function updateBomAndDomInspector() {
 
   bomOut.innerHTML =
     "<b>Viewport:</b> " + viewportW + "&times;" + viewportH + "px &bull; " +
-    "<b>Display:</b> " + screenW + "&times;" + screenH + "px &bull; " +
-    "<b>Locale:</b> " + browserLang + " (" + pageProtocol + ")";
+    "<b>Display:</b> " + screenW + "&times;" + screenH + "px<br />" +
+    "<b>Locale:</b> " + browserLang + " &bull; <b>Protocol:</b> " + pageProtocol.replace(":", "");
 
   const allSections = document.getElementsByTagName("section");
   const allTableRows = document.getElementsByTagName("tr");
+  const allButtons = document.getElementsByTagName("button");
+  const allLinks = document.getElementsByTagName("a");
   const allInputs = document.getElementsByTagName("input");
+  const interactiveTotal = allButtons.length + allLinks.length + allInputs.length;
 
   domOut.innerText =
     "DOM Audit: " + allSections.length + " Panels | " +
     allTableRows.length + " Table Rows | " +
-    allInputs.length + " Interactive Controls";
+    interactiveTotal + " Interactive Controls";
 }
 
 // 5. UNIT VI: Form Validation & Email Validation
@@ -948,4 +951,5 @@ function renderDirectOrdersTable() {
     )
     .join("");
 }
+
 
