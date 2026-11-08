@@ -51,8 +51,8 @@ const STAGE_TIER_CONFIG = {
       "Backstage artist hospitality compound & complimentary dining",
       "Private golf-cart shuttle between all 4 festival stages"
     ],
-    pinX: 145,
-    pinY: 58,
+    pinX: 77,
+    pinY: 48,
     zoneId: "zone-platinum"
   }
 };
