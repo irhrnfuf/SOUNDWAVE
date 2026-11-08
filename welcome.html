@@ -27,84 +27,16 @@
 
     <div class="tv-ambient-glow" aria-hidden="true"></div>
 
-    <!-- Retro 90s CRT Box TV Container (takes ~50vw on desktop, centered in dark room) -->
-    <div id="tv-unit" class="tv-unit" tabindex="0" role="button" aria-label="Click to power on retro TV and time-travel into SoundWave Archive">
-      <!-- Rabbit Ear Antenna -->
-      <div class="tv-antennas" aria-hidden="true">
-        <span class="antenna antenna--left"></span>
-        <span class="antenna antenna--right"></span>
-        <span class="antenna-base"></span>
+    <!-- Retro Pixel TV Unit (using authentic pixel CRT asset with pure black screen) -->
+    <div id="tv-unit" class="tv-unit" tabindex="0" role="button" aria-label="Click to power on retro TV and enter SoundWave">
+      <div class="tv-pixel-frame">
+        <img src="./assets/archive/pixel-tv-black.png" class="tv-pixel-img" alt="Retro Pixel TV" />
       </div>
 
-      <!-- Wooden / Molded Cabinet Housing -->
-      <div class="tv-cabinet">
-        <!-- Beveled CRT Screen Frame -->
-        <div class="tv-screen-bezel">
-          <!-- CRT Glass Screen with phosphor curve, scanlines & static -->
-          <div id="tv-screen" class="tv-screen">
-            <div class="tv-scanlines" aria-hidden="true"></div>
-            <div class="tv-static" aria-hidden="true"></div>
-            <div class="tv-phosphor-glitch" aria-hidden="true"></div>
-            
-            <!-- Default Broadcast Screen Content -->
-            <div id="tv-screen-content" class="tv-screen-content">
-              <span class="tv-ch-badge">CH 03 &bull; VCR/AUX</span>
-              <div class="tv-logo-pixel">SOUNDWAVE</div>
-              <div class="tv-edition-tag">ARCHIVE BROADCAST 1994&ndash;2026</div>
-              <div class="tv-prompt-pill">
-                <span class="tv-blink-dot">&bull;</span>
-                <span class="tv-prompt-text">[ CLICK TV TO TIME TRAVEL ]</span>
-              </div>
-            </div>
-
-            <!-- Real-Time Time Travel Hyperspace Vortex (Activates on Click) -->
-            <div id="tv-warp-tunnel" class="tv-warp-tunnel" aria-hidden="true">
-              <div class="warp-core"></div>
-              <div class="warp-rings">
-                <div class="warp-ring r1"></div>
-                <div class="warp-ring r2"></div>
-                <div class="warp-ring r3"></div>
-                <div class="warp-ring r4"></div>
-              </div>
-              <div class="warp-streaks"></div>
-              <div class="warp-years">
-                <span class="warp-year y2026">2026</span>
-                <span class="warp-year y2024">2024</span>
-                <span class="warp-year y2021">2021</span>
-                <span class="warp-year y2018">2018</span>
-                <span class="warp-year y2014">2014</span>
-              </div>
-            </div>
-
-            <div class="tv-vignette" aria-hidden="true"></div>
-          </div>
-        </div>
-
-        <!-- TV Control Panel: Channel dials, speaker slats, power led -->
-        <div class="tv-controls" aria-hidden="true">
-          <div class="tv-brand-plate">SW-CRT90</div>
-          <div class="tv-speaker-slats">
-            <span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <div class="tv-knob tv-knob--vhf">
-            <span class="knob-marker"></span>
-            <small>VHF</small>
-          </div>
-          <div class="tv-knob tv-knob--uhf">
-            <span class="knob-marker"></span>
-            <small>UHF</small>
-          </div>
-          <div class="tv-led-indicator">
-            <span id="tv-pwr-led" class="led-light"></span>
-            <small>PWR</small>
-          </div>
-        </div>
-      </div>
-      <!-- TV Legs / Base -->
-      <div class="tv-legs" aria-hidden="true">
-        <span class="tv-leg tv-leg--left"></span>
-        <span class="tv-leg tv-leg--right"></span>
+      <!-- Subtle Prompt Bar outside the TV screen -->
+      <div id="tv-hint-bar" class="tv-hint-bar">
+        <span class="tv-hint-dot"></span>
+        <span class="tv-hint-text">[ CLICK TV TO ENTER ]</span>
       </div>
     </div>
 
@@ -113,50 +45,69 @@
 
     <!-- Pixelated Hand & TV Remote Controller (Animates up from bottom-right on click) -->
     <div id="tv-remote-hand-wrapper" class="tv-remote-hand-wrapper" aria-hidden="true">
-      <svg class="pixel-hand-remote" viewBox="0 0 320 400" preserveAspectRatio="xMidYMax meet">
-        <!-- Pixelated Hand Holding Remote -->
-        <!-- Arm & Wrist -->
-        <path d="M 180,400 L 160,330 L 190,320 L 220,400 Z" fill="#cf916a" />
-        <path d="M 160,330 L 140,290 L 180,280 L 200,320 Z" fill="#e0a078" />
-        <!-- Remote Body (Charcoal pixelated 90s remote) -->
-        <rect x="70" y="80" width="130" height="230" rx="8" fill="#1b1c20" stroke="#101114" stroke-width="6" />
-        <rect x="80" y="90" width="110" height="45" rx="4" fill="#2a2c33" />
-        <!-- Infrared Transmitter Bulb -->
-        <circle cx="135" cy="74" r="7" fill="#dc3545" class="remote-ir-bulb" />
-        <circle cx="135" cy="74" r="14" fill="rgba(255, 42, 133, 0.4)" class="remote-ir-flash" />
-        <!-- Big Red Power Button -->
-        <rect id="remote-power-btn" x="90" y="100" width="28" height="26" rx="4" fill="#e53935" stroke="#900" stroke-width="2" class="remote-btn-active" />
-        <text x="96" y="118" font-family="monospace" font-size="12" fill="#fff" font-weight="bold">⏻</text>
-        <!-- Mute & TV/VCR Buttons -->
-        <rect x="126" y="100" width="26" height="12" rx="2" fill="#525760" />
-        <rect x="156" y="100" width="26" height="12" rx="2" fill="#525760" />
-        <rect x="126" y="116" width="56" height="10" rx="2" fill="#3b3e46" />
-        <!-- Numeric 1-9 Grid Buttons -->
-        <g fill="#424751" stroke="#25272d" stroke-width="1.5">
-          <rect x="90" y="145" width="22" height="18" rx="3" /><rect x="124" y="145" width="22" height="18" rx="3" /><rect x="158" y="145" width="22" height="18" rx="3" />
-          <rect x="90" y="170" width="22" height="18" rx="3" /><rect x="124" y="170" width="22" height="18" rx="3" /><rect x="158" y="170" width="22" height="18" rx="3" />
-          <rect x="90" y="195" width="22" height="18" rx="3" /><rect x="124" y="195" width="22" height="18" rx="3" /><rect x="158" y="195" width="22" height="18" rx="3" />
+      <svg class="pixel-hand-remote" viewBox="0 0 280 360" preserveAspectRatio="xMidYMax meet">
+        <!-- Hand Forearm & Wrist (Underneath remote) -->
+        <path d="M 180,360 L 155,270 L 215,245 L 260,360 Z" fill="#cf916a" stroke="#4a2612" stroke-width="3" />
+
+        <!-- Left Fingers wrapping around from behind the remote -->
+        <path d="M 52,105 C 38,105 36,125 52,125 Z" fill="#e0a078" stroke="#4a2612" stroke-width="3" />
+        <path d="M 52,132 C 36,132 34,152 52,152 Z" fill="#e0a078" stroke="#4a2612" stroke-width="3" />
+        <path d="M 52,159 C 38,159 36,179 52,179 Z" fill="#e0a078" stroke="#4a2612" stroke-width="3" />
+        <path d="M 52,186 C 42,186 40,204 52,204 Z" fill="#cf916a" stroke="#4a2612" stroke-width="3" />
+
+        <!-- REMOTE BODY -->
+        <rect x="52" y="42" width="112" height="225" rx="8" fill="#1e2024" stroke="#0e0f12" stroke-width="5" />
+        <rect x="60" y="52" width="96" height="205" rx="4" fill="#141518" />
+
+        <!-- Infrared LED Transmitter Bulb -->
+        <circle cx="108" cy="38" r="6" fill="#c62828" />
+        <circle cx="108" cy="38" r="14" fill="rgba(255, 42, 133, 0.45)" class="remote-ir-flash" />
+
+        <!-- Red Power Button -->
+        <rect id="remote-power-btn" x="70" y="62" width="28" height="24" rx="4" fill="#e53935" stroke="#900" stroke-width="1.5" />
+        <text x="77" y="78" font-family="monospace" font-size="11" fill="#fff" font-weight="bold">⏻</text>
+
+        <!-- Auxiliary Top Buttons (Mute / Source) -->
+        <rect x="106" y="62" width="20" height="10" rx="2" fill="#3e424c" />
+        <rect x="130" y="62" width="20" height="10" rx="2" fill="#3e424c" />
+        <rect x="106" y="76" width="44" height="10" rx="2" fill="#2d3038" />
+
+        <!-- Keypad Grid (3x3 numbers) -->
+        <g fill="#333740" stroke="#1d1e22" stroke-width="1">
+          <rect x="72" y="98" width="22" height="16" rx="2" /><rect x="98" y="98" width="22" height="16" rx="2" /><rect x="124" y="98" width="22" height="16" rx="2" />
+          <rect x="72" y="118" width="22" height="16" rx="2" /><rect x="98" y="118" width="22" height="16" rx="2" /><rect x="124" y="118" width="22" height="16" rx="2" />
+          <rect x="72" y="138" width="22" height="16" rx="2" /><rect x="98" y="138" width="22" height="16" rx="2" /><rect x="124" y="138" width="22" height="16" rx="2" />
         </g>
-        <!-- Directional Rocker & Volume/Channel Buttons -->
-        <rect x="90" y="225" width="40" height="24" rx="4" fill="#007acc" />
-        <text x="96" y="242" font-family="monospace" font-size="11" fill="#fff" font-weight="bold">VOL+</text>
-        <rect x="140" y="225" width="40" height="24" rx="4" fill="#007acc" />
-        <text x="146" y="242" font-family="monospace" font-size="11" fill="#fff" font-weight="bold">CH+</text>
-        <rect x="90" y="255" width="40" height="24" rx="4" fill="#007acc" />
-        <text x="96" y="272" font-family="monospace" font-size="11" fill="#fff" font-weight="bold">VOL-</text>
-        <rect x="140" y="255" width="40" height="24" rx="4" fill="#007acc" />
-        <text x="146" y="272" font-family="monospace" font-size="11" fill="#fff" font-weight="bold">CH-</text>
-        <!-- Brand label on remote -->
-        <text x="110" y="295" font-family="monospace" font-size="9" fill="#757984" letter-spacing="1">SOUNDWAVE</text>
-        <!-- Pixelated Thumb resting on red power button and pressing it -->
-        <!-- Thumb Knuckle & Tip -->
-        <path d="M 140,240 Q 115,160 106,128 Q 102,112 110,110 Q 120,110 128,135 Q 145,185 165,240 Z" fill="#e0a078" stroke="#9e6647" stroke-width="3" class="pixel-thumb-press" />
-        <!-- Palm & Fingers Wrapping Sides -->
-        <path d="M 195,140 Q 215,145 210,170 Q 200,185 185,180 Z" fill="#cf916a" stroke="#9e6647" stroke-width="2" />
-        <path d="M 195,175 Q 215,180 210,205 Q 200,220 185,215 Z" fill="#cf916a" stroke="#9e6647" stroke-width="2" />
-        <path d="M 190,210 Q 210,215 205,240 Q 195,255 180,250 Z" fill="#cf916a" stroke="#9e6647" stroke-width="2" />
+
+        <!-- Volume & Channel Rockers -->
+        <rect x="72" y="164" width="34" height="22" rx="3" fill="#007acc" />
+        <text x="76" y="179" font-family="monospace" font-size="9" fill="#fff" font-weight="bold">VOL</text>
+        <rect x="112" y="164" width="34" height="22" rx="3" fill="#007acc" />
+        <text x="119" y="179" font-family="monospace" font-size="9" fill="#fff" font-weight="bold">CH</text>
+
+        <!-- SoundWave Brand print on remote -->
+        <text x="82" y="240" font-family="monospace" font-size="8" fill="#5e626e" letter-spacing="1">SOUNDWAVE</text>
+
+        <!-- Palm / Right Side of Hand holding remote -->
+        <path d="M 164,185 Q 185,210 180,260 Q 170,285 145,285 L 145,260 Q 164,245 164,185 Z" fill="#cf916a" stroke="#4a2612" stroke-width="3" />
+
+        <!-- The Thumb: Natural human thumb resting directly over the red power button without piercing -->
+        <g class="pixel-thumb-press" id="thumb-group">
+          <!-- Thumb Body connecting from palm to tip -->
+          <path d="M 152,190 C 145,150 120,110 95,85 C 85,75 74,78 74,88 C 74,96 86,108 102,126 C 118,145 138,180 148,205 Z" fill="#e0a078" stroke="#4a2612" stroke-width="3" />
+          <!-- Thumb Knuckle Highlight / Shading -->
+          <path d="M 100,105 Q 108,118 118,124" stroke="#cf916a" stroke-width="3" stroke-linecap="round" fill="none" />
+          <!-- Thumb Fingernail -->
+          <ellipse cx="84" cy="84" rx="5" ry="6" transform="rotate(-30 84 84)" fill="#f7c5a8" stroke="#b2714c" stroke-width="1.5" />
+        </g>
       </svg>
     </div>
+
+    <!-- Direct Skip Option -->
+    <button id="tv-direct-skip" class="tv-direct-skip" type="button" aria-label="Skip retro TV intro">
+      SKIP INTRO &rarr;
+    </button>
+  </div>
 
     <!-- Quick Skip Anchor for direct accessibility -->
     <button id="tv-direct-skip" class="tv-direct-skip" aria-label="Skip intro to archive">Skip Intro &rarr;</button>

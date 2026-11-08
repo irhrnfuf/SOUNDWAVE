@@ -935,48 +935,53 @@ html, body {
   transition: opacity 0.5s ease, visibility 0.5s;
 }
 
-/* Up and Down Splitting Shutters (Start OFF-SCREEN so TV is 100% visible) */
+/* Up and Down Splitting Shutters (Matching Archive-to-Interface Transition) */
 .tv-shutter {
   position: fixed;
   left: 0;
   right: 0;
   height: 50.5vh;
-  background: #000000;
+  background: #141312;
   z-index: 10025;
   pointer-events: none;
-  transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+  transform: translateY(-101%); /* Start off-screen */
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 .tv-shutter--top {
   top: 0;
-  transform: translateY(-101%); /* Off top */
-  border-bottom: 3px solid #ff2a85;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95);
+  transform: translateY(-101%);
+  border-bottom: 2px solid #ff2a85;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .tv-shutter--bottom {
   bottom: 0;
-  transform: translateY(101%); /* Off bottom */
-  border-top: 3px solid #00f0ff;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.95);
-}
-
-/* When closing shut at peak warp: meeting at middle */
-.tv-gateway.shutters-closing .tv-shutter--top {
-  transform: translateY(0);
-}
-
-.tv-gateway.shutters-closing .tv-shutter--bottom {
-  transform: translateY(0);
-}
-
-/* When splitting open to reveal Scene 01: parting up and down */
-.tv-gateway.shutter-open .tv-shutter--top {
-  transform: translateY(-101%);
-}
-
-.tv-gateway.shutter-open .tv-shutter--bottom {
   transform: translateY(101%);
+  border-top: 2px solid #00f0ff;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Shutters closed seamlessly at center seam when screen is fully black */
+.tv-gateway.shutters-closed .tv-shutter--top {
+  transform: translateY(0);
+  transition: none;
+}
+
+.tv-gateway.shutters-closed .tv-shutter--bottom {
+  transform: translateY(0);
+  transition: none;
+}
+
+/* Split open up and down revealing Scene 01 ("The Signal") */
+.tv-gateway.shutters-splitting .tv-shutter--top {
+  transform: translateY(-101%);
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.tv-gateway.shutters-splitting .tv-shutter--bottom {
+  transform: translateY(101%);
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 /* Ambient glow in room behind TV */
@@ -985,535 +990,92 @@ html, body {
   width: 70vw;
   height: 70vw;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, rgba(255, 42, 133, 0.05) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(255, 42, 133, 0.04) 45%, transparent 70%);
   pointer-events: none;
   filter: blur(40px);
 }
 
-/* TV Unit Container - takes up ~50vw on desktop, centered & prominent */
+/* TV Unit Container - Authentic Pixel CRT TV */
 .tv-unit {
   position: relative;
-  width: clamp(380px, 52vw, 680px);
+  width: clamp(340px, 48vw, 620px);
   max-height: 85vh;
   cursor: pointer;
   outline: none;
   z-index: 10005;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
-  transform-origin: center center;
+  transform-origin: 50% 50.2%; /* Center of the CRT black screen */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
 }
 
 .tv-unit:hover {
-  transform: scale(1.02);
-  filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.25));
+  transform: scale(1.025);
+  filter: drop-shadow(0 0 35px rgba(0, 240, 255, 0.3));
 }
 
 .tv-unit:focus-visible {
-  filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.7));
+  filter: drop-shadow(0 0 35px rgba(0, 240, 255, 0.7));
 }
 
-/* REAL-TIME TIME-TRAVEL ZOOM: Smooth 2.8s steady camera glide into the CRT screen */
+.tv-pixel-frame {
+  width: 100%;
+  position: relative;
+}
+
+.tv-pixel-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.95));
+}
+
+/* STEADY REAL-TIME ZOOM INTO CRT BLACK SCREEN (No time-travel vortex) */
 .tv-unit.tv-zooming {
-  transform: scale(10.5) !important;
-  transition: transform 2.8s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+  transform: scale(8.5) !important;
+  transition: transform 2.2s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
 }
 
-/* Rabbit Ear Antennas */
-.tv-antennas {
-  position: absolute;
-  top: -48px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140px;
-  height: 52px;
-  pointer-events: none;
-}
-
-.antenna {
-  position: absolute;
-  bottom: 0;
-  width: 4px;
-  height: 85px;
-  background: linear-gradient(180deg, #d6d9e0, #616670);
-  border-radius: 2px;
-  transform-origin: bottom center;
-}
-
-.antenna::after {
-  content: "";
-  position: absolute;
-  top: -7px;
-  left: -4px;
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle at 35% 35%, #fff, #777);
-  border-radius: 50%;
-}
-
-.antenna--left {
-  left: 55px;
-  transform: rotate(-38deg);
-}
-
-.antenna--right {
-  right: 55px;
-  transform: rotate(38deg);
-}
-
-.antenna-base {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 34px;
-  height: 13px;
-  background: #2b1f18;
-  border-radius: 6px 6px 0 0;
-  border: 2px solid #140d0a;
-}
-
-/* 90s CRT Box TV Wooden Cabinet */
-.tv-cabinet {
-  position: relative;
-  background: linear-gradient(180deg, #5c3a21 0%, #422916 45%, #2a180b 100%);
-  border: 8px solid #22140a;
-  border-radius: 26px;
-  box-shadow:
-    inset 0 2px 6px rgba(255, 255, 255, 0.25),
-    inset 0 -6px 12px rgba(0, 0, 0, 0.7),
-    0 25px 60px rgba(0, 0, 0, 0.95),
-    0 0 35px rgba(0, 240, 255, 0.15);
-  display: grid;
-  grid-template-columns: 1fr 115px;
-  gap: 16px;
-  padding: 22px 20px 24px 24px;
-}
-
-/* TV Screen Beveled Outer Frame */
-.tv-screen-bezel {
-  background: #18191c;
-  border: 10px solid #2b2e36;
-  border-radius: 20px;
-  padding: 10px;
-  box-shadow:
-    inset 0 4px 10px rgba(0, 0, 0, 0.9),
-    0 2px 4px rgba(255, 255, 255, 0.1);
-}
-
-/* CRT Curved Glass Phosphor Screen */
-.tv-screen {
-  position: relative;
-  background: #060b11;
-  border-radius: 14px;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 0 45px rgba(0, 240, 255, 0.3);
-}
-
-/* CRT Scanlines */
-.tv-scanlines {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.45) 0px,
-    rgba(0, 0, 0, 0.45) 2px,
-    transparent 2px,
-    transparent 4px
-  );
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* Subtle Animated Static Noise */
-.tv-static {
-  position: absolute;
-  inset: 0;
-  opacity: 0.12;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='0.95' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>");
-  animation: staticJitter 0.12s infinite;
-  pointer-events: none;
-  z-index: 2;
-}
-
-@keyframes staticJitter {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(-2px, 3px); }
-  50% { transform: translate(3px, -2px); }
-  75% { transform: translate(-1px, -3px); }
-  100% { transform: translate(2px, 1px); }
-}
-
-.tv-vignette {
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.85) 100%);
-  pointer-events: none;
-  z-index: 4;
-}
-
-/* TV Screen Default Content */
-.tv-screen-content {
-  position: relative;
-  z-index: 5;
-  text-align: center;
-  padding: 1.5rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  height: 85%;
-  transition: opacity 0.4s ease;
-}
-
-.tv-ch-badge {
-  font-family: var(--sw-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #00ff66;
-  text-shadow: 0 0 6px rgba(0, 255, 102, 0.8);
-  letter-spacing: 0.18em;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-}
-
-.tv-logo-pixel {
-  font-family: var(--sw-cond);
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  line-height: 0.95;
-  letter-spacing: 0.08em;
-  color: #fffdf7;
-  text-shadow:
-    3px 0 0 rgba(255, 42, 133, 0.8),
-    -3px 0 0 rgba(0, 240, 255, 0.8),
-    0 0 15px rgba(255, 255, 255, 0.5);
-  animation: textGlitch 3s infinite alternate;
-}
-
-@keyframes textGlitch {
-  0%, 92% {
-    transform: none;
-    text-shadow:
-      3px 0 0 rgba(255, 42, 133, 0.8),
-      -3px 0 0 rgba(0, 240, 255, 0.8),
-      0 0 15px rgba(255, 255, 255, 0.5);
-  }
-  94% {
-    transform: skewX(-4deg);
-    text-shadow:
-      5px 0 0 rgba(255, 42, 133, 0.9),
-      -5px 0 0 rgba(0, 240, 255, 0.9);
-  }
-  96% {
-    transform: skewX(3deg);
-    text-shadow:
-      -4px 0 0 rgba(255, 42, 133, 0.9),
-      4px 0 0 rgba(0, 240, 255, 0.9);
-  }
-  98%, 100% {
-    transform: none;
-    text-shadow:
-      3px 0 0 rgba(255, 42, 133, 0.8),
-      -3px 0 0 rgba(0, 240, 255, 0.8);
-  }
-}
-
-.tv-edition-tag {
-  font-family: var(--sw-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  color: #f7a8b8;
-  text-transform: uppercase;
-}
-
-.tv-prompt-pill {
+/* Outside Prompt Hint Bar */
+.tv-hint-bar {
+  margin-top: 1.25rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(229, 57, 53, 0.25);
-  border: 1px solid #e53935;
-  color: #fff;
+  gap: 0.55rem;
+  padding: 0.45rem 1.15rem;
+  background: rgba(20, 18, 16, 0.85);
+  border: 1px solid rgba(255, 42, 133, 0.4);
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(255, 42, 133, 0.25);
+  transition: opacity 0.3s ease;
+}
+
+.tv-hint-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff2a85;
+  box-shadow: 0 0 8px #ff2a85;
+  animation: ledBlink 1.4s infinite;
+}
+
+.tv-hint-text {
   font-family: var(--sw-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  box-shadow: 0 0 12px rgba(229, 57, 53, 0.6);
-  animation: pulsePill 1.4s infinite ease-in-out;
-}
-
-@keyframes pulsePill {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(229, 57, 53, 0.5); }
-  50% { transform: scale(1.05); box-shadow: 0 0 18px rgba(229, 57, 53, 0.9); }
-}
-
-.tv-blink-dot {
-  color: #ff2a85;
-  font-size: 1rem;
-  line-height: 1;
-}
-
-/* ==========================================================================
-   TIME TRAVEL HYPERSPACE VORTEX (Activates inside CRT on Remote Click)
-   ========================================================================== */
-
-.tv-warp-tunnel {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  overflow: hidden;
-  background: radial-gradient(circle at center, #ffffff 0%, #00f0ff 25%, #7928ca 55%, #05030a 90%);
-  z-index: 5;
-}
-
-.tv-screen.warp-active .tv-warp-tunnel {
-  opacity: 1;
-}
-
-.tv-screen.warp-active .tv-screen-content {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Concentric Expanding Warp Rings */
-.warp-rings {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.warp-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 4px solid transparent;
-  box-shadow: 0 0 25px currentColor, inset 0 0 15px currentColor;
-  opacity: 0;
-}
-
-.tv-screen.warp-active .warp-ring.r1 {
-  border-color: #00f0ff;
-  color: #00f0ff;
-  animation: ringPulse 1.4s infinite cubic-bezier(0.2, 0.8, 0.4, 1);
-  animation-delay: 0s;
-}
-
-.tv-screen.warp-active .warp-ring.r2 {
-  border-color: #ff2a85;
-  color: #ff2a85;
-  animation: ringPulse 1.4s infinite cubic-bezier(0.2, 0.8, 0.4, 1);
-  animation-delay: 0.35s;
-}
-
-.tv-screen.warp-active .warp-ring.r3 {
-  border-color: #f1cf65;
-  color: #f1cf65;
-  animation: ringPulse 1.4s infinite cubic-bezier(0.2, 0.8, 0.4, 1);
-  animation-delay: 0.7s;
-}
-
-.tv-screen.warp-active .warp-ring.r4 {
-  border-color: #00ff66;
-  color: #00ff66;
-  animation: ringPulse 1.4s infinite cubic-bezier(0.2, 0.8, 0.4, 1);
-  animation-delay: 1.05s;
-}
-
-@keyframes ringPulse {
-  0% {
-    width: 10px;
-    height: 10px;
-    opacity: 1;
-    transform: rotate(0deg);
-  }
-  100% {
-    width: 700px;
-    height: 700px;
-    opacity: 0;
-    transform: rotate(180deg);
-  }
-}
-
-/* Streaking Hyperspace Starfield */
-.warp-streaks {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at center, transparent 25%, rgba(0, 0, 0, 0.5) 80%),
-    repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.45) 0deg 3deg, transparent 3deg 15deg);
-  animation: spinStreaks 1.6s infinite linear;
-  opacity: 0.65;
-  mix-blend-mode: overlay;
-}
-
-@keyframes spinStreaks {
-  from { transform: rotate(0deg) scale(1); }
-  to { transform: rotate(360deg) scale(1.5); }
-}
-
-/* Floating Festival Milestone Years Traveling Past */
-.warp-years {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.warp-year {
-  position: absolute;
-  font-family: var(--sw-cond);
-  font-size: 4rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.16em;
   color: #fff;
-  text-shadow: 0 0 15px #00f0ff, 0 0 30px #ff2a85;
+}
+
+.tv-unit.tv-zooming .tv-hint-bar,
+.tv-gateway.fading-hint .tv-hint-bar {
   opacity: 0;
-}
-
-.tv-screen.warp-active .warp-year.y2026 { animation: yearFlyby 2.2s ease-in 0.2s forwards; }
-.tv-screen.warp-active .warp-year.y2024 { animation: yearFlyby 2.2s ease-in 0.7s forwards; }
-.tv-screen.warp-active .warp-year.y2021 { animation: yearFlyby 2.2s ease-in 1.2s forwards; }
-.tv-screen.warp-active .warp-year.y2018 { animation: yearFlyby 2.2s ease-in 1.7s forwards; }
-.tv-screen.warp-active .warp-year.y2014 { animation: yearFlyby 2.2s ease-in 2.2s forwards; }
-
-@keyframes yearFlyby {
-  0% { transform: scale(0.1); opacity: 0; }
-  25% { opacity: 0.95; }
-  85% { opacity: 0.95; }
-  100% { transform: scale(5.5); opacity: 0; }
-}
-
-/* TV Right Control Panel */
-.tv-controls {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background: #1f140c;
-  border: 4px solid #140d0a;
-  border-radius: 12px;
-  padding: 12px 8px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.tv-brand-plate {
-  font-family: var(--sw-mono);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #c99363;
-  border: 1px solid #5a3c22;
-  padding: 2px 6px;
-  border-radius: 2px;
-  background: #110905;
-}
-
-.tv-speaker-slats {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  width: 75%;
-}
-
-.tv-speaker-slats span {
-  height: 2px;
-  background: #0c0805;
-  border-radius: 1px;
-}
-
-.tv-knob {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #424751, #1e2025 70%);
-  border: 3px solid #121316;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.knob-marker {
-  position: absolute;
-  top: 4px;
-  width: 3px;
-  height: 10px;
-  background: #fff;
-  border-radius: 1px;
-}
-
-.tv-knob small {
-  position: absolute;
-  bottom: -16px;
-  font-family: var(--sw-mono);
-  font-size: 0.5rem;
-  font-weight: 700;
-  color: #9c8470;
-}
-
-.tv-led-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  margin-top: 10px;
-}
-
-.led-light {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ff2a85;
-  box-shadow: 0 0 8px #ff2a85, 0 0 16px rgba(255, 42, 133, 0.8);
-  animation: ledBlink 1.8s infinite;
-  transition: background 0.3s, box-shadow 0.3s;
-}
-
-@keyframes ledBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
-.tv-led-indicator small {
-  font-family: var(--sw-mono);
-  font-size: 0.48rem;
-  font-weight: 700;
-  color: #c99363;
-}
-
-/* TV Legs */
-.tv-legs {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 60px;
-  margin-top: -6px;
-}
-
-.tv-leg {
-  width: 18px;
-  height: 24px;
-  background: #190e07;
-  transform: skewX(-14deg);
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
-}
-
-.tv-leg--right {
-  transform: skewX(14deg);
+  pointer-events: none;
 }
 
 /* Infrared Glowing Laser Beam from Remote to TV */
@@ -1539,36 +1101,36 @@ html, body {
   filter: blur(10px);
 }
 
-/* Pixelated Hand & TV Remote Wrapper (Bottom-right popup on click in real-time) */
+/* Pixelated Hand & TV Remote Wrapper (Smooth natural popup on click) */
 .tv-remote-hand-wrapper {
   position: fixed;
   bottom: -400px;
-  right: 5vw;
-  width: 320px;
-  height: 400px;
+  right: 6vw;
+  width: 300px;
+  height: 380px;
   z-index: 10015;
   pointer-events: none;
-  transition: transform 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
+  transition: transform 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
 }
 
 .tv-remote-hand-wrapper.active {
-  transform: translateY(-380px);
+  transform: translateY(-360px);
 }
 
 .tv-remote-hand-wrapper.retreat {
-  transform: translateY(80px);
+  transform: translateY(90px);
   opacity: 0;
 }
 
 .pixel-hand-remote {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.95));
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.95));
 }
 
 .remote-ir-flash {
   opacity: 0;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.12s ease;
 }
 
 .remote-ir-flash.firing {
@@ -1576,12 +1138,21 @@ html, body {
 }
 
 .pixel-thumb-press {
-  transform-origin: 140px 240px;
-  transition: transform 0.15s ease;
+  transform-origin: 145px 175px;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.4, 1);
 }
 
 .pixel-thumb-press.pressed {
-  transform: translateY(8px) scale(0.96);
+  transform: translate(-3px, 4px) scale(0.97);
+}
+
+#remote-power-btn {
+  transition: transform 0.12s ease, fill 0.12s ease;
+}
+
+#remote-power-btn.pressed {
+  transform: translateY(2px);
+  fill: #b71c1c;
 }
 
 /* Direct Skip Button for Keyboard / Screen Readers */

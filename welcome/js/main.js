@@ -741,8 +741,6 @@ function playWarpDrone() {
 function setupTvGateway() {
   const gateway = document.getElementById('tv-gateway');
   const tvUnit = document.getElementById('tv-unit');
-  const tvScreen = document.getElementById('tv-screen');
-  const pwrLed = document.getElementById('tv-pwr-led');
   const handWrapper = document.getElementById('tv-remote-hand-wrapper');
   const thumb = document.querySelector('.pixel-thumb-press');
   const irFlash = document.querySelector('.remote-ir-flash');
@@ -765,63 +763,56 @@ function setupTvGateway() {
     // Wake audio context
     initAudio();
 
-    // STEP 1: Hand & Remote pops up smoothly from bottom-right (0ms -> 700ms)
+    // Fade the hint prompt pill
+    gateway.classList.add('fading-hint');
+
+    // STEP 1: Hand & Remote pops up smoothly from bottom-right (0ms -> 650ms)
     if (handWrapper) {
       handWrapper.classList.add('active');
     }
 
-    // STEP 2: Thumb reaches and presses red power button (750ms -> 1100ms)
+    // STEP 2: Natural Thumb reaches and presses red power button (700ms -> 1050ms)
     setTimeout(() => {
+      const pwrBtn = document.getElementById('remote-power-btn');
       if (thumb) thumb.classList.add('pressed');
+      if (pwrBtn) pwrBtn.classList.add('pressed');
       if (irFlash) irFlash.classList.add('firing');
       if (irBeam) irBeam.classList.add('active');
 
-      // Play 8-bit remote button click chirp & TV ignition
+      // Play 8-bit remote button click chirp
       playTvPowerSound();
 
       setTimeout(() => {
         if (thumb) thumb.classList.remove('pressed');
+        if (pwrBtn) pwrBtn.classList.remove('pressed');
         if (irFlash) irFlash.classList.remove('firing');
         if (irBeam) irBeam.classList.remove('active');
       }, 350);
-    }, 750);
+    }, 700);
 
-    // STEP 3: TV responds — LED ignites, CRT screen activates time-travel vortex (1150ms)
-    setTimeout(() => {
-      if (pwrLed) {
-        pwrLed.style.background = '#00ff66';
-        pwrLed.style.boxShadow = '0 0 16px #00ff66, 0 0 30px #00ff66';
-      }
-      if (tvScreen) {
-        tvScreen.classList.add('warp-active');
-      }
-      // Start rising time-travel harmonic frequency
-      playWarpDrone();
-    }, 1150);
-
-    // STEP 4: Camera zooms in steadily into the CRT screen in real time over 2.8s (1450ms)
+    // STEP 3: Hand retreats downward and TV begins steady real-time camera zoom into black screen (1100ms)
     setTimeout(() => {
       if (handWrapper) handWrapper.classList.add('retreat');
       tvUnit.classList.add('tv-zooming');
-    }, 1450);
+    }, 1100);
 
-    // STEP 5: Peak immersion reached inside vortex — Screen splits up and down! (4250ms)
+    // STEP 4: TV screen fills viewport in pure seamless blackness (at ~3300ms, zoom 2.2s complete)
+    // Snap the top and bottom shutters to the center seam
     setTimeout(() => {
-      // First close shutters to center seam
-      gateway.classList.add('shutters-closing');
+      gateway.classList.add('shutters-closed');
 
+      // STEP 5: Split the shutters open up and down (matching the archive-to-interface transition)
       setTimeout(() => {
-        // Then split them apart up and down!
-        gateway.classList.remove('shutters-closing');
-        gateway.classList.add('shutter-open');
-        playSubtlePulse(65, 0.6); // deep sub-bass portal thump
-      }, 250);
-    }, 4250);
+        gateway.classList.remove('shutters-closed');
+        gateway.classList.add('shutters-splitting');
+        playSubtlePulse(60, 0.5); // Deep bass room resonance
+      }, 150);
+    }, 3300);
 
-    // STEP 6: Complete transition into Scene 01 (5100ms)
+    // STEP 6: Complete transition into Scene 01 (4300ms)
     setTimeout(() => {
       dismissGateway();
-    }, 5100);
+    }, 4300);
   }
 
   // Click & Enter / Space Key triggers on the TV
