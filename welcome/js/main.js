@@ -664,12 +664,12 @@ function setupEnterTransition() {
   }
 }
 
-// --- 8-BIT RETRO TV SYNTHESIS SOUNDS ---
+// --- 8-BIT RETRO TV & TIME TRAVEL SYNTHESIS SOUNDS ---
 function playTvPowerSound() {
   if (!state.audioCtx) return;
   try {
     const ctx = state.audioCtx;
-    // Retro 8-bit beep chime: short high blip into resonant CRT whine
+    // Retro 8-bit click / power blip
     const osc1 = ctx.createOscillator();
     const gain1 = ctx.createGain();
     osc1.type = 'square';
@@ -685,23 +685,55 @@ function playTvPowerSound() {
     osc1.start();
     osc1.stop(ctx.currentTime + 0.3);
 
-    // High frequency phosphor degauss whine (15.7 kHz TV hum sensation simulated at 2400Hz)
+    // Phosphor screen ignition degauss crackle
     const osc2 = ctx.createOscillator();
     const gain2 = ctx.createGain();
-    osc2.type = 'sine';
-    osc2.frequency.setValueAtTime(180, ctx.currentTime + 0.15);
-    osc2.frequency.exponentialRampToValueAtTime(1400, ctx.currentTime + 0.65);
+    osc2.type = 'triangle';
+    osc2.frequency.setValueAtTime(120, ctx.currentTime + 0.05);
+    osc2.frequency.exponentialRampToValueAtTime(480, ctx.currentTime + 0.35);
 
-    gain2.gain.setValueAtTime(0.001, ctx.currentTime + 0.15);
-    gain2.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 0.35);
-    gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.75);
+    gain2.gain.setValueAtTime(0.001, ctx.currentTime + 0.05);
+    gain2.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 0.15);
+    gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
 
     osc2.connect(gain2);
     gain2.connect(ctx.destination);
-    osc2.start(ctx.currentTime + 0.15);
-    osc2.stop(ctx.currentTime + 0.75);
+    osc2.start(ctx.currentTime + 0.05);
+    osc2.stop(ctx.currentTime + 0.45);
   } catch (e) {
-    console.warn("TV sound synthesis error:", e);
+    console.warn("TV power sound error:", e);
+  }
+}
+
+function playWarpDrone() {
+  if (!state.audioCtx) return;
+  try {
+    const ctx = state.audioCtx;
+    // Resonant time-travel harmonic frequency sweep building over 2.8 seconds
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(80, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(640, ctx.currentTime + 2.8);
+
+    // Lowpass filter sweep for warm sci-fi vortex sound
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(250, ctx.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(1800, ctx.currentTime + 2.5);
+
+    gain.gain.setValueAtTime(0.001, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.09, ctx.currentTime + 1.2);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.9);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 3.0);
+  } catch (e) {
+    console.warn("Warp drone audio error:", e);
   }
 }
 
@@ -709,9 +741,12 @@ function playTvPowerSound() {
 function setupTvGateway() {
   const gateway = document.getElementById('tv-gateway');
   const tvUnit = document.getElementById('tv-unit');
+  const tvScreen = document.getElementById('tv-screen');
+  const pwrLed = document.getElementById('tv-pwr-led');
   const handWrapper = document.getElementById('tv-remote-hand-wrapper');
   const thumb = document.querySelector('.pixel-thumb-press');
   const irFlash = document.querySelector('.remote-ir-flash');
+  const irBeam = document.getElementById('ir-beam-ray');
   const skipBtn = document.getElementById('tv-direct-skip');
 
   if (!gateway || !tvUnit) return;
@@ -729,40 +764,64 @@ function setupTvGateway() {
 
     // Wake audio context
     initAudio();
-    playTvPowerSound();
 
-    // Step 1: Pixel hand & remote pops in from bottom-right
+    // STEP 1: Hand & Remote pops up smoothly from bottom-right (0ms -> 700ms)
     if (handWrapper) {
       handWrapper.classList.add('active');
     }
 
-    // Step 2: Thumb clicks red power button (infrared flash)
+    // STEP 2: Thumb reaches and presses red power button (750ms -> 1100ms)
     setTimeout(() => {
       if (thumb) thumb.classList.add('pressed');
       if (irFlash) irFlash.classList.add('firing');
+      if (irBeam) irBeam.classList.add('active');
+
+      // Play 8-bit remote button click chirp & TV ignition
+      playTvPowerSound();
 
       setTimeout(() => {
         if (thumb) thumb.classList.remove('pressed');
         if (irFlash) irFlash.classList.remove('firing');
-      }, 180);
-    }, 280);
+        if (irBeam) irBeam.classList.remove('active');
+      }, 350);
+    }, 750);
 
-    // Step 3: Fast zoom deep into the TV screen
+    // STEP 3: TV responds — LED ignites, CRT screen activates time-travel vortex (1150ms)
     setTimeout(() => {
+      if (pwrLed) {
+        pwrLed.style.background = '#00ff66';
+        pwrLed.style.boxShadow = '0 0 16px #00ff66, 0 0 30px #00ff66';
+      }
+      if (tvScreen) {
+        tvScreen.classList.add('warp-active');
+      }
+      // Start rising time-travel harmonic frequency
+      playWarpDrone();
+    }, 1150);
+
+    // STEP 4: Camera zooms in steadily into the CRT screen in real time over 2.8s (1450ms)
+    setTimeout(() => {
+      if (handWrapper) handWrapper.classList.add('retreat');
       tvUnit.classList.add('tv-zooming');
-    }, 450);
+    }, 1450);
 
-    // Step 4: TV screen divides into two (up and down shutter split wipe)
+    // STEP 5: Peak immersion reached inside vortex — Screen splits up and down! (4250ms)
     setTimeout(() => {
-      gateway.classList.add('shutter-open');
-    }, 850);
+      // First close shutters to center seam
+      gateway.classList.add('shutters-closing');
 
-    // Step 5: Full transition into Scene 01 (The Signal)
+      setTimeout(() => {
+        // Then split them apart up and down!
+        gateway.classList.remove('shutters-closing');
+        gateway.classList.add('shutter-open');
+        playSubtlePulse(65, 0.6); // deep sub-bass portal thump
+      }, 250);
+    }, 4250);
+
+    // STEP 6: Complete transition into Scene 01 (5100ms)
     setTimeout(() => {
       dismissGateway();
-      // Smooth pulse to celebrate entrance
-      playSubtlePulse(88, 0.4);
-    }, 1450);
+    }, 5100);
   }
 
   // Click & Enter / Space Key triggers on the TV

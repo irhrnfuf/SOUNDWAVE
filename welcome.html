@@ -21,14 +21,14 @@
        RETRO CRT TV GATEWAY & SHUTTER PORTAL OVERLAY
        ====================================================================== -->
   <div id="tv-gateway" class="tv-gateway" role="dialog" aria-modal="true" aria-label="Interactive SoundWave TV Portal">
-    <!-- Top & Bottom splitting shutter curtains for the TV screen exit wipe -->
-    <div class="tv-shutter tv-shutter--top" aria-hidden="true"></div>
-    <div class="tv-shutter tv-shutter--bottom" aria-hidden="true"></div>
+    <!-- Top & Bottom splitting shutter curtains for the TV screen exit wipe (start off-screen) -->
+    <div id="tv-shutter-top" class="tv-shutter tv-shutter--top" aria-hidden="true"></div>
+    <div id="tv-shutter-bottom" class="tv-shutter tv-shutter--bottom" aria-hidden="true"></div>
 
     <div class="tv-ambient-glow" aria-hidden="true"></div>
 
-    <!-- Retro 90s CRT Box TV Container (takes ~50vw on desktop) -->
-    <div id="tv-unit" class="tv-unit" tabindex="0" role="button" aria-label="Click to power on retro TV and enter SoundWave Archive">
+    <!-- Retro 90s CRT Box TV Container (takes ~50vw on desktop, centered in dark room) -->
+    <div id="tv-unit" class="tv-unit" tabindex="0" role="button" aria-label="Click to power on retro TV and time-travel into SoundWave Archive">
       <!-- Rabbit Ear Antenna -->
       <div class="tv-antennas" aria-hidden="true">
         <span class="antenna antenna--left"></span>
@@ -41,20 +41,41 @@
         <!-- Beveled CRT Screen Frame -->
         <div class="tv-screen-bezel">
           <!-- CRT Glass Screen with phosphor curve, scanlines & static -->
-          <div class="tv-screen">
+          <div id="tv-screen" class="tv-screen">
             <div class="tv-scanlines" aria-hidden="true"></div>
             <div class="tv-static" aria-hidden="true"></div>
             <div class="tv-phosphor-glitch" aria-hidden="true"></div>
             
-            <div class="tv-screen-content">
+            <!-- Default Broadcast Screen Content -->
+            <div id="tv-screen-content" class="tv-screen-content">
               <span class="tv-ch-badge">CH 03 &bull; VCR/AUX</span>
               <div class="tv-logo-pixel">SOUNDWAVE</div>
               <div class="tv-edition-tag">ARCHIVE BROADCAST 1994&ndash;2026</div>
               <div class="tv-prompt-pill">
                 <span class="tv-blink-dot">&bull;</span>
-                <span class="tv-prompt-text">[ CLICK SCREEN TO POWER ON ]</span>
+                <span class="tv-prompt-text">[ CLICK TV TO TIME TRAVEL ]</span>
               </div>
             </div>
+
+            <!-- Real-Time Time Travel Hyperspace Vortex (Activates on Click) -->
+            <div id="tv-warp-tunnel" class="tv-warp-tunnel" aria-hidden="true">
+              <div class="warp-core"></div>
+              <div class="warp-rings">
+                <div class="warp-ring r1"></div>
+                <div class="warp-ring r2"></div>
+                <div class="warp-ring r3"></div>
+                <div class="warp-ring r4"></div>
+              </div>
+              <div class="warp-streaks"></div>
+              <div class="warp-years">
+                <span class="warp-year y2026">2026</span>
+                <span class="warp-year y2024">2024</span>
+                <span class="warp-year y2021">2021</span>
+                <span class="warp-year y2018">2018</span>
+                <span class="warp-year y2014">2014</span>
+              </div>
+            </div>
+
             <div class="tv-vignette" aria-hidden="true"></div>
           </div>
         </div>
@@ -75,7 +96,7 @@
             <small>UHF</small>
           </div>
           <div class="tv-led-indicator">
-            <span class="led-light"></span>
+            <span id="tv-pwr-led" class="led-light"></span>
             <small>PWR</small>
           </div>
         </div>
@@ -87,7 +108,10 @@
       </div>
     </div>
 
-    <!-- Pixelated Hand & TV Remote Controller (Animates in from bottom-right on click) -->
+    <!-- Infrared Glowing Beam Ray connecting remote to TV -->
+    <div id="ir-beam-ray" class="ir-beam-ray" aria-hidden="true"></div>
+
+    <!-- Pixelated Hand & TV Remote Controller (Animates up from bottom-right on click) -->
     <div id="tv-remote-hand-wrapper" class="tv-remote-hand-wrapper" aria-hidden="true">
       <svg class="pixel-hand-remote" viewBox="0 0 320 400" preserveAspectRatio="xMidYMax meet">
         <!-- Pixelated Hand Holding Remote -->
