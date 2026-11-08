@@ -624,7 +624,7 @@ main.app-workspace {
 .gallery-item img {
   display: block;
   width: 100%;
-  height: 155px;
+  height: 320px;
   object-fit: cover;
   opacity: 0.75; /* Unit V: Image Opacity */
   transition: opacity 0.25s ease, transform 0.3s ease;
@@ -1278,7 +1278,7 @@ button.primary-checkout-btn:hover {
 /* 4 Generated Archival Stage History Photos (2x2 Grid: stage-history-photos.jpg) */
 .stage-history-photo {
   width: 100%;
-  height: 290px;
+  height: 320px;
   background-image: url("./stage-history-photos.jpg");
   background-size: 200% 200%;
   background-repeat: no-repeat;
@@ -1287,10 +1287,10 @@ button.primary-checkout-btn:hover {
   box-shadow: 6px 6px 0px #111111;
 }
 
-.history-photo-horizon { background-image: url('./festival-history-montreux.jpg'); background-size: cover !important; background-position: center center !important; height: 290px !important; }
+.history-photo-horizon { background-image: url('./festival-history-montreux.jpg'); background-size: cover !important; background-position: center center !important; height: 320px !important; }
 .history-photo-analog  { background-image: url("./analog-dome-red-lasers.jpg") !important; background-size: cover !important; background-position: center center !important; }
-.history-photo-vinyl   { background-image: url('./vinyl-lawn-sunset-trees.jpg') !important; background-size: cover !important; background-position: center center !important; height: 290px !important; }
-.history-photo-vip     { background-image: url('./vip-cabanas-skydeck-dj.jpg') !important; background-size: cover !important; background-position: center 25% !important; height: 290px !important; }
+.history-photo-vinyl   { background-image: url('./vinyl-lawn-sunset-trees.jpg') !important; background-size: cover !important; background-position: center center !important; height: 320px !important; }
+.history-photo-vip     { background-image: url('./vip-cabanas-skydeck-dj.jpg') !important; background-size: cover !important; background-position: center 25% !important; height: 320px !important; }
 
 /* Clickable Stage Cards on Main Page */
 a.gallery-item {
@@ -3075,6 +3075,7 @@ img {
     grid-template-columns: 1fr !important;
   }
 }
+
 
 
 
