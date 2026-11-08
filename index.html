@@ -8,6 +8,16 @@
   <meta name="author" content="Johan Sanju" />
   <title>SoundWave 2026 &#9835; | An Invitation to Music, Art &amp; Whimsy</title>
 
+  <!-- Living Archive Session Gate -->
+  <script>
+    try {
+      var q = new URLSearchParams(location.search);
+      if (!q.has('skip') && !sessionStorage.getItem('sw_archive_seen')) {
+        location.replace('./welcome.html');
+      }
+    } catch (e) {}
+  </script>
+
   <link rel="stylesheet" href="./src/styles.css" />
 
   <style>
@@ -499,6 +509,7 @@
       <div class="footer-links-col">
         <div class="footer-col-header">Quick Portals</div>
         <ul>
+          <li><a href="./welcome.html" onclick="sessionStorage.removeItem('sw_archive_seen');" style="color:#d0675a; font-weight:700;">REPLAY THE ARCHIVE &nearr;</a></li>
           <li><a href="./index.html">Welcome Hub</a></li>
           <li><a href="./lineup.html">Lineup &amp; Poster</a></li>
           <li><a href="./schedule-builder.html">My Schedule &amp; Camping</a></li>

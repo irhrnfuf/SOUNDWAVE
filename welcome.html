@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SOUNDWAVE — The Living Archive. An immersive exhibition exploring the identity, memories and culture of SOUNDWAVE 2026." />
+  <title>SOUNDWAVE — The Living Archive · An Interactive Digital Exhibition</title>
+
+  <!-- Google Fonts: Editorial, Monospace, Condensed Festival & Handwriting -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap" />
+
+  <!-- Living Archive Stylesheets -->
+  <link rel="stylesheet" href="./welcome/css/artifacts.css" />
+  <link rel="stylesheet" href="./welcome/css/welcome.css" />
+</head>
+<body>
+
+  <!-- Subtle Atmospheric Film & Paper Grain Overlay -->
+  <div class="archive-grain" aria-hidden="true"></div>
+
+  <!-- Fullscreen Cream Transition Veil matching index.html background -->
+  <div id="transition-veil" class="transition-veil" aria-hidden="true"></div>
+
+  <!-- Persistent Top HUD (High contrast, difference blend mode) -->
+  <header class="archive-hud" aria-label="Archive HUD Navigation">
+    <a href="#scene-signal" class="hud-brand" aria-label="Return to Signal">SOUNDWAVE ARCHIVE</a>
+    <div class="hud-actions">
+      <button id="btn-sound-toggle" class="btn-sound" aria-label="Toggle atmospheric sound">🔇 Sound: OFF</button>
+      <a href="./index.html" class="btn-skip" id="btn-skip-to-festival" onclick="sessionStorage.setItem('sw_archive_seen','true');">Skip to Festival &rarr;</a>
+    </div>
+  </header>
+
+  <!-- Side Navigation Rail (Quick scene jumping) -->
+  <nav class="scene-rail" aria-label="Scene Index Navigation">
+    <button class="rail-dot active" data-target="scene-signal" data-label="01 Signal" aria-label="Scene 01: The Signal"></button>
+    <button class="rail-dot" data-target="scene-archive" data-label="02 Archive" aria-label="Scene 02: The Archive"></button>
+    <button class="rail-dot" data-target="scene-people" data-label="03 People" aria-label="Scene 03: The People"></button>
+    <button class="rail-dot" data-target="scene-frequency" data-label="04 Frequency" aria-label="Scene 04: The Frequency"></button>
+    <button class="rail-dot" data-target="scene-invitation" data-label="05 Invitation" aria-label="Scene 05: The Invitation"></button>
+  </nav>
+
+  <!-- ======================================================================
+       SCENE 01: THE SIGNAL
+       ====================================================================== -->
+  <section id="scene-signal" class="scene-section" aria-label="Scene 01: The Signal">
+    <div class="signal-canvas-wrap">
+      <canvas id="signal-canvas" class="signal-canvas"></canvas>
+    </div>
+    <div class="signal-content">
+      <span class="signal-whisper">An Interactive Digital Exhibition</span>
+      <h1 class="signal-quote">&ldquo;Some places never leave you.&rdquo;</h1>
+      <p class="signal-brand">SOUNDWAVE</p>
+      <a href="#scene-archive" class="signal-scroll-prompt">
+        <span>Explore The Archive</span> &darr;
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SCENE 02: THE ARCHIVE (The Archivist's Table)
+       ====================================================================== -->
+  <section id="scene-archive" class="scene-section" aria-label="Scene 02: The Archive">
+    <div class="archive-header">
+      <div class="archive-title-group">
+        <h2>The Archivist&rsquo;s Table</h2>
+        <p>12 YEARS OF MEMORABILIA · POSTERS, BADGES, ACCESS TIERS &amp; FIELD NOTES</p>
+      </div>
+      <div class="discovery-counter" id="discovery-count" aria-live="polite">
+        0/3 Discovered
+      </div>
+    </div>
+
+    <div class="archive-table-container">
+      <div class="archive-grid" id="archive-grid">
+        <!-- Rendered dynamically by main.js from data/archive-items.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SCENE 03: THE PEOPLE (Photographic Exhibition Wall)
+       ====================================================================== -->
+  <section id="scene-people" class="scene-section" aria-label="Scene 03: The People">
+    <div class="people-hero">
+      <h3>&ldquo;The people make the frequency.&rdquo;</h3>
+      <p>SOUNDWAVE IS MORE THAN THE MUSIC</p>
+    </div>
+
+    <div class="people-gallery-grid" id="people-grid">
+      <!-- Rendered dynamically by main.js from data/archive-items.js -->
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SCENE 04: THE FREQUENCY (Particle Transformation Field)
+       ====================================================================== -->
+  <section id="scene-frequency" class="scene-section" aria-label="Scene 04: The Frequency">
+    <div class="frequency-canvas-wrap">
+      <canvas id="frequency-canvas" class="signal-canvas"></canvas>
+    </div>
+    <div class="frequency-overlay-text">
+      <div class="frequency-tag">Harmonic Memory Synthesis</div>
+      <h2 class="frequency-title">THE RESONANCE REMAINS</h2>
+      <p class="frequency-desc">
+        Acoustic vibrations dissolve into ambient ocean air. The frequency line connects twelve editions of collective memory into a singular pulse.
+      </p>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SCENE 05: THE INVITATION (Transition to Main Festival Site)
+       ====================================================================== -->
+  <section id="scene-invitation" class="scene-section" aria-label="Scene 05: The Invitation">
+    <div class="invitation-box">
+      <div class="invitation-edition">MIAMI WATERFRONT PARK · DECEMBER 18&ndash;20, 2026</div>
+      <h2 class="invitation-headline">SOUNDWAVE 2026</h2>
+      <p class="invitation-motto">
+        &ldquo;The frequency never fades. It only finds new ears.&rdquo;
+      </p>
+      <a href="./index.html" id="btn-enter-soundwave" class="btn-enter-soundwave" role="button">
+        ENTER SOUNDWAVE &nearr;
+      </a>
+    </div>
+  </section>
+
+  <!-- Archival Item Details Modal (<dialog>) -->
+  <dialog id="archive-modal" class="archive-modal" aria-labelledby="modal-title">
+    <div class="modal-inner">
+      <div class="modal-media" id="modal-media">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="modal-details">
+        <button id="modal-close" class="modal-close-btn" aria-label="Close dialog">&times;</button>
+        <div>
+          <div class="modal-label" id="modal-label">ARCHIVE ITEM</div>
+          <h3 class="modal-title" id="modal-title">Item Title</h3>
+          <p class="modal-desc" id="modal-desc">Description of the archival artifact.</p>
+        </div>
+        <div class="modal-curator" id="modal-curator">
+          Fictional memorabilia artifact created for SOUNDWAVE 2026.
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Master ES Module -->
+  <script type="module" src="./welcome/js/main.js"></script>
+</body>
+</html>

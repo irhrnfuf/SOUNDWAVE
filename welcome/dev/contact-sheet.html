@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>DEV · Living Archive Contact Sheet</title>
+  <!-- DEV-ONLY review page for the Stage 2 asset checkpoint. Not linked from the site. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;700&family=Syne:wght@700;800&display=swap" />
+  <link rel="stylesheet" href="../css/artifacts.css" />
+  <style>
+    body { margin: 0; background: #141312; color: #e9dfca; font-family: "IBM Plex Mono", monospace; }
+    .sheet-wrap { padding: 40px 48px 64px; }
+    h1 { font-family: "Syne", sans-serif; font-weight: 800; font-size: 34px; margin: 0 0 4px; letter-spacing: -0.02em; }
+    .sub { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #a39880; margin-bottom: 32px; }
+    h2 { font-family: "Anton", sans-serif; font-weight: 400; font-size: 20px; letter-spacing: 0.14em; color: #d0675a; margin: 40px 0 16px; border-bottom: 1px solid #3a3530; padding-bottom: 6px; }
+    .row { display: flex; flex-wrap: wrap; gap: 40px 36px; align-items: flex-start; }
+    .cell { display: flex; flex-direction: column; gap: 10px; }
+    .cell > .lbl { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #8e846f; }
+    .img-cell img { display: block; height: 230px; width: auto; box-shadow: 0 10px 24px rgba(0,0,0,.5); }
+    .table { background: radial-gradient(120% 80% at 50% 30%, #2a2622, #171513); padding: 36px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+<div class="sheet-wrap">
+  <h1>The Living Archive · Asset Contact Sheet</h1>
+  <div class="sub">Stage 2 checkpoint · fictional, art-directed memorabilia for SOUNDWAVE 2026</div>
+
+  <!-- ====================== HTML/CSS ADMISSION ITEMS ====================== -->
+  <h2>A · ADMISSION ITEMS — HTML/CSS (real text)</h2>
+  <div class="row table">
+
+    <div class="cell">
+      <article class="mem mem-paper ticket-ga" style="--rot:-2deg; --mem-size:17px" aria-label="General admission ticket, Edition 02, 2015">
+        <div class="ticket-ga__main mem-crease" style="--crease-at:38%">
+          <div class="ink-worn">
+            <p class="ticket-ga__brand">SOUNDWAVE</p>
+          </div>
+          <span class="ticket-ga__admit ink-worn">ADMIT ONE</span>
+          <div class="ticket-ga__meta ink-worn">
+            <span>Edition<b>02</b></span>
+            <span>Year<b>2015</b></span>
+            <span>Entry<b>Gate B</b></span>
+          </div>
+        </div>
+        <div class="ticket-ga__stub">
+          <span class="ticket-ga__stub-no">Nº 004127</span>
+          <div class="mem-barcode"></div>
+        </div>
+        <span class="ticket-ga__stain"></span>
+      </article>
+      <span class="lbl">01 · GA paper stub · Ed. 02 · perforated</span>
+    </div>
+
+    <div class="cell">
+      <article class="mem ticket-vip" style="--rot:1.5deg; --mem-size:17px" aria-label="VIP foil ticket, Edition 06, 2019">
+        <div class="ticket-vip__top"><span>Edition 06 · 2019</span><span>All Stages</span></div>
+        <p class="ticket-vip__brand foil">SOUNDWAVE<span class="foil">VIP</span></p>
+        <div class="ticket-vip__bottom"><span>Nº 0612 — 0388<br/>Non-transferable</span><span class="ticket-vip__seal">VI</span></div>
+      </article>
+      <span class="lbl">02 · VIP foil card · Ed. 06</span>
+    </div>
+
+    <div class="cell">
+      <article class="mem pass-crew mem-paper" style="--rot:-3deg; --mem-size:16px" aria-label="Crew pass, Edition 08, 2021">
+        <span class="pass-crew__hole"></span>
+        <div class="pass-crew__band"><span>ED. 08</span><span>2021</span></div>
+        <p class="pass-crew__title ink-worn">CREW</p>
+        <p class="pass-crew__brand">SOUNDWAVE</p>
+        <span class="pass-crew__number">#047</span>
+        <div class="pass-crew__fields">Zone: Analog Dome<br/>Access: All areas<br/>Return at gate C</div>
+      </article>
+      <span class="lbl">03 · Laminated crew pass · Ed. 08 · hand-numbered</span>
+    </div>
+
+    <div class="cell" style="gap:28px">
+      <article class="mem band-woven" style="--rot:-4deg; --mem-size:15px" aria-label="Woven fabric wristband, Edition 10, 2023">
+        <div class="band-woven__fabric"><span>SOUNDWAVE</span><span>ED·10</span><span>SOUNDWAVE</span></div>
+        <span class="band-woven__bead"></span>
+        <div class="band-woven__fabric band-woven__tail"></div>
+      </article>
+      <span class="lbl">04 · Woven wristband · Ed. 10 · frayed + crimp bead</span>
+
+      <article class="mem band-rfid" style="--rot:2deg; --mem-size:15px" aria-label="Silicone RFID wristband, Edition 11, 2024">
+        <span class="band-rfid__chip"></span>
+        <span class="band-rfid__deboss">SOUNDWAVE</span>
+        <span class="band-rfid__id">SW11·7F3A</span>
+      </article>
+      <span class="lbl">05 · Silicone RFID band · Ed. 11 · debossed</span>
+    </div>
+  </div>
+
+  <!-- ====================== SMALL DETAILS ====================== -->
+  <h2>B · SMALL ARCHIVAL DETAILS — HTML/CSS + SVG</h2>
+  <div class="row table">
+    <div class="cell">
+      <div class="mem mem-paper" style="--rot:-1deg; width:300px; padding:28px 26px; display:flex; flex-direction:column; gap:26px; align-items:flex-start">
+        <span class="stamp" style="--rot:-8deg; --stamp-size:30px">Admitted<small>SOUNDWAVE · GATE B</small></span>
+        <span class="stamp stamp--blue" style="--rot:5deg; --stamp-size:26px; margin-left:90px">Crew<small>ALL AREAS</small></span>
+        <span class="stamp stamp--ink stamp--round" style="--rot:-14deg; --stamp-size:30px; margin:-30px 0 0 10px">Archived<small>SW · ED. 12</small></span>
+      </div>
+      <span class="lbl">Rubber stamps on paper (multiply blend + worn-ink mask)</span>
+    </div>
+
+    <div class="cell">
+      <div class="mem note" style="--rot:3deg; --mem-size:15px">
+        <span class="tape"></span>
+        <p>Meet at the Vinyl Lawn at sunset — same spot as last year ♥</p>
+      </div>
+      <span class="lbl">Handwritten note + tape</span>
+    </div>
+
+    <div class="cell">
+      <div class="mem mem-paper fragment" style="--rot:-2deg; --mem-size:16px">
+        <h5>SAT · HORIZON ARENA</h5>
+        <ol>
+          <li><time>17:00</time> Gates open</li>
+          <li><time>18:45</time> <span class="circled">Sunset set</span></li>
+          <li><time>21:00</time> Headline set</li>
+          <li><time>23:30</time> Curfew</li>
+        </ol>
+      </div>
+      <span class="lbl">Torn schedule fragment (circled set)</span>
+    </div>
+
+    <div class="cell">
+      <div class="mem mem-paper map-fragment" style="--rot:2deg; --mem-size:15px">
+        <svg viewBox="0 0 220 160" role="img" aria-label="Hand-drawn site map fragment showing four stages">
+          <path d="M0 128 C40 118 70 140 110 130 S180 116 220 126 L220 160 L0 160 Z" fill="#3e5a74" opacity=".35"/>
+          <path d="M8 120 C50 110 80 132 120 122 S190 108 214 118" fill="none" stroke="#3e5a74" stroke-width="1.2" stroke-dasharray="3 2"/>
+          <g fill="none" stroke="#1b1714" stroke-width="1.4">
+            <path d="M30 30 h48 v26 h-48 z"/><circle cx="148" cy="44" r="18"/><path d="M40 84 q30 -14 60 0 v14 h-60 z"/><rect x="140" y="80" width="40" height="22" rx="4"/>
+          </g>
+          <path d="M78 44 C100 44 110 44 130 44 M70 84 C80 70 120 60 140 90 M100 98 C120 108 130 102 140 96" fill="none" stroke="#b13a2e" stroke-width="1" stroke-dasharray="2 2"/>
+          <text x="31" y="24">HORIZON ARENA</text><text x="128" y="20">ANALOG DOME</text>
+          <text x="40" y="110">VINYL LAWN</text><text x="132" y="114">VIP CABANAS</text>
+          <text x="150" y="152" style="fill:#f6eedb">BISCAYNE BAY</text>
+        </svg>
+      </div>
+      <span class="lbl">Site-map fragment (4 stages — matches site)</span>
+    </div>
+  </div>
+
+  <!-- ====================== GENERATED IMAGES ====================== -->
+  <h2>C · POSTERS + FLYERS — generated</h2>
+  <div class="row">
+    <div class="cell img-cell"><img src="../../assets/archive/posters/poster-ed01-2014-sm.jpg" alt="" /><span class="lbl">Poster · Ed. 01 · 2014 · letterpress</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/posters/poster-ed05-2018-sm.jpg" alt="" /><span class="lbl">Poster · Ed. 05 · 2018 · risograph</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/flyers/flyer-zine-ed03-sm.jpg" alt="" /><span class="lbl">Flyer · Ed. 03 · xerox zine</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/flyers/flyer-folded-schedule-sm.jpg" alt="" /><span class="lbl">Flyer · 3-Days Folded Schedule</span></div>
+  </div>
+
+  <h2>D · PHOTOGRAPHY — generated</h2>
+  <div class="row">
+    <div class="cell img-cell"><img src="../../assets/archive/photos/photo-crowd-dusk-sm.jpg" alt="" /><span class="lbl">Crowd at dusk</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/photos/photo-stage-silhouettes-sm.jpg" alt="" /><span class="lbl">Stage silhouettes</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/photos/photo-confetti-sm.jpg" alt="" /><span class="lbl">Confetti</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/photos/photo-light-installation-sm.jpg" alt="" /><span class="lbl">Light installation</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/photos/photo-golden-lawn-sm.jpg" alt="" /><span class="lbl">Golden-hour lawn</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/photos/photo-rain-crowd-sm.jpg" alt="" /><span class="lbl">Rain crowd</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/backstage/backstage-sound-desk-sm.jpg" alt="" /><span class="lbl">Backstage · sound desk</span></div>
+    <div class="cell img-cell"><img src="../../assets/archive/backstage/backstage-side-stage-sm.jpg" alt="" /><span class="lbl">Backstage · side stage</span></div>
+  </div>
+</div>
+</body>
+</html>
