@@ -1201,10 +1201,10 @@ button.primary-checkout-btn:hover {
   box-shadow: 5px 5px 0px #111111;
 }
 
-.culture-photo-merch { background-position: 0% 0%; }
-.culture-photo-food { background-image: url('./culinary-oasis-picnic.jpg'); background-size: cover; background-position: center top; height: 420px; }
-.culture-photo-art   { background-position: 0% 100%; }
-.culture-photo-eco   { background-position: 100% 100%; }
+.culture-photo-merch { background-image: url('./culture-merch-bazaar.jpg'); background-size: cover; background-position: center 20%; height: 650px; }
+.culture-photo-food  { background-image: url('./culinary-oasis-picnic.jpg'); background-size: cover; background-position: center top; height: 650px; }
+.culture-photo-art   { background-image: url('./culture-light-sculpture.jpg'); background-size: cover; background-position: center top; height: 650px; }
+.culture-photo-eco   { background-image: url('./culture-ocean-stewardship.jpg'); background-size: cover; background-position: center top; height: 650px; }
 
 /* Coachella / Lollapalooza Festival Lineup Poster Card */
 .poster-showcase-container {
