@@ -1288,7 +1288,7 @@ button.primary-checkout-btn:hover {
 }
 
 .history-photo-horizon { background-image: url('./festival-history-montreux.jpg'); background-size: cover; background-position: center top; height: 580px !important; }
-.history-photo-analog  { background-position: 100% 0%; }
+.history-photo-analog  { background-image: url("./analog-dome-red-lasers.jpg") !important; background-size: cover !important; background-position: center center !important; }
 .history-photo-vinyl   { background-position: 0% 100%; }
 .history-photo-vip     { background-position: 100% 100%; }
 
@@ -3075,3 +3075,4 @@ img {
     grid-template-columns: 1fr !important;
   }
 }
+
