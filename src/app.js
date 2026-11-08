@@ -128,7 +128,7 @@ function calculateLivePassTotal() {
   const promoCode = promoInput ? promoInput.value.trim().toUpperCase() : "";
 
   let basePrice = 129;
-  let tierPerkText = "Three-Stage General Access";
+  let tierPerkText = "Four-Stage General Access";
 
   // Unit VI: switch statement
   switch (selectedTier) {
@@ -948,3 +948,4 @@ function renderDirectOrdersTable() {
     )
     .join("");
 }
+
