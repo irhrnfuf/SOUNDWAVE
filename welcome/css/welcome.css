@@ -183,12 +183,54 @@ html, body {
 #scene-signal {
   background: radial-gradient(circle at center, #161413 0%, #0c0b0a 75%);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Atmospheric blended photographic silhouette */
+.signal-photo-blend {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.signal-bg-img {
+  width: 100%;
+  max-width: 980px;
+  height: 90vh;
+  object-fit: cover;
+  object-position: center 30%;
+  opacity: 0.38;
+  filter: grayscale(100%) contrast(1.25) brightness(0.85);
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(circle at 50% 50%, black 40%, rgba(0, 0, 0, 0.5) 65%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 40%, rgba(0, 0, 0, 0.5) 65%, transparent 80%);
+  transform: scale(1.05);
+  animation: photoBreathe 12s ease-in-out infinite alternate;
+}
+
+@keyframes photoBreathe {
+  0% { transform: scale(1.03) translateY(0); opacity: 0.28; }
+  100% { transform: scale(1.08) translateY(-10px); opacity: 0.36; }
+}
+
+.signal-blend-radial {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 20%, rgba(12, 11, 10, 0.6) 65%, #0c0b0a 85%);
+  pointer-events: none;
 }
 
 .signal-canvas-wrap {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 3;
 }
 
 .signal-canvas {
@@ -199,7 +241,7 @@ html, body {
 .signal-content {
   position: relative;
   z-index: 10;
-  max-width: 780px;
+  max-width: 860px;
   padding: 0 1.5rem;
 }
 
@@ -210,8 +252,8 @@ html, body {
   text-transform: uppercase;
   color: var(--sw-red);
   margin-bottom: 2rem;
-  opacity: 0;
-  animation: signalFadeIn 1.8s ease forwards 0.4s;
+  opacity: 1 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 }
 
 .signal-quote {
@@ -222,8 +264,8 @@ html, body {
   letter-spacing: -0.025em;
   color: var(--sw-cream);
   margin: 0 0 2rem;
-  opacity: 0;
-  animation: signalFadeIn 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.2s;
+  opacity: 1 !important;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .signal-brand {
@@ -233,8 +275,8 @@ html, body {
   color: #fff;
   line-height: 0.9;
   margin: 0;
-  opacity: 0;
-  animation: signalFadeIn 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 2.5s;
+  opacity: 1 !important;
+  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.9);
 }
 
 .signal-scroll-prompt {
@@ -248,9 +290,9 @@ html, body {
   text-transform: uppercase;
   color: var(--sw-cream-dim);
   text-decoration: none;
-  opacity: 0;
-  animation: signalFadeIn 2s ease forwards 3.8s;
+  opacity: 1 !important;
   transition: color 0.2s ease;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
 }
 
 .signal-scroll-prompt:hover {
