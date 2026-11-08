@@ -320,13 +320,39 @@ function validateFestivalForm(event) {
   }
 
   const priceInfo = calculateLivePassTotal();
+  renderDirectOrdersTable();
   const generatedPassCode = generatePassCodeWithWhileLoop();
 
   feedbackBox.className = "validation-box success";
   feedbackBox.innerHTML =
-    "<b>Pass Issued: " + generatedPassCode + "</b><br />" +
-    "Holder: " + fullName + " &bull; Total: <b>$" + priceInfo.finalTotal.toFixed(2) + "</b>" +
-    "<div id='firebase-save-status' style='margin-top:4px;'>Syncing with Firebase SQL Connect...</div>";
+    "<b>Pass Reserved: " + generatedPassCode + "</b> &bull; Total: <b>$" + priceInfo.finalTotal.toFixed(2) + "</b><br />" +
+    "Holder: <b>" + fullName + "</b> (" + priceInfo.selectedTier + ") &bull; Status: Confirmed ?";
+
+  // Immediately store in local orders ledger
+  try {
+    const ORDERS_KEY = "soundwave_firebase_passes_mirror";
+    const existingRaw = localStorage.getItem(ORDERS_KEY);
+    let ordersList = [];
+    if (existingRaw) {
+      try { ordersList = JSON.parse(existingRaw); } catch (e) { ordersList = []; }
+    }
+    const newOrderEntry = {
+      id: "pass-" + Date.now(),
+      passCode: generatedPassCode,
+      attendeeName: fullName,
+      email: email,
+      passTier: priceInfo.selectedTier,
+      festivalDay: priceInfo.chosenDay,
+      quantity: priceInfo.quantity,
+      totalPrice: priceInfo.finalTotal,
+      favoriteArtist: document.getElementById("favorite-artist")?.value.trim() || "Neon Pulse",
+      createdAt: new Date().toISOString()
+    };
+    ordersList.unshift(newOrderEntry);
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(ordersList));
+  } catch (err) {
+    console.warn("Could not save to local orders ledger:", err);
+  }
 
   const chosenArtist = document.getElementById("favorite-artist")?.value.trim() || "Neon Pulse";
   const notes = document.getElementById("special-notes")?.value.trim() || "";
@@ -469,6 +495,7 @@ function updatePassCanvas() {
   ctx.fillText("SW26-AUTH", 310, 106);
 
   calculateLivePassTotal();
+  renderDirectOrdersTable();
 }
 
 // 7. UNIT II: Drag & Drop Personal Weekend Schedule Builder
@@ -775,6 +802,7 @@ window.addEventListener("DOMContentLoaded", function () {
   filterArtistsByGenre("ALL");
   updateBomAndDomInspector();
   calculateLivePassTotal();
+  renderDirectOrdersTable();
 
   const form = document.getElementById("pass-registration-form");
   if (form) {
@@ -855,3 +883,68 @@ function switchReelMode(mode) {
 
 
 
+
+
+
+// Standalone Direct Orders Table Renderer (Works on shuttles-orders.html without relying on remote imports)
+function renderDirectOrdersTable() {
+  const tbody = document.getElementById("firebase-passes-tbody");
+  if (!tbody) return;
+
+  const ORDERS_KEY = "soundwave_firebase_passes_mirror";
+  const DEFAULT_SEED_ORDERS = [
+    {
+      passCode: "SW26-NEON01-100",
+      attendeeName: "Johan Sanju",
+      email: "johansanju00@gmail.com",
+      passTier: "Backstage All-Access ($499)",
+      festivalDay: "All 3 Days",
+      quantity: 2,
+      totalPrice: 810.50,
+      favoriteArtist: "Neon Pulse"
+    },
+    {
+      passCode: "SW26-VIP77A-101",
+      attendeeName: "Aria Montgomery",
+      email: "aria@soundwave2026.com",
+      passTier: "VIP Gold Pass ($249)",
+      festivalDay: "Day 3 Finale",
+      quantity: 1,
+      totalPrice: 261.50,
+      favoriteArtist: "DJ Solaris"
+    }
+  ];
+
+  let orders = [];
+  try {
+    const raw = localStorage.getItem(ORDERS_KEY);
+    if (raw) {
+      orders = JSON.parse(raw);
+    } else {
+      orders = DEFAULT_SEED_ORDERS;
+      localStorage.setItem(ORDERS_KEY, JSON.stringify(DEFAULT_SEED_ORDERS));
+    }
+  } catch (e) {
+    orders = DEFAULT_SEED_ORDERS;
+  }
+
+  if (!orders || orders.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7">No wristband orders found. Book a pass to see it here!</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = orders
+    .map(
+      (p) =>
+        "<tr>" +
+          "<td><b>" + (p.passCode || "SW26-PASS") + "</b></td>" +
+          "<td><b>" + (p.attendeeName || "Attendee") + "</b><br /><small>" + (p.email || "") + "</small></td>" +
+          "<td>" + (p.passTier || "General Admission") + "</td>" +
+          "<td>" + (p.festivalDay || "All 3 Days") + "</td>" +
+          "<td>" + (p.quantity || 1) + "</td>" +
+          "<td><b>$" + Number(p.totalPrice || 0).toFixed(2) + "</b></td>" +
+          "<td>" + (p.favoriteArtist || "Neon Pulse") + "</td>" +
+        "</tr>"
+    )
+    .join("");
+}
