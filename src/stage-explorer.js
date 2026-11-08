@@ -18,7 +18,7 @@ const STAGE_TIER_CONFIG = {
       "Direct access to shade sails and misting towers"
     ],
     pinX: 280,
-    pinY: 285,
+    pinY: 260,
     zoneId: "zone-ga"
   },
   VIP: {
@@ -35,7 +35,7 @@ const STAGE_TIER_CONFIG = {
       "Fast-track VIP express gate entry lane"
     ],
     pinX: 280,
-    pinY: 185,
+    pinY: 160,
     zoneId: "zone-vip"
   },
   PLATINUM: {
@@ -51,8 +51,8 @@ const STAGE_TIER_CONFIG = {
       "Backstage artist hospitality compound & complimentary dining",
       "Private golf-cart shuttle between all 4 festival stages"
     ],
-    pinX: 165,
-    pinY: 112,
+    pinX: 145,
+    pinY: 58,
     zoneId: "zone-platinum"
   }
 };
