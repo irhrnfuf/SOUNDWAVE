@@ -2782,3 +2782,141 @@ button:hover {
   font-weight: 700;
   color: #555;
 }
+
+
+/* ==========================================================================
+   Comprehensive Responsive Refinements (Step 4: 1440px, 1280px, 768px, 390px, 360px)
+   ========================================================================== */
+
+/* Laptop & Compact Desktop (1280px) */
+@media screen and (max-width: 1280px) {
+  .banner-container {
+    grid-template-columns: 240px 1fr 280px;
+    gap: 1.25rem;
+  }
+  .stage-page-container,
+  main.app-workspace {
+    max-width: 1200px;
+    padding: 0 1.25rem;
+  }
+  .itinerary-workspace {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 1.25rem;
+  }
+}
+
+/* Tablet & Smaller Devices (768px) */
+@media screen and (max-width: 768px) {
+  .sticky-navbar {
+    padding: 0.5rem 1rem;
+  }
+  .sticky-navbar .nav-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+  .brand-link {
+    justify-content: center;
+  }
+  .sticky-navbar ul {
+    justify-content: center;
+    gap: 0.35rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sticky-navbar ul li a {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.78rem;
+  }
+  .banner-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-logo-Totem {
+    margin: 0 auto;
+  }
+  .banner-stats-box {
+    margin-top: 0.5rem;
+  }
+  .form-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .stage-map-grid {
+    grid-template-columns: 1fr;
+  }
+  .interactive-sightline-svg {
+    max-height: 340px;
+    width: 100%;
+  }
+  .schedule-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 2px solid #111111;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile & Small Handhelds (390px - 360px) */
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 0.95rem;
+  }
+  .sticky-navbar {
+    padding: 0.4rem 0.65rem;
+  }
+  .lolla-wordmark-svg {
+    height: 36px;
+  }
+  .nav-logo-patch {
+    height: 40px;
+  }
+  .sticky-navbar ul {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 2px 0 6px;
+  }
+  .sticky-navbar ul li a {
+    font-size: 0.74rem;
+    padding: 0.3rem 0.55rem;
+    flex-shrink: 0;
+  }
+  .hero-card-block {
+    padding: 1rem 0.95rem;
+  }
+  .workspace-right-sticky {
+    padding: 1rem 0.85rem;
+  }
+  .pass-tier-card {
+    padding: 1.15rem 0.95rem;
+  }
+  .draggable-chip {
+    padding: 0.5rem 0.65rem;
+  }
+  .chip-title {
+    font-size: 0.84rem;
+  }
+  .chip-meta {
+    font-size: 0.72rem;
+  }
+  .planner-dropzone {
+    padding: 0.95rem 0.75rem;
+    min-height: 380px;
+  }
+  .modal-card {
+    padding: 1.25rem 1rem;
+    width: 95%;
+  }
+  .club-poster-board {
+    padding: 1.25rem 0.85rem;
+  }
+}

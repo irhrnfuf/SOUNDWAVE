@@ -231,8 +231,6 @@ function calculateLivePassTotal() {
     finalTotal: Number(finalTotal.toFixed(2))
   };
 }
-  };
-}
 
 // 3. UNIT VI: WHILE Loop for Serial Ticket Number Generation
 function generatePassCodeWithWhileLoop() {
@@ -393,55 +391,82 @@ function updatePassCanvas() {
   if (!canvas || !canvas.getContext) return;
   const ctx = canvas.getContext("2d");
 
-  const name = document.getElementById("attendee-name").value.trim() || "ENTER ATTENDEE NAME";
-  const tier = document.getElementById("pass-tier").value;
-  const date = document.getElementById("arrival-date").value || "2026-12-18";
-  const accentColor = document.getElementById("wristband-color").value || "#e03e1a";
+  const nameEl = document.getElementById("attendee-name");
+  const tierEl = document.getElementById("pass-tier");
+  const dateEl = document.getElementById("arrival-date");
+  const colorEl = document.getElementById("wristband-color");
+  const qtyEl = document.getElementById("ticket-qty");
+
+  const name = (nameEl && nameEl.value.trim()) ? nameEl.value.trim() : "JOHAN SANJU";
+  const tier = (tierEl && tierEl.value) ? tierEl.value : "VIP Gold Pass ($249)";
+  const date = (dateEl && dateEl.value) ? dateEl.value : "2026-12-18";
+  const accentColor = (colorEl && colorEl.value) ? colorEl.value : "#ffe600";
+  const qty = (qtyEl && parseInt(qtyEl.value, 10)) ? parseInt(qtyEl.value, 10) : 1;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Dark Wallet Pass Card Base
-  ctx.fillStyle = "#111110";
+  // Modern Neo-Brutalist Pass Base with Subtle Radial Gradient
+  const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  grad.addColorStop(0, "#1c1a1b");
+  grad.addColorStop(1, "#111011");
+  ctx.fillStyle = grad;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Top Accent Bar
+  // Top Neon Accent Strip
   ctx.fillStyle = accentColor;
   ctx.fillRect(0, 0, canvas.width, 8);
+
+  // Left Tag Pill
+  ctx.fillStyle = "#ff3366";
+  ctx.fillRect(16, 16, 6, 22);
+
+  // Pass Brand Header
+  ctx.fillStyle = accentColor;
+  ctx.font = "bold 11px 'Space Grotesk', sans-serif";
+  ctx.fillText("SOUNDWAVE 2026 FESTIVAL PASS", 28, 25);
+
+  ctx.fillStyle = "#888884";
+  ctx.font = "9px 'Space Grotesk', sans-serif";
+  ctx.fillText("DEC 18-20 • WATERFRONT PARK MIAMI", 28, 36);
+
+  // Attendee Name
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 17px 'Space Grotesk', sans-serif";
+  const displayName = name.toUpperCase().slice(0, 22);
+  ctx.fillText(displayName, 18, 64);
+
+  // Tier Badge
+  ctx.fillStyle = "#ffe600";
+  ctx.font = "bold 12px 'Space Grotesk', sans-serif";
+  ctx.fillText(tier + (qty > 1 ? "  (x" + qty + ")" : ""), 18, 86);
+
+  // Date and Gate info
+  ctx.fillStyle = "#bbbbbb";
+  ctx.font = "10px sans-serif";
+  ctx.fillText("CHECK-IN: " + date + "  •  GATE A EXPRESS ENTRY", 18, 108);
 
   // Perforated Tear Line on Right
   ctx.save();
   ctx.setLineDash([4, 4]);
-  ctx.strokeStyle = "#3d3c38";
+  ctx.strokeStyle = "#444444";
+  ctx.lineWidth = 1.5;
   ctx.beginPath();
-  ctx.moveTo(295, 10);
-  ctx.lineTo(295, canvas.height - 10);
+  ctx.moveTo(290, 10);
+  ctx.lineTo(290, canvas.height - 10);
   ctx.stroke();
   ctx.restore();
 
-  // Pass Header
-  ctx.fillStyle = accentColor;
-  ctx.font = "bold 10px sans-serif";
-  ctx.fillText("SOUNDWAVE 2026  â€¢  DIGITAL WALLET PASS", 18, 30);
-
-  // Holder Name
+  // Barcode Lines on Right Stub
   ctx.fillStyle = "#ffffff";
-  ctx.font = "bold 18px sans-serif";
-  ctx.fillText(name.toUpperCase().slice(0, 20), 18, 60);
-
-  // Tier & Date
-  ctx.fillStyle = "#a8a49b";
-  ctx.font = "12px sans-serif";
-  ctx.fillText(tier, 18, 88);
-  ctx.fillText("CHECK-IN: " + date + "  â€¢  GATE A", 18, 110);
-
-  // Barcode on Right Stub
-  ctx.fillStyle = "#f4f3ef";
-  for (let x = 312; x < 374; x += 5) {
-    const barW = (x % 10 === 0) ? 3 : 1.5;
-    ctx.fillRect(x, 24, barW, 74);
+  for (let x = 305; x < 375; x += 4) {
+    const barW = (x % 8 === 0) ? 2.5 : 1.2;
+    ctx.fillRect(x, 22, barW, 70);
   }
-  ctx.font = "10px monospace";
-  ctx.fillText("SW26-PASS", 316, 114);
+
+  // Stub Serial Code
+  ctx.fillStyle = accentColor;
+  ctx.font = "bold 9px monospace";
+  ctx.fillText("SW26-AUTH", 310, 106);
 
   calculateLivePassTotal();
 }
@@ -825,6 +850,8 @@ function switchReelMode(mode) {
 
   video.load();
 }
+
+
 
 
 
