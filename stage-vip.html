@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="VIP Cabanas & SkyDeck (Est. 2018) — Elevated Hospitality Terrace History, Secret Acoustic Sets, Attendance & Ticket Sightline Map" />
   <title>VIP Cabanas &amp; SkyDeck &#128081; | Stage History &amp; Ticket Sightline Map &mdash; SoundWave 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800;900&display=swap" />
   <link rel="stylesheet" href="./src/styles.css" />
   <link rel="stylesheet" href="./src/tactile-console.css" />
 </head>
 <body>
+  <!-- Atmospheric Film Grain Overlay & Ambient Stage Lighting Bleeds -->
+  <div class="global-film-grain" aria-hidden="true"></div>
+  <div class="ambient-stage-glow" aria-hidden="true"></div>
 
   <!-- Top Scrolling Ticker -->
   <div class="marquee-strip" aria-label="Stage Archive Feed">
@@ -55,45 +61,164 @@
   </nav>
 
   <!-- Hero Banner with Embroidered Logo Patch + New Embroidered Crown & Flamingo Cocktail Patch -->
-  <header id="top-banner">
-    <div class="banner-container">
-      <div class="hero-logo-Totem">
-        <img
-          src="./src/soundwave-logo-patch.jpg"
-          alt="SoundWave 2026 FEST Hand-Stitched Embroidered Thread Patch Logo"
-          class="logo-patch-img"
-        />
+    <!-- ======================================================================
+       MONUMENTAL BIG HERO TYPE ARCHITECTURAL CENTERPIECE: VIP SKYDECK
+       ====================================================================== -->
+  <header id="big-hero-stage" class="hero-top-anchor">
+    <!-- Atmospheric Concert Photo Backdrop & Dark Radial Vignette -->
+    <div class="big-hero-backdrop" aria-hidden="true">
+      <img
+        src="./src/vip-cabanas-skydeck-dj.jpg"
+        alt=""
+        class="big-hero-backdrop-img"
+      />
+      <div class="big-hero-vignette"></div>
+    </div>
+
+    <div class="big-hero-inner">
+      <!-- Top Tactical Status Ribbon -->
+      <div class="big-hero-status-ribbon">
+        <div class="hero-status-pill">
+          <span class="hero-live-dot"></span>
+          <span><b>STAGE 04 &bull; SKYDECK & CABANAS</b> &bull; DEC 18&ndash;20, 2026</span>
+        </div>
+        <div class="hero-coords-pill">
+          <span>25.7617&deg; N, 80.1918&deg; W &bull; WATERFRONT PARK, MIAMI</span>
+        </div>
+        <div class="hero-status-pill" style="border-color: #00ff66;">
+          <span style="color: #00ff66; font-weight: 800;">100% CLEAN SOLAR &amp; H₂O POWER</span>
+        </div>
       </div>
 
-      <div class="hero-card-block">
-        <div style="display:flex; align-items:center; gap: 1rem; flex-wrap:wrap;">
-          <span class="stage-patch-sprite stage-patch-lg stage-patch-vip" title="Hand-Stitched VIP Cabanas & SkyDeck Golden Crown & Flamingo Cocktail Patch"></span>
-          <div style="flex: 1;">
-            <div class="event-meta-row">STAGE 04 &bull; FOUNDED DECEMBER 2018 &bull; 8-YEAR ARCHIVE</div>
-            <h1 style="margin: 0.2rem 0 0.45rem;">VIP Cabanas &amp; SkyDeck</h1>
-            <p style="margin: 0; font-size: 0.94rem;">
-              Introduced in <strong>2018</strong> as a two-story palm-fringed timber skydeck overlooking the main festival grounds, hosting
-              <strong>3,200 guests</strong> for unannounced midnight champagne DJ sets and elevated main-stage viewing.
-            </p>
+      <!-- Monumental Wall-to-Wall Big Hero Type Typography -->
+      <div class="big-hero-monument">
+        <span class="hero-tape-badge">★ PRIVATE SKYDECK & CHAMPAGNE CABANAS ★</span>
+
+        <h1 class="big-hero-title" aria-label="SKY DECK">
+          <span class="hero-type-line hero-type-line--sound">SKY</span>
+          <span class="hero-type-line hero-type-line--wave">DECK</span>
+        </h1>
+
+        <span class="hero-theme-stamp">ELEVATED SIGHTLINES & ARTISAN MIXOLOGY</span>
+        <span class="hero-curator-scribble">&larr; Dedicated express wristband concierges</span>
+      </div>
+
+      <!-- Lower Hero Hardware Console Deck -->
+      <div class="big-hero-deck">
+        <!-- Column 1: Identity Flight-Chassis -->
+        <div class="hero-deck-chassis">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="deck-patch-lockup">
+            <img
+              src="./src/stage-patches.jpg"
+              alt="VIP SkyDeck Embroidered Patch"
+              class="deck-patch-thumb"
+            />
+            <div class="deck-patch-meta">
+              <h3>VIP CABANAS</h3>
+              <span>2,500 CAPACITY RETREAT</span>
+            </div>
+          </div>
+
+          <p class="deck-narrative-lead">
+            <strong>A lavish multi-tiered waterfront retreat</strong> offering unobstructed panoramic sightlines of Horizon Arena, private cabanas, and concierge service.
+          </p>
+
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #8c8273;">
+            <span>CLIMATE CABANAS &bull; DEDICATED SOUND SYSTEM</span>
+          </div>
+        </div>
+
+        <!-- Center Column: Quick Action Cockpit -->
+        <div class="hero-deck-cockpit">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="cockpit-header">
+            <h2>VIP CABANAS & SKYDECK PRIVILEGES</h2>
+            <small>DEC 18&ndash;20, 2026</small>
+          </div>
+
+          <p class="cockpit-lead-text">
+            Relax in air-conditioned comfort with complimentary champagne tastings, curated craft dining, and direct stage front-of-house viewing boxes.
+          </p>
+
+          <div class="cockpit-cta-row">
+            
+            <a href="./passes.html" class="btn-monument-cta">
+              <span>Book VIP Wristband</span>
+              <span>&rarr;</span>
+            </a>
+            <a href="./stages.html" class="btn-monument-secondary">
+              <span>All 4 Stages</span>
+              <span>&rarr;</span>
+            </a>
+            <a href="./passes.html#wristband-perks" class="btn-monument-secondary" style="border-color: #ffaa00; color: #ffaa00;">
+              <span>VIP Perks</span>
+              <span>&nearr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 3: Live Telemetry & Audio VU Peak Meter -->
+        <div class="hero-deck-telemetry">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="telemetry-title">
+            <span>VIP RETREAT SPECS</span>
+            <span style="color: #00ff66;">ACTIVE</span>
+          </div>
+
+          <div class="telemetry-grid">
+            <div class="telemetry-item">
+              <span class="telemetry-label">CAPACITY:</span>
+              <span class="telemetry-val">2,500 GUESTS</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">MIXOLOGY BARS:</span>
+              <span class="telemetry-val telemetry-val--pink">4 PRIVATE LOUNGES</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">ELEVATION:</span>
+              <span class="telemetry-val telemetry-val--green">+24 FT OVER ARENA</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">CONCIERGE:</span>
+              <span class="telemetry-val" style="color: #ffaa00;">24/7 DEDICATED</span>
+            </div>
+          </div>
+
+          <!-- VU Audio Peak Meter Bar -->
+          <div class="telemetry-vu-meter" aria-label="Audio VU Meter">
+            <div class="vu-meter-labels">
+              <span>-20dB</span>
+              <span>-6dB</span>
+              <span>0dB</span>
+              <span style="color: #ff5555;">+3dB</span>
+            </div>
+            <div class="vu-meter-track" aria-hidden="true">
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-red"></span>
+            </div>
           </div>
         </div>
       </div>
-
-      <aside class="banner-stats-box">
-        <h3>SkyDeck Vital Stats</h3>
-        <div class="stat-line">
-          <span>INAUGURAL YEAR</span>
-          <span>2018 (8 Editions)</span>
-        </div>
-        <div class="stat-line">
-          <span>TERRACE CAPACITY</span>
-          <span>3,200 Guests / Night</span>
-        </div>
-        <div class="stat-line">
-          <span>DECK ELEVATION</span>
-          <span>24 Feet Above Lawn</span>
-        </div>
-      </aside>
     </div>
   </header>
 
@@ -432,7 +557,7 @@
         </div>
 
         <!-- Tactile 3D Back to Top Button -->
-        <a href="#top-banner" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
+        <a href="#big-hero-stage" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
           <span class="top-arrow">&uarr;</span>
           <span>RETURN TO TOP</span>
         </a>

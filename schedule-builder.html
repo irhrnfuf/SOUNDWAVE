@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="SoundWave 2026 Personal Schedule Builder & Camping Guide — HTML5 Drag & Drop Festival Planner with LocalStorage" />
   <title>My Schedule &amp; Camping Planner &mdash; SoundWave 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800;900&display=swap" />
   <link rel="stylesheet" href="./src/styles.css" />
   <link rel="stylesheet" href="./src/tactile-console.css" />
 </head>
 <body>
+  <!-- Atmospheric Film Grain Overlay & Ambient Stage Lighting Bleeds -->
+  <div class="global-film-grain" aria-hidden="true"></div>
+  <div class="ambient-stage-glow" aria-hidden="true"></div>
 
   <!-- Top Marquee Strip -->
   <div class="marquee-strip" aria-label="Planner Feed">
@@ -41,35 +47,164 @@
   </nav>
 
   <!-- Header Banner -->
-  <header id="top-banner">
-    <div class="banner-container">
-      <div class="hero-logo-Totem">
-        <img src="./src/soundwave-logo-patch.jpg" alt="SoundWave Logo Patch" class="logo-patch-img" />
+    <!-- ======================================================================
+       MONUMENTAL BIG HERO TYPE ARCHITECTURAL CENTERPIECE: SCHEDULE
+       ====================================================================== -->
+  <header id="big-hero-stage" class="hero-top-anchor">
+    <!-- Atmospheric Concert Photo Backdrop & Dark Radial Vignette -->
+    <div class="big-hero-backdrop" aria-hidden="true">
+      <img
+        src="./assets/archive/invitation-soundsystem-opt.jpg"
+        alt=""
+        class="big-hero-backdrop-img"
+      />
+      <div class="big-hero-vignette"></div>
+    </div>
+
+    <div class="big-hero-inner">
+      <!-- Top Tactical Status Ribbon -->
+      <div class="big-hero-status-ribbon">
+        <div class="hero-status-pill">
+          <span class="hero-live-dot"></span>
+          <span><b>PERSONAL ITINERARY PLANNER</b> &bull; DEC 18&ndash;20, 2026</span>
+        </div>
+        <div class="hero-coords-pill">
+          <span>25.7617&deg; N, 80.1918&deg; W &bull; WATERFRONT PARK, MIAMI</span>
+        </div>
+        <div class="hero-status-pill" style="border-color: #00ff66;">
+          <span style="color: #00ff66; font-weight: 800;">100% CLEAN SOLAR &amp; H₂O POWER</span>
+        </div>
       </div>
 
-      <div class="hero-card-block">
-        <div class="event-meta-row">FESTIVAL ITINERARY &bull; CAMPING &amp; OVERNIGHT GUIDE</div>
-        <h1 style="margin: 0.2rem 0 0.45rem;">My Weekend Schedule &amp; Camping Planner</h1>
-        <p style="margin: 0; font-size: 0.95rem;">
-          Drag and drop your must-see acts into your personalized schedule builder. Your customized weekend plan stays saved on your device so you never miss a set.
-        </p>
+      <!-- Monumental Wall-to-Wall Big Hero Type Typography -->
+      <div class="big-hero-monument">
+        <span class="hero-tape-badge">★ INTERACTIVE DRAG & DROP BUILDER ★</span>
+
+        <h1 class="big-hero-title" aria-label="TIME TABLE">
+          <span class="hero-type-line hero-type-line--sound">TIME</span>
+          <span class="hero-type-line hero-type-line--wave">TABLE</span>
+        </h1>
+
+        <span class="hero-theme-stamp">CAMPGROUNDS: TENT VILLAGE & GLAMPING</span>
+        <span class="hero-curator-scribble">&larr; Drag your favorite sets into your schedule</span>
       </div>
 
-      <aside class="banner-stats-box">
-        <h3>Campground Pulse</h3>
-        <div class="stat-line">
-          <span>TENT VILLAGE</span>
-          <span>82% Reserved</span>
+      <!-- Lower Hero Hardware Console Deck -->
+      <div class="big-hero-deck">
+        <!-- Column 1: Identity Flight-Chassis -->
+        <div class="hero-deck-chassis">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="deck-patch-lockup">
+            <img
+              src="./src/soundwave-logo-patch.jpg"
+              alt="Schedule Embroidered Patch"
+              class="deck-patch-thumb"
+            />
+            <div class="deck-patch-meta">
+              <h3>SCHEDULE & CAMP</h3>
+              <span>SYNCED TO LOCAL STORAGE</span>
+            </div>
+          </div>
+
+          <p class="deck-narrative-lead">
+            <strong>Design your seamless festival journey</strong> without missing conflicting acts. Built-in camp logistics, glamping guides, and shower maps.
+          </p>
+
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #8c8273;">
+            <span>AUTO-SAVES TO DEVICE &bull; OFFLINE CACHED</span>
+          </div>
         </div>
-        <div class="stat-line">
-          <span>CAMPING SHOWERS</span>
-          <span>24/7 Solar Heated</span>
+
+        <!-- Center Column: Quick Action Cockpit -->
+        <div class="hero-deck-cockpit">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="cockpit-header">
+            <h2>BUILD YOUR SOUNDWAVE SET SCHEDULE</h2>
+            <small>DEC 18&ndash;20, 2026</small>
+          </div>
+
+          <p class="cockpit-lead-text">
+            Drag and drop performers across Friday, Saturday, and Sunday. Explore village camping perks, 24/7 solar showers, and morning sound baths.
+          </p>
+
+          <div class="cockpit-cta-row">
+            
+            <a href="#drag-drop-planner" class="btn-monument-cta">
+              <span>Open Schedule Planner</span>
+              <span>&darr;</span>
+            </a>
+            <a href="./lineup.html" class="btn-monument-secondary">
+              <span>View Full Lineup</span>
+              <span>&nearr;</span>
+            </a>
+            <a href="./stages.html" class="btn-monument-secondary" style="border-color: #ffaa00; color: #ffaa00;">
+              <span>Stage Sightlines</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
         </div>
-        <div class="stat-line">
-          <span>MORNING YOGA</span>
-          <span>Daily 9:00 AM</span>
+
+        <!-- Column 3: Live Telemetry & Audio VU Peak Meter -->
+        <div class="hero-deck-telemetry">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="telemetry-title">
+            <span>CAMPING & SET TELEMETRY</span>
+            <span style="color: #00ff66;">ACTIVE</span>
+          </div>
+
+          <div class="telemetry-grid">
+            <div class="telemetry-item">
+              <span class="telemetry-label">TENT VILLAGE:</span>
+              <span class="telemetry-val">82% RESERVED</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">SOLAR SHOWERS:</span>
+              <span class="telemetry-val telemetry-val--pink">24/7 ACTIVE</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">MORNING YOGA:</span>
+              <span class="telemetry-val telemetry-val--green">DAILY 09:00</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">SCHEDULE ENGINE:</span>
+              <span class="telemetry-val" style="color: #ffaa00;">READY</span>
+            </div>
+          </div>
+
+          <!-- VU Audio Peak Meter Bar -->
+          <div class="telemetry-vu-meter" aria-label="Audio VU Meter">
+            <div class="vu-meter-labels">
+              <span>-20dB</span>
+              <span>-6dB</span>
+              <span>0dB</span>
+              <span style="color: #ff5555;">+3dB</span>
+            </div>
+            <div class="vu-meter-track" aria-hidden="true">
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-red"></span>
+            </div>
+          </div>
         </div>
-      </aside>
+      </div>
     </div>
   </header>
 
@@ -455,7 +590,7 @@
         </div>
 
         <!-- Tactile 3D Back to Top Button -->
-        <a href="#top-banner" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
+        <a href="#big-hero-stage" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
           <span class="top-arrow">&uarr;</span>
           <span>RETURN TO TOP</span>
         </a>

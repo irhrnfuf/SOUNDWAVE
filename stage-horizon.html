@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Horizon Arena (Est. 2014) — Stage History, Past Headliners, Attendance Records & Interactive Ticket Sightline Map" />
   <title>Horizon Arena &#127928; | Stage History &amp; Ticket Sightline Map &mdash; SoundWave 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800;900&display=swap" />
   <link rel="stylesheet" href="./src/styles.css" />
   <link rel="stylesheet" href="./src/tactile-console.css" />
 </head>
 <body>
+  <!-- Atmospheric Film Grain Overlay & Ambient Stage Lighting Bleeds -->
+  <div class="global-film-grain" aria-hidden="true"></div>
+  <div class="ambient-stage-glow" aria-hidden="true"></div>
 
   <!-- Top Scrolling Ticker -->
   <div class="marquee-strip" aria-label="Stage Archive Feed">
@@ -55,45 +61,164 @@
   </nav>
 
   <!-- Hero Banner with Embroidered Logo Patch + New Embroidered Stage Patch -->
-  <header id="top-banner">
-    <div class="banner-container">
-      <div class="hero-logo-Totem">
-        <img
-          src="./src/soundwave-logo-patch.jpg"
-          alt="SoundWave 2026 FEST Hand-Stitched Embroidered Thread Patch Logo"
-          class="logo-patch-img"
-        />
+    <!-- ======================================================================
+       MONUMENTAL BIG HERO TYPE ARCHITECTURAL CENTERPIECE: HORIZON ARENA
+       ====================================================================== -->
+  <header id="big-hero-stage" class="hero-top-anchor">
+    <!-- Atmospheric Concert Photo Backdrop & Dark Radial Vignette -->
+    <div class="big-hero-backdrop" aria-hidden="true">
+      <img
+        src="./assets/archive/photos/photo-crowd-dusk.jpg"
+        alt=""
+        class="big-hero-backdrop-img"
+      />
+      <div class="big-hero-vignette"></div>
+    </div>
+
+    <div class="big-hero-inner">
+      <!-- Top Tactical Status Ribbon -->
+      <div class="big-hero-status-ribbon">
+        <div class="hero-status-pill">
+          <span class="hero-live-dot"></span>
+          <span><b>STAGE 01 &bull; MAINSTAGE</b> &bull; DEC 18&ndash;20, 2026</span>
+        </div>
+        <div class="hero-coords-pill">
+          <span>25.7617&deg; N, 80.1918&deg; W &bull; WATERFRONT PARK, MIAMI</span>
+        </div>
+        <div class="hero-status-pill" style="border-color: #00ff66;">
+          <span style="color: #00ff66; font-weight: 800;">100% CLEAN SOLAR &amp; H₂O POWER</span>
+        </div>
       </div>
 
-      <div class="hero-card-block">
-        <div style="display:flex; align-items:center; gap: 1rem; flex-wrap:wrap;">
-          <span class="stage-patch-sprite stage-patch-lg stage-patch-horizon" title="Hand-Stitched Horizon Arena Electric Guitar & Pyro Patch"></span>
-          <div style="flex: 1;">
-            <div class="event-meta-row">STAGE 01 &bull; FOUNDED JUNE 2014 &bull; 12-YEAR ARCHIVE</div>
-            <h1 style="margin: 0.2rem 0 0.45rem;">Horizon Arena</h1>
-            <p style="margin: 0; font-size: 0.94rem;">
-              Our flagship oceanfront main amphitheater dating back to <strong>2014</strong>. Built to hold
-              <strong>48,500 fans</strong> across three tiered viewing zones with an 80,000-watt twin line-array and roof pyrotechnics.
-            </p>
+      <!-- Monumental Wall-to-Wall Big Hero Type Typography -->
+      <div class="big-hero-monument">
+        <span class="hero-tape-badge">★ THE MAINSTAGE AMPHITHEATER ★</span>
+
+        <h1 class="big-hero-title" aria-label="HORIZON ARENA">
+          <span class="hero-type-line hero-type-line--sound">HORIZON</span>
+          <span class="hero-type-line hero-type-line--wave">ARENA</span>
+        </h1>
+
+        <span class="hero-theme-stamp">GLOBAL HEADLINERS & OCEAN SUNSETS</span>
+        <span class="hero-curator-scribble">&larr; Unbeatable views over Biscayne Bay</span>
+      </div>
+
+      <!-- Lower Hero Hardware Console Deck -->
+      <div class="big-hero-deck">
+        <!-- Column 1: Identity Flight-Chassis -->
+        <div class="hero-deck-chassis">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="deck-patch-lockup">
+            <img
+              src="./src/stage-patches.jpg"
+              alt="Horizon Arena Embroidered Patch"
+              class="deck-patch-thumb"
+            />
+            <div class="deck-patch-meta">
+              <h3>HORIZON ARENA</h3>
+              <span>45,000 CAPACITY BOWL</span>
+            </div>
+          </div>
+
+          <p class="deck-narrative-lead">
+            <strong>The epic amphitheater of SoundWave</strong> hosting the world's most acclaimed headliners against the golden Miami sunset backdrop.
+          </p>
+
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #8c8273;">
+            <span>L-ACOUSTICS K1/K2 &bull; 100% SOLAR ARRAY</span>
+          </div>
+        </div>
+
+        <!-- Center Column: Quick Action Cockpit -->
+        <div class="hero-deck-cockpit">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="cockpit-header">
+            <h2>MAINSTAGE SIGHTLINES & HISTORICAL HEADLINERS</h2>
+            <small>DEC 18&ndash;20, 2026</small>
+          </div>
+
+          <p class="cockpit-lead-text">
+            Where 45,000 attendees unite every evening. Experience massive concert visuals, pyrotechnics, and crystal-clear acoustic projection.
+          </p>
+
+          <div class="cockpit-cta-row">
+            
+            <a href="./passes.html" class="btn-monument-cta">
+              <span>Claim Horizon Pass</span>
+              <span>&rarr;</span>
+            </a>
+            <a href="./stages.html" class="btn-monument-secondary">
+              <span>All 4 Stages</span>
+              <span>&rarr;</span>
+            </a>
+            <a href="./lineup.html" class="btn-monument-secondary" style="border-color: #ffaa00; color: #ffaa00;">
+              <span>Mainstage Lineup</span>
+              <span>&nearr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 3: Live Telemetry & Audio VU Peak Meter -->
+        <div class="hero-deck-telemetry">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="telemetry-title">
+            <span>HORIZON SPECS</span>
+            <span style="color: #00ff66;">ACTIVE</span>
+          </div>
+
+          <div class="telemetry-grid">
+            <div class="telemetry-item">
+              <span class="telemetry-label">SOUND RIG:</span>
+              <span class="telemetry-val">L-ACOUSTICS K1</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">CAPACITY:</span>
+              <span class="telemetry-val telemetry-val--pink">45,000 FANS</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">STAGE PROSCENIUM:</span>
+              <span class="telemetry-val telemetry-val--green">180 FT WIDTH</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">SOLAR BANK:</span>
+              <span class="telemetry-val" style="color: #ffaa00;">1.2 MEGAWATT</span>
+            </div>
+          </div>
+
+          <!-- VU Audio Peak Meter Bar -->
+          <div class="telemetry-vu-meter" aria-label="Audio VU Meter">
+            <div class="vu-meter-labels">
+              <span>-20dB</span>
+              <span>-6dB</span>
+              <span>0dB</span>
+              <span style="color: #ff5555;">+3dB</span>
+            </div>
+            <div class="vu-meter-track" aria-hidden="true">
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-red"></span>
+            </div>
           </div>
         </div>
       </div>
-
-      <aside class="banner-stats-box">
-        <h3>Stage Vital Stats</h3>
-        <div class="stat-line">
-          <span>INAUGURAL YEAR</span>
-          <span>2014 (12 Editions)</span>
-        </div>
-        <div class="stat-line">
-          <span>PEAK ATTENDANCE</span>
-          <span>48,500 (Sun Finale)</span>
-        </div>
-        <div class="stat-line">
-          <span>CUMULATIVE CROWD</span>
-          <span>1.42 Million Fans</span>
-        </div>
-      </aside>
     </div>
   </header>
 
@@ -468,7 +593,7 @@
         </div>
 
         <!-- Tactile 3D Back to Top Button -->
-        <a href="#top-banner" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
+        <a href="#big-hero-stage" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
           <span class="top-arrow">&uarr;</span>
           <span>RETURN TO TOP</span>
         </a>

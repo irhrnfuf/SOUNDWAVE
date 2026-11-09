@@ -5,10 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="SoundWave 2026 Official Lineup Poster & Stage Timetable — Coachella and Lollapalooza Style Billing Poster & Interactive Genre Filter" />
   <title>Official Lineup &amp; Festival Poster &mdash; SoundWave 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800;900&display=swap" />
   <link rel="stylesheet" href="./src/styles.css" />
   <link rel="stylesheet" href="./src/tactile-console.css" />
 </head>
 <body>
+  <!-- Atmospheric Film Grain Overlay & Ambient Stage Lighting Bleeds -->
+  <div class="global-film-grain" aria-hidden="true"></div>
+  <div class="ambient-stage-glow" aria-hidden="true"></div>
 
   <!-- Top Marquee Strip -->
   <div class="marquee-strip" aria-label="Lineup Feed">
@@ -41,35 +47,164 @@
   </nav>
 
   <!-- Header Banner -->
-  <header id="top-banner">
-    <div class="banner-container">
-      <div class="hero-logo-Totem">
-        <img src="./src/soundwave-logo-patch.jpg" alt="SoundWave Logo Patch" class="logo-patch-img" />
+    <!-- ======================================================================
+       MONUMENTAL BIG HERO TYPE ARCHITECTURAL CENTERPIECE: LINEUP
+       ====================================================================== -->
+  <header id="big-hero-stage" class="hero-top-anchor">
+    <!-- Atmospheric Concert Photo Backdrop & Dark Radial Vignette -->
+    <div class="big-hero-backdrop" aria-hidden="true">
+      <img
+        src="./assets/archive/photos/photo-stage-silhouettes.jpg"
+        alt=""
+        class="big-hero-backdrop-img"
+      />
+      <div class="big-hero-vignette"></div>
+    </div>
+
+    <div class="big-hero-inner">
+      <!-- Top Tactical Status Ribbon -->
+      <div class="big-hero-status-ribbon">
+        <div class="hero-status-pill">
+          <span class="hero-live-dot"></span>
+          <span><b>LIVE ARTIST ROSTER</b> &bull; DEC 18&ndash;20, 2026</span>
+        </div>
+        <div class="hero-coords-pill">
+          <span>25.7617&deg; N, 80.1918&deg; W &bull; WATERFRONT PARK, MIAMI</span>
+        </div>
+        <div class="hero-status-pill" style="border-color: #00ff66;">
+          <span style="color: #00ff66; font-weight: 800;">100% CLEAN SOLAR &amp; H₂O POWER</span>
+        </div>
       </div>
 
-      <div class="hero-card-block">
-        <div class="event-meta-row">OFFICIAL 2026 BILLING POSTER &bull; THREE DAYS &bull; 40+ ARTISTS</div>
-        <h1 style="margin: 0.2rem 0 0.45rem;">SoundWave 2026 Lineup &amp; Times</h1>
-        <p style="margin: 0; font-size: 0.95rem;">
-          Explore the official festival billing poster, filter performers by your favorite musical style, and plan your weekend around stage set times.
-        </p>
+      <!-- Monumental Wall-to-Wall Big Hero Type Typography -->
+      <div class="big-hero-monument">
+        <span class="hero-tape-badge">★ OFFICIAL 3-DAY BILLING ★</span>
+
+        <h1 class="big-hero-title" aria-label="LINE UP '26">
+          <span class="hero-type-line hero-type-line--sound">LINE</span>
+          <span class="hero-type-line hero-type-line--wave">UP '26</span>
+        </h1>
+
+        <span class="hero-theme-stamp">GENRES: SYNTH • INDIE • DUB • AMBIENT</span>
+        <span class="hero-curator-scribble">&larr; Don't miss the secret midnight Dome drop!</span>
       </div>
 
-      <aside class="banner-stats-box">
-        <h3>Festival Lineup</h3>
-        <div class="stat-line">
-          <span>MAIN STAGES</span>
-          <span>4 Unique Venues</span>
+      <!-- Lower Hero Hardware Console Deck -->
+      <div class="big-hero-deck">
+        <!-- Column 1: Identity Flight-Chassis -->
+        <div class="hero-deck-chassis">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="deck-patch-lockup">
+            <img
+              src="./src/soundwave-logo-patch.jpg"
+              alt="Lineup Embroidered Patch"
+              class="deck-patch-thumb"
+            />
+            <div class="deck-patch-meta">
+              <h3>SOUNDWAVE LINEUP</h3>
+              <span>OFFICIAL FESTIVAL POSTER</span>
+            </div>
+          </div>
+
+          <p class="deck-narrative-lead">
+            <strong>Featuring over 85 curated artists</strong> across synthwave, indie rock, underground techno, and acoustic roots on Biscayne Bay.
+          </p>
+
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #8c8273;">
+            <span>DEC 18&ndash;20 &bull; LIVE LACQUER SESSIONS</span>
+          </div>
         </div>
-        <div class="stat-line">
-          <span>HEADLINERS</span>
-          <span>6 Platinum Acts</span>
+
+        <!-- Center Column: Quick Action Cockpit -->
+        <div class="hero-deck-cockpit">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="cockpit-header">
+            <h2>EXPLORE PERFORMERS & STAGE SET TIMES</h2>
+            <small>DEC 18&ndash;20, 2026</small>
+          </div>
+
+          <p class="cockpit-lead-text">
+            Discover headliners, explore rising talent, and filter stage timetables to craft your ultimate weekend itinerary.
+          </p>
+
+          <div class="cockpit-cta-row">
+            
+            <a href="#lineup-filter-nav" class="btn-monument-cta">
+              <span>Filter By Genre</span>
+              <span>&darr;</span>
+            </a>
+            <a href="./passes.html" class="btn-monument-secondary">
+              <span>Claim Wristband</span>
+              <span>&rarr;</span>
+            </a>
+            <a href="./schedule-builder.html" class="btn-monument-secondary" style="border-color: #ffaa00; color: #ffaa00;">
+              <span>Build Schedule</span>
+              <span>&nearr;</span>
+            </a>
+          </div>
         </div>
-        <div class="stat-line">
-          <span>SET GENRES</span>
-          <span>Synth, Rock, Acoustic</span>
+
+        <!-- Column 3: Live Telemetry & Audio VU Peak Meter -->
+        <div class="hero-deck-telemetry">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="telemetry-title">
+            <span>LINEUP TELEMETRY</span>
+            <span style="color: #00ff66;">ACTIVE</span>
+          </div>
+
+          <div class="telemetry-grid">
+            <div class="telemetry-item">
+              <span class="telemetry-label">TOTAL ACTS:</span>
+              <span class="telemetry-val">85+ ARTISTS</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">HEADLINERS:</span>
+              <span class="telemetry-val telemetry-val--pink">6 PLATINUM SETS</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">STAGES:</span>
+              <span class="telemetry-val telemetry-val--green">4 ICONIC ARENAS</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">TIMETABLE:</span>
+              <span class="telemetry-val" style="color: #ffaa00;">FINALIZED</span>
+            </div>
+          </div>
+
+          <!-- VU Audio Peak Meter Bar -->
+          <div class="telemetry-vu-meter" aria-label="Audio VU Meter">
+            <div class="vu-meter-labels">
+              <span>-20dB</span>
+              <span>-6dB</span>
+              <span>0dB</span>
+              <span style="color: #ff5555;">+3dB</span>
+            </div>
+            <div class="vu-meter-track" aria-hidden="true">
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-red"></span>
+            </div>
+          </div>
         </div>
-      </aside>
+      </div>
     </div>
   </header>
 
@@ -467,7 +602,7 @@
         </div>
 
         <!-- Tactile 3D Back to Top Button -->
-        <a href="#top-banner" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
+        <a href="#big-hero-stage" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
           <span class="top-arrow">&uarr;</span>
           <span>RETURN TO TOP</span>
         </a>
