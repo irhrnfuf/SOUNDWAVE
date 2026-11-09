@@ -661,129 +661,115 @@ function setupEnterTransition() {
   }
 }
 
-// --- VINYL NEEDLE DROP AUDIO SYNTHESIS ---
-function playVinylNeedleDropSound() {
+// --- DJ MIXER DROP AUDIO SYNTHESIS ---
+function playDjDropSound() {
   if (!state.audioCtx) return;
   try {
     const ctx = state.audioCtx;
 
-    // 1. Needle touch transient (warm low-frequency thump: 65Hz -> 24Hz)
-    const osc = ctx.createOscillator();
-    const oscGain = ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(65, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(24, ctx.currentTime + 0.18);
-    oscGain.gain.setValueAtTime(0.2, ctx.currentTime);
-    oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
-    osc.connect(oscGain);
-    oscGain.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.28);
+    // 1. DJ Play transient & Punchy Sub Kick (130Hz -> 32Hz deep 808 drop)
+    const subOsc = ctx.createOscillator();
+    const subGain = ctx.createGain();
+    subOsc.type = 'sine';
+    subOsc.frequency.setValueAtTime(130, ctx.currentTime);
+    subOsc.frequency.exponentialRampToValueAtTime(32, ctx.currentTime + 0.35);
+    subGain.gain.setValueAtTime(0.35, ctx.currentTime);
+    subGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+    subOsc.connect(subGain);
+    subGain.connect(ctx.destination);
+    subOsc.start();
+    subOsc.stop(ctx.currentTime + 0.48);
 
-    // 2. Vinyl surface crackle & micro-noise burst
-    const bufferSize = Math.floor(ctx.sampleRate * 0.45);
+    // 2. Vinyl/jogwheel cue sweep (highpass filter sweep mimicking a crisp cue touch)
+    const bufferSize = Math.floor(ctx.sampleRate * 0.35);
     const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const output = noiseBuffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
-      // Occasional crackle spikes + low vinyl hiss
-      output[i] = Math.random() < 0.025 ? (Math.random() * 2 - 1) * 0.4 : (Math.random() * 2 - 1) * 0.02;
+      output[i] = (Math.random() * 2 - 1) * 0.08;
     }
     const noiseSource = ctx.createBufferSource();
     noiseSource.buffer = noiseBuffer;
 
-    // Bandpass filter for analog vinyl warmth
-    const filter = ctx.createBiquadFilter();
-    filter.type = 'bandpass';
-    filter.frequency.setValueAtTime(1400, ctx.currentTime);
-    filter.Q.setValueAtTime(1.8, ctx.currentTime);
+    const sweepFilter = ctx.createBiquadFilter();
+    sweepFilter.type = 'bandpass';
+    sweepFilter.frequency.setValueAtTime(450, ctx.currentTime);
+    sweepFilter.frequency.exponentialRampToValueAtTime(3200, ctx.currentTime + 0.3);
+    sweepFilter.Q.setValueAtTime(3.5, ctx.currentTime);
 
     const noiseGain = ctx.createGain();
-    noiseGain.gain.setValueAtTime(0.09, ctx.currentTime + 0.02);
-    noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.42);
+    noiseGain.gain.setValueAtTime(0.12, ctx.currentTime);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.32);
 
-    noiseSource.connect(filter);
-    filter.connect(noiseGain);
+    noiseSource.connect(sweepFilter);
+    sweepFilter.connect(noiseGain);
     noiseGain.connect(ctx.destination);
-    noiseSource.start(ctx.currentTime + 0.02);
+    noiseSource.start(ctx.currentTime);
 
-    // 3. Resonant vinyl opening chord (warm FM triad: 220Hz + 277Hz + 330Hz = A Major)
-    [220, 277.18, 329.63].forEach((f, idx) => {
+    // 3. Resonant synth chord opening into the festival archive (D Minor 9th: 146.8Hz, 220Hz, 261.6Hz, 329.6Hz)
+    [146.83, 220.0, 261.63, 329.63].forEach((f, idx) => {
       const chordOsc = ctx.createOscillator();
       const chordGain = ctx.createGain();
       chordOsc.type = 'triangle';
-      chordOsc.frequency.setValueAtTime(f, ctx.currentTime + 0.05);
-      chordGain.gain.setValueAtTime(0.001, ctx.currentTime + 0.05);
-      chordGain.gain.linearRampToValueAtTime(0.07 / (idx + 1), ctx.currentTime + 0.28);
-      chordGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.4);
+      chordOsc.frequency.setValueAtTime(f, ctx.currentTime + 0.06);
+      chordGain.gain.setValueAtTime(0.001, ctx.currentTime + 0.06);
+      chordGain.gain.linearRampToValueAtTime(0.08 / (idx + 1), ctx.currentTime + 0.25);
+      chordGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.6);
       chordOsc.connect(chordGain);
       chordGain.connect(ctx.destination);
-      chordOsc.start(ctx.currentTime + 0.05);
-      chordOsc.stop(ctx.currentTime + 1.5);
+      chordOsc.start(ctx.currentTime + 0.06);
+      chordOsc.stop(ctx.currentTime + 1.7);
     });
   } catch (e) {
-    console.warn("Vinyl needle audio error:", e);
+    console.warn("DJ drop audio error:", e);
   }
 }
 
-// --- OPTION 1: VINYL NEEDLE DROP GATEWAY CONTROLLER ---
-function setupVinylGateway() {
-  const gateway = document.getElementById('vinyl-gateway');
-  const deck = document.getElementById('turntable-deck');
-  const skipBtn = document.getElementById('vinyl-skip-btn');
+// --- OPTION 1: DJ MIXER GATEWAY CONTROLLER ---
+function setupDjGateway() {
+  const gateway = document.getElementById('dj-gateway');
+  const mixer = document.getElementById('dj-mixer-unit');
 
-  if (!gateway || !deck) return;
+  if (!gateway || !mixer) return;
 
-  let isDropping = false;
+  let isActivating = false;
 
-  function dismissGateway() {
-    gateway.classList.add('portal-dismissed');
-    setTimeout(() => {
-      gateway.style.display = 'none';
-    }, 900);
-  }
+  function triggerDjDrop() {
+    if (isActivating) return;
+    isActivating = true;
 
-  function dropNeedle() {
-    if (isDropping) return;
-    isDropping = true;
-
-    // Initialize audio context
+    // Initialize audio context on user interaction
     initAudio();
 
-    // 1. Tonearm lifts and swings over the spinning vinyl record
-    deck.classList.add('needle-dropping');
+    // 1. Mixer pulses and jogwheels glow
+    mixer.classList.add('dj-activating');
 
-    // 2. Needle lands in the groove at 700ms
-    setTimeout(() => {
-      playVinylNeedleDropSound();
-    }, 700);
+    // 2. Play punchy DJ drop sound
+    playDjDropSound();
 
-    // 3. Shockwave ripples expand and wipe portal into Scene 01
+    // 3. Shockwave expands and smoothly wipes portal into Scene 01
     setTimeout(() => {
-      dismissGateway();
+      gateway.classList.add('portal-dismissed');
+    }, 650);
+
+    // 4. Clean up after transition completes
+    setTimeout(() => {
+      gateway.style.display = 'none';
     }, 1450);
   }
 
-  // Click & Keydown triggers on the turntable
-  deck.addEventListener('click', dropNeedle);
-  deck.addEventListener('keydown', (e) => {
+  // Click & Keydown triggers on the DJ mixer
+  mixer.addEventListener('click', triggerDjDrop);
+  mixer.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      dropNeedle();
+      triggerDjDrop();
     }
   });
-
-  // Direct Skip Button
-  if (skipBtn) {
-    skipBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dismissGateway();
-    });
-  }
 }
 
 // --- DOM BOOT ---
 window.addEventListener('DOMContentLoaded', () => {
-  setupVinylGateway();
+  setupDjGateway();
   renderArchiveTable();
   renderPeopleGallery();
   initFrequencyCanvas();
