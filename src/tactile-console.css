@@ -1,0 +1,710 @@
+/* ==========================================================================
+   src/tactile-console.css
+   SOUNDWAVE 2026: TACTILE NEO-BRUTALISM & SKEUOMORPHIC AUDIO HARDWARE
+   Combines chunky Neo-Brutalist geometry with physical analog studio gear.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. GLOBAL TACTILE 3D BUTTON PHYSICS (NEO-BRUTALIST INJECTION-MOLDED KEYS)
+   -------------------------------------------------------------------------- */
+.nav-cta-btn,
+.secondary-btn,
+.portal-card-cta,
+.btn-primary-enter,
+.console-cta-button {
+  position: relative !important;
+  box-shadow: 0 4px 0 #111111, 4px 5px 0 #111111 !important;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.15s ease !important;
+  border: 2.5px solid #111111 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+
+/* Subtle top bevel highlight mimicking physical plastic keycaps */
+.nav-cta-btn::before,
+.secondary-btn::before,
+.portal-card-cta::before,
+.console-cta-button::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 1px !important;
+  left: 2px !important;
+  right: 2px !important;
+  height: 2px !important;
+  background: rgba(255, 255, 255, 0.45) !important;
+  border-radius: 999px !important;
+  pointer-events: none !important;
+}
+
+/* Hover lift */
+.nav-cta-btn:hover,
+.secondary-btn:hover,
+.portal-card-cta:hover,
+.console-cta-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 0 #111111, 5px 7px 0 #111111 !important;
+}
+
+/* Physical Mechanical Press-Down (Tactile Drop) */
+.nav-cta-btn:active,
+.secondary-btn:active,
+.portal-card-cta:active,
+.console-cta-button:active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #111111, 2px 2px 0 #111111 !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. VIP LAMINATE ALL-ACCESS PASS CARDS (.portal-card)
+   -------------------------------------------------------------------------- */
+.portal-card {
+  position: relative !important;
+  overflow: hidden !important;
+  background-color: #ffffff !important;
+  border: 3.5px solid #161415 !important;
+  border-radius: 18px !important;
+  box-shadow: 6px 6px 0px #161415 !important;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease !important;
+  padding-top: 1.85rem !important; /* room for physical grommet hole */
+}
+
+/* Metallic silver punched eyelet grommet at top center of pass */
+.portal-card-grommet {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #555 25%, #bbb 55%, #eee 70%, #222 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  border: 1.5px solid #111111;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.portal-card-grommet::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #161415;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+/* Glossy diagonal plastic laminate reflection */
+.portal-card-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 32%, transparent 45%, transparent 100%);
+  pointer-events: none;
+  z-index: 8;
+}
+
+.portal-card:hover {
+  transform: translate(-3px, -5px) rotate(-0.5deg) !important;
+  box-shadow: 10px 12px 0px #161415 !important;
+  background-color: #fffef9 !important;
+}
+
+.portal-card:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 3px 3px 0px #161415 !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. SOUNDWAVE TX-26 ANALOG MASTER TAPE CONSOLE (SKEUOMORPHIC AUDIO HARDWARE)
+   -------------------------------------------------------------------------- */
+.audio-console-unit {
+  position: relative;
+  background: linear-gradient(180deg, #2b2826 0%, #1e1c1b 45%, #151312 100%);
+  background-image: 
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.015) 2px, rgba(255, 255, 255, 0.015) 4px),
+    linear-gradient(180deg, #2b2826 0%, #1c1a19 50%, #121110 100%);
+  border: 4px solid #111111;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0px #111111, inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  padding: 1.75rem;
+  margin: 1.25rem 0 2.5rem;
+  color: #f4ede0;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Corner Industrial Hex Screws */
+.console-screw {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #888 0%, #444 60%, #111 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  border: 1px solid #111;
+  z-index: 5;
+}
+
+.console-screw::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  right: 2px;
+  height: 2px;
+  background: #111;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.screw-tl { top: 12px; left: 12px; }
+.screw-tr { top: 12px; right: 12px; }
+.screw-bl { bottom: 12px; left: 12px; }
+.screw-br { bottom: 12px; right: 12px; }
+
+/* Console Top Stencil Header Plate */
+.console-header-plate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #33302c;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.console-brand-mark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.console-brand-text {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: #fff9fc;
+  text-shadow: 0 1px 2px #000;
+}
+
+.console-sub-text {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #ff9100;
+}
+
+.console-status-cluster {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.console-led-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.console-led {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #333;
+  border: 1.5px solid #111;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+  transition: all 0.15s ease;
+}
+
+.led-power.active {
+  background: #00ff66;
+  box-shadow: 0 0 10px #00ff66, 0 0 18px rgba(0, 255, 102, 0.6);
+}
+
+.led-peak.peaking {
+  background: #ff2a4b;
+  box-shadow: 0 0 12px #ff2a4b, 0 0 22px rgba(255, 42, 75, 0.85);
+}
+
+.led-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #8c857b;
+}
+
+/* Console Main Grid: VU Meters, Cassette Deck, Hardware Controls */
+.console-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1.1fr;
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+/* --- LEFT BAY: DUAL ANALOG VU METERS --- */
+.console-meters-bay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.vu-meters-housing {
+  display: flex;
+  gap: 0.85rem;
+}
+
+.vu-meter {
+  position: relative;
+  flex: 1;
+  height: 120px;
+  background: #fbf6e2;
+  border: 3px solid #111111;
+  border-radius: 8px;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.4), 0 2px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.vu-dial-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.vu-header-label {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #4a453e;
+  letter-spacing: 0.12em;
+}
+
+.vu-scale-arc {
+  position: absolute;
+  top: 26px;
+  left: 10%;
+  right: 10%;
+  height: 38px;
+  border-top: 2px solid #222;
+  border-radius: 50% 50% 0 0;
+}
+
+.vu-scale-labels {
+  position: absolute;
+  top: 32px;
+  left: 6%;
+  right: 6%;
+  display: flex;
+  justify-content: space-between;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #222;
+}
+
+.vu-red-zone {
+  color: #d81b2a !important;
+}
+
+/* Mechanical Pivoting Needle */
+.vu-needle {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 1.5px;
+  height: 72px;
+  background: #111111;
+  transform-origin: bottom center;
+  transform: rotate(-32deg);
+  transition: transform 0.09s cubic-bezier(0.1, 0.9, 0.3, 1);
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+.vu-pivot-cap {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #111;
+  border: 1px solid #444;
+  z-index: 4;
+}
+
+.vu-glass-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%);
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* OLED Digital Tape Counter */
+.tape-counter-box {
+  background: #080808;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 0.5rem 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.counter-label,
+.counter-speed {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #8c857b;
+  letter-spacing: 0.08em;
+}
+
+.tape-digits {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #00ff66;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.8);
+  letter-spacing: 0.15em;
+}
+
+/* --- CENTER BAY: CASSETTE WELL & SPINNING SPOOLS --- */
+.console-cassette-bay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cassette-window {
+  position: relative;
+  width: 100%;
+  height: 165px;
+  background: #0d0c0b;
+  border: 3px solid #111111;
+  border-radius: 12px;
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.cassette-body {
+  width: 100%;
+  height: 100%;
+  background: #1c1a18;
+  border: 2px solid #2d2925;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.65rem;
+  box-sizing: border-box;
+}
+
+.cassette-label-strip {
+  background: #f7b2d4;
+  color: #111111;
+  border: 1.5px solid #111;
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.c-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.c-artist {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.cassette-spools-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+}
+
+.cassette-reel {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ddd 35%, #222 45%, #555 70%, #111 100%);
+  border: 2px solid #111;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reel-hub {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #111;
+  position: relative;
+}
+
+.hub-tooth {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 20px;
+  background: #f4ede0;
+  transform-origin: center center;
+  margin-left: -2.5px;
+  margin-top: -10px;
+}
+
+.hub-tooth.t-1 { transform: rotate(0deg); }
+.hub-tooth.t-2 { transform: rotate(60deg); }
+.hub-tooth.t-3 { transform: rotate(120deg); }
+
+/* Rotating Reels when playing */
+.cassette-window.is-playing .cassette-reel {
+  animation: spinTapeReel 2.2s linear infinite;
+}
+
+@keyframes spinTapeReel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.cassette-tape-bridge {
+  flex: 1;
+  height: 18px;
+  margin: 0 0.5rem;
+  background: #0d0c0b;
+  border: 1px solid #333;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.tape-tape-ribbon {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, #3d2314 0%, #683818 50%, #3d2314 100%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.cassette-glass-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, transparent 45%, rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* --- RIGHT BAY: MECHANICAL TRANSPORT ROCKERS & POTENTIOMETER --- */
+.console-controls-bay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.console-transport-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.65rem;
+}
+
+/* Tactile Studio Rocker Buttons */
+.console-rocker-btn {
+  background: #252220;
+  color: #f4ede0;
+  border: 2.5px solid #111111;
+  border-radius: 8px;
+  padding: 0.65rem 0.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  box-shadow: 0 4px 0 #111111, inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+  outline: none;
+}
+
+.console-rocker-btn .btn-icon {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.console-rocker-btn .btn-text {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.console-rocker-btn:hover {
+  background: #36322e;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 #111111;
+}
+
+.console-rocker-btn:active,
+.console-rocker-btn.is-active {
+  transform: translateY(3px) !important;
+  box-shadow: 0 1px 0 #111111, inset 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+.btn-play.is-active {
+  background: #00e676 !important;
+  color: #111111 !important;
+  box-shadow: 0 0 14px rgba(0, 230, 118, 0.5) !important;
+}
+
+.btn-pause.is-active {
+  background: #ffaa00 !important;
+  color: #111111 !important;
+}
+
+/* Master Gain Potentiometer & Quick Booking Box */
+.console-master-pot-row {
+  display: grid;
+  grid-template-columns: 85px 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.potentiometer-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pot-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #8c857b;
+}
+
+.pot-dial-wrap {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pot-knob {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #555 0%, #252220 65%, #111 100%);
+  border: 2px solid #111;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  position: relative;
+  cursor: pointer;
+  transform: rotate(45deg);
+  transition: transform 0.1s ease;
+}
+
+.knob-marker {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  width: 2.5px;
+  height: 10px;
+  background: #00ff66;
+  border-radius: 1px;
+  margin-left: -1.25px;
+  box-shadow: 0 0 4px #00ff66;
+}
+
+.pot-level-txt {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #00ff66;
+}
+
+/* Quick Pass Booking Box inside Console */
+.console-pass-quick-box {
+  background: rgba(247, 178, 212, 0.16);
+  border: 2px solid #3d353b;
+  border-radius: 10px;
+  padding: 0.75rem 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pass-quick-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.console-pass-quick-box p {
+  margin: 0;
+  font-size: 0.76rem;
+  color: #c9c3b8;
+  line-height: 1.35;
+}
+
+.tag-status {
+  background: #111;
+  color: #f7b2d4;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.console-cta-button {
+  display: inline-block;
+  text-align: center;
+  background: #f7b2d4 !important;
+  color: #111111 !important;
+  padding: 6px 10px !important;
+  border-radius: 6px !important;
+  font-size: 0.78rem !important;
+  text-decoration: none !important;
+  margin-top: 0.2rem;
+}
+
+/* Responsive Console on Mobile */
+@media (max-width: 900px) {
+  .console-main-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
