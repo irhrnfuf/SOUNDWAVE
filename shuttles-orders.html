@@ -19,6 +19,7 @@
   </script>
 
   <link rel="stylesheet" href="./src/styles.css" />
+  <link rel="stylesheet" href="./src/tactile-console.css" />
 </head>
 <body>
 
@@ -168,29 +169,112 @@
 
   </div>
 
-  <footer id="footer">
-    <div class="footer-inner">
-      <div class="footer-brand-col">
-        <div class="footer-brand-title">SOUNDWAVE FESTIVAL MIAMI &rsquo;26</div>
-        <p class="footer-tagline">Three Days &bull; 4 Iconic Stages &bull; Clean Solar &amp; H<sub>2</sub>O Energy &bull; Ocean Stewardship</p>
-        <p class="footer-copy">&copy; 2026 SOUNDWAVE MUSIC FESTIVAL &bull; ALL RIGHTS RESERVED</p>
+  <!-- ======================================================================
+       REDEFINED FESTIVAL FOOTER: MAINSTAGE PRODUCTION DECK
+       ====================================================================== -->
+  <footer id="footer" class="mainstage-footer">
+    <!-- Top Hazard Marquee Strip -->
+    <div class="footer-marquee-strip" aria-hidden="true">
+      <div class="footer-marquee-track">
+        <span>★ SOUNDWAVE 2026</span>
+        <span>★ DEC 18–20, 2026</span>
+        <span>★ WATERFRONT PARK, MIAMI</span>
+        <span>★ 4 ICONIC STAGES</span>
+        <span>★ 100% CLEAN SOLAR &amp; H₂O POWER</span>
+        <span>★ 12TH ANNUAL EDITION</span>
+        <span>★ SOUNDWAVE 2026</span>
+        <span>★ DEC 18–20, 2026</span>
+        <span>★ WATERFRONT PARK, MIAMI</span>
+        <span>★ 4 ICONIC STAGES</span>
+        <span>★ 100% CLEAN SOLAR &amp; H₂O POWER</span>
+        <span>★ 12TH ANNUAL EDITION</span>
       </div>
-      <div class="footer-links-col">
-        <div class="footer-col-header">Quick Portals</div>
-        <ul>
+    </div>
+
+    <div class="footer-inner-deck">
+      <!-- Column 1: Festival Identity & Heartbeat Capsule -->
+      <div class="footer-col-identity">
+        <div class="footer-brand-lockup">
+          <img
+            src="./src/soundwave-logo-patch.jpg"
+            alt="SoundWave 2026 Embroidered Patch Logo"
+            class="footer-patch-logo"
+          />
+          <div>
+            <h2 class="footer-festival-title">SOUNDWAVE 2026</h2>
+            <span class="footer-festival-subtitle">AN INVITATION TO MUSIC, ART &amp; WHIMSY</span>
+          </div>
+        </div>
+
+        <p class="footer-narrative">
+          A three-day gathering uniting 45,000 music lovers along Biscayne Bay with four distinct soundscapes, live vinyl lacquer cutting, kinetic sculptures, and ocean stewardship.
+        </p>
+
+        <!-- Live Festival Pulse Capsule -->
+        <div class="footer-status-capsule">
+          <span class="live-status-dot"></span>
+          <div class="live-status-text">
+            <b>GATES OPEN DEC 18 &bull; 16:00 EST</b>
+            <small>Waterfront Park &bull; Miami, FL &bull; 12th Annual Edition</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Explore Navigation -->
+      <div class="footer-col-nav">
+        <div class="footer-section-badge">EXPLORE</div>
+        <ul class="footer-nav-list">
+          <li><a href="./welcome.html" class="archive-highlight-link">Living Archive <span class="arrow">&nearr;</span></a></li>
           <li><a href="./index.html">Welcome Hub</a></li>
-          <li><a href="./lineup.html">Lineup &amp; Poster</a></li>
-          <li><a href="./schedule-builder.html">My Schedule &amp; Camping</a></li>
-          <li><a href="./stages.html">All Stages &amp; Media</a></li>
+          <li><a href="./lineup.html">Lineup &amp; 3-Day Poster</a></li>
+          <li><a href="./stages.html">All 4 Stages &amp; Sightlines</a></li>
+          <li><a href="./schedule-builder.html">My Schedule &amp; Itinerary</a></li>
         </ul>
       </div>
-      <div class="footer-links-col">
-        <div class="footer-col-header">Passes &amp; Transit</div>
-        <ul>
-          <li><a href="./passes.html">Passes &amp; Checkout</a></li>
-          <li><a href="./shuttles-orders.html">Shuttles &amp; Live Orders</a></li>
-          <li><a href="mailto:tickets@soundwave2026.com?subject=SoundWave%20Festival%20Inquiry">Box Office Contact</a></li>
+
+      <!-- Column 3: Passes & Logistics -->
+      <div class="footer-col-nav">
+        <div class="footer-section-badge">PASSES &amp; TRANSIT</div>
+        <ul class="footer-nav-list">
+          <li><a href="./passes.html">3-Day GA, VIP &amp; Platinum</a></li>
+          <li><a href="./passes.html#wristband-perks">Wristband Access Guide</a></li>
+          <li><a href="./shuttles-orders.html">Shuttles, Transit &amp; Orders</a></li>
+          <li><a href="./schedule-builder.html#camping-info">Camping &amp; Glamping Village</a></li>
+          <li><a href="mailto:tickets@soundwave2026.com?subject=SoundWave%202026%20Box%20Office">Box Office &amp; Help Desk</a></li>
         </ul>
+      </div>
+
+      <!-- Column 4: Stay in the Groove & Back-to-Top -->
+      <div class="footer-col-actions">
+        <div class="footer-section-badge">CONNECT</div>
+        <p class="footer-connect-txt">
+          Follow the festival broadcast feed for unannounced secret sets and popup stage drop times:
+        </p>
+
+        <!-- Social Pill Badges -->
+        <div class="footer-social-chips">
+          <span class="social-chip">@SOUNDWAVEFEST</span>
+          <span class="social-chip">SPOTIFY RADIO</span>
+          <span class="social-chip">COMMUNITY DISCORD</span>
+        </div>
+
+        <!-- Tactile 3D Back to Top Button -->
+        <a href="#top-banner" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
+          <span class="top-arrow">&uarr;</span>
+          <span>RETURN TO TOP</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom Perforated Baseline & Sustainability Ledger -->
+    <div class="footer-baseline-bar">
+      <div class="baseline-left">
+        <span>&copy; 2026 SOUNDWAVE MUSIC FESTIVAL &bull; ALL RIGHTS RESERVED</span>
+        <span class="baseline-sep">&bull;</span>
+        <span class="sustainability-tag">100% SOLAR &amp; ZERO-PLASTIC INITIATIVE</span>
+      </div>
+      <div class="baseline-right">
+        <span class="coordinates-stamp">25.7617&deg; N, 80.1918&deg; W &bull; BISCAYNE BAY</span>
       </div>
     </div>
   </footer>
