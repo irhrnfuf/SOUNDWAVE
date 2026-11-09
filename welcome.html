@@ -17,6 +17,76 @@
 </head>
 <body>
 
+  <!-- ======================================================================
+       OPTION 1: THE VINYL NEEDLE DROP ENTRANCE GATEWAY
+       ====================================================================== -->
+  <div id="vinyl-gateway" class="vinyl-gateway" role="dialog" aria-modal="true" aria-label="Interactive Vinyl Needle Drop Portal">
+    <div class="vinyl-ambient-glow" aria-hidden="true"></div>
+
+    <!-- Turntable Deck Container -->
+    <div id="turntable-deck" class="turntable-deck" tabindex="0" role="button" aria-label="Click to drop the needle onto the vinyl record and enter SoundWave Archive">
+      
+      <!-- Vinyl LP Platter -->
+      <div class="vinyl-platter">
+        <div id="vinyl-record" class="vinyl-record">
+          <!-- Concentric Micro-Grooves & Sheen Highlights -->
+          <div class="vinyl-groove g-outer" aria-hidden="true"></div>
+          <div class="vinyl-groove g-mid" aria-hidden="true"></div>
+          <div class="vinyl-groove g-inner" aria-hidden="true"></div>
+          <div class="vinyl-sheen sheen-a" aria-hidden="true"></div>
+          <div class="vinyl-sheen sheen-b" aria-hidden="true"></div>
+
+          <!-- Vintage Record Center Label -->
+          <div class="vinyl-center-label" aria-hidden="true">
+            <div class="label-border-ring"></div>
+            <div class="label-rpm">33⅓ RPM &bull; STEREO</div>
+            <div class="label-brand">SOUNDWAVE</div>
+            <div class="label-title">THE LIVING ARCHIVE</div>
+            <div class="label-details">ED. 01&ndash;12 &bull; 2014&ndash;2026</div>
+            <div class="label-side">SIDE A</div>
+            <div class="label-spindle"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Precision Turntable Tonearm with Stylus Cartridge -->
+      <div id="turntable-tonearm" class="turntable-tonearm" aria-hidden="true">
+        <!-- Pivot Gimbal Base & Counterweight -->
+        <div class="tonearm-pivot">
+          <div class="pivot-bearing"></div>
+          <div class="counterweight"></div>
+        </div>
+        <!-- Brushed Aluminum Wand -->
+        <div class="tonearm-wand"></div>
+        <!-- Headshell & Stylus Needle -->
+        <div class="tonearm-headshell">
+          <div class="cartridge">
+            <span class="cartridge-badge">SW</span>
+            <span class="stylus-needle"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shockwave Sound Rings (Emanate outward when needle touches down) -->
+      <div id="vinyl-shockwaves" class="vinyl-shockwaves" aria-hidden="true">
+        <span class="shock-ring sr-1"></span>
+        <span class="shock-ring sr-2"></span>
+        <span class="shock-ring sr-3"></span>
+      </div>
+
+      <!-- Interactive Prompt Bar -->
+      <div id="needle-prompt-bar" class="needle-prompt-bar">
+        <span class="needle-prompt-dot"></span>
+        <span class="needle-prompt-text">[ CLICK RECORD TO DROP NEEDLE ]</span>
+      </div>
+    </div>
+
+    <!-- Direct Skip Option -->
+    <button id="vinyl-skip-btn" class="vinyl-skip-btn" type="button" aria-label="Skip vinyl intro">
+      SKIP INTRO &rarr;
+    </button>
+  </div>
+
   <!-- Subtle Atmospheric Film & Paper Grain Overlay -->
   <div class="archive-grain" aria-hidden="true"></div>
 

@@ -909,3 +909,474 @@ html, body {
     display: none;
   }
 }
+
+/* ==========================================================================
+   OPTION 1: THE VINYL NEEDLE DROP ENTRANCE GATEWAY
+   ========================================================================== */
+.vinyl-gateway {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #1b1714 0%, #0a0908 60%, #000000 100%);
+  overflow: hidden;
+  user-select: none;
+  transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1), transform 0.85s ease, visibility 0.85s;
+}
+
+.vinyl-gateway.portal-dismissed {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.vinyl-ambient-glow {
+  position: absolute;
+  width: 75vw;
+  height: 75vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(208, 103, 90, 0.12) 0%, rgba(241, 207, 101, 0.05) 45%, transparent 70%);
+  pointer-events: none;
+  filter: blur(50px);
+}
+
+/* Turntable Deck Container */
+.turntable-deck {
+  position: relative;
+  width: clamp(340px, 46vw, 540px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  z-index: 5;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.turntable-deck:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 35px rgba(208, 103, 90, 0.3));
+}
+
+.turntable-deck:focus-visible {
+  filter: drop-shadow(0 0 35px rgba(255, 42, 133, 0.6));
+}
+
+/* Vinyl Platter & Spinning Disk */
+.vinyl-platter {
+  position: relative;
+  width: 88%;
+  height: 88%;
+  border-radius: 50%;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.95),
+    0 0 40px rgba(0, 0, 0, 0.85);
+}
+
+.vinyl-record {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #0a0908 0%, #171513 45%, #0e0d0c 70%, #1a1816 88%, #080706 100%);
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.9),
+    0 0 0 2px #26221d,
+    0 0 0 4px #12100e;
+  animation: vinylSpin 3.2s linear infinite;
+}
+
+@keyframes vinylSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Concentric Vinyl Micro-Grooves */
+.vinyl-groove {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.vinyl-groove.g-outer {
+  inset: 5%;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.02),
+    inset 0 0 0 10px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 18px rgba(255, 255, 255, 0.025),
+    inset 0 0 0 28px rgba(0, 0, 0, 0.5);
+}
+
+.vinyl-groove.g-mid {
+  inset: 18%;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.025),
+    inset 0 0 0 12px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 24px rgba(255, 255, 255, 0.03);
+}
+
+.vinyl-groove.g-inner {
+  inset: 31%;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.035),
+    inset 0 0 0 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Specular Light Sheen Reflection across Grooves */
+.vinyl-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 35deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.07) 35deg,
+    transparent 70deg,
+    transparent 180deg,
+    rgba(255, 255, 255, 0.07) 215deg,
+    transparent 250deg
+  );
+}
+
+/* Center Record Label */
+.vinyl-center-label {
+  position: absolute;
+  width: 37%;
+  height: 37%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fbf7ee 0%, #f1e7d2 75%, #d9c39e 100%);
+  border: 2px solid #5a3825;
+  box-shadow:
+    inset 0 0 10px rgba(0, 0, 0, 0.35),
+    0 0 12px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #1a1714;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.label-border-ring {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px dashed rgba(90, 56, 37, 0.5);
+  pointer-events: none;
+}
+
+.label-rpm {
+  font-family: var(--sw-mono);
+  font-size: clamp(0.38rem, 0.75vw, 0.5rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #7a5e48;
+  margin-top: 2px;
+}
+
+.label-brand {
+  font-family: var(--sw-cond);
+  font-size: clamp(1rem, 2.4vw, 1.5rem);
+  letter-spacing: 0.14em;
+  line-height: 0.95;
+  color: #d0675a;
+  margin: 3px 0 1px;
+}
+
+.label-title {
+  font-family: var(--sw-mono);
+  font-size: clamp(0.42rem, 0.82vw, 0.54rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #2b2118;
+}
+
+.label-details {
+  font-family: var(--sw-mono);
+  font-size: clamp(0.34rem, 0.68vw, 0.44rem);
+  letter-spacing: 0.12em;
+  color: #8c725d;
+  margin-top: 2px;
+}
+
+.label-side {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--sw-mono);
+  font-size: 0.45rem;
+  font-weight: 700;
+  color: #5a3825;
+  border: 1px solid rgba(90, 56, 37, 0.4);
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+.label-spindle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #0c0b0a;
+  border: 2px solid #d4af37;
+  box-shadow: inset 0 0 5px #000;
+  z-index: 2;
+}
+
+/* Precision Turntable Tonearm */
+.turntable-tonearm {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 140px;
+  height: 310px;
+  pointer-events: none;
+  transform-origin: 32px 32px;
+  transform: rotate(-32deg); /* Initial rest position */
+  transition: transform 0.75s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 10;
+}
+
+.turntable-deck.needle-dropping .turntable-tonearm {
+  transform: rotate(18deg); /* Swings over the outer vinyl groove */
+}
+
+/* Tonearm Base & Gimbal Bearing */
+.tonearm-pivot {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 40px;
+  height: 40px;
+}
+
+.pivot-bearing {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e1e4ea, #606470 65%, #2a2c33 100%);
+  border: 2px solid #1c1d22;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.counterweight {
+  position: absolute;
+  top: -14px;
+  left: 8px;
+  width: 24px;
+  height: 20px;
+  background: linear-gradient(90deg, #18191c, #3a3d46, #18191c);
+  border: 1px solid #111;
+  border-radius: 3px;
+}
+
+/* Brushed Aluminum Wand */
+.tonearm-wand {
+  position: absolute;
+  top: 32px;
+  left: 30px;
+  width: 5px;
+  height: 220px;
+  background: linear-gradient(90deg, #d8dbe2, #999ea8 60%, #686c75);
+  border-radius: 2px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.7);
+  transform: rotate(3deg);
+  transform-origin: top center;
+}
+
+/* Headshell & Cartridge */
+.tonearm-headshell {
+  position: absolute;
+  bottom: 45px;
+  left: 20px;
+  width: 28px;
+  height: 48px;
+  transform: rotate(-14deg);
+  transition: transform 0.25s ease 0.65s;
+}
+
+.turntable-deck.needle-dropping .tonearm-headshell {
+  transform: rotate(-14deg) translateY(4px);
+}
+
+.cartridge {
+  width: 100%;
+  height: 100%;
+  background: #191a1e;
+  border: 2px solid #33363f;
+  border-radius: 4px 4px 6px 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartridge-badge {
+  font-family: var(--sw-mono);
+  font-size: 0.45rem;
+  font-weight: 700;
+  color: #ff2a85;
+  letter-spacing: 0.1em;
+}
+
+.stylus-needle {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 7px;
+  background: #ff2a85;
+  box-shadow: 0 0 6px #ff2a85;
+  border-radius: 1px;
+}
+
+/* Sound Shockwave Rings */
+.vinyl-shockwaves {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+}
+
+.shock-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  opacity: 0;
+}
+
+.turntable-deck.needle-dropping .shock-ring.sr-1 {
+  border-color: #ff2a85;
+  box-shadow: 0 0 30px #ff2a85;
+  animation: shockPulse 1.3s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  animation-delay: 0.72s;
+}
+
+.turntable-deck.needle-dropping .shock-ring.sr-2 {
+  border-color: #00f0ff;
+  box-shadow: 0 0 30px #00f0ff;
+  animation: shockPulse 1.3s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  animation-delay: 0.86s;
+}
+
+.turntable-deck.needle-dropping .shock-ring.sr-3 {
+  border-color: #f1cf65;
+  box-shadow: 0 0 30px #f1cf65;
+  animation: shockPulse 1.3s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  animation-delay: 1.0s;
+}
+
+@keyframes shockPulse {
+  0% {
+    width: 60px;
+    height: 60px;
+    opacity: 1;
+    transform: scale(0.2);
+  }
+  100% {
+    width: 1100px;
+    height: 1100px;
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+/* Interactive Prompt Bar */
+.needle-prompt-bar {
+  position: absolute;
+  bottom: -48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 1.15rem;
+  background: rgba(20, 18, 16, 0.85);
+  border: 1px solid rgba(255, 42, 133, 0.4);
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(255, 42, 133, 0.25);
+  transition: opacity 0.3s ease;
+}
+
+.needle-prompt-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff2a85;
+  box-shadow: 0 0 8px #ff2a85;
+  animation: needleDotBlink 1.4s infinite;
+}
+
+@keyframes needleDotBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.needle-prompt-text {
+  font-family: var(--sw-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #fff;
+}
+
+.turntable-deck.needle-dropping .needle-prompt-bar {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Skip Intro Button */
+.vinyl-skip-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: rgba(20, 18, 16, 0.85);
+  border: 1px solid var(--sw-border);
+  color: var(--sw-cream-dim);
+  font-family: var(--sw-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  cursor: pointer;
+  z-index: 100010;
+  transition: all 0.2s ease;
+}
+
+.vinyl-skip-btn:hover {
+  background: var(--sw-surface);
+  color: var(--sw-cream);
+  border-color: var(--sw-cream-dim);
+}
+
+@media (max-width: 640px) {
+  .turntable-deck {
+    width: 88vw;
+  }
+  .turntable-tonearm {
+    right: -25px;
+    height: 250px;
+  }
+  .needle-prompt-bar {
+    bottom: -40px;
+  }
+}

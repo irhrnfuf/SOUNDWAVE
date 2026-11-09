@@ -661,8 +661,129 @@ function setupEnterTransition() {
   }
 }
 
+// --- VINYL NEEDLE DROP AUDIO SYNTHESIS ---
+function playVinylNeedleDropSound() {
+  if (!state.audioCtx) return;
+  try {
+    const ctx = state.audioCtx;
+
+    // 1. Needle touch transient (warm low-frequency thump: 65Hz -> 24Hz)
+    const osc = ctx.createOscillator();
+    const oscGain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(65, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(24, ctx.currentTime + 0.18);
+    oscGain.gain.setValueAtTime(0.2, ctx.currentTime);
+    oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+    osc.connect(oscGain);
+    oscGain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.28);
+
+    // 2. Vinyl surface crackle & micro-noise burst
+    const bufferSize = Math.floor(ctx.sampleRate * 0.45);
+    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const output = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      // Occasional crackle spikes + low vinyl hiss
+      output[i] = Math.random() < 0.025 ? (Math.random() * 2 - 1) * 0.4 : (Math.random() * 2 - 1) * 0.02;
+    }
+    const noiseSource = ctx.createBufferSource();
+    noiseSource.buffer = noiseBuffer;
+
+    // Bandpass filter for analog vinyl warmth
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(1400, ctx.currentTime);
+    filter.Q.setValueAtTime(1.8, ctx.currentTime);
+
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.09, ctx.currentTime + 0.02);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.42);
+
+    noiseSource.connect(filter);
+    filter.connect(noiseGain);
+    noiseGain.connect(ctx.destination);
+    noiseSource.start(ctx.currentTime + 0.02);
+
+    // 3. Resonant vinyl opening chord (warm FM triad: 220Hz + 277Hz + 330Hz = A Major)
+    [220, 277.18, 329.63].forEach((f, idx) => {
+      const chordOsc = ctx.createOscillator();
+      const chordGain = ctx.createGain();
+      chordOsc.type = 'triangle';
+      chordOsc.frequency.setValueAtTime(f, ctx.currentTime + 0.05);
+      chordGain.gain.setValueAtTime(0.001, ctx.currentTime + 0.05);
+      chordGain.gain.linearRampToValueAtTime(0.07 / (idx + 1), ctx.currentTime + 0.28);
+      chordGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.4);
+      chordOsc.connect(chordGain);
+      chordGain.connect(ctx.destination);
+      chordOsc.start(ctx.currentTime + 0.05);
+      chordOsc.stop(ctx.currentTime + 1.5);
+    });
+  } catch (e) {
+    console.warn("Vinyl needle audio error:", e);
+  }
+}
+
+// --- OPTION 1: VINYL NEEDLE DROP GATEWAY CONTROLLER ---
+function setupVinylGateway() {
+  const gateway = document.getElementById('vinyl-gateway');
+  const deck = document.getElementById('turntable-deck');
+  const skipBtn = document.getElementById('vinyl-skip-btn');
+
+  if (!gateway || !deck) return;
+
+  let isDropping = false;
+
+  function dismissGateway() {
+    gateway.classList.add('portal-dismissed');
+    setTimeout(() => {
+      gateway.style.display = 'none';
+    }, 900);
+  }
+
+  function dropNeedle() {
+    if (isDropping) return;
+    isDropping = true;
+
+    // Initialize audio context
+    initAudio();
+
+    // 1. Tonearm lifts and swings over the spinning vinyl record
+    deck.classList.add('needle-dropping');
+
+    // 2. Needle lands in the groove at 700ms
+    setTimeout(() => {
+      playVinylNeedleDropSound();
+    }, 700);
+
+    // 3. Shockwave ripples expand and wipe portal into Scene 01
+    setTimeout(() => {
+      dismissGateway();
+    }, 1450);
+  }
+
+  // Click & Keydown triggers on the turntable
+  deck.addEventListener('click', dropNeedle);
+  deck.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      dropNeedle();
+    }
+  });
+
+  // Direct Skip Button
+  if (skipBtn) {
+    skipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissGateway();
+    });
+  }
+}
+
 // --- DOM BOOT ---
 window.addEventListener('DOMContentLoaded', () => {
+  setupVinylGateway();
   renderArchiveTable();
   renderPeopleGallery();
   initFrequencyCanvas();
