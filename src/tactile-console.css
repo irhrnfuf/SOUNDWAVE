@@ -1651,7 +1651,7 @@
     radial-gradient(circle at 50% 0%, #1d1a17 0%, #12100e 85%) !important;
   border-bottom: 2.5px solid #282420 !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 2px 0 rgba(255, 170, 0, 0.6) !important;
-  padding: 0.65rem 1.5rem !important;
+  padding: 0.45rem 1.25rem !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
 }
@@ -1670,29 +1670,33 @@
 }
 
 .sticky-navbar .nav-inner {
-  max-width: 1400px !important;
+  max-width: 1440px !important;
   margin: 0 auto !important;
   display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 1.25rem !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
 }
 
 /* Brand Emblem & Wordmark */
 .brand-link {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 0.85rem !important;
+  gap: 0.65rem !important;
   text-decoration: none !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   padding: 0 !important;
+  flex-shrink: 0 !important;
 }
 
 .nav-logo-patch {
-  height: 44px !important;
-  width: 44px !important;
+  height: 38px !important;
+  width: 38px !important;
   border-radius: 8px !important;
   border: 1.5px solid #ffaa00 !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7) !important;
@@ -1706,7 +1710,7 @@
 
 /* High-Impact Wordmark */
 .lolla-wordmark-svg {
-  height: 40px !important;
+  height: 34px !important;
   width: auto !important;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8)) !important;
 }
@@ -1732,29 +1736,33 @@
   letter-spacing: 2px !important;
 }
 
-/* Hardware Nav Keys */
+/* Hardware Nav Keys — STRICTLY 1 SINGLE LINE WITHOUT WRAPPING */
 .sticky-navbar ul {
   display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   align-items: center !important;
-  gap: 0.4rem !important;
+  gap: 0.3rem !important;
   list-style: none !important;
   margin: 0 !important;
   padding: 0 !important;
+  flex-shrink: 0 !important;
 }
 
 .sticky-navbar ul li {
-  display: inline-block !important;
+  display: inline-flex !important;
+  flex-shrink: 0 !important;
 }
 
 .sticky-navbar ul li a {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 0.35rem !important;
-  padding: 0.45rem 0.85rem !important;
+  gap: 0.25rem !important;
+  padding: 0.38rem 0.62rem !important;
   font-family: "IBM Plex Mono", "Space Grotesk", monospace !important;
-  font-size: 0.76rem !important;
+  font-size: 0.72rem !important;
   font-weight: 700 !important;
-  letter-spacing: 0.05em !important;
+  letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
   color: #d1c8bb !important;
   background: #191715 !important;
@@ -1764,6 +1772,7 @@
   text-decoration: none !important;
   transition: all 0.12s ease !important;
   white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .sticky-navbar ul li a:hover {
@@ -1799,28 +1808,31 @@
   box-shadow: 0 0 14px rgba(255, 42, 133, 0.6) !important;
 }
 
-/* Tactile 3D "GET PASSES" Button in Navbar */
+/* Tactile 3D "GET PASSES" Button in Navbar: Inline On Same Row */
 .sticky-navbar .nav-cta-btn {
   background: #ff5500 !important;
   color: #ffffff !important;
   font-family: "Space Grotesk", sans-serif !important;
   font-weight: 800 !important;
-  font-size: 0.8rem !important;
-  padding: 0.52rem 1.15rem !important;
+  font-size: 0.74rem !important;
+  padding: 0.42rem 0.88rem !important;
   border-radius: 6px !important;
   border: 1.5px solid #111 !important;
-  box-shadow: 0 3px 0 #111, 2px 4px 0 #111, 0 4px 12px rgba(255, 85, 0, 0.35) !important;
-  letter-spacing: 0.06em !important;
+  box-shadow: 0 3px 0 #111, 2px 3px 0 #111, 0 4px 10px rgba(255, 85, 0, 0.35) !important;
+  letter-spacing: 0.05em !important;
   text-transform: uppercase !important;
   text-decoration: none !important;
   transition: all 0.08s ease !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  margin-left: 0.2rem !important;
 }
 
 .sticky-navbar .nav-cta-btn:hover {
   background: #ff6a1a !important;
   color: #ffffff !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 5px 0 #111, 2px 6px 0 #111, 0 6px 16px rgba(255, 85, 0, 0.5) !important;
+  box-shadow: 0 5px 0 #111, 2px 5px 0 #111, 0 6px 14px rgba(255, 85, 0, 0.5) !important;
 }
 
 .sticky-navbar .nav-cta-btn:active {
@@ -1828,14 +1840,26 @@
   box-shadow: 0 1px 0 #111, 1px 1px 0 #111 !important;
 }
 
-@media (max-width: 1024px) {
+/* Responsive: Always Strictly One Single Row */
+@media (max-width: 1240px) {
+  .sticky-navbar {
+    padding: 0.4rem 1rem !important;
+  }
   .sticky-navbar .nav-inner {
-    flex-wrap: wrap !important;
-    justify-content: center !important;
+    flex-wrap: nowrap !important;
+    gap: 0.5rem !important;
   }
   .sticky-navbar ul {
+    flex-wrap: nowrap !important;
     overflow-x: auto !important;
-    max-width: 100% !important;
-    padding-bottom: 4px !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  .sticky-navbar ul::-webkit-scrollbar {
+    display: none !important;
+  }
+  .sticky-navbar ul li a {
+    padding: 0.34rem 0.52rem !important;
+    font-size: 0.68rem !important;
   }
 }
