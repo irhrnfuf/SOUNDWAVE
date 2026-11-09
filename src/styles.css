@@ -2708,11 +2708,12 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffe600;
+  background-color: #fffbf0;
   border: 2px solid #111111;
+  border-left: 5px solid #ffaa00;
   border-radius: 10px;
   padding: 0.65rem 0.85rem;
-  box-shadow: 3px 3px 0px #111111;
+  box-shadow: 2px 2px 0px #111111;
   animation: slideInSchedule 0.2s ease-out;
 }
 
@@ -2722,8 +2723,9 @@ button:hover {
 }
 
 .scheduled-artist-card.has-conflict {
-  background-color: #ffcc80;
+  background-color: #fff3e0;
   border-color: #e65100;
+  border-left: 5px solid #d84315;
 }
 
 .scheduled-item-info {

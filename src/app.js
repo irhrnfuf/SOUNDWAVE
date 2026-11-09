@@ -554,31 +554,34 @@ function parseItemSlot(itemStr) {
   return null;
 }
 
-// LocalStorage Persistence for Personal Schedule
-function saveScheduleToLocalStorage() {
-  try {
-    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(activeScheduleItems));
-  } catch (err) {
-    console.warn("Could not save personal schedule to localStorage:", err);
-  }
-}
-
+// Session-based in-memory working schedule.
+// localStorage stores finalized/locked schedules under SCHEDULE_STORAGE_KEY.
 function loadSavedLineup() {
-  try {
-    const raw = localStorage.getItem(SCHEDULE_STORAGE_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) {
-        activeScheduleItems = parsed;
-      }
-    }
-  } catch (err) {
-    console.warn("Could not restore personal schedule from localStorage:", err);
-    activeScheduleItems = [];
-  }
+  // Fresh session begins empty on the active builder workspace
+  activeScheduleItems = [];
   renderLineupList();
   setupDragAndDropListeners();
   setupKeyboardAccessibility();
+  updateScheduleNoticeBanner();
+}
+
+// Update the notice banner if saved schedules exist in localStorage
+function updateScheduleNoticeBanner() {
+  const banner = document.getElementById("saved-schedule-notice-banner");
+  if (!banner) return;
+  try {
+    const raw = localStorage.getItem(SCHEDULE_STORAGE_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      if (Array.isArray(saved) && saved.length > 0) {
+        banner.style.display = "flex";
+        const countSpan = document.getElementById("saved-notice-count");
+        if (countSpan) countSpan.textContent = saved.length === 1 ? "1 Act Saved" : saved.length + " Acts Saved";
+        return;
+      }
+    }
+  } catch (e) {}
+  banner.style.display = "none";
 }
 
 function filterScheduleChips(day, btnElement) {
@@ -681,13 +684,11 @@ function onDropzoneDrop(event) {
 
 function addArtistDirectly(artistStr) {
   if (!artistStr) return;
-  // Normalize dashes
   const normalizedStr = artistStr.replace(/\uFFFD/g, "-");
   if (!activeScheduleItems.includes(normalizedStr)) {
     activeScheduleItems.push(normalizedStr);
-    saveScheduleToLocalStorage();
     renderLineupList();
-    showScheduleFeedback("Added & Saved: " + normalizedStr.split("-")[0].trim() + " ✓ (localStorage synced)", "success");
+    showScheduleFeedback("Added: " + normalizedStr.split("-")[0].trim() + " ✓", "success");
   } else {
     showScheduleFeedback("Already in your schedule!", "warning");
   }
@@ -696,18 +697,16 @@ function addArtistDirectly(artistStr) {
 function removeArtistFromSchedule(index) {
   if (index >= 0 && index < activeScheduleItems.length) {
     const removed = activeScheduleItems.splice(index, 1)[0];
-    saveScheduleToLocalStorage();
     renderLineupList();
-    showScheduleFeedback("Removed & Saved: " + removed.split("-")[0].trim() + " (localStorage updated)", "info");
+    showScheduleFeedback("Removed: " + removed.split("-")[0].trim(), "info");
   }
 }
 
 function clearSavedLineup() {
   if (activeScheduleItems.length === 0) return;
   activeScheduleItems = [];
-  saveScheduleToLocalStorage();
   renderLineupList();
-  showScheduleFeedback("Schedule cleared (localStorage reset)", "info");
+  showScheduleFeedback("Working session reset", "info");
 }
 
 // Sophisticated time interval conflict detection: checks if [startA, endA) overlaps [startB, endB) on same day
@@ -720,7 +719,6 @@ function checkScheduleConflicts() {
       const a = parsedSlots[i];
       const b = parsedSlots[j];
       if (a && b && a.day === b.day) {
-        // Two performances overlap if startA < endB AND startB < endA
         if (a.startMin < b.endMin && b.startMin < a.endMin) {
           conflictIndices.add(i);
           conflictIndices.add(j);
@@ -745,6 +743,7 @@ function checkScheduleConflicts() {
 function renderLineupList() {
   const ul = document.getElementById("saved-lineup-list");
   const countBadge = document.getElementById("schedule-count-badge");
+  const actionRow = document.getElementById("schedule-actions-row");
   if (!ul) return;
 
   const count = activeScheduleItems.length;
@@ -752,12 +751,16 @@ function renderLineupList() {
     countBadge.textContent = count === 1 ? "1 Act Added" : count + " Acts Added";
   }
 
+  if (actionRow) {
+    actionRow.style.display = count > 0 ? "flex" : "none";
+  }
+
   if (count === 0) {
     ul.innerHTML = `
       <li class="empty-schedule-prompt">
         <span style="font-size: 2.2rem; display: block; margin-bottom: 0.5rem;">&#127911;</span>
-        <b>Your festival weekend schedule is empty!</b><br />
-        Drag artists from the left column or tap the (+) button to build your custom itinerary.
+        <b>Your working schedule is empty</b><br />
+        Select or drag artists from the left column to draft your weekend plan.
       </li>
     `;
     const conflictBanner = document.getElementById("schedule-conflict-banner");
@@ -801,11 +804,135 @@ function showScheduleFeedback(msg, type) {
     }
     clearTimeout(el._feedbackTimeout);
     el._feedbackTimeout = setTimeout(() => {
-      el.textContent = "✓ Changes automatically saved in browser localStorage";
+      el.textContent = "Select or drag performances to schedule";
       el.style.color = "#555";
       el.style.fontWeight = "normal";
     }, 3200);
   }
+}
+
+// Save schedule for later into localStorage & show modal
+function saveScheduleForLater() {
+  if (activeScheduleItems.length === 0) {
+    alert("Please add at least one performance before saving.");
+    return;
+  }
+  try {
+    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(activeScheduleItems));
+  } catch (e) {
+    console.warn("Could not save to localStorage:", e);
+  }
+  openScheduleSavedModal(activeScheduleItems, "Saved for Later");
+  updateScheduleNoticeBanner();
+}
+
+// Lock passes & attach schedule to checkout
+function lockScheduleAndProceed() {
+  if (activeScheduleItems.length === 0) {
+    alert("Please add at least one performance before locking your passes.");
+    return;
+  }
+  try {
+    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(activeScheduleItems));
+  } catch (e) {
+    console.warn("Could not save to localStorage:", e);
+  }
+  window.location.href = "./passes.html?from=schedule#book-pass";
+}
+
+// Modal for Viewing Saved Schedule
+function openScheduleSavedModal(scheduleList, titleText) {
+  let modal = document.getElementById("schedule-saved-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "schedule-saved-modal";
+    modal.className = "order-modal-backdrop";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.innerHTML = `
+      <div class="order-modal-card" style="max-width: 520px;">
+        <div class="order-modal-header">
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <span style="display:inline-block; width:12px; height:12px; background:#00e676; border-radius:50%; box-shadow:0 0 8px #00e676;"></span>
+            <h3 id="schedule-modal-title" style="margin:0; font-size:1.25rem;">My Saved Schedule</h3>
+          </div>
+          <button type="button" class="order-modal-close" onclick="closeScheduleSavedModal()" aria-label="Close modal">&times;</button>
+        </div>
+        <div style="padding: 1.25rem 1.5rem;">
+          <p style="font-size:0.86rem; color:#57554f; margin-top:0;">Your customized SoundWave itinerary is safely archived in your browser storage. You can access it anytime or link it to your festival wristband.</p>
+          <div id="schedule-modal-list-wrap" style="max-height: 260px; overflow-y: auto; margin-bottom: 1.25rem;"></div>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a href="./passes.html" class="nav-cta-btn" style="flex:1; text-align:center; text-decoration:none; padding:10px 14px;">Lock Passes With This Schedule &rarr;</a>
+            <button type="button" class="secondary-btn" onclick="closeScheduleSavedModal()" style="flex:1; padding:10px 14px;">Close</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  const titleEl = document.getElementById("schedule-modal-title");
+  if (titleEl && titleText) titleEl.textContent = titleText;
+
+  const listWrap = document.getElementById("schedule-modal-list-wrap");
+  if (listWrap) {
+    const items = scheduleList || [];
+    if (items.length === 0) {
+      listWrap.innerHTML = "<p style='font-size:0.85rem; color:#888; text-align:center;'>No saved performances found.</p>";
+    } else {
+      listWrap.innerHTML = items.map(it => {
+        const parts = it.split("-");
+        const artist = parts[0] ? parts[0].trim() : it;
+        const details = parts[1] ? parts[1].trim() : "";
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; margin-bottom:6px; background:#fffdf7; border:2px solid #111111; border-radius:8px;">
+            <div>
+              <b style="font-size:0.9rem; color:#111;">${artist}</b>
+              <div style="font-size:0.78rem; color:#57554f;">${details}</div>
+            </div>
+            <span style="font-size:0.75rem; font-weight:800; background:#00e676; border:1.5px solid #111; border-radius:999px; padding:2px 8px;">CONFIRMED</span>
+          </div>
+        `;
+      }).join("");
+    }
+  }
+
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeScheduleSavedModal() {
+  const modal = document.getElementById("schedule-saved-modal");
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+}
+
+// Function to view previously saved schedule
+function viewSavedSchedule() {
+  try {
+    const raw = localStorage.getItem(SCHEDULE_STORAGE_KEY);
+    const saved = raw ? JSON.parse(raw) : [];
+    openScheduleSavedModal(saved, "My Saved Schedule");
+  } catch (e) {
+    openScheduleSavedModal([], "My Saved Schedule");
+  }
+}
+
+// Restore saved schedule into the current working workspace
+function restoreSavedScheduleToWorkspace() {
+  try {
+    const raw = localStorage.getItem(SCHEDULE_STORAGE_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      if (Array.isArray(saved) && saved.length > 0) {
+        activeScheduleItems = [...saved];
+        renderLineupList();
+        showScheduleFeedback("Loaded " + saved.length + " acts from saved archive", "success");
+      }
+    }
+  } catch (e) {}
 }
 
 function exportPersonalSchedule() {
