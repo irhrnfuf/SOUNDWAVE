@@ -143,14 +143,14 @@ body:has(#dj-gateway:not(.portal-dismissed)) .archive-hud.hud-revealed {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  z-index: 900;
+  z-index: 1001;
 }
 
 .rail-dot {
-  width: 9px;
-  height: 9px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 1.5px solid rgba(244, 237, 224, 0.35);
+  border: 1.5px solid rgba(244, 237, 224, 0.45);
   background: transparent;
   padding: 0;
   cursor: pointer;

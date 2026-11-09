@@ -608,27 +608,46 @@ function initFrequencyCanvas() {
 
 // --- SCENE NAVIGATION RAIL & OBSERVER ---
 function initSceneObserver() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const index = Array.from(elements.scenes).indexOf(entry.target);
-        if (index !== -1) {
-          state.activeScene = index;
-          elements.railDots.forEach((dot, dIdx) => {
-            dot.classList.toggle('active', dIdx === index);
-          });
-          playSubtlePulse(90 + index * 25, 0.12);
-        }
+  const sceneList = Array.from(elements.scenes);
+
+  // Robust scroll spy that accurately tracks which section is in view regardless of section height
+  function updateActiveSceneOnScroll() {
+    const scrollPos = window.scrollY + window.innerHeight * 0.4;
+    let currentIdx = 0;
+
+    sceneList.forEach((scene, idx) => {
+      const top = scene.offsetTop;
+      if (scrollPos >= top) {
+        currentIdx = idx;
       }
     });
-  }, { threshold: 0.5 });
 
-  elements.scenes.forEach(scene => observer.observe(scene));
+    if (state.activeScene !== currentIdx) {
+      state.activeScene = currentIdx;
+      elements.railDots.forEach((dot, dIdx) => {
+        dot.classList.toggle('active', dIdx === currentIdx);
+      });
+      playSubtlePulse(90 + currentIdx * 25, 0.12);
+    }
+  }
 
-  elements.railDots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const targetScene = document.getElementById(dot.getAttribute('data-target'));
-      if (targetScene) targetScene.scrollIntoView({ behavior: 'smooth' });
+  window.addEventListener('scroll', updateActiveSceneOnScroll, { passive: true });
+  // Initial check
+  updateActiveSceneOnScroll();
+
+  // Rail dot click navigation
+  elements.railDots.forEach((dot, idx) => {
+    dot.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = dot.getAttribute('data-target');
+      const targetScene = document.getElementById(targetId);
+      if (targetScene) {
+        targetScene.scrollIntoView({ behavior: 'smooth' });
+        state.activeScene = idx;
+        elements.railDots.forEach((d, dIdx) => {
+          d.classList.toggle('active', dIdx === idx);
+        });
+      }
     });
   });
 }
