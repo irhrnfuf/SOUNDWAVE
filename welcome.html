@@ -23,10 +23,23 @@
   <div id="dj-gateway" class="dj-gateway" role="dialog" aria-modal="true" aria-label="Interactive SoundWave DJ Portal">
     <div class="dj-ambient-glow" aria-hidden="true"></div>
 
+    <!-- Power-On Horizontal Laser Flare -->
+    <div class="dj-power-line" aria-hidden="true"></div>
+
     <!-- Centered Pixel DJ Mixer Setup (CDJ + Mixer + CDJ) -->
     <div id="dj-mixer-unit" class="dj-mixer-unit" tabindex="0" role="button" aria-label="Click to start the set and enter SoundWave Archive">
       <div class="dj-pixel-frame">
         <img src="./assets/archive/pixel-dj-mixer-clean.png" class="dj-pixel-img" alt="Pixel Art DJ Mixer & Twin CDJs" />
+
+        <!-- Standby Blinking Indicators for CDJ Cue & Play -->
+        <div class="dj-deck-leds" aria-hidden="true">
+          <span class="dj-led led-cue led-cue-l"></span>
+          <span class="dj-led led-play led-play-l"></span>
+          <span class="dj-led led-cue led-cue-r"></span>
+          <span class="dj-led led-play led-play-r"></span>
+          <span class="dj-screen-glow glow-screen-l"></span>
+          <span class="dj-screen-glow glow-screen-r"></span>
+        </div>
       </div>
 
       <!-- Shockwave Bass Rings (Fires when DJ mixer is clicked) -->
