@@ -567,21 +567,32 @@ function loadSavedLineup() {
 
 // Update the notice banner if saved schedules exist in localStorage
 function updateScheduleNoticeBanner() {
-  const banner = document.getElementById("saved-schedule-notice-banner");
-  if (!banner) return;
+  const bottomBar = document.getElementById("saved-schedule-dropzone-bar");
+  const bottomBtnText = document.getElementById("saved-schedule-btn-text");
+  const passesPill = document.getElementById("passes-saved-schedule-pill");
+  const passesCount = document.getElementById("passes-saved-schedule-count");
+
   try {
     const raw = localStorage.getItem(SCHEDULE_STORAGE_KEY);
     if (raw) {
       const saved = JSON.parse(raw);
       if (Array.isArray(saved) && saved.length > 0) {
-        banner.style.display = "flex";
-        const countSpan = document.getElementById("saved-notice-count");
-        if (countSpan) countSpan.textContent = saved.length === 1 ? "1 Act Saved" : saved.length + " Acts Saved";
+        const countTxt = saved.length === 1 ? "1 Act Saved" : saved.length + " Acts Saved";
+        if (bottomBar) {
+          bottomBar.style.display = "flex";
+          if (bottomBtnText) bottomBtnText.textContent = "View Saved Schedule (" + countTxt + ")";
+        }
+        if (passesPill) {
+          passesPill.style.display = "flex";
+          if (passesCount) passesCount.textContent = countTxt + " linked to your weekend pass";
+        }
         return;
       }
     }
   } catch (e) {}
-  banner.style.display = "none";
+
+  if (bottomBar) bottomBar.style.display = "none";
+  if (passesPill) passesPill.style.display = "none";
 }
 
 function filterScheduleChips(day, btnElement) {
@@ -843,61 +854,92 @@ function lockScheduleAndProceed() {
 // Modal for Viewing Saved Schedule
 function openScheduleSavedModal(scheduleList, titleText) {
   let modal = document.getElementById("schedule-saved-modal");
+  
+  // If modal exists but has wrong classes or elements, clean it up
   if (!modal) {
     modal = document.createElement("div");
     modal.id = "schedule-saved-modal";
-    modal.className = "order-modal-backdrop";
-    modal.setAttribute("role", "dialog");
-    modal.setAttribute("aria-modal", "true");
-    modal.innerHTML = `
-      <div class="order-modal-card" style="max-width: 520px;">
-        <div class="order-modal-header">
-          <div style="display:flex; align-items:center; gap:0.5rem;">
-            <span style="display:inline-block; width:12px; height:12px; background:#00e676; border-radius:50%; box-shadow:0 0 8px #00e676;"></span>
-            <h3 id="schedule-modal-title" style="margin:0; font-size:1.25rem;">My Saved Schedule</h3>
-          </div>
-          <button type="button" class="order-modal-close" onclick="closeScheduleSavedModal()" aria-label="Close modal">&times;</button>
-        </div>
-        <div style="padding: 1.25rem 1.5rem;">
-          <p style="font-size:0.86rem; color:#57554f; margin-top:0;">Your customized SoundWave itinerary is safely archived in your browser storage. You can access it anytime or link it to your festival wristband.</p>
-          <div id="schedule-modal-list-wrap" style="max-height: 260px; overflow-y: auto; margin-bottom: 1.25rem;"></div>
-          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-            <a href="./passes.html" class="nav-cta-btn" style="flex:1; text-align:center; text-decoration:none; padding:10px 14px;">Lock Passes With This Schedule &rarr;</a>
-            <button type="button" class="secondary-btn" onclick="closeScheduleSavedModal()" style="flex:1; padding:10px 14px;">Close</button>
-          </div>
-        </div>
-      </div>
-    `;
     document.body.appendChild(modal);
   }
 
-  const titleEl = document.getElementById("schedule-modal-title");
-  if (titleEl && titleText) titleEl.textContent = titleText;
+  modal.className = "order-modal-backdrop active";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.style.display = "flex";
 
-  const listWrap = document.getElementById("schedule-modal-list-wrap");
-  if (listWrap) {
-    const items = scheduleList || [];
-    if (items.length === 0) {
-      listWrap.innerHTML = "<p style='font-size:0.85rem; color:#888; text-align:center;'>No saved performances found.</p>";
-    } else {
-      listWrap.innerHTML = items.map(it => {
+  const items = (Array.isArray(scheduleList) && scheduleList.length > 0)
+    ? scheduleList
+    : (() => {
+        try {
+          const raw = localStorage.getItem(SCHEDULE_STORAGE_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          return [];
+        }
+      })();
+
+  const listItemsHtml = items.length === 0
+    ? '<div style="text-align: center; padding: 2rem 1rem; color: #666;"><span style="font-size: 2.2rem; display: block; margin-bottom: 0.5rem;">📋</span><b style="font-size: 1rem; color: #111;">No Saved Schedule Found</b><p style="margin: 0.4rem 0 0; font-size: 0.84rem;">Add performances in the builder and click \'Save for Later\' to archive your weekend.</p></div>'
+    : items.map(it => {
         const parts = it.split("-");
         const artist = parts[0] ? parts[0].trim() : it;
         const details = parts[1] ? parts[1].trim() : "";
         return `
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; margin-bottom:6px; background:#fffdf7; border:2px solid #111111; border-radius:8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; margin-bottom: 8px; background: #fffdf7; border: 2px solid #111111; border-radius: 10px; box-shadow: 2px 2px 0px #111;">
             <div>
-              <b style="font-size:0.9rem; color:#111;">${artist}</b>
-              <div style="font-size:0.78rem; color:#57554f;">${details}</div>
+              <b style="font-size: 0.94rem; color: #111; display: block;">${artist}</b>
+              <small style="font-size: 0.8rem; color: #57554f; font-weight: 600;">${details}</small>
             </div>
-            <span style="font-size:0.75rem; font-weight:800; background:#00e676; border:1.5px solid #111; border-radius:999px; padding:2px 8px;">CONFIRMED</span>
+            <span style="font-size: 0.72rem; font-weight: 800; background: #00e676; border: 1.5px solid #111; border-radius: 999px; padding: 3px 9px;">CONFIRMED</span>
           </div>
         `;
       }).join("");
-    }
-  }
 
-  modal.classList.add("active");
+  modal.innerHTML = `
+    <div class="order-modal-card" style="max-width: 540px; width: 92%; max-height: 88vh; display: flex; flex-direction: column; padding: 1.5rem; background: #fffdf7; border: 3px solid #111111; border-radius: 16px; box-shadow: 6px 6px 0px #111111;">
+      
+      <!-- Modal Header with Small 'X' Close Button -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #111111; padding-bottom: 0.85rem; margin-bottom: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.25rem;">📋</span>
+          <div>
+            <h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; color: #111;">${titleText || "My Saved Festival Schedule"}</h3>
+            <small style="color: #666; font-weight: 600;">${items.length} performance${items.length === 1 ? "" : "s"} archived</small>
+          </div>
+        </div>
+        <button type="button" class="close-modal-x-btn" onclick="closeScheduleSavedModal()" aria-label="Close" style="background: #111111; color: #ffffff; border: none; border-radius: 50%; width: 28px; height: 28px; font-size: 1rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; transition: transform 0.15s ease;">&times;</button>
+      </div>
+
+      <!-- Scrollable Itinerary List -->
+      <div style="overflow-y: auto; flex: 1; padding-right: 0.25rem; margin-bottom: 1.25rem; max-height: 320px;">
+        ${listItemsHtml}
+      </div>
+
+      <!-- Footer with Load Into Planner & Lock Passes options -->
+      <div style="display: flex; gap: 0.65rem; border-top: 2px solid #e0ded7; padding-top: 1rem; flex-wrap: wrap;">
+        ${items.length > 0 ? `
+          <button type="button" class="secondary-btn" style="flex: 1; padding: 10px 14px; font-weight: 700; background: #e8f5e9; border: 2px solid #2e7d32; color: #1b5e20;" onclick="restoreSavedScheduleToWorkspace(); closeScheduleSavedModal();">
+            Load into Planner ↑
+          </button>
+          <a href="./passes.html" class="nav-cta-btn" style="flex: 1.2; text-align: center; text-decoration: none; padding: 10px 14px; border: 2px solid #111;">
+            Lock Passes &rarr;
+          </a>
+        ` : `
+          <button type="button" class="secondary-btn" style="flex: 1; padding: 10px 14px;" onclick="closeScheduleSavedModal()">
+            Close
+          </button>
+        `}
+      </div>
+    </div>
+  `;
+
+  // Clicking outside the card closes the modal
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      closeScheduleSavedModal();
+    }
+  };
+
   document.body.style.overflow = "hidden";
 }
 
@@ -905,6 +947,7 @@ function closeScheduleSavedModal() {
   const modal = document.getElementById("schedule-saved-modal");
   if (modal) {
     modal.classList.remove("active");
+    modal.style.display = "none";
     document.body.style.overflow = "";
   }
 }
@@ -914,9 +957,9 @@ function viewSavedSchedule() {
   try {
     const raw = localStorage.getItem(SCHEDULE_STORAGE_KEY);
     const saved = raw ? JSON.parse(raw) : [];
-    openScheduleSavedModal(saved, "My Saved Schedule");
+    openScheduleSavedModal(saved, "My Saved Festival Schedule");
   } catch (e) {
-    openScheduleSavedModal([], "My Saved Schedule");
+    openScheduleSavedModal([], "My Saved Festival Schedule");
   }
 }
 
@@ -929,7 +972,7 @@ function restoreSavedScheduleToWorkspace() {
       if (Array.isArray(saved) && saved.length > 0) {
         activeScheduleItems = [...saved];
         renderLineupList();
-        showScheduleFeedback("Loaded " + saved.length + " acts from saved archive", "success");
+        showScheduleFeedback("Loaded " + saved.length + " acts into your working planner!", "success");
       }
     }
   } catch (e) {}
