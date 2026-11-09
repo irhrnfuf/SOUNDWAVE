@@ -245,7 +245,7 @@ export const PEOPLE_GALLERY = [
   {
     id: "photo-crowd-dusk",
     title: "Memories Inside Horizon",
-    caption: "Sunset Dusk Sky · Golden crimson horizon over the arena crowd",
+    caption: "Main Stage Spectacle · Confetti bursts & massive LED screens over thousands of hands in the night sky",
     location: "Horizon Arena",
     thumb: "assets/archive/photos/photo-crowd-dusk-sm.jpg",
     full: "assets/archive/photos/photo-crowd-dusk.jpg",
