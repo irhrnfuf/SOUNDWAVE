@@ -1863,3 +1863,57 @@
     font-size: 0.68rem !important;
   }
 }
+
+
+/* ==========================================================================
+   OPTION A: CLEAN EDITORIAL FESTIVAL STREAMLINING
+   Removes cockpit visual noise, reduces competing accents, balances hierarchy
+   ========================================================================== */
+
+/* 1. Remove over-crowding stickers, fake scribbles & rivets on big hero type */
+.hero-tape-badge,
+.hero-theme-stamp,
+.hero-curator-scribble,
+.chassis-rivet {
+  display: none !important;
+}
+
+/* 2. Streamline Top Hero Status Ribbon to clean essential info */
+.hero-coords-pill {
+  display: none !important;
+}
+.big-hero-status-ribbon {
+  justify-content: flex-start !important;
+  gap: 0.75rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* 3. Re-balance Hero Deck: 2 generous columns instead of a cramped 3-way cockpit */
+.big-hero-deck {
+  grid-template-columns: 340px 1fr !important;
+  gap: 1.75rem !important;
+}
+
+/* 4. Hide noisy raw engineering telemetry deck on public festival entrance */
+.hero-deck-telemetry {
+  display: none !important;
+}
+
+/* 5. Calibrate hero actions: 1 dominant CTA + 1 clear secondary */
+.cockpit-cta-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  flex-wrap: wrap !important;
+  margin-top: 1.5rem !important;
+}
+.cockpit-cta-row .btn-monument-secondary[href*="welcome.html"] {
+  display: none !important;
+}
+
+/* 6. Mobile & Tablet responsive deck */
+@media (max-width: 900px) {
+  .big-hero-deck {
+    grid-template-columns: 1fr !important;
+  }
+}
