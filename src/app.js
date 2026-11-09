@@ -456,7 +456,7 @@ function updatePassCanvas() {
 
   ctx.fillStyle = "#888884";
   ctx.font = "9px 'Space Grotesk', sans-serif";
-  ctx.fillText("DEC 18-20 ï WATERFRONT PARK MIAMI", 28, 36);
+  ctx.fillText("DEC 18-20 - WATERFRONT PARK MIAMI", 28, 36);
 
   // Attendee Name
   ctx.fillStyle = "#ffffff";
@@ -472,7 +472,7 @@ function updatePassCanvas() {
   // Date and Gate info
   ctx.fillStyle = "#bbbbbb";
   ctx.font = "10px sans-serif";
-  ctx.fillText("CHECK-IN: " + date + "  ï  GATE A EXPRESS ENTRY", 18, 108);
+  ctx.fillText("CHECK-IN: " + date + "  -  GATE A EXPRESS ENTRY", 18, 108);
 
   // Perforated Tear Line on Right
   ctx.save();
@@ -502,11 +502,83 @@ function updatePassCanvas() {
 }
 
 // 7. UNIT II: Drag & Drop Personal Weekend Schedule Builder
+const SCHEDULE_STORAGE_KEY = "soundwave_personal_schedule_2026";
 let activeScheduleItems = [];
 
+// Performance interval lookup table (Day + Time -> start minute & duration)
+const PERFORMANCE_TIME_SLOTS = {
+  // Friday Dec 18 (Gates 4:00 PM = 240m)
+  "Fri 06:00 PM": { day: "FRI", startMin: 360, endMin: 450, label: "6:00 PM ‚Äì 7:30 PM (90m)" },
+  "Fri 09:30 PM": { day: "FRI", startMin: 570, endMin: 675, label: "9:30 PM ‚Äì 11:15 PM (105m)" },
+
+  // Saturday Dec 19
+  "Sat 06:00 PM": { day: "SAT", startMin: 360, endMin: 435, label: "6:00 PM ‚Äì 7:15 PM (75m)" },
+  "Sat 07:00 PM": { day: "SAT", startMin: 420, endMin: 525, label: "7:00 PM ‚Äì 8:45 PM (105m)" },
+  "Sat 10:30 PM": { day: "SAT", startMin: 630, endMin: 750, label: "10:30 PM ‚Äì 12:30 AM (120m)" },
+
+  // Sunday Dec 20
+  "Sun 07:30 PM": { day: "SUN", startMin: 450, endMin: 540, label: "7:30 PM ‚Äì 9:00 PM (90m)" },
+  "Sun 10:00 PM": { day: "SUN", startMin: 600, endMin: 720, label: "10:00 PM ‚Äì Midnight (120m)" }
+};
+
+// Parse a schedule item string into day and start time
+function parseItemSlot(itemStr) {
+  if (!itemStr) return null;
+  const match = itemStr.match(/\((.*?)\)/);
+  if (!match || !match[1]) return null;
+  const slotRaw = match[1].trim(); // e.g. "Fri 06:00 PM"
+  const parts = slotRaw.split(/\s+/);
+  if (parts.length < 3) return null;
+  const day = parts[0].toUpperCase(); // "FRI"
+  const timeStr = parts.slice(1).join(" "); // "06:00 PM"
+
+  // Standardize key
+  const normalizedKey = parts[0].charAt(0).toUpperCase() + parts[0].slice(1).toLowerCase() + " " + timeStr;
+  const known = PERFORMANCE_TIME_SLOTS[normalizedKey] || PERFORMANCE_TIME_SLOTS[slotRaw];
+  if (known) {
+    return { day: known.day, startMin: known.startMin, endMin: known.endMin, label: known.label, slotRaw: slotRaw };
+  }
+
+  // Fallback time parsing
+  const tMatch = timeStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (tMatch) {
+    let hours = parseInt(tMatch[1], 10);
+    const mins = parseInt(tMatch[2], 10);
+    const meridian = tMatch[3].toUpperCase();
+    if (meridian === "PM" && hours < 12) hours += 12;
+    if (meridian === "AM" && hours === 12) hours = 0;
+    const startMin = hours * 60 + mins;
+    return { day: day, startMin: startMin, endMin: startMin + 90, label: timeStr + " (90m)", slotRaw: slotRaw };
+  }
+
+  return null;
+}
+
+// LocalStorage Persistence for Personal Schedule
+function saveScheduleToLocalStorage() {
+  try {
+    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(activeScheduleItems));
+  } catch (err) {
+    console.warn("Could not save personal schedule to localStorage:", err);
+  }
+}
+
 function loadSavedLineup() {
+  try {
+    const raw = localStorage.getItem(SCHEDULE_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        activeScheduleItems = parsed;
+      }
+    }
+  } catch (err) {
+    console.warn("Could not restore personal schedule from localStorage:", err);
+    activeScheduleItems = [];
+  }
   renderLineupList();
   setupDragAndDropListeners();
+  setupKeyboardAccessibility();
 }
 
 function filterScheduleChips(day, btnElement) {
@@ -544,6 +616,25 @@ function setupDragAndDropListeners() {
     dropzone.addEventListener("dragleave", onDropzoneDragLeave);
     dropzone.addEventListener("drop", onDropzoneDrop);
   }
+}
+
+// Keyboard accessibility for schedule cards
+function setupKeyboardAccessibility() {
+  const chips = document.querySelectorAll(".draggable-chip");
+  chips.forEach(chip => {
+    chip.setAttribute("tabindex", "0");
+    chip.setAttribute("role", "button");
+    const artist = chip.getAttribute("data-artist") || "";
+    chip.setAttribute("aria-label", "Add " + artist.split("-")[0].trim() + " to custom schedule");
+
+    chip.onkeydown = function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const artistData = chip.getAttribute("data-artist");
+        if (artistData) addArtistDirectly(artistData);
+      }
+    };
+  });
 }
 
 function onChipDragStart(event) {
@@ -590,57 +681,65 @@ function onDropzoneDrop(event) {
 
 function addArtistDirectly(artistStr) {
   if (!artistStr) return;
-  if (!activeScheduleItems.includes(artistStr)) {
-    activeScheduleItems.push(artistStr);
+  // Normalize dashes
+  const normalizedStr = artistStr.replace(/\uFFFD/g, "-");
+  if (!activeScheduleItems.includes(normalizedStr)) {
+    activeScheduleItems.push(normalizedStr);
+    saveScheduleToLocalStorage();
     renderLineupList();
-    showScheduleFeedback("Added: " + artistStr.split("ó")[0].trim() + " ?");
+    showScheduleFeedback("Added & Saved: " + normalizedStr.split("-")[0].trim() + " ‚úì (localStorage synced)", "success");
   } else {
-    showScheduleFeedback("Already in your schedule!");
+    showScheduleFeedback("Already in your schedule!", "warning");
   }
 }
 
 function removeArtistFromSchedule(index) {
   if (index >= 0 && index < activeScheduleItems.length) {
     const removed = activeScheduleItems.splice(index, 1)[0];
+    saveScheduleToLocalStorage();
     renderLineupList();
-    showScheduleFeedback("Removed: " + removed.split("ó")[0].trim());
+    showScheduleFeedback("Removed & Saved: " + removed.split("-")[0].trim() + " (localStorage updated)", "info");
   }
 }
 
 function clearSavedLineup() {
+  if (activeScheduleItems.length === 0) return;
   activeScheduleItems = [];
+  saveScheduleToLocalStorage();
   renderLineupList();
-  showScheduleFeedback("Schedule reset");
+  showScheduleFeedback("Schedule cleared (localStorage reset)", "info");
 }
 
+// Sophisticated time interval conflict detection: checks if [startA, endA) overlaps [startB, endB) on same day
 function checkScheduleConflicts() {
-  const timeMap = {};
-  let conflictFound = false;
+  const conflictIndices = new Set();
+  const parsedSlots = activeScheduleItems.map(item => parseItemSlot(item));
 
-  activeScheduleItems.forEach(item => {
-    // Expect format: "Artist Name ó Stage (Day Time)"
-    const match = item.match(/\((.*?)\)/);
-    if (match && match[1]) {
-      const slot = match[1].trim(); // e.g. "Fri 09:30 PM"
-      if (!timeMap[slot]) {
-        timeMap[slot] = [item];
-      } else {
-        timeMap[slot].push(item);
-        conflictFound = true;
+  for (let i = 0; i < parsedSlots.length; i++) {
+    for (let j = i + 1; j < parsedSlots.length; j++) {
+      const a = parsedSlots[i];
+      const b = parsedSlots[j];
+      if (a && b && a.day === b.day) {
+        // Two performances overlap if startA < endB AND startB < endA
+        if (a.startMin < b.endMin && b.startMin < a.endMin) {
+          conflictIndices.add(i);
+          conflictIndices.add(j);
+        }
       }
     }
-  });
+  }
 
   const conflictBanner = document.getElementById("schedule-conflict-banner");
   if (conflictBanner) {
-    if (conflictFound) {
+    if (conflictIndices.size > 0) {
       conflictBanner.style.display = "block";
+      conflictBanner.innerHTML = "‚ö†Ô∏è <b>Schedule Conflict Detected:</b> You have " + conflictIndices.size + " overlapping performances on your schedule!";
     } else {
       conflictBanner.style.display = "none";
     }
   }
 
-  return timeMap;
+  return conflictIndices;
 }
 
 function renderLineupList() {
@@ -666,37 +765,46 @@ function renderLineupList() {
     return;
   }
 
-  const timeMap = checkScheduleConflicts();
+  const conflictIndices = checkScheduleConflicts();
 
   ul.innerHTML = activeScheduleItems.map((item, idx) => {
-    const parts = item.split("ó");
+    const parts = item.split("-");
     const name = parts[0] ? parts[0].trim() : item;
     const details = parts[1] ? parts[1].trim() : "";
-    const match = item.match(/\((.*?)\)/);
-    const slot = match && match[1] ? match[1].trim() : "";
-    const isConflict = timeMap[slot] && timeMap[slot].length > 1;
+    const isConflict = conflictIndices.has(idx);
 
     return `
       <li class="scheduled-artist-card ${isConflict ? "has-conflict" : ""}">
         <div class="scheduled-item-info">
-          <span class="scheduled-item-title">${name} ${isConflict ? "<small style='color: #d84315; font-weight: 800;'>[CONFLICT]</small>" : ""}</span>
+          <span class="scheduled-item-title">${name} ${isConflict ? "<small style='color: #d84315; font-weight: 800; background: #fff3e0; border: 1px solid #d84315; border-radius: 4px; padding: 1px 5px; margin-left: 6px;'>[TIME OVERLAP]</small>" : ""}</span>
           <span class="scheduled-item-details">${details}</span>
         </div>
-        <button type="button" class="remove-scheduled-btn" title="Remove Set" onclick="removeArtistFromSchedule(${idx})">&times;</button>
+        <button type="button" class="remove-scheduled-btn" title="Remove Set" aria-label="Remove ${name} from schedule" onclick="removeArtistFromSchedule(${idx})">&times;</button>
       </li>
     `;
   }).join("");
 }
 
-function showScheduleFeedback(msg) {
+function showScheduleFeedback(msg, type) {
   const el = document.getElementById("schedule-feedback");
   if (el) {
     el.textContent = msg;
-    el.style.color = "#0088ff";
-    setTimeout(() => {
-      el.textContent = "Drop items here to schedule";
+    if (type === "success") {
+      el.style.color = "#00c853";
+      el.style.fontWeight = "700";
+    } else if (type === "warning") {
+      el.style.color = "#ff9100";
+      el.style.fontWeight = "700";
+    } else {
+      el.style.color = "#0088ff";
+      el.style.fontWeight = "600";
+    }
+    clearTimeout(el._feedbackTimeout);
+    el._feedbackTimeout = setTimeout(() => {
+      el.textContent = "‚úì Changes automatically saved in browser localStorage";
       el.style.color = "#555";
-    }, 2500);
+      el.style.fontWeight = "normal";
+    }, 3200);
   }
 }
 
@@ -741,7 +849,7 @@ function runAcousticWorker() {
   }
   const worker = new Worker("./src/festival-worker.js");
   output.innerHTML = "Running acoustic model...";
-  worker.postMessage({ attendees: 15000, stages: 3 });
+  worker.postMessage({ attendees: 15000, stages: 4 });
   worker.onmessage = function (e) {
     const res = e.data;
     output.innerHTML =

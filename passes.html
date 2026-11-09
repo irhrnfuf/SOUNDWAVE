@@ -245,23 +245,23 @@
 
         <!-- Tier Grid (Unit IV Box Model) -->
         <div class="pass-tier-grid">
-          <div class="box-model-pass" onclick="selectPassTierFromCard('General Admission ($129)')">
+          <div class="box-model-pass" tabindex="0" role="button" aria-label="Select 3-Day GA Tier ($129)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPassTierFromCard('General Admission ($129)');}" onclick="selectPassTierFromCard('General Admission ($129)')">
             <div>
               <div class="tier-header-strip">
                 <h4 style="margin:0; font-size:1.25rem;">3-Day GA</h4>
               </div>
               <p class="pass-price">$129</p>
-              <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Full access to Horizon Arena, Analog Dome, Vinyl Lawn &amp; artisanal food market.</p>
+              <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Full access across all 4 iconic stages: Horizon Arena, Analog Dome, Vinyl Lawn, and VIP Cabanas promenade &amp; food market.</p>
               <ul class="styled-list" style="font-size: 0.8rem; padding-left: 1rem;">
                 <li>Free hydration stations</li>
                 <li>Panoramic amphitheater lawn view</li>
                 <li>RFID cashless wristband</li>
               </ul>
             </div>
-            <button type="button" class="secondary-btn tier-select-btn">Select GA ($129) &rarr;</button>
+            <button type="button" class="secondary-btn tier-select-btn" onclick="event.stopPropagation();selectPassTierFromCard('General Admission ($129)');">Select GA ($129) &rarr;</button>
           </div>
 
-          <div class="box-model-pass vip-featured" onclick="selectPassTierFromCard('VIP Gold Pass ($249)')">
+          <div class="box-model-pass vip-featured" tabindex="0" role="button" aria-label="Select 3-Day VIP Gold Tier ($249)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPassTierFromCard('VIP Gold Pass ($249)');}" onclick="selectPassTierFromCard('VIP Gold Pass ($249)')">
             <div>
               <div class="tier-header-strip">
                 <h4 style="margin:0; font-size:1.25rem;">★ 3-Day VIP</h4>
@@ -274,10 +274,10 @@
                 <li>Luxury private air-conditioned restrooms</li>
               </ul>
             </div>
-            <button type="button" class="tier-select-btn">Select VIP ($249) &rarr;</button>
+            <button type="button" class="tier-select-btn" onclick="event.stopPropagation();selectPassTierFromCard('VIP Gold Pass ($249)');">Select VIP ($249) &rarr;</button>
           </div>
 
-          <div class="box-model-pass platinum-tier" onclick="selectPassTierFromCard('Backstage All-Access ($499)')">
+          <div class="box-model-pass platinum-tier" tabindex="0" role="button" aria-label="Select 3-Day Platinum Backstage Tier ($499)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPassTierFromCard('Backstage All-Access ($499)');}" onclick="selectPassTierFromCard('Backstage All-Access ($499)')">
             <div>
               <div class="tier-header-strip">
                 <h4 style="margin:0; font-size:1.25rem;">3-Day Platinum</h4>
@@ -290,7 +290,7 @@
                 <li>All-inclusive gourmet food &amp; premium drinks</li>
               </ul>
             </div>
-            <button type="button" class="secondary-btn tier-select-btn">Select Platinum ($499) &rarr;</button>
+            <button type="button" class="secondary-btn tier-select-btn" onclick="event.stopPropagation();selectPassTierFromCard('Backstage All-Access ($499)');">Select Platinum ($499) &rarr;</button>
           </div>
         </div>
 
@@ -473,14 +473,14 @@
       <div class="order-modal-header">
         <div style="display:flex; align-items:center; gap:0.5rem;">
           <span style="display:inline-block; width:12px; height:12px; background:#00e676; border-radius:50%; box-shadow:0 0 8px #00e676;"></span>
-          <h3 id="modal-title" style="margin:0; font-size:1.3rem;">Order Confirmed &amp; Stored</h3>
+          <h3 id="modal-title" style="margin:0; font-size:1.3rem;">Wristband Reservation Confirmed</h3>
         </div>
         <button type="button" class="order-modal-close" onclick="closeOrderConfirmationModal()" aria-label="Close modal">&times;</button>
       </div>
 
       <div class="payment-security-notice">
         <b>&#128274; Safe &amp; Secure Reservation Notice:</b><br />
-        To protect attendee privacy, <b>no credit card or raw banking data is collected</b> on this frontend. Your order has been cryptographically serialized, stored in the <b>Firebase SQL Connect PostgreSQL database</b>, and held under our official Box Office will-call guarantee.
+        <b>Demonstration Mode:</b> No credit card or real payment transaction was charged. Your pass reservation has been verified, assigned a credential code, and recorded in your local browser wristband ledger for Will-Call Box Office redemption.
       </div>
 
       <div class="order-modal-receipt-box">
@@ -515,7 +515,7 @@
       </div>
 
       <div style="font-size:0.82rem; color:#57554f; margin-bottom:1.25rem;">
-        &#9889; A confirmation copy has been added to your local wristband registry and synchronized with our central backend. You can review your booking status anytime on the <b>Shuttles &amp; Orders</b> page.
+        &#9889; A reservation voucher has been saved in your browser storage and will be synchronized whenever cloud connectivity is available. You can view all active passes anytime on the <b>Shuttles &amp; Orders</b> ledger.
       </div>
 
       <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
@@ -635,6 +635,7 @@
     </div>
   </footer>
 
+  <script src="./src/festival-data.js"></script>
   <script src="./src/app.js"></script>
   <script type="module" src="./src/firebase.js"></script>
 </body>
