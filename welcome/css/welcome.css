@@ -909,3 +909,48 @@ html, body {
     display: none;
   }
 }
+
+/* ==========================================================================
+   SPLIT SHUTTER PORTAL TRANSITION (MATCHING ARCHIVE & INTERFACE)
+   ========================================================================== */
+.entrance-curtain {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50.5vh;
+  background: #141312;
+  z-index: 999999;
+  pointer-events: none;
+  transform: translateY(0);
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.entrance-curtain--top {
+  top: 0;
+  border-bottom: 2px solid #ff2a85;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.entrance-curtain--bottom {
+  bottom: 0;
+  border-top: 2px solid #00f0ff;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+}
+
+body.curtains-opened .entrance-curtain--top {
+  transform: translateY(-101%);
+}
+
+body.curtains-opened .entrance-curtain--bottom {
+  transform: translateY(101%);
+}
+
+body.curtains-closing .entrance-curtain--top {
+  transform: translateY(0) !important;
+  transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1) !important;
+}
+
+body.curtains-closing .entrance-curtain--bottom {
+  transform: translateY(0) !important;
+  transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1) !important;
+}

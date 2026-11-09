@@ -634,23 +634,21 @@ function initSceneObserver() {
 
 // --- EXIT TRANSITION INTO HOMEPAGE (index.html) ---
 function setupEnterTransition() {
-  if (!elements.btnEnter) return;
+  // Handle smooth split shutter close when exiting to festival interface
+  const exitLinks = document.querySelectorAll('a[href*="index.html"], #btn-enter-festival');
+  exitLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      playSubtlePulse(320, 0.3);
+      sessionStorage.setItem('sw_archive_seen', 'true');
 
-  elements.btnEnter.addEventListener('click', (e) => {
-    e.preventDefault();
-    playSubtlePulse(320, 0.4);
+      document.body.classList.remove('curtains-opened');
+      document.body.classList.add('curtains-closing');
 
-    // Save session flag so index.html doesn't redirect back during this session
-    sessionStorage.setItem('sw_archive_seen', 'true');
-
-    // Trigger full-screen cream veil expansion
-    if (elements.veil) {
-      elements.veil.classList.add('active');
-    }
-
-    setTimeout(() => {
-      window.location.href = './index.html';
-    }, 700);
+      setTimeout(() => {
+        window.location.href = link.href || './index.html';
+      }, 750);
+    });
   });
 
   // Sound toggle button
@@ -671,4 +669,9 @@ window.addEventListener('DOMContentLoaded', () => {
   initFrequencyCanvas();
   initSceneObserver();
   setupEnterTransition();
+
+  // Reveal Living Archive with the split shutter opening transition
+  setTimeout(() => {
+    document.body.classList.add('curtains-opened');
+  }, 80);
 });
