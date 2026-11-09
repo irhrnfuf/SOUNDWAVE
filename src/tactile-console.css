@@ -1033,3 +1033,589 @@
     padding: 1.25rem 1.25rem 0;
   }
 }
+
+/* ==========================================================================
+   MONUMENTAL BIG HERO TYPE ARCHITECTURE FOR SOUNDWAVE 2026
+   Awwwards / Site-Of-The-Day High Editorial & Tactile Staging
+   ========================================================================== */
+
+:root {
+  --sw-void: #0a0908;
+  --sw-carbon: #121110;
+  --sw-plate: #191816;
+  --sw-edge: #2c2824;
+  --sw-cream: #f6f0e4;
+  --sw-gold: #ffaa00;
+  --sw-amber: #ff5500;
+  --sw-laser-pink: #ff2a85;
+  --sw-laser-cyan: #00f0ff;
+  --sw-neon-green: #00ff66;
+}
+
+/* Atmospheric Global Grain Overlay */
+.global-film-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0.042;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+
+/* Ambient Stage Lighting Bleeds */
+.ambient-stage-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.ambient-stage-glow::before {
+  content: "";
+  position: absolute;
+  top: -20vh;
+  right: -15vw;
+  width: 75vw;
+  height: 85vh;
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.08) 0%, rgba(255, 42, 133, 0.04) 45%, transparent 70%);
+  filter: blur(80px);
+}
+.ambient-stage-glow::after {
+  content: "";
+  position: absolute;
+  top: 40vh;
+  left: -20vw;
+  width: 70vw;
+  height: 80vh;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.06) 0%, rgba(0, 255, 102, 0.03) 50%, transparent 70%);
+  filter: blur(90px);
+}
+
+/* Big Hero Type Section Container */
+#big-hero-stage {
+  position: relative;
+  background: #0d0c0a radial-gradient(circle at 50% 20%, #1c1815 0%, #0a0908 80%);
+  border-bottom: 3.5px solid #1c1a18;
+  padding: 2.5rem 1.5rem 3.5rem;
+  overflow: hidden;
+  color: var(--sw-cream);
+  z-index: 1;
+}
+
+/* Background Atmosphere & Stage Light Sweeps */
+.big-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.big-hero-backdrop-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.22;
+  mix-blend-mode: luminosity;
+  filter: contrast(140%) saturate(120%);
+}
+
+.big-hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 20%, rgba(10, 9, 8, 0.85) 85%),
+              linear-gradient(180deg, rgba(10, 9, 8, 0.4) 0%, transparent 40%, #0a0908 98%);
+}
+
+/* Hero Content Grid / Shell */
+.big-hero-inner {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Top Tactical Status Bar */
+.big-hero-status-ribbon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #191816;
+  border: 1.5px solid #2e2a25;
+  padding: 5px 12px;
+  border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hero-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ff66;
+  box-shadow: 0 0 10px #00ff66, 0 0 18px #00ff66;
+  animation: radarPulse 2s infinite ease-in-out;
+}
+
+@keyframes radarPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.5; }
+}
+
+.hero-coords-pill {
+  color: #a69e90;
+}
+
+/* ==========================================================================
+   MONUMENTAL WALL-TO-WALL DISPLAY TYPE
+   ========================================================================== */
+.big-hero-monument {
+  position: relative;
+  width: 100%;
+  margin: 0.5rem 0 0;
+  text-align: center;
+  user-select: none;
+}
+
+.big-hero-title {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 0.82;
+  text-transform: uppercase;
+  font-family: "Anton", "Syne", "Bebas Neue", sans-serif;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+}
+
+.hero-type-line {
+  display: block;
+  font-size: clamp(4.5rem, 15vw, 13.5rem);
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+/* Line 1: SOUND — Sunset Masked Metallic Texture */
+.hero-type-line--sound {
+  background: linear-gradient(180deg, #ffffff 0%, #ffdfba 35%, #ff8833 70%, #d02060 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 12px 30px rgba(255, 100, 30, 0.35));
+}
+
+/* Line 2: WAVE — Architectural Kinetic Ocean Sheen */
+.hero-type-line--wave {
+  background: linear-gradient(180deg, #ffffff 0%, #d4eeff 40%, #00bfff 75%, #0044bb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 14px 35px rgba(0, 180, 255, 0.4));
+  margin-top: -0.06em;
+}
+
+/* Tactical Decals & Pinned Badges */
+.hero-tape-badge {
+  position: absolute;
+  top: 14%;
+  left: 2%;
+  background: #ffea00;
+  color: #111111;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.7rem, 1.1vw, 0.95rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  padding: 4px 14px;
+  transform: rotate(-5deg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border: 1.5px solid #111;
+  z-index: 4;
+}
+
+.hero-theme-stamp {
+  position: absolute;
+  bottom: 12%;
+  right: 2%;
+  background: #1c1916;
+  border: 2px dashed #ff2a85;
+  color: #ff85be;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.65rem, 0.9vw, 0.82rem);
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 4px;
+  transform: rotate(3deg);
+  letter-spacing: 0.08em;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+  z-index: 4;
+}
+
+.hero-curator-scribble {
+  position: absolute;
+  bottom: -15px;
+  left: 8%;
+  font-family: "Caveat", cursive;
+  font-size: clamp(1.2rem, 2.1vw, 1.85rem);
+  color: #f1cf65;
+  transform: rotate(-7deg);
+  pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  z-index: 5;
+}
+
+/* Lower Hero Flight-Deck Console */
+.big-hero-deck {
+  display: grid;
+  grid-template-columns: 320px 1fr 340px;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-top: 1rem;
+}
+
+.hero-deck-chassis {
+  background: #161412;
+  border: 2px solid #2b2723;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.chassis-rivet {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: #2f2a24;
+  border: 1px solid #111;
+  border-radius: 50%;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+.rivet-tl { top: 8px; left: 8px; }
+.rivet-tr { top: 8px; right: 8px; }
+.rivet-bl { bottom: 8px; left: 8px; }
+.rivet-br { bottom: 8px; right: 8px; }
+
+.deck-patch-lockup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.deck-patch-thumb {
+  width: 68px;
+  height: 68px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid #ffaa00;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  flex-shrink: 0;
+}
+
+.deck-patch-meta h3 {
+  margin: 0;
+  font-family: "Syne", sans-serif;
+  font-size: 1.15rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.deck-patch-meta span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  color: #ffaa00;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-top: 3px;
+}
+
+.deck-narrative-lead {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #d1c8bb;
+}
+
+.deck-narrative-lead strong {
+  color: #ffffff;
+}
+
+.hero-deck-cockpit {
+  background: #161412;
+  border: 2px solid #2b2723;
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.cockpit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1.5px dashed #2d2822;
+  padding-bottom: 0.85rem;
+}
+
+.cockpit-header h2 {
+  margin: 0;
+  font-family: "Syne", sans-serif;
+  font-size: 1.5rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.cockpit-header small {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  color: #ff5500;
+  font-weight: 700;
+}
+
+.cockpit-lead-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ded6c9;
+}
+
+.cockpit-cta-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-monument-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #ff5500;
+  color: #ffffff !important;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 800;
+  font-size: 0.96rem;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 2px solid #111111;
+  box-shadow: 0 5px 0 #111111, 4px 6px 0 #111111, 0 8px 18px rgba(255, 85, 0, 0.35);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-monument-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 #111111, 4px 8px 0 #111111, 0 12px 25px rgba(255, 85, 0, 0.5);
+  background: #ff6a1a;
+  color: #fff !important;
+}
+
+.btn-monument-cta:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #111111, 2px 3px 0 #111111;
+}
+
+.btn-monument-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #221f1c;
+  color: #f4ede0 !important;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 2px solid #363029;
+  box-shadow: 0 4px 0 #111, 3px 5px 0 #111;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, border-color 0.15s ease;
+  letter-spacing: 0.03em;
+}
+
+.btn-monument-secondary:hover {
+  transform: translateY(-2px);
+  border-color: #ffaa00;
+  color: #ffaa00 !important;
+  box-shadow: 0 6px 0 #111, 3px 7px 0 #111;
+}
+
+.btn-monument-secondary:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #111, 1px 2px 0 #111;
+}
+
+.hero-deck-telemetry {
+  background: #161412;
+  border: 2px solid #2b2723;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.telemetry-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  color: #a3998b;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.65rem;
+}
+
+.telemetry-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.telemetry-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+}
+
+.telemetry-label {
+  color: #8c8273;
+}
+
+.telemetry-val {
+  font-weight: 700;
+  color: #f4ede0;
+}
+
+.telemetry-val--green {
+  color: #00ff66;
+}
+
+.telemetry-val--pink {
+  color: #ff2a85;
+}
+
+.telemetry-vu-meter {
+  background: #0f0e0d;
+  border: 1px solid #2f2a24;
+  border-radius: 4px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vu-meter-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.62rem;
+  color: #6a6256;
+}
+
+.vu-meter-track {
+  height: 8px;
+  background: #1c1a17;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  gap: 2px;
+}
+
+.vu-led-seg {
+  flex: 1;
+  background: #25221e;
+  border-radius: 1px;
+}
+
+.vu-led-seg.on-green {
+  background: #00ff66;
+  box-shadow: 0 0 6px rgba(0, 255, 102, 0.6);
+}
+
+.vu-led-seg.on-yellow {
+  background: #ffcc00;
+  box-shadow: 0 0 6px rgba(255, 204, 0, 0.6);
+}
+
+.vu-led-seg.on-red {
+  background: #ff3333;
+  box-shadow: 0 0 8px rgba(255, 51, 51, 0.8);
+  animation: peakFlash 1.4s infinite alternate;
+}
+
+@keyframes peakFlash {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+@media (max-width: 1100px) {
+  .big-hero-deck {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-deck-chassis {
+    order: 2;
+  }
+  .hero-deck-cockpit {
+    grid-column: span 2;
+    order: 1;
+  }
+  .hero-deck-telemetry {
+    order: 3;
+  }
+}
+
+@media (max-width: 720px) {
+  #big-hero-stage {
+    padding: 1.5rem 1rem 2.5rem;
+  }
+  .big-hero-deck {
+    grid-template-columns: 1fr;
+  }
+  .hero-deck-cockpit {
+    grid-column: span 1;
+    padding: 1.25rem;
+  }
+  .hero-tape-badge,
+  .hero-theme-stamp,
+  .hero-curator-scribble {
+    display: none;
+  }
+}

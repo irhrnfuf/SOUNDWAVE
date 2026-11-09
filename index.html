@@ -18,6 +18,10 @@
     } catch (e) {}
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800;900&display=swap" />
+
   <link rel="stylesheet" href="./src/styles.css" />
   <link rel="stylesheet" href="./src/tactile-console.css" />
 
@@ -130,6 +134,9 @@
   </style>
 </head>
 <body>
+  <!-- Atmospheric Film Grain Overlay & Ambient Stage Lighting Bleeds -->
+  <div class="global-film-grain" aria-hidden="true"></div>
+  <div class="ambient-stage-glow" aria-hidden="true"></div>
 
   <!-- Top Marquee Ticker -->
   <div class="marquee-strip" aria-label="Welcome Festival Feed">
@@ -177,43 +184,168 @@
     </div>
   </nav>
 
-  <!-- Hero Header: Hand-Stitched Logo & Welcome Invitation -->
-  <header id="top-banner">
-    <div class="banner-container">
-      <div class="hero-logo-Totem">
-        <img
-          src="./src/soundwave-logo-patch.jpg"
-          alt="SoundWave 2026 FEST Hand-Stitched Embroidered Thread Patch Logo"
-          class="logo-patch-img"
-        />
+  <!-- ======================================================================
+       MONUMENTAL BIG HERO TYPE ARCHITECTURAL CENTERPIECE
+       ====================================================================== -->
+  <header id="big-hero-stage" class="hero-top-anchor">
+    <!-- Atmospheric Concert Crowd Backdrop & Subtle Vignette Overlay -->
+    <div class="big-hero-backdrop" aria-hidden="true">
+      <img
+        src="./assets/archive/photos/photo-crowd-dusk.jpg"
+        alt=""
+        class="big-hero-backdrop-img"
+      />
+      <div class="big-hero-vignette"></div>
+    </div>
+
+    <div class="big-hero-inner">
+      <!-- Top Tactical Status Ribbon -->
+      <div class="big-hero-status-ribbon">
+        <div class="hero-status-pill">
+          <span class="hero-live-dot"></span>
+          <span><b>LIVE STAGE BROADCAST</b> &bull; DEC 18&ndash;20, 2026</span>
+        </div>
+        <div class="hero-coords-pill">
+          <span>25.7617&deg; N, 80.1918&deg; W &bull; WATERFRONT PARK, MIAMI</span>
+        </div>
+        <div class="hero-status-pill" style="border-color: #00ff66;">
+          <span style="color: #00ff66; font-weight: 800;">100% CLEAN SOLAR &amp; H₂O POWER</span>
+        </div>
       </div>
 
-      <div class="hero-card-block">
-        <div class="event-meta-row">
-          <time datetime="2026-12-18">DEC 18<sup>th</sup></time>&ndash;<time datetime="2026-12-20">20<sup>th</sup>, 2026</time>
-          &nbsp;&bull;&nbsp; WATERFRONT PARK, MIAMI &nbsp;&bull;&nbsp; <small>H<sub>2</sub>O Clean Power</small>
-        </div>
-        <h1>An Open Invitation to SoundWave 2026</h1>
-        <p style="margin: 0; font-size: 0.98rem; line-height: 1.55;">
-          <strong>Whether you are joining us for the very first time or returning for your 12th year,</strong> SoundWave is more than a music festival. It is a three-day celebration of human expression, handcrafted artisan markets, culinary wonders, immersive kinetic art installations, and community ocean stewardship along Biscayne Bay.
-        </p>
+      <!-- Monumental Wall-to-Wall Big Hero Type Typography -->
+      <div class="big-hero-monument">
+        <!-- Pinned Utility Badge over letters -->
+        <span class="hero-tape-badge">★ 12TH ANNUAL EDITION ★</span>
+
+        <!-- Monumental Title -->
+        <h1 class="big-hero-title" aria-label="SOUNDWAVE 2026">
+          <span class="hero-type-line hero-type-line--sound">SOUND</span>
+          <span class="hero-type-line hero-type-line--wave">WAVE</span>
+        </h1>
+
+        <!-- Pinned Festival Theme Stamp -->
+        <span class="hero-theme-stamp">THEME: &ldquo;THREADS OF RHYTHM&rdquo;</span>
+
+        <!-- Organic Curator Handwriting Note -->
+        <span class="hero-curator-scribble">&larr; Catch the sunset sets over Biscayne Bay</span>
       </div>
 
-      <aside class="banner-stats-box">
-        <h3>Festival Heartbeat</h3>
-        <div class="stat-line">
-          <span>THEME FOR 2026</span>
-          <span>&ldquo;Threads of Rhythm&rdquo;</span>
+      <!-- Lower Hero Hardware Console Deck (Flight-Chassis, Cockpit, Audio Telemetry) -->
+      <div class="big-hero-deck">
+        <!-- Column 1: Festival Identity Flight-Chassis -->
+        <div class="hero-deck-chassis">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="deck-patch-lockup">
+            <img
+              src="./src/soundwave-logo-patch.jpg"
+              alt="SoundWave 2026 Hand-Stitched Embroidered Logo Patch"
+              class="deck-patch-thumb"
+            />
+            <div class="deck-patch-meta">
+              <h3>SOUNDWAVE 2026</h3>
+              <span>WATERFRONT PARK &bull; MIAMI</span>
+            </div>
+          </div>
+
+          <p class="deck-narrative-lead">
+            <strong>Welcome to Miami's iconic gathering</strong> uniting 45,000 music lovers, 4 permanent waterfront stages, kinetic ocean sculptures, and live vinyl cutting along Biscayne Bay.
+          </p>
+
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #8c8273;">
+            <span>EST. 2014 &bull; 12 YEARS OF COMMUNITY</span>
+          </div>
         </div>
-        <div class="stat-line">
-          <span>CLEAN ENERGY</span>
-          <span>100% Solar &amp; H<sub>2</sub>O</span>
+
+        <!-- Center Column: Quick Action Cockpit -->
+        <div class="hero-deck-cockpit">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="cockpit-header">
+            <h2>AN OPEN INVITATION TO MUSIC, ART &amp; WHIMSY</h2>
+            <small>DEC 18&ndash;20, 2026</small>
+          </div>
+
+          <p class="cockpit-lead-text">
+            Three days of pure human expression. Explore all 4 custom-crafted soundscapes—from the open lawn of Horizon Arena to the pulsing lasers of Analog Dome and the sunset strings on Vinyl Lawn.
+          </p>
+
+          <div class="cockpit-cta-row">
+            <a href="./passes.html" class="btn-monument-cta">
+              <span>Claim Weekend Wristband</span>
+              <span>&rarr;</span>
+            </a>
+            <a href="./lineup.html" class="btn-monument-secondary">
+              <span>Official 3-Day Poster</span>
+              <span>&nearr;</span>
+            </a>
+            <a href="./welcome.html" class="btn-monument-secondary" style="border-color: #ff2a85; color: #ff2a85;">
+              <span>The Living Archive</span>
+              <span>&nearr;</span>
+            </a>
+          </div>
         </div>
-        <div class="stat-line">
-          <span>LOCAL ARTISANS</span>
-          <span>60+ Independent Stalls</span>
+
+        <!-- Column 3: Live Audio Telemetry & VU Peak Meter Deck -->
+        <div class="hero-deck-telemetry">
+          <span class="chassis-rivet rivet-tl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-tr" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-bl" aria-hidden="true"></span>
+          <span class="chassis-rivet rivet-br" aria-hidden="true"></span>
+
+          <div class="telemetry-title">
+            <span>FESTIVAL TELEMETRY</span>
+            <span style="color: #00ff66;">ACTIVE</span>
+          </div>
+
+          <div class="telemetry-grid">
+            <div class="telemetry-item">
+              <span class="telemetry-label">MAIN RIG:</span>
+              <span class="telemetry-val">L-ACOUSTICS K1</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">PEAK SPL:</span>
+              <span class="telemetry-val telemetry-val--pink">128 dB A-WEIGHTED</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">GRID STATUS:</span>
+              <span class="telemetry-val telemetry-val--green">100% SOLAR ARRAY</span>
+            </div>
+            <div class="telemetry-item">
+              <span class="telemetry-label">GATES STATUS:</span>
+              <span class="telemetry-val" style="color: #ffaa00;">OPENS 16:00 EST</span>
+            </div>
+          </div>
+
+          <!-- VU Audio Peak Meter Bar -->
+          <div class="telemetry-vu-meter" aria-label="Live Audio VU Meter">
+            <div class="vu-meter-labels">
+              <span>-20dB</span>
+              <span>-6dB</span>
+              <span>0dB</span>
+              <span style="color: #ff5555;">+3dB</span>
+            </div>
+            <div class="vu-meter-track" aria-hidden="true">
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-green"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-yellow"></span>
+              <span class="vu-led-seg on-red"></span>
+            </div>
+          </div>
         </div>
-      </aside>
+      </div>
     </div>
   </header>
 
@@ -753,7 +885,7 @@
         </div>
 
         <!-- Tactile 3D Back to Top Button -->
-        <a href="#top-banner" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
+        <a href="#big-hero-stage" class="footer-back-to-top" id="btn-back-to-top" aria-label="Return to top of page">
           <span class="top-arrow">&uarr;</span>
           <span>RETURN TO TOP</span>
         </a>
