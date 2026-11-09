@@ -49,14 +49,6 @@
     body.curtains-opened .entrance-curtain--bottom {
       transform: translateY(101%);
     }
-    body.curtains-closing .entrance-curtain--top {
-      transform: translateY(0) !important;
-      transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1) !important;
-    }
-    body.curtains-closing .entrance-curtain--bottom {
-      transform: translateY(0) !important;
-      transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1) !important;
-    }
 
     .welcome-hero-grid {
       display: grid;
@@ -582,19 +574,6 @@
       setTimeout(function () {
         document.body.classList.add('curtains-opened');
       }, 60);
-
-      // Smooth split shutter closing when user clicks any link directing to SoundWave Living Archive
-      document.querySelectorAll('a[href*="welcome.html"]').forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          sessionStorage.removeItem('sw_archive_seen');
-          document.body.classList.remove('curtains-opened');
-          document.body.classList.add('curtains-closing');
-          setTimeout(function () {
-            window.location.href = link.href;
-          }, 750);
-        });
-      });
     });
   </script>
 </body>

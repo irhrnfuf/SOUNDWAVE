@@ -634,22 +634,21 @@ function initSceneObserver() {
 
 // --- EXIT TRANSITION INTO HOMEPAGE (index.html) ---
 function setupEnterTransition() {
-  // Handle smooth split shutter close when exiting to festival interface
-  const exitLinks = document.querySelectorAll('a[href*="index.html"], #btn-enter-festival');
-  exitLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+  if (elements.btnEnter) {
+    elements.btnEnter.addEventListener('click', (e) => {
       e.preventDefault();
-      playSubtlePulse(320, 0.3);
+      playSubtlePulse(320, 0.4);
       sessionStorage.setItem('sw_archive_seen', 'true');
 
-      document.body.classList.remove('curtains-opened');
-      document.body.classList.add('curtains-closing');
+      if (elements.veil) {
+        elements.veil.classList.add('active');
+      }
 
       setTimeout(() => {
-        window.location.href = link.href || './index.html';
-      }, 750);
+        window.location.href = './index.html';
+      }, 700);
     });
-  });
+  }
 
   // Sound toggle button
   if (elements.btnSound) {
@@ -669,9 +668,4 @@ window.addEventListener('DOMContentLoaded', () => {
   initFrequencyCanvas();
   initSceneObserver();
   setupEnterTransition();
-
-  // Reveal Living Archive with the split shutter opening transition
-  setTimeout(() => {
-    document.body.classList.add('curtains-opened');
-  }, 80);
 });
