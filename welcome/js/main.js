@@ -634,20 +634,28 @@ function initSceneObserver() {
 
 // --- EXIT TRANSITION INTO HOMEPAGE (index.html) ---
 function setupEnterTransition() {
+  function handleFestivalTransition(e) {
+    if (e) e.preventDefault();
+    playSubtlePulse(320, 0.4);
+    sessionStorage.setItem('sw_archive_seen', 'true');
+
+    if (elements.veil) {
+      elements.veil.classList.add('active');
+    }
+
+    setTimeout(() => {
+      window.location.href = './index.html';
+    }, 780);
+  }
+
   if (elements.btnEnter) {
-    elements.btnEnter.addEventListener('click', (e) => {
-      e.preventDefault();
-      playSubtlePulse(320, 0.4);
-      sessionStorage.setItem('sw_archive_seen', 'true');
+    elements.btnEnter.addEventListener('click', handleFestivalTransition);
+  }
 
-      if (elements.veil) {
-        elements.veil.classList.add('active');
-      }
-
-      setTimeout(() => {
-        window.location.href = './index.html';
-      }, 700);
-    });
+  // Also handle "Skip to Festival" link in top HUD
+  const btnSkip = document.getElementById('btn-skip-to-festival');
+  if (btnSkip) {
+    btnSkip.addEventListener('click', handleFestivalTransition);
   }
 
   // Sound toggle button
@@ -724,10 +732,12 @@ function playDjDropSound() {
   }
 }
 
-// --- OPTION 1: DJ MIXER GATEWAY CONTROLLER ---
+// --- OPTION 1: DJ MIXER GATEWAY CONTROLLER (SPLIT SHUTTER PORTAL) ---
 function setupDjGateway() {
   const gateway = document.getElementById('dj-gateway');
   const mixer = document.getElementById('dj-mixer-unit');
+  const sceneSignal = document.getElementById('scene-signal');
+  const hud = document.querySelector('.archive-hud');
 
   if (!gateway || !mixer) return;
 
@@ -740,21 +750,36 @@ function setupDjGateway() {
     // Initialize audio context on user interaction
     initAudio();
 
-    // 1. Mixer pulses and jogwheels glow
+    // 1. Mixer zooms forward towards camera with deep bass blur
     mixer.classList.add('dj-activating');
 
     // 2. Play punchy DJ drop sound
     playDjDropSound();
 
-    // 3. Shockwave expands and smoothly wipes portal into Scene 01
+    // 3. Split shutters smoothly part open up and down
+    setTimeout(() => {
+      gateway.classList.add('dj-opening');
+      if (sceneSignal) {
+        sceneSignal.classList.add('scene-revealed');
+      }
+    }, 140);
+
+    // 4. Reveal top HUD smoothly
+    setTimeout(() => {
+      if (hud) {
+        hud.classList.add('hud-revealed');
+      }
+    }, 350);
+
+    // 5. Dismiss gateway overlay
     setTimeout(() => {
       gateway.classList.add('portal-dismissed');
-    }, 650);
+    }, 980);
 
-    // 4. Clean up after transition completes
+    // 6. Clean up after transition completes
     setTimeout(() => {
       gateway.style.display = 'none';
-    }, 1450);
+    }, 1300);
   }
 
   // Click & Keydown triggers on the DJ mixer

@@ -574,6 +574,19 @@
       setTimeout(function () {
         document.body.classList.add('curtains-opened');
       }, 60);
+
+      // Seamless split shutter close when navigating to the archive
+      document.querySelectorAll('a[href*="welcome.html"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          var href = this.getAttribute('href');
+          sessionStorage.removeItem('sw_archive_seen');
+          document.body.classList.remove('curtains-opened');
+          setTimeout(function () {
+            window.location.href = href;
+          }, 780);
+        });
+      });
     });
   </script>
 </body>

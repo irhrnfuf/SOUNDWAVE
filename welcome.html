@@ -21,6 +21,10 @@
        PIXEL DJ MIXER CDJ GATEWAY
        ====================================================================== -->
   <div id="dj-gateway" class="dj-gateway" role="dialog" aria-modal="true" aria-label="Interactive SoundWave DJ Portal">
+    <!-- Split Shutter Curtains (Top & Bottom halves that part open on DJ drop) -->
+    <div class="dj-shutter dj-shutter--top" aria-hidden="true"></div>
+    <div class="dj-shutter dj-shutter--bottom" aria-hidden="true"></div>
+
     <div class="dj-ambient-glow" aria-hidden="true"></div>
 
     <!-- Power-On Horizontal Laser Flare -->
@@ -54,8 +58,11 @@
   <!-- Subtle Atmospheric Film & Paper Grain Overlay -->
   <div class="archive-grain" aria-hidden="true"></div>
 
-  <!-- Fullscreen Cream Transition Veil matching index.html background -->
-  <div id="transition-veil" class="transition-veil" aria-hidden="true"></div>
+  <!-- Exit Split Shutter Curtains (Matching index.html entrance-curtain) -->
+  <div id="transition-veil" class="transition-veil" aria-hidden="true">
+    <div class="veil-shutter veil-shutter--top"></div>
+    <div class="veil-shutter veil-shutter--bottom"></div>
+  </div>
 
   <!-- Persistent Top HUD (High contrast, difference blend mode) -->
   <header class="archive-hud" aria-label="Archive HUD Navigation">

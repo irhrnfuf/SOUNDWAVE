@@ -60,6 +60,17 @@ html, body {
   z-index: 1000;
   pointer-events: none;
   mix-blend-mode: difference;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body:has(#dj-gateway:not(.portal-dismissed)) .archive-hud {
+  opacity: 0;
+  transform: translateY(-14px);
+}
+
+body:has(#dj-gateway:not(.portal-dismissed)) .archive-hud.hud-revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .archive-hud * {
@@ -185,6 +196,17 @@ html, body {
   text-align: center;
   position: relative;
   overflow: hidden;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal {
+  transform: scale(1.04);
+  filter: blur(3px);
+}
+
+body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
+  transform: scale(1);
+  filter: blur(0);
 }
 
 /* Atmospheric blended photographic silhouette */
@@ -777,20 +799,48 @@ html, body {
   box-shadow: 0 4px 12px var(--sw-red-glow), 2px 2px 0px var(--sw-red);
 }
 
-/* Final Transition Wipe Panel (Cream #fffdf7 matching index.html) */
+/* Final Transition Split Shutter matching index.html */
 .transition-veil {
   position: fixed;
   inset: 0;
-  background: #fffdf7;
-  z-index: 99999;
-  transform: scaleY(0);
-  transform-origin: center;
+  z-index: 999999;
   pointer-events: none;
-  transition: transform 0.65s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.veil-shutter {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 50.5vh;
+  background: #141312;
+  pointer-events: none;
+  transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.veil-shutter--top {
+  top: 0;
+  transform: translateY(-101%);
+  border-bottom: 2px solid #ff2a85;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 42, 133, 0.6);
+}
+
+.veil-shutter--bottom {
+  bottom: 0;
+  transform: translateY(101%);
+  border-top: 2px solid #00f0ff;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.6);
 }
 
 .transition-veil.active {
-  transform: scaleY(1);
+  pointer-events: all;
+}
+
+.transition-veil.active .veil-shutter--top {
+  transform: translateY(0%);
+}
+
+.transition-veil.active .veil-shutter--bottom {
+  transform: translateY(0%);
 }
 
 /* --------------------------------------------------------------------------
@@ -911,7 +961,7 @@ html, body {
 }
 
 /* ==========================================================================
-   PIXEL DJ MIXER CDJ ENTRANCE GATEWAY (POWER-ON BOOT SEQUENCE)
+   PIXEL DJ MIXER CDJ ENTRANCE GATEWAY (POWER-ON BOOT SEQUENCE & SPLIT SHUTTER)
    ========================================================================== */
 .dj-gateway {
   position: fixed;
@@ -920,17 +970,49 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, #191614 0%, #0a0908 60%, #000000 100%);
+  background: transparent;
   overflow: hidden;
   user-select: none;
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s ease, visibility 0.8s;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
 }
 
 .dj-gateway.portal-dismissed {
   opacity: 0;
-  transform: scale(1.08);
   pointer-events: none;
   visibility: hidden;
+}
+
+/* Split Shutter Curtains on DJ Portal */
+.dj-shutter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50.5vh;
+  background: radial-gradient(circle at center, #181514 0%, #090807 65%, #000000 100%);
+  pointer-events: none;
+  z-index: 1;
+  transform: translateY(0);
+  transition: transform 0.95s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.dj-shutter--top {
+  top: 0;
+  border-bottom: 2px solid #ff2a85;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 42, 133, 0.5);
+}
+
+.dj-shutter--bottom {
+  bottom: 0;
+  border-top: 2px solid #00f0ff;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.5);
+}
+
+.dj-gateway.dj-opening .dj-shutter--top {
+  transform: translateY(-101%);
+}
+
+.dj-gateway.dj-opening .dj-shutter--bottom {
+  transform: translateY(101%);
 }
 
 /* Ambient Stage Glow (Atmospheric dual-side lighting) */
@@ -1057,9 +1139,13 @@ html, body {
 
 .dj-mixer-unit.dj-activating {
   animation: none !important;
-  transform: scale(1.14) !important;
-  filter: drop-shadow(0 0 65px rgba(0, 240, 255, 0.9)) !important;
-  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.3, 1), filter 0.85s ease !important;
+  transform: scale(2.4) translateY(-10px) !important;
+  opacity: 0 !important;
+  filter: drop-shadow(0 0 75px rgba(0, 240, 255, 1)) blur(8px) brightness(1.6) !important;
+  pointer-events: none !important;
+  transition: transform 0.85s cubic-bezier(0.7, 0, 0.2, 1),
+              opacity 0.75s cubic-bezier(0.7, 0, 0.2, 1),
+              filter 0.8s ease-out !important;
 }
 
 .dj-pixel-frame {
