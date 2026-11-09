@@ -753,6 +753,9 @@ function setupDjGateway() {
     // 1. Mixer zooms forward towards camera with deep bass blur
     mixer.classList.add('dj-activating');
 
+    // Ensure page is pinned strictly to top before revealing archive
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
     // 2. Play punchy DJ drop sound
     playDjDropSound();
 
@@ -771,9 +774,11 @@ function setupDjGateway() {
       }
     }, 350);
 
-    // 5. Dismiss gateway overlay
+    // 5. Dismiss gateway overlay and unlock scroll
     setTimeout(() => {
       gateway.classList.add('portal-dismissed');
+      document.body.classList.remove('dj-portal-locked');
+      window.scrollTo(0, 0);
     }, 980);
 
     // 6. Clean up after transition completes

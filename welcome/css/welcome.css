@@ -37,6 +37,16 @@ html, body {
   scroll-snap-type: y proximity;
 }
 
+/* Lock scrolling while DJ gateway portal is displayed on the first screen */
+body.dj-portal-locked {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+body:has(#dj-gateway:not(.portal-dismissed)) {
+  overflow: hidden !important;
+}
+
 /* Background grain & atmospheric noise overlay */
 .archive-grain {
   position: fixed;
