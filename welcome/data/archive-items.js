@@ -278,7 +278,7 @@ export const PEOPLE_GALLERY = [
   {
     id: "photo-golden-lawn",
     title: "Vinyl Lawn",
-    caption: "Vinyl Lawn Stage · Sunlit afternoon festival crowd",
+    caption: "Vinyl Lawn Stage · Fiery sunset sky & crowd gathering on the grassy hill",
     location: "Vinyl Lawn",
     thumb: "assets/archive/photos/photo-golden-lawn-sm.jpg",
     full: "assets/archive/photos/photo-golden-lawn.jpg",
