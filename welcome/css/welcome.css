@@ -673,7 +673,7 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
   font-size: 0.75rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--sw-blue);
+  color: var(--sw-cream-dim);
   margin-bottom: 1.5rem;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 }
@@ -830,15 +830,15 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
 .veil-shutter--top {
   top: 0;
   transform: translateY(-101%);
-  border-bottom: 2px solid #ff2a85;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 42, 133, 0.6);
+  border-bottom: 2px solid transparent;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .veil-shutter--bottom {
   bottom: 0;
   transform: translateY(101%);
-  border-top: 2px solid #00f0ff;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.6);
+  border-top: 2px solid transparent;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .transition-veil.active {

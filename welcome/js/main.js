@@ -588,7 +588,8 @@ function initFrequencyCanvas() {
     for (let layer = 0; layer < 4; layer++) {
       ctx4.beginPath();
       ctx4.lineWidth = 1.2;
-      ctx4.strokeStyle = layer === 0 ? '#d0675a' : (layer === 1 ? '#4a779d' : 'rgba(244, 237, 224, 0.25)');
+      // In Scene 04 Frequency Field: sleek muted archival monochrome waves
+      ctx4.strokeStyle = layer === 0 ? 'rgba(244, 237, 224, 0.45)' : (layer === 1 ? 'rgba(244, 237, 224, 0.28)' : 'rgba(244, 237, 224, 0.16)');
 
       const layerY = height * 0.52 + (layer - 1.5) * 35;
       for (let x = 0; x < width; x += 6) {
