@@ -133,8 +133,78 @@
     });
   }
 
+  function initInteractiveCarousels() {
+    document.querySelectorAll(".sw-carousel").forEach(function (carousel) {
+      const slides = Array.from(carousel.querySelectorAll(".sw-carousel-slide"));
+      const pills = Array.from(carousel.querySelectorAll(".sw-carousel-pill"));
+      const dots = Array.from(carousel.querySelectorAll(".sw-carousel-dot"));
+      const prevBtn = carousel.querySelector('.sw-carousel-arrow[data-dir="-1"]');
+      const nextBtn = carousel.querySelector('.sw-carousel-arrow[data-dir="1"]');
+
+      if (slides.length === 0) return;
+
+      let activeIndex = slides.findIndex(function (s) {
+        return s.classList.contains("is-active");
+      });
+      if (activeIndex < 0) activeIndex = 0;
+
+      function setSlide(newIndex) {
+        activeIndex = (newIndex + slides.length) % slides.length;
+        slides.forEach(function (slide, idx) {
+          slide.classList.toggle("is-active", idx === activeIndex);
+        });
+        pills.forEach(function (pill, idx) {
+          const isMatch = idx === activeIndex;
+          pill.classList.toggle("is-active", isMatch);
+          pill.setAttribute("aria-selected", isMatch ? "true" : "false");
+        });
+        dots.forEach(function (dot, idx) {
+          const isMatch = idx === activeIndex;
+          dot.classList.toggle("is-active", isMatch);
+          dot.setAttribute("aria-current", isMatch ? "true" : "false");
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener("click", function () {
+          setSlide(activeIndex - 1);
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+          setSlide(activeIndex + 1);
+        });
+      }
+
+      pills.forEach(function (pill, idx) {
+        pill.addEventListener("click", function () {
+          setSlide(idx);
+        });
+      });
+
+      dots.forEach(function (dot, idx) {
+        dot.addEventListener("click", function () {
+          setSlide(idx);
+        });
+      });
+
+      carousel.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          setSlide(activeIndex - 1);
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          setSlide(activeIndex + 1);
+        }
+      });
+
+      setSlide(activeIndex);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initLenisSmoothScroll();
     initBlurInHeadlines();
+    initInteractiveCarousels();
   });
 })();
