@@ -3896,3 +3896,114 @@ html.lenis body {
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   PASSES PAGE COMPACT LEVELED WORKSPACE & FULL-WIDTH GUIDELINES
+   ========================================================================== */
+main.app-workspace.passes-workspace {
+  align-items: stretch;
+  min-height: auto;
+  margin: 1.25rem auto 1.5rem;
+  gap: 1.5rem;
+}
+
+.passes-workspace .workspace-left > .ui-panel {
+  height: 100%;
+  box-sizing: border-box;
+  margin-bottom: 0 !important;
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.passes-workspace .panel-header {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.65rem;
+}
+
+.passes-workspace .sw-carousel {
+  margin-top: 0.35rem;
+}
+
+.passes-workspace .sw-carousel-pills {
+  margin-bottom: 0.75rem;
+}
+
+.passes-workspace .sw-carousel-slide--single {
+  min-height: 220px;
+}
+
+.passes-workspace .sw-carousel-body {
+  padding: 1.1rem 1.3rem;
+  gap: 0.65rem;
+}
+
+.passes-workspace .sw-carousel-body p {
+  font-size: 0.88rem;
+  margin-bottom: 0.55rem;
+}
+
+.passes-workspace .sw-carousel-dots {
+  margin-top: 0.65rem;
+}
+
+.passes-workspace .workspace-right-sticky {
+  position: static;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.passes-workspace .checkout-header-band {
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.45rem;
+}
+
+.passes-workspace .field-group {
+  margin-bottom: 0.45rem;
+}
+
+.passes-workspace .field-group label {
+  font-size: 0.76rem;
+  margin-bottom: 2px;
+}
+
+.passes-workspace .field-group input,
+.passes-workspace .field-group select {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.passes-workspace .option-group-row {
+  padding: 0.42rem 0.65rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.81rem;
+}
+
+.passes-workspace .checkout-extras-accordion {
+  padding: 0.45rem 0.75rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.82rem;
+}
+
+.passes-workspace .price-summary-box {
+  padding: 0.55rem 0.75rem;
+  margin: 0.4rem 0;
+  font-size: 0.84rem;
+}
+
+.passes-fullwidth-guidelines {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto 2.25rem;
+  padding: 0 1.75rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 960px) {
+  .passes-fullwidth-guidelines {
+    padding: 0 1rem;
+  }
+}
