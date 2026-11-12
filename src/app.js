@@ -1231,3 +1231,16 @@ function renderDirectOrdersTable() {
 }
 
 
+
+// Interactive 3-Tab Wristband Showcase on Passes Page
+function switchPassShowcaseTab(tierKey, tabEl) {
+  document.querySelectorAll(".sw-showcase-tab").forEach(function (btn) {
+    const isMatch = btn === tabEl || btn.getAttribute("data-showcase-tier") === tierKey;
+    btn.classList.toggle("is-active", isMatch);
+    btn.setAttribute("aria-selected", isMatch ? "true" : "false");
+  });
+  document.querySelectorAll(".sw-preview-pane").forEach(function (pane) {
+    const isMatch = pane.getAttribute("data-preview-tier") === tierKey;
+    pane.classList.toggle("is-active", isMatch);
+  });
+}

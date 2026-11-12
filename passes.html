@@ -304,6 +304,96 @@
         </div>
       </section>
 
+      <!-- Interactive 3-Tab Wristband Showcase -->
+      <section id="wristband-perks-showcase" class="sw-showcase-panel" style="margin-bottom: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <span class="sw-preview-badge sw-preview-badge--cyan" style="margin-bottom: 0.45rem;">&#10022; Interactive Access Preview</span>
+            <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; color: #ffffff;">Inspect Your Weekend Experience</h2>
+          </div>
+          <small style="color: rgba(255,255,255,0.72); font-weight: 600;">Select a tier to preview live wristband perks</small>
+        </div>
+
+        <div class="sw-showcase-grid">
+          <!-- Left: 3 Interactive Tabs -->
+          <div class="sw-showcase-tabs" role="tablist" aria-label="Wristband Tier Showcase">
+            <button type="button" class="sw-showcase-tab is-active" role="tab" aria-selected="true" data-showcase-tier="ga" onclick="switchPassShowcaseTab('ga', this)">
+              <div class="sw-showcase-tab-head">
+                <span class="sw-showcase-tab-title">01 &middot; General Admission</span>
+                <span class="sw-showcase-tab-price">$129</span>
+              </div>
+              <p>Full 3-day entry to all 4 stages, RFID cashless payments, and free electrolyte hydration stations.</p>
+            </button>
+
+            <button type="button" class="sw-showcase-tab" role="tab" aria-selected="false" data-showcase-tier="vip" onclick="switchPassShowcaseTab('vip', this)">
+              <div class="sw-showcase-tab-head">
+                <span class="sw-showcase-tab-title">02 &middot; VIP Gold</span>
+                <span class="sw-showcase-tab-price">$249</span>
+              </div>
+              <p>Elevated front-wave viewing decks, express gate lanes, craft cocktail lounge, and AC restrooms.</p>
+            </button>
+
+            <button type="button" class="sw-showcase-tab" role="tab" aria-selected="false" data-showcase-tier="platinum" onclick="switchPassShowcaseTab('platinum', this)">
+              <div class="sw-showcase-tab-head">
+                <span class="sw-showcase-tab-title">03 &middot; Backstage Platinum</span>
+                <span class="sw-showcase-tab-price">$499</span>
+              </div>
+              <p>Side-stage artist wings, private golf-cart shuttles, all-day gourmet dining, and SkyDeck cabanas.</p>
+            </button>
+          </div>
+
+          <!-- Right: Dynamic Frosted Glass Preview Card -->
+          <div class="sw-showcase-preview">
+            <!-- GA Preview -->
+            <div class="sw-preview-pane is-active" data-preview-tier="ga">
+              <div>
+                <span class="sw-preview-badge sw-preview-badge--cyan">&#128737; RFID NFC WRISTBAND</span>
+                <h3 style="margin: 0 0 0.35rem; font-size: 1.2rem;">4-Stage Festival Grounds Access</h3>
+                <ul class="sw-preview-list">
+                  <li>&#10003; Horizon Arena, Analog Dome &amp; Vinyl Lawn</li>
+                  <li>&#10003; 0.2s tap-and-pay at 35+ food &amp; merch booths</li>
+                  <li>&#10003; Complimentary express city shuttle transfers</li>
+                </ul>
+              </div>
+              <button type="button" class="sw-preview-cta" onclick="selectPassTierFromCard('General Admission ($129)')">Select GA ($129) in Checkout &rarr;</button>
+            </div>
+
+            <!-- VIP Preview -->
+            <div class="sw-preview-pane" data-preview-tier="vip">
+              <div>
+                <span class="sw-preview-badge sw-preview-badge--violet">&#9889; VIP GOLD ACCESS</span>
+                <h3 style="margin: 0 0 0.35rem; font-size: 1.2rem;">Front-Wave Decks &amp; Shaded Lounge</h3>
+                <ul class="sw-preview-list">
+                  <li>&#10003; Dedicated front-of-stage pit at all 4 stages</li>
+                  <li>&#10003; Express VIP security &amp; RFID gate lane</li>
+                  <li>&#10003; Air-conditioned craft cocktail &amp; sommelier bar</li>
+                </ul>
+              </div>
+              <button type="button" class="sw-preview-cta" onclick="selectPassTierFromCard('VIP Gold Pass ($249)')">Select VIP Gold ($249) in Checkout &rarr;</button>
+            </div>
+
+            <!-- Platinum Preview -->
+            <div class="sw-preview-pane" data-preview-tier="platinum">
+              <div>
+                <span class="sw-preview-badge sw-preview-badge--gold">&#9733; ALL-ACCESS CREDENTIAL</span>
+                <div class="sw-preview-receipt">
+                  <div style="display:flex; justify-content:space-between; font-size:0.78rem; font-weight:800;">
+                    <span>PLATINUM PASS</span>
+                    <span>DEC 18&ndash;20, 2026</span>
+                  </div>
+                  <div style="font-size:0.76rem; color:#444; margin-top:4px;">Side-Stage Wings &bull; Golf-Cart Shuttles &bull; All-Inclusive Dining</div>
+                </div>
+                <ul class="sw-preview-list" style="margin-top:0.35rem;">
+                  <li>&#10003; Watch headliners from side-stage wings</li>
+                  <li>&#10003; Artist Hospitality Lounge &amp; SkyDeck Cabanas</li>
+                </ul>
+              </div>
+              <button type="button" class="sw-preview-cta" onclick="selectPassTierFromCard('Backstage All-Access ($499)')">Select Platinum ($499) in Checkout &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Unit III: FAQ & Policies -->
       <section class="ui-panel active-panel">
         <div class="panel-header">

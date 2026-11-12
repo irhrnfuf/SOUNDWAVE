@@ -3149,3 +3149,329 @@ html.lenis body {
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   NEXARIS-INSPIRED BENTO GRID HIGHLIGHTS (Homepage)
+   ========================================================================== */
+.sw-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.15rem;
+  margin-top: 1rem;
+}
+
+.sw-bento-card {
+  position: relative;
+  overflow: hidden;
+  border: 2.5px solid #111111;
+  border-radius: 16px;
+  padding: 1.45rem;
+  background: linear-gradient(155deg, #ffffff 0%, #f7f9ff 100%);
+  box-shadow: 4px 4px 0px #111111;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sw-bento-card:hover {
+  transform: translate(-2px, -3px);
+  box-shadow: 7px 7px 0px #111111;
+}
+
+.sw-bento-card--wide {
+  grid-column: span 7;
+}
+
+.sw-bento-card--narrow {
+  grid-column: span 5;
+}
+
+.sw-bento-card--dark {
+  background: radial-gradient(circle at 80% 15%, rgba(16, 83, 255, 0.35), transparent 55%),
+              linear-gradient(160deg, #0b1124 0%, #05070e 100%);
+  color: #ffffff;
+}
+
+.sw-bento-card--dark p,
+.sw-bento-card--dark small {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.sw-bento-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1.5px solid #111111;
+  background: #e0f2fe;
+  color: #0369a1;
+  width: fit-content;
+  margin-bottom: 0.75rem;
+}
+
+.sw-bento-card--dark .sw-bento-pill {
+  background: rgba(16, 83, 255, 0.28);
+  border-color: rgba(0, 242, 254, 0.45);
+  color: #7ee8fa;
+}
+
+.sw-bento-title {
+  margin: 0 0 0.45rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.sw-bento-orbit-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 110px;
+  margin: 0.4rem 0;
+}
+
+.sw-orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 242, 254, 0.25);
+  pointer-events: none;
+}
+
+.sw-orbit-ring--1 { width: 90px; height: 90px; }
+.sw-orbit-ring--2 { width: 150px; height: 150px; border-color: rgba(16, 83, 255, 0.35); }
+.sw-orbit-ring--3 { width: 210px; height: 210px; border-color: rgba(124, 58, 237, 0.22); }
+
+.sw-orbit-cta {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, #1053ff 0%, #00c6ff 100%);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 0 24px rgba(16, 83, 255, 0.55);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sw-orbit-cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 32px rgba(0, 242, 254, 0.75);
+}
+
+.sw-bento-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+
+.sw-bento-chip {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1.5px solid #111111;
+  background: #fffdf7;
+}
+
+/* ==========================================================================
+   NEXARIS-INSPIRED 3-TAB INTERACTIVE SHOWCASE (Passes & Checkout)
+   ========================================================================== */
+.sw-showcase-panel {
+  background: radial-gradient(circle at 50% -10%, rgba(0, 242, 254, 0.22), transparent 55%),
+              linear-gradient(160deg, #0d4cff 0%, #09257a 55%, #05070e 100%);
+  border: 3px solid #111111;
+  border-radius: 18px;
+  box-shadow: 6px 6px 0px #111111;
+  padding: 1.65rem;
+  color: #ffffff;
+  margin-top: 1.5rem;
+}
+
+.sw-showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 1.35rem;
+  align-items: stretch;
+  margin-top: 1rem;
+}
+
+.sw-showcase-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sw-showcase-tab {
+  text-align: left;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 1rem 1.15rem;
+  color: #ffffff;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
+}
+
+.sw-showcase-tab:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateX(3px);
+}
+
+.sw-showcase-tab.is-active {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #00f2fe;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.sw-showcase-tab-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.sw-showcase-tab-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.sw-showcase-tab-price {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgba(0, 242, 254, 0.18);
+  color: #7ee8fa;
+}
+
+.sw-showcase-tab p {
+  margin: 0;
+  font-size: 0.83rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.45;
+}
+
+.sw-showcase-preview {
+  position: relative;
+  background: rgba(5, 7, 14, 0.65);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 1.35rem;
+  backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 16px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 290px;
+}
+
+.sw-preview-pane {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  animation: fadeSlideShowcase 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sw-preview-pane.is-active {
+  display: flex;
+}
+
+@keyframes fadeSlideShowcase {
+  from { opacity: 0; filter: blur(6px); transform: translateY(6px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+.sw-preview-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 11px;
+  border-radius: 999px;
+  width: fit-content;
+  margin-bottom: 0.75rem;
+}
+
+.sw-preview-badge--cyan {
+  background: rgba(0, 242, 254, 0.18);
+  border: 1px solid rgba(0, 242, 254, 0.5);
+  color: #7ee8fa;
+}
+
+.sw-preview-badge--violet {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.6);
+}
+
+.sw-preview-badge--gold {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+  color: #111111;
+}
+
+.sw-preview-receipt {
+  background: #ffffff;
+  color: #111111;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin: 0.65rem 0;
+  border-bottom: 4px dashed #0d4cff;
+}
+
+.sw-preview-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.65rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.sw-preview-cta {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+  background: #ffffff;
+  color: #05070e;
+  font-weight: 800;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.sw-preview-cta:hover {
+  background: #00f2fe;
+  border-color: #00f2fe;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 860px) {
+  .sw-bento-card--wide,
+  .sw-bento-card--narrow {
+    grid-column: span 12;
+  }
+  .sw-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+}
