@@ -1094,9 +1094,12 @@
 /* Big Hero Type Section Container */
 #big-hero-stage {
   position: relative;
-  background: #0d0c0a radial-gradient(circle at 50% 20%, #1c1815 0%, #0a0908 80%);
-  border-bottom: 3.5px solid #1c1a18;
-  padding: 2.5rem 1.5rem 3.5rem;
+  background: #0a0b10 radial-gradient(circle at 50% 18%, #181a24 0%, #090a0f 82%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2.25rem 1.5rem 3rem;
+  min-height: min(82vh, 700px);
+  display: flex;
+  align-items: center;
   overflow: hidden;
   color: var(--sw-cream);
   z-index: 1;
@@ -1126,8 +1129,8 @@
 .big-hero-vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, transparent 20%, rgba(10, 9, 8, 0.85) 85%),
-              linear-gradient(180deg, rgba(10, 9, 8, 0.4) 0%, transparent 40%, #0a0908 98%);
+  background: radial-gradient(circle at 50% 38%, rgba(10, 11, 16, 0.25) 15%, rgba(9, 10, 15, 0.88) 85%),
+              linear-gradient(180deg, rgba(9, 10, 15, 0.45) 0%, transparent 38%, #090a0f 98%);
 }
 
 /* Hero Content Grid / Shell */
@@ -1218,20 +1221,16 @@
   position: relative;
 }
 
-/* Line 1: SOUND — Sunset Masked Metallic Texture */
-.hero-type-line--sound {
-  background: linear-gradient(180deg, #ffffff 0%, #ffdfba 35%, #ff8833 70%, #d02060 100%);
+/* Line 1 & 2: Luminous White-to-Ice Metallic Texture */
+.hero-type-line--sound,
+.hero-type-line--wave {
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 65%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 12px 30px rgba(255, 100, 30, 0.35));
+  filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.7));
 }
 
-/* Line 2: WAVE — Architectural Kinetic Ocean Sheen */
 .hero-type-line--wave {
-  background: linear-gradient(180deg, #ffffff 0%, #d4eeff 40%, #00bfff 75%, #0044bb 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 14px 35px rgba(0, 180, 255, 0.4));
   margin-top: -0.06em;
 }
 
@@ -1288,17 +1287,25 @@
 .big-hero-deck {
   display: grid;
   grid-template-columns: 320px 1fr 340px;
-  gap: 1.5rem;
+  gap: 0;
   align-items: stretch;
   margin-top: 1rem;
+  background: rgba(14, 15, 22, 0.72);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
 }
 
 .hero-deck-chassis {
-  background: #161412;
-  border: 2px solid #2b2723;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  padding: 1.75rem 2rem;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1307,13 +1314,7 @@
 }
 
 .chassis-rivet {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background: #2f2a24;
-  border: 1px solid #111;
-  border-radius: 50%;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  display: none;
 }
 .rivet-tl { top: 8px; left: 8px; }
 .rivet-tr { top: 8px; right: 8px; }
@@ -1331,7 +1332,7 @@
   height: 68px;
   border-radius: 10px;
   object-fit: cover;
-  border: 2px solid #ffaa00;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
   flex-shrink: 0;
 }
@@ -1365,11 +1366,11 @@
 }
 
 .hero-deck-cockpit {
-  background: #161412;
-  border: 2px solid #2b2723;
-  border-radius: 12px;
-  padding: 1.75rem 2rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1.75rem 2.25rem;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1381,7 +1382,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 1.5px dashed #2d2822;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 0.85rem;
 }
 
@@ -1891,7 +1892,7 @@
 /* 3. Re-balance Hero Deck: 2 generous columns instead of a cramped 3-way cockpit */
 .big-hero-deck {
   grid-template-columns: 340px 1fr !important;
-  gap: 1.75rem !important;
+  gap: 0 !important;
 }
 
 /* 4. Hide noisy raw engineering telemetry deck on public festival entrance */
@@ -1915,5 +1916,9 @@
 @media (max-width: 900px) {
   .big-hero-deck {
     grid-template-columns: 1fr !important;
+  }
+  .hero-deck-chassis {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 }

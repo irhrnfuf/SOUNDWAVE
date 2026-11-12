@@ -5,7 +5,7 @@
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Shrikhand&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jacquard+12&family=Jersey+15&family=Pixelify+Sans:wght@500;700&family=Silkscreen:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
 
 * {
   box-sizing: border-box;
@@ -4098,92 +4098,27 @@ main.app-workspace.passes-workspace {
 }
 
 /* ==========================================================================
-   BITMAP TYPEFACE LIVE PREVIEW TESTER
+   BITMAP DISPLAY TYPEFACE (JERSEY 15)
    ========================================================================== */
-html[data-bitmap-font="jersey"] {
+:root {
   --sw-bitmap-font: 'Jersey 15', sans-serif;
 }
-html[data-bitmap-font="pixelify"] {
-  --sw-bitmap-font: 'Pixelify Sans', sans-serif;
-}
-html[data-bitmap-font="silkscreen"] {
-  --sw-bitmap-font: 'Silkscreen', monospace;
-}
-html[data-bitmap-font="jacquard"] {
-  --sw-bitmap-font: 'Jacquard 12', serif;
-}
 
-html[data-bitmap-font]:not([data-bitmap-font="off"]) .big-hero-title,
-html[data-bitmap-font]:not([data-bitmap-font="off"]) .hero-type-line,
-html[data-bitmap-font]:not([data-bitmap-font="off"]) h1,
-html[data-bitmap-font]:not([data-bitmap-font="off"]) h2,
-html[data-bitmap-font]:not([data-bitmap-font="off"]) h3,
-html[data-bitmap-font]:not([data-bitmap-font="off"]) .pass-price,
-html[data-bitmap-font]:not([data-bitmap-font="off"]) .impact-stat-number,
-html[data-bitmap-font]:not([data-bitmap-font="off"]) .sw-bento-title,
-html[data-bitmap-font]:not([data-bitmap-font="off"]) .sw-carousel-body h3,
-html[data-bitmap-font]:not([data-bitmap-font="off"]) .footer-festival-title {
+.big-hero-title,
+.hero-type-line,
+h1,
+h2,
+h3,
+.pass-price,
+.impact-stat-number,
+.sw-bento-title,
+.sw-carousel-body h3,
+.footer-festival-title {
   font-family: var(--sw-bitmap-font) !important;
   letter-spacing: 0.025em !important;
   font-weight: 400 !important;
 }
 
-html[data-bitmap-font="silkscreen"] .hero-type-line {
-  font-size: clamp(3.4rem, 11vw, 9.5rem) !important;
-}
-
-html[data-bitmap-font="jacquard"] .hero-type-line,
-html[data-bitmap-font="jersey"] .hero-type-line {
+.hero-type-line {
   font-size: clamp(4.6rem, 15.5vw, 13.8rem) !important;
-}
-
-.sw-font-tester {
-  position: fixed;
-  bottom: 14px;
-  right: 16px;
-  z-index: 10070;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
-  max-width: calc(100vw - 100px);
-  padding: 6px 8px;
-  background: rgba(22, 20, 21, 0.92);
-  backdrop-filter: blur(12px);
-  border: 2px solid #f7b2d4;
-  border-radius: 12px;
-  box-shadow: 4px 4px 0px #111111;
-  color: #ffffff;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.72rem;
-}
-
-.sw-font-tester-label {
-  font-weight: 700;
-  color: #f7b2d4;
-  padding: 0 4px;
-  text-transform: uppercase;
-}
-
-.sw-font-tester button {
-  padding: 4px 8px !important;
-  font-size: 0.72rem !important;
-  border-radius: 7px !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.25) !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #ffffff !important;
-  box-shadow: none !important;
-  cursor: pointer;
-}
-
-.sw-font-tester button.is-active {
-  background: #ffe600 !important;
-  color: #111111 !important;
-  border-color: #111111 !important;
-}
-
-@media print {
-  .sw-font-tester {
-    display: none !important;
-  }
 }
