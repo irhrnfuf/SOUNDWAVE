@@ -53,7 +53,7 @@
 
         e.preventDefault();
         lenis.scrollTo(targetEl, {
-          offset: -72,
+          offset: -24,
           duration: 1.25
         });
       });
@@ -202,7 +202,83 @@
     });
   }
 
+  function initToggleSidebar() {
+    const nav = document.querySelector(".sticky-navbar");
+    if (!nav || nav.classList.contains("sw-sidebar-drawer")) return;
+
+    nav.classList.add("sw-sidebar-drawer");
+    nav.setAttribute("data-lenis-prevent", "");
+
+    const navInner = nav.querySelector(".nav-inner");
+    const brandLink = navInner ? navInner.querySelector(".brand-link") : null;
+
+    // Wrap brand link + close X button in a clean sidebar header row
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "sw-sidebar-close";
+    closeBtn.setAttribute("aria-label", "Close navigation sidebar");
+    closeBtn.innerHTML = "&times;";
+
+    if (navInner && brandLink) {
+      const headerRow = document.createElement("div");
+      headerRow.className = "sw-sidebar-header-row";
+      navInner.insertBefore(headerRow, brandLink);
+      headerRow.appendChild(brandLink);
+      headerRow.appendChild(closeBtn);
+    } else if (navInner) {
+      navInner.prepend(closeBtn);
+    }
+
+    // Create compact floating toggle pill
+    const toggleBtn = document.createElement("button");
+    toggleBtn.type = "button";
+    toggleBtn.className = "sw-sidebar-toggle";
+    toggleBtn.setAttribute("aria-expanded", "false");
+    toggleBtn.setAttribute("aria-label", "Open navigation menu");
+    toggleBtn.innerHTML = '<span aria-hidden="true">&#9776;</span><span>Menu</span>';
+
+    // Create translucent backdrop
+    const backdrop = document.createElement("div");
+    backdrop.className = "sw-sidebar-backdrop";
+    backdrop.setAttribute("aria-hidden", "true");
+
+    document.body.appendChild(backdrop);
+    document.body.appendChild(toggleBtn);
+
+    function setSidebarOpen(isOpen) {
+      nav.classList.toggle("is-open", isOpen);
+      backdrop.classList.toggle("is-open", isOpen);
+      toggleBtn.classList.toggle("is-hidden", isOpen);
+      toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+
+    toggleBtn.addEventListener("click", function () {
+      setSidebarOpen(true);
+    });
+
+    closeBtn.addEventListener("click", function () {
+      setSidebarOpen(false);
+    });
+
+    backdrop.addEventListener("click", function () {
+      setSidebarOpen(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("is-open")) {
+        setSidebarOpen(false);
+      }
+    });
+
+    nav.querySelectorAll("ul li a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setSidebarOpen(false);
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    initToggleSidebar();
     initLenisSmoothScroll();
     initBlurInHeadlines();
     initInteractiveCarousels();
