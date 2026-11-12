@@ -3742,7 +3742,7 @@ html.lenis body {
    DOCKED COLLAPSIBLE PIXEL-ICON SIDEBAR RAIL (No Overlap, Click to Expand)
    ========================================================================== */
 body.has-sw-rail {
-  padding-left: 66px;
+  padding-left: 78px;
 }
 
 .sw-rail-backdrop {
@@ -3766,9 +3766,9 @@ body.has-sw-rail {
   top: 0 !important;
   left: 0 !important;
   bottom: 0 !important;
-  width: 66px !important;
+  width: 78px !important;
   z-index: 10060 !important;
-  padding: 0.75rem 0.5rem !important;
+  padding: 0.85rem 0.6rem !important;
   background-color: #161415 !important;
   background-image: radial-gradient(rgba(247, 178, 212, 0.1) 1px, transparent 0) !important;
   background-size: 5px 5px !important;
@@ -3776,14 +3776,13 @@ body.has-sw-rail {
   border-right: 3px solid #111111 !important;
   box-shadow: 4px 0 18px rgba(0, 0, 0, 0.22) !important;
   transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  overflow-x: visible !important;
-  overflow-y: auto !important;
+  overflow: visible !important;
   box-sizing: border-box !important;
 }
 
 .sticky-navbar.sw-rail-sidebar.is-expanded {
-  width: 256px !important;
-  padding: 0.9rem 0.85rem !important;
+  width: 264px !important;
+  padding: 0.9rem 0.9rem !important;
   border-right-color: #f7b2d4 !important;
   box-shadow: 10px 0 32px rgba(0, 0, 0, 0.45) !important;
 }
@@ -3793,7 +3792,7 @@ body.has-sw-rail {
   align-items: stretch !important;
   justify-content: flex-start !important;
   gap: 0.85rem !important;
-  height: 100% !important;
+  height: auto !important;
   flex-wrap: nowrap !important;
 }
 
@@ -3925,7 +3924,7 @@ body.has-sw-rail {
 .sticky-navbar.sw-rail-sidebar:not(.is-expanded) ul li a::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 56px;
+  left: 64px;
   top: 50%;
   transform: translateY(-50%) translateX(-4px);
   background: #111111;
