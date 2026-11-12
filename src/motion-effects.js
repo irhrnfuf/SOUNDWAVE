@@ -236,12 +236,38 @@
   }
 
   function getExpandArrowSvg(isExpanded) {
-    if (isExpanded) {
-      // Pixel « Retract
-      return '<svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" style="shape-rendering:crispEdges" aria-hidden="true"><rect x="6" y="3" width="2" height="2"/><rect x="4" y="5" width="2" height="2"/><rect x="2" y="7" width="2" height="2"/><rect x="4" y="9" width="2" height="2"/><rect x="6" y="11" width="2" height="2"/><rect x="12" y="3" width="2" height="2"/><rect x="10" y="5" width="2" height="2"/><rect x="8" y="7" width="2" height="2"/><rect x="10" y="9" width="2" height="2"/><rect x="12" y="11" width="2" height="2"/></svg>';
-    }
-    // Pixel » Expand
-    return '<svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" style="shape-rendering:crispEdges" aria-hidden="true"><rect x="2" y="3" width="2" height="2"/><rect x="4" y="5" width="2" height="2"/><rect x="6" y="7" width="2" height="2"/><rect x="4" y="9" width="2" height="2"/><rect x="2" y="11" width="2" height="2"/><rect x="8" y="3" width="2" height="2"/><rect x="10" y="5" width="2" height="2"/><rect x="12" y="7" width="2" height="2"/><rect x="10" y="9" width="2" height="2"/><rect x="8" y="11" width="2" height="2"/></svg>';
+    // Crisp 16x16 pixelated vinyl record icon (pink label when collapsed, bright gold when expanded)
+    const labelColor = isExpanded ? "#ffe600" : "#ff2a85";
+    const grooveColor = isExpanded ? "#ffe600" : "#f7b2d4";
+    return (
+      '<svg viewBox="0 0 16 16" width="26" height="26" style="shape-rendering:crispEdges; display:block;" aria-hidden="true">' +
+      // Outer pixel vinyl disc silhouette
+      '<rect x="5" y="1" width="6" height="1" fill="#ffffff"/>' +
+      '<rect x="3" y="2" width="10" height="1" fill="#ffffff"/>' +
+      '<rect x="2" y="3" width="12" height="2" fill="#2a2628"/>' +
+      '<rect x="1" y="5" width="14" height="6" fill="#2a2628"/>' +
+      '<rect x="2" y="11" width="12" height="2" fill="#2a2628"/>' +
+      '<rect x="3" y="13" width="10" height="1" fill="#ffffff"/>' +
+      '<rect x="5" y="14" width="6" height="1" fill="#ffffff"/>' +
+      // Pixel outer rim sides
+      '<rect x="1" y="5" width="1" height="6" fill="#ffffff"/>' +
+      '<rect x="14" y="5" width="1" height="6" fill="#ffffff"/>' +
+      '<rect x="2" y="3" width="1" height="2" fill="#ffffff"/>' +
+      '<rect x="13" y="3" width="1" height="2" fill="#ffffff"/>' +
+      '<rect x="2" y="11" width="1" height="2" fill="#ffffff"/>' +
+      '<rect x="13" y="11" width="1" height="2" fill="#ffffff"/>' +
+      // Pixel groove highlights
+      '<rect x="4" y="4" width="2" height="1" fill="' + grooveColor + '"/>' +
+      '<rect x="3" y="5" width="1" height="2" fill="' + grooveColor + '"/>' +
+      '<rect x="12" y="9" width="1" height="2" fill="' + grooveColor + '"/>' +
+      '<rect x="10" y="11" width="2" height="1" fill="' + grooveColor + '"/>' +
+      // Center pixel label
+      '<rect x="6" y="5" width="4" height="6" fill="' + labelColor + '"/>' +
+      '<rect x="5" y="6" width="6" height="4" fill="' + labelColor + '"/>' +
+      // Center spindle hole
+      '<rect x="7" y="7" width="2" height="2" fill="#161415"/>' +
+      "</svg>"
+    );
   }
 
   function initToggleSidebar() {
