@@ -3613,12 +3613,15 @@ html.lenis body {
 
 .sw-carousel-media {
   position: relative;
-  min-height: 320px;
+  min-height: 400px;
+  height: 100%;
   background-color: #111111;
   overflow: hidden;
 }
 
 .sw-carousel-media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -3626,9 +3629,11 @@ html.lenis body {
 }
 
 .sw-carousel-media .culture-photo {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  min-height: 340px;
+  min-height: 0;
   margin: 0 !important;
   border: none !important;
   border-radius: 0 !important;
@@ -3731,10 +3736,9 @@ html.lenis body {
   .sw-carousel-slide {
     grid-template-columns: 1fr;
   }
-  .sw-carousel-media,
-  .sw-carousel-media .culture-photo {
-    min-height: 230px;
-    max-height: 260px;
+  .sw-carousel-media {
+    min-height: 240px;
+    height: 240px;
   }
   .sw-carousel-body {
     padding: 1.25rem;
