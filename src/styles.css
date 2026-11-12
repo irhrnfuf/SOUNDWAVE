@@ -3195,6 +3195,14 @@ html.lenis body {
   color: #ffffff;
 }
 
+.sw-bento-card--dark h1,
+.sw-bento-card--dark h2,
+.sw-bento-card--dark h3,
+.sw-bento-card--dark h4,
+.sw-bento-card--dark .sw-bento-title {
+  color: #ffffff;
+}
+
 .sw-bento-card--dark p,
 .sw-bento-card--dark small {
   color: rgba(255, 255, 255, 0.78);
