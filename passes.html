@@ -243,57 +243,97 @@
           </div>
         </div>
 
-        <!-- Tier Grid (Unit IV Box Model) -->
-        <div class="pass-tier-grid">
-          <div class="box-model-pass" tabindex="0" role="button" aria-label="Select 3-Day GA Tier ($129)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPassTierFromCard('General Admission ($129)');}" onclick="selectPassTierFromCard('General Admission ($129)')">
-            <div>
-              <div class="tier-header-strip">
-                <h4 style="margin:0; font-size:1.25rem;">3-Day GA</h4>
-              </div>
-              <p class="pass-price">$129</p>
-              <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Full access across all 4 iconic stages: Horizon Arena, Analog Dome, Vinyl Lawn, and VIP Cabanas promenade &amp; food market.</p>
-              <ul class="styled-list" style="font-size: 0.8rem; padding-left: 1rem;">
-                <li>Free hydration stations</li>
-                <li>Panoramic amphitheater lawn view</li>
-                <li>RFID cashless wristband</li>
-              </ul>
-            </div>
-            <button type="button" class="secondary-btn tier-select-btn" onclick="event.stopPropagation();selectPassTierFromCard('General Admission ($129)');">Select GA ($129) &rarr;</button>
+        <!-- Interactive Tier Comparison Carousel -->
+        <div class="sw-carousel" role="region" aria-label="Compare 3-Day Wristband Tiers" tabindex="0">
+          <div class="sw-carousel-pills" role="tablist" aria-label="Wristband Tiers">
+            <button type="button" class="sw-carousel-pill is-active" role="tab" aria-selected="true">3-Day GA &bull; $129</button>
+            <button type="button" class="sw-carousel-pill" role="tab" aria-selected="false">&#9733; 3-Day VIP &bull; $249</button>
+            <button type="button" class="sw-carousel-pill" role="tab" aria-selected="false">3-Day Platinum &bull; $499</button>
           </div>
 
-          <div class="box-model-pass vip-featured" tabindex="0" role="button" aria-label="Select 3-Day VIP Gold Tier ($249)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPassTierFromCard('VIP Gold Pass ($249)');}" onclick="selectPassTierFromCard('VIP Gold Pass ($249)')">
-            <div>
-              <div class="tier-header-strip">
-                <h4 style="margin:0; font-size:1.25rem;">★ 3-Day VIP</h4>
-              </div>
-              <p class="pass-price">$249</p>
-              <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Elevated front-row viewing decks, express VIP entry lanes &amp; shaded air-conditioned lounge bar.</p>
-              <ul class="styled-list" style="font-size: 0.8rem; padding-left: 1rem;">
-                <li>Front-wave pit at all 4 stages</li>
-                <li>Exclusive craft cocktails &amp; sommelier bar</li>
-                <li>Luxury private air-conditioned restrooms</li>
-              </ul>
+          <div class="sw-carousel-stage">
+            <button type="button" class="sw-carousel-arrow" data-dir="-1" aria-label="Previous pass tier">&lsaquo;</button>
+
+            <div class="sw-carousel-viewport">
+              <!-- Slide 1: 3-Day GA -->
+              <article class="sw-carousel-slide sw-carousel-slide--single is-active">
+                <div class="sw-carousel-body">
+                  <div>
+                    <div class="tier-header-strip" style="display:flex; justify-content:space-between; align-items:center;">
+                      <h4 style="margin:0; font-size:1.25rem;">3-Day General Admission</h4>
+                      <span style="font-family:'IBM Plex Mono', monospace; font-weight:800; font-size:0.82rem;">TIER 01 / 03</span>
+                    </div>
+                    <p class="pass-price" style="margin: 0.5rem 0;">$129 <small style="font-family:'Space Grotesk', sans-serif; font-size:0.85rem; font-weight:700; color:#57554f;">/ 3-Day Weekend</small></p>
+                    <p>Full access across all 4 iconic stages: Horizon Arena, Analog Dome, Vinyl Lawn, and VIP Cabanas promenade &amp; food market.</p>
+                    <ul class="styled-list" style="font-size: 0.88rem; margin: 0;">
+                      <li>Free chilled electrolyte hydration stations across all 40 acres</li>
+                      <li>Panoramic amphitheater lawn view &amp; 35+ artisan bazaar access</li>
+                      <li>0.2s RFID cashless wristband with complimentary express shuttle transfers</li>
+                    </ul>
+                  </div>
+                  <div class="sw-carousel-footer">
+                    <small style="font-weight: 700; color: #57554f;">All-Ages &bull; Full Weekend Re-Entry</small>
+                    <button type="button" class="secondary-btn" style="padding: 9px 18px; font-weight: 800;" onclick="selectPassTierFromCard('General Admission ($129)')">Select GA ($129) in Checkout &rarr;</button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Slide 2: 3-Day VIP -->
+              <article class="sw-carousel-slide sw-carousel-slide--single">
+                <div class="sw-carousel-body" style="background: linear-gradient(180deg, #fffdf0 0%, #ffffff 100%);">
+                  <div>
+                    <div class="tier-header-strip" style="background:#161415; color:#ffffff; display:flex; justify-content:space-between; align-items:center;">
+                      <h4 style="margin:0; font-size:1.25rem; color:#ffe600;">&#9733; 3-Day VIP Gold</h4>
+                      <span style="font-family:'IBM Plex Mono', monospace; font-weight:800; font-size:0.82rem; color:#f7b2d4;">MOST POPULAR</span>
+                    </div>
+                    <p class="pass-price" style="margin: 0.5rem 0;">$249 <small style="font-family:'Space Grotesk', sans-serif; font-size:0.85rem; font-weight:700; color:#57554f;">/ 3-Day Weekend</small></p>
+                    <p>Elevated front-row viewing decks, express VIP entry lanes, and shaded air-conditioned craft cocktail lounge.</p>
+                    <ul class="styled-list" style="font-size: 0.88rem; margin: 0;">
+                      <li>Dedicated front-wave pit at all 4 festival stages</li>
+                      <li>Exclusive craft cocktails, sommelier bar &amp; shaded SkyDeck lounge</li>
+                      <li>Luxury private air-conditioned restrooms &amp; express gate lanes</li>
+                    </ul>
+                  </div>
+                  <div class="sw-carousel-footer">
+                    <small style="font-weight: 700; color: #57554f;">Express VIP Security &amp; Front-Wave Pit</small>
+                    <button type="button" class="nav-cta-btn" style="padding: 9px 18px; font-weight: 800;" onclick="selectPassTierFromCard('VIP Gold Pass ($249)')">Select VIP ($249) in Checkout &rarr;</button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Slide 3: 3-Day Platinum -->
+              <article class="sw-carousel-slide sw-carousel-slide--single">
+                <div class="sw-carousel-body">
+                  <div>
+                    <div class="tier-header-strip" style="background:#ff2a85; color:#ffffff; display:flex; justify-content:space-between; align-items:center;">
+                      <h4 style="margin:0; font-size:1.25rem; color:#ffffff;">3-Day Backstage Platinum</h4>
+                      <span style="font-family:'IBM Plex Mono', monospace; font-weight:800; font-size:0.82rem;">LAST 45 LEFT</span>
+                    </div>
+                    <p class="pass-price" style="margin: 0.5rem 0;">$499 <small style="font-family:'Space Grotesk', sans-serif; font-size:0.85rem; font-weight:700; color:#57554f;">/ 3-Day Weekend</small></p>
+                    <p>Side-stage viewing wings right beside performing artists, private golf-cart shuttles, complimentary all-day dining &amp; artist lounge.</p>
+                    <ul class="styled-list" style="font-size: 0.88rem; margin: 0;">
+                      <li>Side-stage viewing wings &amp; VIP Cabanas SkyDeck secret sets</li>
+                      <li>On-demand private golf-cart shuttles between all 4 stages</li>
+                      <li>All-inclusive gourmet chef dining &amp; premium open bar</li>
+                    </ul>
+                  </div>
+                  <div class="sw-carousel-footer">
+                    <small style="font-weight: 700; color: #57554f;">All-Inclusive Backstage Hospitality</small>
+                    <button type="button" class="secondary-btn" style="padding: 9px 18px; font-weight: 800; background:#111111; color:#ffffff;" onclick="selectPassTierFromCard('Backstage All-Access ($499)')">Select Platinum ($499) in Checkout &rarr;</button>
+                  </div>
+                </div>
+              </article>
             </div>
-            <button type="button" class="tier-select-btn" onclick="event.stopPropagation();selectPassTierFromCard('VIP Gold Pass ($249)');">Select VIP ($249) &rarr;</button>
+
+            <button type="button" class="sw-carousel-arrow" data-dir="1" aria-label="Next pass tier">&rsaquo;</button>
           </div>
 
-          <div class="box-model-pass platinum-tier" tabindex="0" role="button" aria-label="Select 3-Day Platinum Backstage Tier ($499)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPassTierFromCard('Backstage All-Access ($499)');}" onclick="selectPassTierFromCard('Backstage All-Access ($499)')">
-            <div>
-              <div class="tier-header-strip">
-                <h4 style="margin:0; font-size:1.25rem;">3-Day Platinum</h4>
-              </div>
-              <p class="pass-price">$499</p>
-              <p style="font-size: 0.85rem; margin: 0 0 0.5rem;">Side-stage viewing wings, private golf-cart shuttles, complimentary all-day dining &amp; artist lounge.</p>
-              <ul class="styled-list" style="font-size: 0.8rem; padding-left: 1rem;">
-                <li>Side-stage viewing right beside artists</li>
-                <li>Private golf-cart shuttles between stages</li>
-                <li>All-inclusive gourmet food &amp; premium drinks</li>
-              </ul>
-            </div>
-            <button type="button" class="secondary-btn tier-select-btn" onclick="event.stopPropagation();selectPassTierFromCard('Backstage All-Access ($499)');">Select Platinum ($499) &rarr;</button>
+          <div class="sw-carousel-dots" aria-label="Pass tier indicators">
+            <button type="button" class="sw-carousel-dot is-active" aria-label="3-Day GA"></button>
+            <button type="button" class="sw-carousel-dot" aria-label="3-Day VIP"></button>
+            <button type="button" class="sw-carousel-dot" aria-label="3-Day Platinum"></button>
           </div>
         </div>
-
         <!-- Stage View Check Link -->
         <div style="margin-top: 1.5rem; background: #fff9db; border: 2px solid #111111; border-radius: 12px; padding: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
           <div>

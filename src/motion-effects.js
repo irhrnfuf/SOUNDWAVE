@@ -14,14 +14,14 @@
     }
 
     const lenis = new window.Lenis({
-      duration: 1.2,
+      duration: 0.72,
       easing: function (t) {
         return Math.min(1, 1.001 - Math.pow(2, -10 * t));
       },
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: 1.15,
       touchMultiplier: 1.5,
       prevent: function (node) {
         // Allow native scrolling inside modals, dialogs, and custom scroll containers

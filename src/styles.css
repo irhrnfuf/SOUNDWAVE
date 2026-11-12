@@ -3585,6 +3585,11 @@ html.lenis body {
   display: grid;
 }
 
+.sw-carousel-slide--single {
+  grid-template-columns: 1fr;
+  min-height: 290px;
+}
+
 @keyframes swCarouselFade {
   from {
     opacity: 0;
