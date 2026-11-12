@@ -716,8 +716,8 @@
   background: #100f0e !important;
   color: #f4ede0 !important;
   border-top: 3.5px solid #161415 !important;
-  padding: 0 0 2rem !important;
-  margin-top: 4.5rem !important;
+  padding: 0 0 1.25rem !important;
+  margin-top: 2.5rem !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
   user-select: none;
 }
@@ -728,7 +728,7 @@
   background: #181615;
   border-bottom: 2px solid #2d2925;
   overflow: hidden;
-  padding: 0.65rem 0;
+  padding: 0.45rem 0;
   white-space: nowrap;
 }
 
@@ -753,10 +753,10 @@
 .footer-inner-deck {
   max-width: 1360px;
   margin: 0 auto;
-  padding: 3rem 1.75rem 2rem;
+  padding: 1.75rem 1.75rem 1.25rem;
   display: grid;
   grid-template-columns: 1.6fr 1.05fr 1.05fr 1.25fr;
-  gap: 2.5rem;
+  gap: 1.75rem;
   align-items: start;
 }
 
@@ -764,7 +764,7 @@
 .footer-col-identity {
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: 0.7rem;
 }
 
 .footer-brand-lockup {
@@ -802,8 +802,8 @@
 
 .footer-narrative {
   margin: 0;
-  font-size: 0.86rem;
-  line-height: 1.6;
+  font-size: 0.8rem;
+  line-height: 1.45;
   color: #b8af9f;
 }
 
@@ -815,7 +815,7 @@
   background: #181615;
   border: 1.5px solid #2d2925;
   border-radius: 12px;
-  padding: 0.75rem 1rem;
+  padding: 0.55rem 0.85rem;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
@@ -857,7 +857,7 @@
 .footer-col-nav {
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: 0.7rem;
 }
 
 .footer-section-badge {
@@ -880,7 +880,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.4rem;
 }
 
 .footer-nav-list li a {
@@ -889,7 +889,7 @@
   gap: 0.45rem;
   color: #f4ede0;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   font-weight: 600;
   transition: transform 0.15s ease, color 0.15s ease;
 }
@@ -978,8 +978,8 @@
 /* Bottom Perforated Baseline Bar */
 .footer-baseline-bar {
   max-width: 1360px;
-  margin: 1.5rem auto 0;
-  padding: 1.5rem 1.75rem 0;
+  margin: 1rem auto 0;
+  padding: 1rem 1.75rem 0;
   border-top: 2px dashed #2d2925;
   display: flex;
   justify-content: space-between;
@@ -1096,10 +1096,8 @@
   position: relative;
   background: #0a0b10 radial-gradient(circle at 50% 18%, #181a24 0%, #090a0f 82%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 2.25rem 1.5rem 3rem;
-  min-height: min(82vh, 700px);
-  display: flex;
-  align-items: center;
+  padding: 1.5rem 1.5rem 2rem;
+  min-height: auto;
   overflow: hidden;
   color: var(--sw-cream);
   z-index: 1;
@@ -1141,7 +1139,7 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1rem;
 }
 
 /* Top Tactical Status Bar */
@@ -1151,7 +1149,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  padding-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.72rem;
@@ -1289,7 +1287,7 @@
   grid-template-columns: 320px 1fr 340px;
   gap: 0;
   align-items: stretch;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   background: rgba(14, 15, 22, 0.72);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
@@ -1304,12 +1302,12 @@
   border: none;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0;
-  padding: 1.75rem 2rem;
+  padding: 1.15rem 1.5rem;
   box-shadow: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.25rem;
+  gap: 0.75rem;
   position: relative;
 }
 
@@ -1369,12 +1367,12 @@
   background: transparent;
   border: none;
   border-radius: 0;
-  padding: 1.75rem 2.25rem;
+  padding: 1.15rem 1.75rem;
   box-shadow: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 0.85rem;
   position: relative;
 }
 
@@ -1886,7 +1884,7 @@
 .big-hero-status-ribbon {
   justify-content: flex-start !important;
   gap: 0.75rem !important;
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
 }
 
 /* 3. Re-balance Hero Deck: 2 generous columns instead of a cramped 3-way cockpit */
@@ -1906,7 +1904,7 @@
   align-items: center !important;
   gap: 1rem !important;
   flex-wrap: wrap !important;
-  margin-top: 1.5rem !important;
+  margin-top: 0.85rem !important;
 }
 .cockpit-cta-row .btn-monument-secondary[href*="welcome.html"] {
   display: none !important;
