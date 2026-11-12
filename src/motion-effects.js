@@ -357,7 +357,63 @@
     });
   }
 
+  function initBitmapFontTester() {
+    const STORAGE_KEY = "sw_bitmap_font_preview";
+    const options = [
+      { id: "jersey", label: "Jersey 15" },
+      { id: "jacquard", label: "Jacquard 12" },
+      { id: "pixelify", label: "Pixelify" },
+      { id: "silkscreen", label: "Silkscreen" },
+      { id: "off", label: "Original" }
+    ];
+
+    let activeFont = "jersey";
+    try {
+      const saved = sessionStorage.getItem(STORAGE_KEY);
+      if (saved && options.some(function (o) { return o.id === saved; })) {
+        activeFont = saved;
+      }
+    } catch (e) {}
+
+    function applyFont(fontId) {
+      document.documentElement.setAttribute("data-bitmap-font", fontId);
+      try {
+        sessionStorage.setItem(STORAGE_KEY, fontId);
+      } catch (e) {}
+      bar.querySelectorAll("button").forEach(function (btn) {
+        btn.classList.toggle("is-active", btn.getAttribute("data-font-id") === fontId);
+      });
+    }
+
+    const bar = document.createElement("div");
+    bar.className = "sw-font-tester";
+    bar.setAttribute("aria-label", "Bitmap Typeface Preview Switcher");
+    bar.innerHTML =
+      '<span class="sw-font-tester-label">Bitmap Test:</span>' +
+      options
+        .map(function (opt) {
+          return (
+            '<button type="button" data-font-id="' +
+            opt.id +
+            '">' +
+            opt.label +
+            "</button>"
+          );
+        })
+        .join("");
+
+    bar.querySelectorAll("button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applyFont(btn.getAttribute("data-font-id"));
+      });
+    });
+
+    document.body.appendChild(bar);
+    applyFont(activeFont);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    initBitmapFontTester();
     initToggleSidebar();
     initLenisSmoothScroll();
     initBlurInHeadlines();
