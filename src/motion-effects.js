@@ -202,78 +202,132 @@
     });
   }
 
+  function getPixelIconSvg(href, isCta) {
+    // Crisp 16x16 pixelated SVG icons matching retro pixel-grid style
+    if (isCta) {
+      // Pixel Star / Sparkle
+      return '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="7" y="1" width="2" height="3"/><rect x="7" y="12" width="2" height="3"/><rect x="1" y="7" width="3" height="2"/><rect x="12" y="7" width="3" height="2"/><rect x="5" y="5" width="6" height="6"/><rect x="3" y="3" width="2" height="2"/><rect x="11" y="3" width="2" height="2"/><rect x="3" y="11" width="2" height="2"/><rect x="11" y="11" width="2" height="2"/></svg>';
+    }
+    if (href.includes("index.html")) {
+      // Pixel Home / Welcome Hub
+      return '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="7" y="2" width="2" height="2"/><rect x="5" y="4" width="6" height="2"/><rect x="3" y="6" width="10" height="2"/><rect x="3" y="8" width="3" height="6"/><rect x="10" y="8" width="3" height="6"/><rect x="6" y="8" width="4" height="2"/><rect x="6" y="12" width="4" height="2"/></svg>';
+    }
+    if (href.includes("lineup.html")) {
+      // Pixel Music Eighth-Note
+      return '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="6" y="2" width="7" height="2"/><rect x="6" y="4" width="2" height="7"/><rect x="11" y="4" width="2" height="6"/><rect x="3" y="10" width="5" height="4"/><rect x="9" y="9" width="4" height="4"/></svg>';
+    }
+    if (href.includes("schedule-builder.html")) {
+      // Pixel Clock / Timetable
+      return '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="5" y="2" width="6" height="2"/><rect x="5" y="12" width="6" height="2"/><rect x="2" y="5" width="2" height="6"/><rect x="12" y="5" width="2" height="6"/><rect x="4" y="4" width="1" height="1"/><rect x="11" y="4" width="1" height="1"/><rect x="4" y="11" width="1" height="1"/><rect x="11" y="11" width="1" height="1"/><rect x="7" y="4" width="2" height="5"/><rect x="9" y="7" width="2" height="2"/></svg>';
+    }
+    if (href.includes("stage")) {
+      // Pixel Equalizer / Stages
+      return '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="2" y="9" width="3" height="5"/><rect x="6" y="3" width="3" height="11"/><rect x="10" y="6" width="3" height="8"/><rect x="2" y="6" width="3" height="2"/><rect x="10" y="3" width="3" height="2"/></svg>';
+    }
+    if (href.includes("passes.html")) {
+      // Pixel Ticket / Diamond Pass
+      return '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="2" y="4" width="12" height="2"/><rect x="2" y="10" width="12" height="2"/><rect x="2" y="6" width="2" height="4"/><rect x="12" y="6" width="2" height="4"/><rect x="6" y="7" width="4" height="2"/><rect x="9" y="5" width="2" height="1"/><rect x="9" y="10" width="2" height="1"/></svg>';
+    }
+    if (href.includes("shuttles-orders.html")) {
+      // Pixel Lightning / Express Transit
+      return '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="8" y="1" width="3" height="2"/><rect x="6" y="3" width="4" height="2"/><rect x="4" y="5" width="5" height="2"/><rect x="3" y="7" width="10" height="2"/><rect x="7" y="9" width="4" height="2"/><rect x="6" y="11" width="3" height="2"/><rect x="5" y="13" width="2" height="2"/></svg>';
+    }
+    return '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="10" height="10"/></svg>';
+  }
+
+  function getExpandArrowSvg(isExpanded) {
+    if (isExpanded) {
+      // Pixel « Retract
+      return '<svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" style="shape-rendering:crispEdges" aria-hidden="true"><rect x="6" y="3" width="2" height="2"/><rect x="4" y="5" width="2" height="2"/><rect x="2" y="7" width="2" height="2"/><rect x="4" y="9" width="2" height="2"/><rect x="6" y="11" width="2" height="2"/><rect x="12" y="3" width="2" height="2"/><rect x="10" y="5" width="2" height="2"/><rect x="8" y="7" width="2" height="2"/><rect x="10" y="9" width="2" height="2"/><rect x="12" y="11" width="2" height="2"/></svg>';
+    }
+    // Pixel » Expand
+    return '<svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" style="shape-rendering:crispEdges" aria-hidden="true"><rect x="2" y="3" width="2" height="2"/><rect x="4" y="5" width="2" height="2"/><rect x="6" y="7" width="2" height="2"/><rect x="4" y="9" width="2" height="2"/><rect x="2" y="11" width="2" height="2"/><rect x="8" y="3" width="2" height="2"/><rect x="10" y="5" width="2" height="2"/><rect x="12" y="7" width="2" height="2"/><rect x="10" y="9" width="2" height="2"/><rect x="8" y="11" width="2" height="2"/></svg>';
+  }
+
   function initToggleSidebar() {
     const nav = document.querySelector(".sticky-navbar");
-    if (!nav || nav.classList.contains("sw-sidebar-drawer")) return;
+    if (!nav || nav.classList.contains("sw-rail-sidebar")) return;
 
-    nav.classList.add("sw-sidebar-drawer");
+    nav.classList.add("sw-rail-sidebar");
     nav.setAttribute("data-lenis-prevent", "");
+    document.body.classList.add("has-sw-rail");
 
     const navInner = nav.querySelector(".nav-inner");
     const brandLink = navInner ? navInner.querySelector(".brand-link") : null;
 
-    // Wrap brand link + close X button in a clean sidebar header row
-    const closeBtn = document.createElement("button");
-    closeBtn.type = "button";
-    closeBtn.className = "sw-sidebar-close";
-    closeBtn.setAttribute("aria-label", "Close navigation sidebar");
-    closeBtn.innerHTML = "&times;";
+    // Expand / Retract button at the top of the rail
+    const expandBtn = document.createElement("button");
+    expandBtn.type = "button";
+    expandBtn.className = "sw-rail-expand-btn";
+    expandBtn.setAttribute("aria-expanded", "false");
+    expandBtn.setAttribute("aria-label", "Expand navigation sidebar");
+    expandBtn.setAttribute("title", "Expand / Collapse Sidebar");
+    expandBtn.innerHTML = getExpandArrowSvg(false);
 
     if (navInner && brandLink) {
       const headerRow = document.createElement("div");
-      headerRow.className = "sw-sidebar-header-row";
+      headerRow.className = "sw-rail-header";
       navInner.insertBefore(headerRow, brandLink);
       headerRow.appendChild(brandLink);
-      headerRow.appendChild(closeBtn);
+      headerRow.appendChild(expandBtn);
     } else if (navInner) {
-      navInner.prepend(closeBtn);
+      navInner.prepend(expandBtn);
     }
 
-    // Create compact floating toggle pill
-    const toggleBtn = document.createElement("button");
-    toggleBtn.type = "button";
-    toggleBtn.className = "sw-sidebar-toggle";
-    toggleBtn.setAttribute("aria-expanded", "false");
-    toggleBtn.setAttribute("aria-label", "Open navigation menu");
-    toggleBtn.innerHTML = '<span aria-hidden="true">&#9776;</span><span>Menu</span>';
+    // Inject pixelated icons + hover tooltips into each nav link
+    nav.querySelectorAll("ul li a").forEach(function (link) {
+      const rawText = (link.textContent || "").trim();
+      const cleanLabel = rawText.replace(/^[←→\s]+|[←→\s]+$/g, "").trim() || rawText;
+      const href = link.getAttribute("href") || "";
+      const isCta = link.classList.contains("nav-cta-btn");
 
-    // Create translucent backdrop
+      link.setAttribute("data-tooltip", cleanLabel);
+      link.setAttribute("aria-label", cleanLabel);
+      link.innerHTML =
+        '<span class="sw-rail-icon">' +
+        getPixelIconSvg(href, isCta) +
+        '</span><span class="sw-rail-label">' +
+        rawText +
+        "</span>";
+    });
+
+    // Translucent backdrop when expanded
     const backdrop = document.createElement("div");
-    backdrop.className = "sw-sidebar-backdrop";
+    backdrop.className = "sw-rail-backdrop";
     backdrop.setAttribute("aria-hidden", "true");
-
     document.body.appendChild(backdrop);
-    document.body.appendChild(toggleBtn);
 
-    function setSidebarOpen(isOpen) {
-      nav.classList.toggle("is-open", isOpen);
-      backdrop.classList.toggle("is-open", isOpen);
-      toggleBtn.classList.toggle("is-hidden", isOpen);
-      toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    function setExpanded(isExpanded) {
+      nav.classList.toggle("is-expanded", isExpanded);
+      backdrop.classList.toggle("is-open", isExpanded);
+      expandBtn.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+      expandBtn.setAttribute(
+        "aria-label",
+        isExpanded ? "Retract navigation sidebar" : "Expand navigation sidebar"
+      );
+      expandBtn.innerHTML = getExpandArrowSvg(isExpanded);
     }
 
-    toggleBtn.addEventListener("click", function () {
-      setSidebarOpen(true);
+    expandBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      setExpanded(!nav.classList.contains("is-expanded"));
     });
 
-    closeBtn.addEventListener("click", function () {
-      setSidebarOpen(false);
-    });
-
-    backdrop.addEventListener("click", function () {
-      setSidebarOpen(false);
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && nav.classList.contains("is-open")) {
-        setSidebarOpen(false);
+    // Clicking empty rail space (not a link) also expands/retracts
+    nav.addEventListener("click", function (e) {
+      if (!e.target.closest("a") && !e.target.closest("button")) {
+        setExpanded(!nav.classList.contains("is-expanded"));
       }
     });
 
-    nav.querySelectorAll("ul li a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        setSidebarOpen(false);
-      });
+    backdrop.addEventListener("click", function () {
+      setExpanded(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("is-expanded")) {
+        setExpanded(false);
+      }
     });
   }
 
