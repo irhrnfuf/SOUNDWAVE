@@ -3381,6 +3381,17 @@ html.lenis body {
   min-height: 290px;
 }
 
+.sw-showcase-panel h2,
+.sw-showcase-panel h3 {
+  color: #ffffff !important;
+}
+
+.sw-showcase-preview h3 {
+  color: #ffffff !important;
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.01em;
+}
+
 .sw-preview-pane {
   display: none;
   flex-direction: column;
