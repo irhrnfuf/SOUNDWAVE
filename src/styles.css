@@ -4142,31 +4142,35 @@ h3,
 }
 
 .sw-stage-slide-clickable .sw-carousel-media::after {
-  content: "✦ CLICK FOR INSIDER TIP ↗";
+  content: "↗";
   position: absolute;
-  bottom: 14px;
-  left: 14px;
+  bottom: 12px;
+  right: 12px;
   z-index: 3;
-  padding: 5px 11px;
+  width: 28px;
+  height: 28px;
   border-radius: 999px;
-  background: rgba(17, 17, 17, 0.84);
+  background: rgba(17, 17, 17, 0.62);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 230, 0, 0.55);
-  color: #ffe600;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: rgba(255, 255, 255, 0.88);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
   transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
 .sw-stage-slide-clickable:hover .sw-carousel-media::after {
-  transform: translateY(-2px);
-  background: #ffe600;
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.92);
   color: #111111;
-  border-color: #111111;
+  border-color: #ffffff;
 }
 
 .sw-stage-lightbox {
