@@ -235,7 +235,7 @@
 
           <div class="sw-carousel-viewport">
             <!-- Stage 1: Horizon Arena -->
-            <article class="sw-carousel-slide is-active">
+            <article class="sw-carousel-slide is-active sw-stage-slide-clickable" data-stage-id="horizon">
               <div class="sw-carousel-media">
                 <img src="./src/festival-history-montreux.jpg" alt="Horizon Arena waterfront amphitheater stage with pyrotechnics" />
                 <span class="sw-carousel-badge">EST. 2014 &bull; 48,500 CAPACITY</span>
@@ -263,7 +263,7 @@
             </article>
 
             <!-- Stage 2: Analog Dome -->
-            <article class="sw-carousel-slide">
+            <article class="sw-carousel-slide sw-stage-slide-clickable" data-stage-id="analog">
               <div class="sw-carousel-media">
                 <img src="./src/analog-dome-red-lasers.jpg" alt="Analog Dome crowd and red light canopy" />
                 <span class="sw-carousel-badge">EST. 2016 &bull; 22,000 CAPACITY</span>
@@ -291,7 +291,7 @@
             </article>
 
             <!-- Stage 3: Vinyl Lawn -->
-            <article class="sw-carousel-slide">
+            <article class="sw-carousel-slide sw-stage-slide-clickable" data-stage-id="vinyl">
               <div class="sw-carousel-media">
                 <img src="./src/vinyl-lawn-sunset-trees.jpg" alt="Vinyl Lawn acoustic sunset stage and golden hour crowd" />
                 <span class="sw-carousel-badge">EST. 2015 &bull; 14,500 CAPACITY</span>
@@ -319,7 +319,7 @@
             </article>
 
             <!-- Stage 4: VIP Cabanas & SkyDeck -->
-            <article class="sw-carousel-slide">
+            <article class="sw-carousel-slide sw-stage-slide-clickable" data-stage-id="vip">
               <div class="sw-carousel-media">
                 <img src="./src/vip-cabanas-skydeck-dj.jpg" alt="VIP Cabanas & SkyDeck neon club secret set with DJs" />
                 <span class="sw-carousel-badge">EST. 2018 &bull; 3,200 CAPACITY</span>
@@ -475,6 +475,115 @@
   <script src="./src/app.js"></script>
   <script src="./src/lenis.min.js"></script>
   <script src="./src/motion-effects.js"></script>
+
+  <!-- Stage Expanded Insider Lightbox -->
+  <div id="sw-stage-lightbox" class="sw-stage-lightbox" role="dialog" aria-modal="true" aria-labelledby="sw-lb-title">
+    <div class="sw-stage-lightbox-dialog">
+      <div class="sw-stage-lightbox-media">
+        <img id="sw-lb-img" src="" alt="" />
+      </div>
+      <div class="sw-stage-lightbox-body">
+        <button type="button" class="sw-stage-lightbox-close" id="sw-lb-close" aria-label="Close stage details">&times;</button>
+        <span id="sw-lb-eyebrow" class="sw-stage-lightbox-eyebrow"></span>
+        <h2 id="sw-lb-title" class="sw-stage-lightbox-title"></h2>
+        <p id="sw-lb-desc" class="sw-stage-lightbox-desc"></p>
+        <div id="sw-lb-tip" class="sw-stage-lightbox-tip"></div>
+        <div class="sw-stage-lightbox-actions">
+          <a id="sw-lb-link" href="./stage-horizon.html" class="sw-stage-lightbox-link">Open Sightline Map &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const stageDetails = {
+        horizon: {
+          eyebrow: "STAGE 01 / 04 • EST. 2014 • 48,500 CAPACITY",
+          title: "Horizon Arena",
+          img: "./src/festival-history-montreux.jpg",
+          alt: "Horizon Arena waterfront amphitheater stage with pyrotechnics",
+          desc: "SoundWave's flagship oceanfront amphitheater. Engineered for stadium-scale headliners, synchronized pyrotechnics, and panoramic Biscayne Bay sunsets.",
+          tip: "Stand just in front of the FOH soundboard about 20m back from center stage — you get the cleanest 128 dB sweet-spot mix, full sunset & pyro framing, and plenty of breathing room.",
+          href: "./stage-horizon.html"
+        },
+        analog: {
+          eyebrow: "STAGE 02 / 04 • EST. 2016 • 22,000 CAPACITY",
+          title: "Analog Dome",
+          img: "./src/analog-dome-red-lasers.jpg",
+          alt: "Analog Dome crowd and red light canopy",
+          desc: "An enclosed geodesic acoustic sanctuary featuring 360° spatial ambisonic audio, overhead 40W RGB laser grids, and late-night electronic showcases.",
+          tip: "Post up along the inner-ring laser balcony or right under the glowing prism ribs — unbeatable angles for aesthetic pics while still letting the full 360° sub-bass wrap right around you.",
+          href: "./stage-analog.html"
+        },
+        vinyl: {
+          eyebrow: "STAGE 03 / 04 • EST. 2015 • 14,500 CAPACITY",
+          title: "Vinyl Lawn",
+          img: "./src/vinyl-lawn-sunset-trees.jpg",
+          alt: "Vinyl Lawn acoustic sunset stage and golden hour crowd",
+          desc: "Open-air botanical hillside designed for acoustic ensembles, indie storytelling, and live analog vinyl lacquer cutting right beside the water.",
+          tip: "Go in groups — grab a shaded patch on the upper botanical slope, spread out a blanket, and pass around cold drinks together while the live LP lathe cuts golden-hour sets by the bay.",
+          href: "./stage-vinyl.html"
+        },
+        vip: {
+          eyebrow: "STAGE 04 / 04 • EST. 2018 • 3,200 CAPACITY",
+          title: "VIP Cabanas & SkyDeck",
+          img: "./src/vip-cabanas-skydeck-dj.jpg",
+          alt: "VIP Cabanas & SkyDeck neon club secret set with DJs",
+          desc: "Elevated bayfront terrace hosting unannounced secret DJ sets, craft mixology bars, shaded lounge cabanas, and sweeping sightlines across the entire park.",
+          tip: "Don't be shy near the booth rail — during late-night B2Bs, the resident DJs love hearing your favorite deep-cut vinyl requests and slipping unreleased edits into the mix between transitions.",
+          href: "./stage-vip.html"
+        }
+      };
+
+      const modal = document.getElementById("sw-stage-lightbox");
+      const imgEl = document.getElementById("sw-lb-img");
+      const eyebrowEl = document.getElementById("sw-lb-eyebrow");
+      const titleEl = document.getElementById("sw-lb-title");
+      const descEl = document.getElementById("sw-lb-desc");
+      const tipEl = document.getElementById("sw-lb-tip");
+      const linkEl = document.getElementById("sw-lb-link");
+      const closeBtn = document.getElementById("sw-lb-close");
+
+      if (!modal) return;
+
+      function openStageModal(id) {
+        const data = stageDetails[id];
+        if (!data) return;
+        imgEl.src = data.img;
+        imgEl.alt = data.alt;
+        eyebrowEl.textContent = data.eyebrow;
+        titleEl.textContent = data.title;
+        descEl.textContent = data.desc;
+        tipEl.innerHTML = "<strong>INSIDER TIP:</strong> " + data.tip;
+        linkEl.href = data.href;
+        modal.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeStageModal() {
+        modal.classList.remove("is-open");
+        document.body.style.overflow = "";
+      }
+
+      document.querySelectorAll(".sw-stage-slide-clickable").forEach(function (slide) {
+        slide.addEventListener("click", function (e) {
+          if (e.target.closest("a, button")) return;
+          openStageModal(slide.getAttribute("data-stage-id"));
+        });
+      });
+
+      closeBtn.addEventListener("click", closeStageModal);
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) closeStageModal();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && modal.classList.contains("is-open")) {
+          closeStageModal();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
 

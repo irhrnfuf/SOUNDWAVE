@@ -4133,3 +4133,175 @@ h3,
 .hero-type-line {
   font-size: clamp(3rem, 7.5vw, 6.4rem) !important;
 }
+
+/* ==========================================================================
+   STAGE EXPANDED LIGHTBOX (Living Archive Editorial Modal)
+   ========================================================================== */
+.sw-stage-slide-clickable {
+  cursor: pointer;
+}
+
+.sw-stage-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10090;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(8, 9, 12, 0.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.sw-stage-lightbox.is-open {
+  display: flex;
+  animation: swLightboxFade 0.22s ease-out;
+}
+
+@keyframes swLightboxFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sw-stage-lightbox-dialog {
+  position: relative;
+  width: min(960px, 100%);
+  max-height: 90vh;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  background: #141517;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.72);
+  color: #f4f4f5;
+}
+
+.sw-stage-lightbox-media {
+  position: relative;
+  min-height: 440px;
+  background: #0b0c0f;
+}
+
+.sw-stage-lightbox-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sw-stage-lightbox-body {
+  position: relative;
+  padding: 2.5rem 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.15rem;
+  overflow-y: auto;
+}
+
+.sw-stage-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #d4d4d8;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sw-stage-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.sw-stage-lightbox-eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #e07a5f;
+}
+
+.sw-stage-lightbox-title {
+  margin: 0;
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  line-height: 1;
+  color: #ffffff !important;
+}
+
+.sw-stage-lightbox-desc {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: #d4d4d8;
+}
+
+.sw-stage-lightbox-tip {
+  margin-top: 0.25rem;
+  padding-top: 1.1rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.16);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: #a1a1aa;
+}
+
+.sw-stage-lightbox-tip strong {
+  color: #ffe600;
+  letter-spacing: 0.05em;
+}
+
+.sw-stage-lightbox-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.35rem;
+}
+
+.sw-stage-lightbox-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #111111 !important;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 0.84rem;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.sw-stage-lightbox-link:hover {
+  background: #f7b2d4;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+@media (max-width: 780px) {
+  .sw-stage-lightbox-dialog {
+    grid-template-columns: 1fr;
+  }
+  .sw-stage-lightbox-media {
+    min-height: 220px;
+  }
+  .sw-stage-lightbox-body {
+    padding: 1.75rem 1.35rem 1.5rem;
+  }
+}
