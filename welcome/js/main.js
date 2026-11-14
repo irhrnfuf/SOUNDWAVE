@@ -476,20 +476,17 @@ function renderPeopleGallery() {
   }
 
   const CFG = {
-    rounded: 20,
-    thumbWidth: 108,
-    thumbHeight: 120,
-    thumbGap: 12,
-    heroWidth: 530,
-    heroHeight: 670,
+    rounded: 18,
+    thumbGap: 10,
+    heroHeight: 390,
     duration: 0.7,
     ease: 'power3.inOut',
-    stackOffsetX: 3,
+    stackOffsetX: 4,
     stackOffsetY: 9,
   };
 
   let order = items.map((_, i) => i);
-  let opened = true;
+  let opened = false;
   let isAnimating = false;
   let mobileMode = null;
   let captionTween = null;
@@ -502,16 +499,26 @@ function renderPeopleGallery() {
     const isNarrow = stageWidth > 0 && stageWidth < 900;
     const scale = isNarrow ? Math.min(1, stageWidth / 900) : 1;
     const railCount = Math.max(items.length - 1, 0);
-    const tW = CFG.thumbWidth * scale;
-    const tH = CFG.thumbHeight * scale;
-    const gap = CFG.thumbGap * scale;
-    const hW = Math.min(CFG.heroWidth * scale, stageWidth * 0.46);
-    const hH = CFG.heroHeight * (hW / CFG.heroWidth || 1);
-    const railX = Math.max(24, stageWidth * 0.045);
-    const heroX = stageWidth - hW - railX;
-    const stackWidth = Math.min(215 * scale, stageWidth * 0.42);
-    const stackHeight = stackWidth * 1.5;
-    const stageH = Math.max(hH + 120, Math.round(window.innerHeight * 0.88), 760);
+    const vh = window.innerHeight || 720;
+    const stageH = Math.max(430, Math.min(540, Math.round(vh * 0.66)));
+    const centerY = Math.round((stageH - 42) / 2);
+
+    const hH = Math.min(CFG.heroHeight, Math.max(290, Math.round((stageH - 80) * 0.88)));
+    const hW = Math.min(Math.round(hH * 0.78), Math.round(stageWidth * 0.32));
+
+    const gap = Math.round(CFG.thumbGap * scale);
+    const tH = Math.min(
+      78,
+      Math.max(58, Math.floor((hH - Math.max(0, railCount - 1) * gap) / Math.max(1, railCount)))
+    );
+    const tW = Math.round(tH * 0.88);
+
+    const railX = Math.max(36, Math.round(stageWidth * 0.05));
+    const rightInset = Math.max(96, Math.round(stageWidth * 0.08));
+    const heroX = stageWidth - hW - rightInset;
+
+    const stackHeight = Math.min(285, Math.max(220, Math.round(hH * 0.74)));
+    const stackWidth = Math.round(stackHeight * 0.72);
 
     return {
       isMobile,
@@ -528,6 +535,7 @@ function renderPeopleGallery() {
       stackWidth,
       stackHeight,
       stageH,
+      centerY,
     };
   };
 
@@ -581,28 +589,32 @@ function renderPeopleGallery() {
     if (!desktopEls) return;
     const stageWidth = container.clientWidth || window.innerWidth;
     const m = computeMetrics(stageWidth);
-    const centerY = m.stageH / 2;
+    const centerY = m.centerY;
 
     container.style.minHeight = `${m.stageH}px`;
     desktopEls.stage.style.minHeight = `${m.stageH}px`;
     desktopEls.stage.classList.toggle('is-collapsed', !opened);
 
+    desktopEls.counter.style.left = `${m.railX}px`;
+    desktopEls.counter.style.top = '12px';
     desktopEls.counter.style.opacity = opened ? '1' : '0';
     desktopEls.counter.style.pointerEvents = opened ? 'auto' : 'none';
 
-    const contentLeft = m.railX + m.tW + Math.max(48, stageWidth * 0.06);
-    const contentMaxW = Math.max(220, m.heroX - contentLeft - 44);
+    const contentLeft = m.railX + m.tW + Math.max(40, Math.round(stageWidth * 0.045));
+    const contentMaxW = Math.max(220, m.heroX - contentLeft - 40);
     desktopEls.content.style.left = `${contentLeft}px`;
-    desktopEls.content.style.maxWidth = `${Math.min(contentMaxW, stageWidth * 0.24)}px`;
+    desktopEls.content.style.top = `${centerY}px`;
+    desktopEls.content.style.maxWidth = `${contentMaxW}px`;
     desktopEls.content.style.display = m.isNarrow ? 'none' : 'block';
     desktopEls.content.style.opacity = opened ? '1' : '0';
 
     desktopEls.hint.textContent = opened
-      ? 'Click any frame to swap · Click background or press Esc to stack'
-      : 'Click the stack to spread, then any frame to swap';
+      ? 'Click any frame to swap it in,\nor click background to stack'
+      : 'Click the stack to spread it out,\nthen any frame to swap it in';
 
     const heroItemIndex = order[0];
     const railHeight = m.railCount * m.tH + Math.max(0, m.railCount - 1) * m.gap;
+    const stackTotalOffsetY = (items.length - 1) * CFG.stackOffsetY;
 
     desktopEls.cards.forEach((card, itemIndex) => {
       const slot = order.indexOf(itemIndex);
@@ -617,25 +629,25 @@ function renderPeopleGallery() {
 
       card.style.transform = 'none';
       if (!opened) {
-        card.style.left = `${stageWidth / 2 - m.stackWidth / 2 + slot * CFG.stackOffsetX}px`;
-        card.style.top = `${centerY - m.stackHeight / 2 + slot * CFG.stackOffsetY}px`;
+        card.style.left = `${Math.round(stageWidth / 2 - m.stackWidth / 2 + slot * CFG.stackOffsetX)}px`;
+        card.style.top = `${Math.round(centerY - m.stackHeight / 2 - stackTotalOffsetY / 2 + slot * CFG.stackOffsetY)}px`;
         card.style.width = `${m.stackWidth}px`;
         card.style.height = `${m.stackHeight}px`;
-        card.style.borderRadius = `${CFG.rounded * 0.75 * m.scale}px`;
+        card.style.borderRadius = `${Math.round(CFG.rounded * 0.85 * m.scale)}px`;
         card.style.zIndex = String(items.length - slot);
       } else if (slot === 0) {
         card.style.left = `${m.heroX}px`;
         card.style.top = `${centerY - m.hH / 2}px`;
         card.style.width = `${m.hW}px`;
         card.style.height = `${m.hH}px`;
-        card.style.borderRadius = `${CFG.rounded * m.scale}px`;
+        card.style.borderRadius = `${Math.round(CFG.rounded * m.scale)}px`;
         card.style.zIndex = String(items.length + 1);
       } else {
         card.style.left = `${m.railX}px`;
         card.style.top = `${centerY - railHeight / 2 + (slot - 1) * (m.tH + m.gap)}px`;
         card.style.width = `${m.tW}px`;
         card.style.height = `${m.tH}px`;
-        card.style.borderRadius = `${CFG.rounded * 0.6 * m.scale}px`;
+        card.style.borderRadius = `${Math.round(CFG.rounded * 0.65 * m.scale)}px`;
         card.style.zIndex = String(items.length - slot);
       }
     });
