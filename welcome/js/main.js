@@ -444,41 +444,446 @@ function setupCardDragging(card) {
   });
 }
 
-// --- INITIALIZE THE PEOPLE EXHIBITION (Scene 03) ---
+// --- INITIALIZE THE PEOPLE EXHIBITION (Scene 03: GSAP Flip Card Gallery) ---
+function createFlipGalleryItems(photos) {
+  return photos.slice(0, 5).map((photo, idx) => ({
+    id: photo.id || `people-${idx}`,
+    image: photo.full || photo.thumb,
+    alt: `${photo.title} — ${photo.location}`,
+    title: photo.title,
+    meta: `${photo.location} / SoundWave Archive / ${photo.timestamp}`,
+    description: photo.caption,
+    caption: `Captured on 35mm film at ${photo.location}. Part of the SoundWave Living Archive Collection.`,
+  }));
+}
+
 function renderPeopleGallery() {
-  if (!elements.peopleGrid) return;
-  elements.peopleGrid.innerHTML = '';
+  const container = elements.peopleGrid;
+  if (!container) return;
 
-  PEOPLE_GALLERY.forEach((photo, idx) => {
-    const cell = document.createElement('div');
-    // Varied column spans for rich editorial rhythm
-    const spanClass = idx === 0 ? 'col-span-8' : (idx === 1 ? 'col-span-4' : (idx === 2 ? 'col-span-4' : (idx === 3 ? 'col-span-8' : 'col-span-6')));
-    cell.className = `photo-cell ${spanClass}`;
-    cell.setAttribute('tabindex', '0');
-    cell.setAttribute('role', 'button');
-    cell.setAttribute('aria-label', `${photo.title} (${photo.caption})`);
+  if (typeof container._flipCleanup === 'function') {
+    container._flipCleanup();
+  }
+  container.innerHTML = '';
 
-    cell.innerHTML = `
-      <img src="${photo.thumb}" alt="${photo.title}" loading="lazy" />
-      <div class="photo-cell-overlay">
-        <span class="photo-cell-time">${photo.timestamp}</span>
-        <h4 class="photo-cell-title">${photo.title}</h4>
-        <span class="photo-cell-loc">${photo.location}</span>
-      </div>
-    `;
+  const items = createFlipGalleryItems(PEOPLE_GALLERY);
+  if (items.length === 0) return;
 
-    cell.addEventListener('click', () => {
-      openArchiveDetail({
-        title: photo.title,
-        label: `PHOTOGRAPHIC ARCHIVE · ${photo.timestamp}`,
-        full: photo.full,
-        description: photo.caption,
-        curatorNotes: `Captured on 35mm stock at ${photo.location}. SoundWave Living Archive Collection.`
-      });
+  const gsapLib = window.gsap;
+  const FlipPlugin = window.Flip;
+  if (gsapLib && FlipPlugin) {
+    gsapLib.registerPlugin(FlipPlugin);
+  }
+
+  const CFG = {
+    rounded: 20,
+    thumbWidth: 108,
+    thumbHeight: 120,
+    thumbGap: 12,
+    heroWidth: 530,
+    heroHeight: 670,
+    duration: 0.7,
+    ease: 'power3.inOut',
+    stackOffsetX: 3,
+    stackOffsetY: 9,
+  };
+
+  let order = items.map((_, i) => i);
+  let opened = true;
+  let isAnimating = false;
+  let mobileMode = null;
+  let captionTween = null;
+
+  const prefersReduced = () =>
+    window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+
+  const computeMetrics = (stageWidth) => {
+    const isMobile = stageWidth > 0 && stageWidth <= 1025;
+    const isNarrow = stageWidth > 0 && stageWidth < 900;
+    const scale = isNarrow ? Math.min(1, stageWidth / 900) : 1;
+    const railCount = Math.max(items.length - 1, 0);
+    const tW = CFG.thumbWidth * scale;
+    const tH = CFG.thumbHeight * scale;
+    const gap = CFG.thumbGap * scale;
+    const hW = Math.min(CFG.heroWidth * scale, stageWidth * 0.46);
+    const hH = CFG.heroHeight * (hW / CFG.heroWidth || 1);
+    const railX = Math.max(24, stageWidth * 0.045);
+    const heroX = stageWidth - hW - railX;
+    const stackWidth = Math.min(215 * scale, stageWidth * 0.42);
+    const stackHeight = stackWidth * 1.5;
+    const stageH = Math.max(hH + 120, Math.round(window.innerHeight * 0.88), 760);
+
+    return {
+      isMobile,
+      isNarrow,
+      scale,
+      railCount,
+      tW,
+      tH,
+      gap,
+      hW,
+      hH,
+      railX,
+      heroX,
+      stackWidth,
+      stackHeight,
+      stageH,
+    };
+  };
+
+  let desktopEls = null;
+  let mobileEls = null;
+
+  const updateTextDOM = (textEls, counterCurEl, itemIndex) => {
+    const active = items[itemIndex];
+    if (!active) return;
+    if (counterCurEl) {
+      counterCurEl.textContent = String(itemIndex + 1).padStart(2, '0');
+    }
+    textEls.title.textContent = active.title;
+    textEls.meta.textContent = active.meta;
+    textEls.desc.textContent = active.description;
+    textEls.caption.textContent = active.caption;
+  };
+
+  const transitionText = (contentEl, textEls, counterCurEl, itemIndex) => {
+    const targets = contentEl.querySelectorAll('[data-card-text]');
+    if (!gsapLib || prefersReduced()) {
+      updateTextDOM(textEls, counterCurEl, itemIndex);
+      if (gsapLib) gsapLib.set(targets, { opacity: 1, y: 0 });
+      return;
+    }
+
+    if (captionTween) captionTween.kill();
+    captionTween = gsapLib.to(targets, {
+      opacity: 0,
+      y: -8,
+      duration: 0.25,
+      ease: 'power2.in',
+      onComplete: () => {
+        updateTextDOM(textEls, counterCurEl, itemIndex);
+        captionTween = gsapLib.fromTo(
+          targets,
+          { opacity: 0, y: 12 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.55,
+            stagger: 0.06,
+            ease: 'power3.out',
+          }
+        );
+      },
+    });
+  };
+
+  const applyDesktopLayout = () => {
+    if (!desktopEls) return;
+    const stageWidth = container.clientWidth || window.innerWidth;
+    const m = computeMetrics(stageWidth);
+    const centerY = m.stageH / 2;
+
+    container.style.minHeight = `${m.stageH}px`;
+    desktopEls.stage.style.minHeight = `${m.stageH}px`;
+    desktopEls.stage.classList.toggle('is-collapsed', !opened);
+
+    desktopEls.counter.style.opacity = opened ? '1' : '0';
+    desktopEls.counter.style.pointerEvents = opened ? 'auto' : 'none';
+
+    const contentLeft = m.railX + m.tW + Math.max(48, stageWidth * 0.06);
+    const contentMaxW = Math.max(220, m.heroX - contentLeft - 44);
+    desktopEls.content.style.left = `${contentLeft}px`;
+    desktopEls.content.style.maxWidth = `${Math.min(contentMaxW, stageWidth * 0.24)}px`;
+    desktopEls.content.style.display = m.isNarrow ? 'none' : 'block';
+    desktopEls.content.style.opacity = opened ? '1' : '0';
+
+    desktopEls.hint.textContent = opened
+      ? 'Click any frame to swap · Click background or press Esc to stack'
+      : 'Click the stack to spread, then any frame to swap';
+
+    const heroItemIndex = order[0];
+    const railHeight = m.railCount * m.tH + Math.max(0, m.railCount - 1) * m.gap;
+
+    desktopEls.cards.forEach((card, itemIndex) => {
+      const slot = order.indexOf(itemIndex);
+      const isHero = itemIndex === heroItemIndex;
+      card.classList.toggle('is-hero', opened && isHero);
+      card.setAttribute('aria-current', opened && isHero ? 'true' : 'false');
+      card.tabIndex = !opened ? (slot === 0 ? 0 : -1) : (isHero ? -1 : 0);
+      card.setAttribute(
+        'aria-label',
+        opened ? `${items[itemIndex].title} — ${items[itemIndex].meta}` : `Open gallery — ${items.length} frames`
+      );
+
+      card.style.transform = 'none';
+      if (!opened) {
+        card.style.left = `${stageWidth / 2 - m.stackWidth / 2 + slot * CFG.stackOffsetX}px`;
+        card.style.top = `${centerY - m.stackHeight / 2 + slot * CFG.stackOffsetY}px`;
+        card.style.width = `${m.stackWidth}px`;
+        card.style.height = `${m.stackHeight}px`;
+        card.style.borderRadius = `${CFG.rounded * 0.75 * m.scale}px`;
+        card.style.zIndex = String(items.length - slot);
+      } else if (slot === 0) {
+        card.style.left = `${m.heroX}px`;
+        card.style.top = `${centerY - m.hH / 2}px`;
+        card.style.width = `${m.hW}px`;
+        card.style.height = `${m.hH}px`;
+        card.style.borderRadius = `${CFG.rounded * m.scale}px`;
+        card.style.zIndex = String(items.length + 1);
+      } else {
+        card.style.left = `${m.railX}px`;
+        card.style.top = `${centerY - railHeight / 2 + (slot - 1) * (m.tH + m.gap)}px`;
+        card.style.width = `${m.tW}px`;
+        card.style.height = `${m.tH}px`;
+        card.style.borderRadius = `${CFG.rounded * 0.6 * m.scale}px`;
+        card.style.zIndex = String(items.length - slot);
+      }
+    });
+  };
+
+  const runDesktopFlip = (mutateState, opts = {}) => {
+    if (!desktopEls || isAnimating) return;
+    if (!gsapLib || !FlipPlugin || prefersReduced()) {
+      mutateState();
+      applyDesktopLayout();
+      return;
+    }
+
+    const cardEls = order.map((idx) => desktopEls.cards[idx]);
+    const flipState = FlipPlugin.getState(cardEls, { props: 'borderRadius' });
+    mutateState();
+    applyDesktopLayout();
+
+    isAnimating = true;
+    FlipPlugin.from(flipState, {
+      duration: opts.duration ?? CFG.duration,
+      ease: CFG.ease,
+      absolute: true,
+      props: 'borderRadius',
+      stagger: opts.stagger ?? 0,
+      onComplete: () => {
+        isAnimating = false;
+      },
+    });
+  };
+
+  const selectItem = (itemIndex) => {
+    if (itemIndex === order[0] || isAnimating) return;
+    playSubtlePulse(180, 0.12);
+
+    const swapOrder = () => {
+      const next = [...order];
+      const from = next.indexOf(itemIndex);
+      next[from] = next[0];
+      next[0] = itemIndex;
+      order = next;
+    };
+
+    if (mobileMode) {
+      swapOrder();
+      updateMobileView();
+      return;
+    }
+
+    runDesktopFlip(swapOrder);
+    transitionText(desktopEls.content, desktopEls.text, desktopEls.counterCur, itemIndex);
+  };
+
+  const openStack = () => {
+    if (opened || isAnimating || mobileMode) return;
+    playSubtlePulse(160, 0.14);
+    runDesktopFlip(() => {
+      opened = true;
+    }, { duration: CFG.duration, stagger: 0.04 });
+  };
+
+  const closeStack = () => {
+    if (!opened || isAnimating || mobileMode) return;
+    playSubtlePulse(110, 0.12);
+    runDesktopFlip(() => {
+      opened = false;
+    }, { duration: CFG.duration * 0.9, stagger: { each: 0.035, from: 'end' } });
+  };
+
+  const updateMobileView = () => {
+    if (!mobileEls) return;
+    const heroIdx = order[0];
+    const heroItem = items[heroIdx];
+    mobileEls.heroImg.src = heroItem.image;
+    mobileEls.heroImg.alt = heroItem.alt;
+    transitionText(mobileEls.content, mobileEls.text, mobileEls.counterCur, heroIdx);
+
+    mobileEls.thumbsWrap.innerHTML = '';
+    order.slice(1).forEach((itemIndex) => {
+      const item = items[itemIndex];
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hxs-flip-mobile-thumb';
+      btn.setAttribute('aria-label', `${item.title} — ${item.meta}`);
+      btn.innerHTML = `<img src="${item.image}" alt="${item.alt}" draggable="false" />`;
+      btn.addEventListener('click', () => selectItem(itemIndex));
+      mobileEls.thumbsWrap.appendChild(btn);
+    });
+  };
+
+  const buildDesktop = () => {
+    container.innerHTML = '';
+    container.style.minHeight = '';
+    mobileEls = null;
+    mobileMode = false;
+
+    const counter = document.createElement('div');
+    counter.className = 'hxs-flip-counter';
+    const counterCur = document.createElement('span');
+    counterCur.className = 'hxs-flip-counter-current';
+    counterCur.textContent = String(order[0] + 1).padStart(2, '0');
+    const counterTotal = document.createElement('span');
+    counterTotal.className = 'hxs-flip-counter-total';
+    counterTotal.textContent = ` / ${String(items.length).padStart(2, '0')}`;
+    counter.append(counterCur, counterTotal);
+
+    const stage = document.createElement('div');
+    stage.className = 'hxs-flip-stage';
+    stage.addEventListener('click', (e) => {
+      if (e.target === stage) closeStack();
     });
 
-    elements.peopleGrid.appendChild(cell);
-  });
+    const content = document.createElement('div');
+    content.className = 'hxs-flip-content';
+    content.innerHTML = `
+      <h4 class="hxs-flip-title" data-card-text></h4>
+      <p class="hxs-flip-meta" data-card-text></p>
+      <p class="hxs-flip-desc" data-card-text></p>
+      <p class="hxs-flip-caption" data-card-text></p>
+    `;
+    const textEls = {
+      title: content.querySelector('.hxs-flip-title'),
+      meta: content.querySelector('.hxs-flip-meta'),
+      desc: content.querySelector('.hxs-flip-desc'),
+      caption: content.querySelector('.hxs-flip-caption'),
+    };
+    updateTextDOM(textEls, counterCur, order[0]);
+
+    const cards = items.map((item, itemIndex) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'hxs-flip-card';
+      btn.dataset.flipId = `hxs-card-${item.id}`;
+      btn.innerHTML = `<img src="${item.image}" alt="${item.alt}" draggable="false" />`;
+      btn.addEventListener('click', () => (opened ? selectItem(itemIndex) : openStack()));
+      stage.appendChild(btn);
+      return btn;
+    });
+
+    const hint = document.createElement('p');
+    hint.className = 'hxs-flip-hint';
+
+    stage.append(content, hint);
+    container.append(counter, stage);
+
+    desktopEls = { counter, counterCur, stage, content, text: textEls, cards, hint };
+    applyDesktopLayout();
+  };
+
+  const buildMobile = () => {
+    container.innerHTML = '';
+    container.style.minHeight = '';
+    desktopEls = null;
+    mobileMode = true;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'hxs-flip-mobile-wrap';
+
+    const counter = document.createElement('div');
+    counter.className = 'hxs-flip-counter';
+    const counterCur = document.createElement('span');
+    counterCur.className = 'hxs-flip-counter-current';
+    const counterTotal = document.createElement('span');
+    counterTotal.className = 'hxs-flip-counter-total';
+    counterTotal.textContent = ` / ${String(items.length).padStart(2, '0')}`;
+    counter.append(counterCur, counterTotal);
+
+    const heroBox = document.createElement('div');
+    heroBox.className = 'hxs-flip-mobile-hero';
+    const heroImg = document.createElement('img');
+    heroImg.draggable = false;
+    heroBox.appendChild(heroImg);
+
+    const content = document.createElement('div');
+    content.className = 'hxs-flip-content';
+    content.innerHTML = `
+      <h4 class="hxs-flip-title" data-card-text></h4>
+      <p class="hxs-flip-meta" data-card-text></p>
+      <p class="hxs-flip-desc" data-card-text></p>
+      <p class="hxs-flip-caption" data-card-text></p>
+    `;
+    const textEls = {
+      title: content.querySelector('.hxs-flip-title'),
+      meta: content.querySelector('.hxs-flip-meta'),
+      desc: content.querySelector('.hxs-flip-desc'),
+      caption: content.querySelector('.hxs-flip-caption'),
+    };
+
+    const thumbsWrap = document.createElement('div');
+    thumbsWrap.className = 'hxs-flip-mobile-thumbs';
+
+    wrap.append(counter, heroBox, content, thumbsWrap);
+    container.appendChild(wrap);
+
+    mobileEls = { counterCur, heroImg, content, text: textEls, thumbsWrap };
+    updateTextDOM(textEls, counterCur, order[0]);
+    updateMobileView();
+  };
+
+  const syncModeAndLayout = () => {
+    const width = container.clientWidth || window.innerWidth;
+    const nextIsMobile = width <= 1025;
+    if (nextIsMobile && mobileMode !== true) {
+      buildMobile();
+    } else if (!nextIsMobile && mobileMode !== false) {
+      buildDesktop();
+    } else if (!nextIsMobile && !isAnimating) {
+      applyDesktopLayout();
+    }
+  };
+
+  syncModeAndLayout();
+
+  const ro = new ResizeObserver(() => syncModeAndLayout());
+  ro.observe(container);
+
+  const onKeyDown = (e) => {
+    if (e.key === 'Escape' && opened && !mobileMode) {
+      const rect = container.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.8 && rect.bottom > window.innerHeight * 0.2;
+      if (inView || container.contains(document.activeElement)) {
+        closeStack();
+      }
+      return;
+    }
+
+    if (!opened || mobileMode) return;
+    const isArrowLR = e.key === 'ArrowRight' || e.key === 'ArrowLeft';
+    const isArrowUD = e.key === 'ArrowDown' || e.key === 'ArrowUp';
+    const hasFocus = container.contains(document.activeElement);
+    const rect = container.getBoundingClientRect();
+    const centeredInView = rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.45;
+
+    if ((isArrowLR && (hasFocus || centeredInView)) || (isArrowUD && hasFocus)) {
+      e.preventDefault();
+      const step = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : -1;
+      const nextItemIndex = (order[0] + step + items.length) % items.length;
+      selectItem(nextItemIndex);
+    }
+  };
+
+  window.addEventListener('keydown', onKeyDown);
+
+  container._flipCleanup = () => {
+    ro.disconnect();
+    window.removeEventListener('keydown', onKeyDown);
+    if (captionTween) captionTween.kill();
+  };
 }
 
 // --- MODAL CONTROLLER ---
