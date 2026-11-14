@@ -495,23 +495,23 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
    -------------------------------------------------------------------------- */
 #scene-people {
   background: #090808;
-  padding: 3rem 0 1.5rem;
+  padding: 2rem 0 1rem;
   align-items: stretch;
 }
 
 .people-hero {
   max-width: 1200px;
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.65rem;
   padding: 0 2rem;
   text-align: center;
 }
 
 .people-hero h3 {
   font-family: var(--sw-display);
-  font-size: clamp(1.85rem, 3.8vw, 3rem);
+  font-size: clamp(1.65rem, 3.2vw, 2.5rem);
   font-weight: 800;
   line-height: 1.05;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.35rem;
   letter-spacing: -0.02em;
 }
 
@@ -526,7 +526,7 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
 .people-gallery-grid {
   position: relative;
   width: 100%;
-  min-height: 460px;
+  min-height: 540px;
   background: #090808;
   color: var(--sw-cream);
   overflow: hidden;
@@ -557,7 +557,7 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
 .hxs-flip-stage {
   position: relative;
   width: 100%;
-  min-height: 460px;
+  min-height: 540px;
   cursor: pointer;
 }
 

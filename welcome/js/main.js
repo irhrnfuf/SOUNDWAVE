@@ -476,13 +476,13 @@ function renderPeopleGallery() {
   }
 
   const CFG = {
-    rounded: 18,
-    thumbGap: 10,
-    heroHeight: 390,
+    rounded: 20,
+    thumbGap: 11,
+    heroHeight: 490,
     duration: 0.7,
     ease: 'power3.inOut',
-    stackOffsetX: 4,
-    stackOffsetY: 9,
+    stackOffsetX: 5,
+    stackOffsetY: 10,
   };
 
   let order = items.map((_, i) => i);
@@ -499,26 +499,27 @@ function renderPeopleGallery() {
     const isNarrow = stageWidth > 0 && stageWidth < 900;
     const scale = isNarrow ? Math.min(1, stageWidth / 900) : 1;
     const railCount = Math.max(items.length - 1, 0);
-    const vh = window.innerHeight || 720;
-    const stageH = Math.max(430, Math.min(540, Math.round(vh * 0.66)));
-    const centerY = Math.round((stageH - 42) / 2);
+    const vh = window.innerHeight || 760;
+    const stageH = Math.max(520, Math.min(640, Math.round(vh * 0.78)));
+    const centerY = Math.round((stageH - 44) / 2);
 
-    const hH = Math.min(CFG.heroHeight, Math.max(290, Math.round((stageH - 80) * 0.88)));
-    const hW = Math.min(Math.round(hH * 0.78), Math.round(stageWidth * 0.32));
+    const hH = Math.min(CFG.heroHeight, Math.max(380, Math.round(stageH - 84)));
+    const hW = Math.min(400, Math.round(hH * 0.81), Math.round(stageWidth * 0.36));
 
     const gap = Math.round(CFG.thumbGap * scale);
+    const maxRailH = hH - 32;
     const tH = Math.min(
-      78,
-      Math.max(58, Math.floor((hH - Math.max(0, railCount - 1) * gap) / Math.max(1, railCount)))
+      100,
+      Math.max(78, Math.floor((maxRailH - Math.max(0, railCount - 1) * gap) / Math.max(1, railCount)))
     );
-    const tW = Math.round(tH * 0.88);
+    const tW = Math.round(tH * 0.92);
 
-    const railX = Math.max(36, Math.round(stageWidth * 0.05));
-    const rightInset = Math.max(96, Math.round(stageWidth * 0.08));
+    const railX = Math.max(36, Math.round(stageWidth * 0.048));
+    const rightInset = Math.max(82, Math.round(stageWidth * 0.065));
     const heroX = stageWidth - hW - rightInset;
 
-    const stackHeight = Math.min(285, Math.max(220, Math.round(hH * 0.74)));
-    const stackWidth = Math.round(stackHeight * 0.72);
+    const stackHeight = Math.min(355, Math.max(275, Math.round(hH * 0.76)));
+    const stackWidth = Math.round(stackHeight * 0.74);
 
     return {
       isMobile,
@@ -596,7 +597,7 @@ function renderPeopleGallery() {
     desktopEls.stage.classList.toggle('is-collapsed', !opened);
 
     desktopEls.counter.style.left = `${m.railX}px`;
-    desktopEls.counter.style.top = '12px';
+    desktopEls.counter.style.top = '14px';
     desktopEls.counter.style.opacity = opened ? '1' : '0';
     desktopEls.counter.style.pointerEvents = opened ? 'auto' : 'none';
 
@@ -614,6 +615,7 @@ function renderPeopleGallery() {
 
     const heroItemIndex = order[0];
     const railHeight = m.railCount * m.tH + Math.max(0, m.railCount - 1) * m.gap;
+    const railCenterY = centerY + 14;
     const stackTotalOffsetY = (items.length - 1) * CFG.stackOffsetY;
 
     desktopEls.cards.forEach((card, itemIndex) => {
@@ -644,7 +646,7 @@ function renderPeopleGallery() {
         card.style.zIndex = String(items.length + 1);
       } else {
         card.style.left = `${m.railX}px`;
-        card.style.top = `${centerY - railHeight / 2 + (slot - 1) * (m.tH + m.gap)}px`;
+        card.style.top = `${Math.round(railCenterY - railHeight / 2 + (slot - 1) * (m.tH + m.gap))}px`;
         card.style.width = `${m.tW}px`;
         card.style.height = `${m.tH}px`;
         card.style.borderRadius = `${Math.round(CFG.rounded * 0.65 * m.scale)}px`;
