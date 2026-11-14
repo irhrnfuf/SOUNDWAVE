@@ -362,6 +362,128 @@
   </div>
 
   <!-- ======================================================================
+       HORIZONTAL SCROLL STAGE STORYLINE (2014–2026) — GSAP + LENIS
+       ====================================================================== -->
+  <section id="journey" class="sw-tl-section" aria-label="SoundWave Stage Evolution Timeline">
+    <div class="sw-tl-sticky">
+      <div class="sw-tl-slider">
+        <div class="sw-tl-hero-card">
+          <img
+            src="./src/festival-history-montreux.jpg"
+            alt="Horizon Arena waterfront amphitheater stage at sunset"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="sw-tl-track-wrap">
+          <!-- Center Horizontal Progress Axis -->
+          <div class="sw-tl-axis" aria-hidden="true">
+            <div class="sw-tl-axis-dot"></div>
+            <div class="sw-tl-axis-line"></div>
+            <div class="sw-tl-axis-dot"></div>
+          </div>
+
+          <!-- Top Milestone Row -->
+          <div class="sw-tl-row">
+            <div class="sw-tl-intro">
+              <h2 class="sw-tl-title">Stage Storyline</h2>
+            </div>
+
+            <div class="sw-tl-items">
+              <article class="sw-tl-item sw-tl-item--top" data-tl-item="2014-may">
+                <div class="sw-tl-stem-wrap" aria-hidden="true">
+                  <div class="sw-tl-dot"></div>
+                  <div class="sw-tl-stem"></div>
+                </div>
+                <div class="sw-tl-clip">
+                  <h3 class="sw-tl-date">2014 May</h3>
+                </div>
+                <div class="sw-tl-clip">
+                  <p class="sw-tl-desc">Horizon Arena opens on Biscayne Bay as our oceanfront flagship.</p>
+                </div>
+              </article>
+
+              <article class="sw-tl-item sw-tl-item--top" data-tl-item="2016-october">
+                <div class="sw-tl-stem-wrap" aria-hidden="true">
+                  <div class="sw-tl-dot"></div>
+                  <div class="sw-tl-stem"></div>
+                </div>
+                <div class="sw-tl-clip">
+                  <h3 class="sw-tl-date">2016 October</h3>
+                </div>
+                <div class="sw-tl-clip">
+                  <p class="sw-tl-desc">Analog Dome launches as a 360&deg; geodesic synth sanctuary.</p>
+                </div>
+              </article>
+
+              <article class="sw-tl-item sw-tl-item--top" data-tl-item="2022-april">
+                <div class="sw-tl-stem-wrap" aria-hidden="true">
+                  <div class="sw-tl-dot"></div>
+                  <div class="sw-tl-stem"></div>
+                </div>
+                <div class="sw-tl-clip">
+                  <h3 class="sw-tl-date">2022 April</h3>
+                </div>
+                <div class="sw-tl-clip">
+                  <p class="sw-tl-desc">All four stages transition to 100% solar and H&#x2082;O clean power.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Bottom Milestone Row -->
+          <div class="sw-tl-row">
+            <div class="sw-tl-intro sw-tl-intro--bottom">
+              <p class="sw-tl-period">2014&ndash;2026</p>
+            </div>
+
+            <div class="sw-tl-items sw-tl-items--bottom">
+              <article class="sw-tl-item sw-tl-item--bottom" data-tl-item="2015-august">
+                <div class="sw-tl-stem-wrap" aria-hidden="true">
+                  <div class="sw-tl-stem"></div>
+                  <div class="sw-tl-dot"></div>
+                </div>
+                <div class="sw-tl-clip">
+                  <h3 class="sw-tl-date">2015 August</h3>
+                </div>
+                <div class="sw-tl-clip">
+                  <p class="sw-tl-desc">Vinyl Lawn debuts with shaded palms and live LP lacquer cutting.</p>
+                </div>
+              </article>
+
+              <article class="sw-tl-item sw-tl-item--bottom" data-tl-item="2018-november">
+                <div class="sw-tl-stem-wrap" aria-hidden="true">
+                  <div class="sw-tl-stem"></div>
+                  <div class="sw-tl-dot"></div>
+                </div>
+                <div class="sw-tl-clip">
+                  <h3 class="sw-tl-date">2018 November</h3>
+                </div>
+                <div class="sw-tl-clip">
+                  <p class="sw-tl-desc">VIP Cabanas &amp; SkyDeck bring elevated late-night secret B2B sets.</p>
+                </div>
+              </article>
+
+              <article class="sw-tl-item sw-tl-item--bottom" data-tl-item="2026-december">
+                <div class="sw-tl-stem-wrap" aria-hidden="true">
+                  <div class="sw-tl-stem"></div>
+                  <div class="sw-tl-dot"></div>
+                </div>
+                <div class="sw-tl-clip">
+                  <h3 class="sw-tl-date">2026 December</h3>
+                </div>
+                <div class="sw-tl-clip">
+                  <p class="sw-tl-desc">12th Annual Edition unites 45,000 fans across all four worlds.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
        REDEFINED FESTIVAL FOOTER: MAINSTAGE PRODUCTION DECK
        ====================================================================== -->
   <footer id="footer" class="mainstage-footer">
@@ -475,6 +597,106 @@
   <script src="./src/app.js"></script>
   <script src="./src/lenis.min.js"></script>
   <script src="./src/motion-effects.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script>
+    (function () {
+      const section = document.getElementById("journey");
+      if (!section || typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") {
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      if (window.soundwaveLenis && typeof window.soundwaveLenis.on === "function") {
+        window.soundwaveLenis.on("scroll", ScrollTrigger.update);
+      }
+
+      const mm = gsap.matchMedia();
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      mm.add("(min-width: 769px)", function () {
+        const slider = section.querySelector(".sw-tl-slider");
+        const axisLine = section.querySelector(".sw-tl-axis-line");
+        const items = Array.from(section.querySelectorAll("[data-tl-item]"));
+        const isTablet = window.innerWidth <= 1024;
+        const slidePercent = isTablet ? -58 : -54;
+        const lineWidth = isTablet ? "88%" : "96%";
+
+        if (reducedMotion) {
+          gsap.set(axisLine, { width: lineWidth });
+          items.forEach(function (item) {
+            gsap.set(item.querySelectorAll(".sw-tl-stem"), { scaleY: 1 });
+            gsap.set(item.querySelectorAll(".sw-tl-dot"), { scale: 1 });
+            gsap.set(item.querySelectorAll(".sw-tl-date, .sw-tl-desc"), { y: 0, opacity: 1 });
+          });
+
+          gsap.fromTo(
+            slider,
+            { xPercent: 0 },
+            {
+              xPercent: slidePercent,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true
+              }
+            }
+          );
+          return;
+        }
+
+        gsap.set(axisLine, { width: "0%" });
+        items.forEach(function (item) {
+          gsap.set(item.querySelector(".sw-tl-stem"), { scaleY: 0 });
+          gsap.set(item.querySelector(".sw-tl-dot"), { scale: 0 });
+          gsap.set(item.querySelectorAll(".sw-tl-date, .sw-tl-desc"), { y: 42, opacity: 0 });
+        });
+
+        const master = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.6
+          }
+        });
+
+        master
+          .fromTo(slider, { xPercent: 0 }, { xPercent: slidePercent, ease: "none", duration: 1 }, 0)
+          .to(axisLine, { width: lineWidth, ease: "none", duration: 1 }, 0);
+
+        const chronologicalOrder = [
+          "2014-may",
+          "2015-august",
+          "2016-october",
+          "2018-november",
+          "2022-april",
+          "2026-december"
+        ];
+
+        chronologicalOrder.forEach(function (id, index) {
+          const item = section.querySelector('[data-tl-item="' + id + '"]');
+          if (!item) return;
+          const at = 0.04 + index * 0.14;
+          const stem = item.querySelector(".sw-tl-stem");
+          const dot = item.querySelector(".sw-tl-dot");
+          const text = item.querySelectorAll(".sw-tl-date, .sw-tl-desc");
+
+          master
+            .to(stem, { scaleY: 1, duration: 0.08, ease: "power2.out" }, at)
+            .to(dot, { scale: 1, duration: 0.04, ease: "back.out(1.7)" }, at + 0.06)
+            .to(text, { y: 0, opacity: 1, duration: 0.1, stagger: 0.025, ease: "power2.out" }, at + 0.05);
+        });
+      });
+
+      window.addEventListener("resize", function () {
+        ScrollTrigger.refresh();
+      });
+    })();
+  </script>
 
   <!-- Stage Expanded Insider Lightbox -->
   <div id="sw-stage-lightbox" class="sw-stage-lightbox" role="dialog" aria-modal="true" aria-labelledby="sw-lb-title">
