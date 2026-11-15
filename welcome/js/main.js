@@ -361,7 +361,7 @@ const HOVER_STACK_REVIEWS = [
     tag: "Cassie",
     bg: "#67D6A3",
     textColor: "#1A1A1A",
-    stickerTopLeft: "./assets/stickers/b1_acdc.png",
+    stickerTopLeft: "./assets/stickers/a6_memories_plate.png",
     stickerBottomRight: "./assets/stickers/a16_driving_poster.png",
   },
   {
