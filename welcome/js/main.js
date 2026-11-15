@@ -326,7 +326,7 @@ const HOVER_STACK_REVIEWS = [
     bg: "#E4FF1A",
     textColor: "#1A1A1A",
     stickerTopLeft: "./assets/stickers/a1_leopard.png",
-    stickerBottomRight: "./assets/stickers/a4_martini.png",
+    stickerBottomRight: "./assets/stickers/card01_br_minidisc.png",
   },
   {
     id: 2,
@@ -334,7 +334,7 @@ const HOVER_STACK_REVIEWS = [
     tag: "Kathy",
     bg: "#DD1155",
     textColor: "#FFFFFF",
-    stickerTopLeft: "./assets/stickers/a5_lips.png",
+    stickerTopLeft: "./assets/stickers/card02_tl_cd.png",
     stickerBottomRight: "./assets/stickers/a8_dj_turntable.png",
   },
   {
@@ -343,8 +343,8 @@ const HOVER_STACK_REVIEWS = [
     tag: "Jonathan Dan",
     bg: "#FF5714",
     textColor: "#1A1A1A",
-    stickerTopLeft: "./assets/stickers/b1_acdc.png",
-    stickerBottomRight: "./assets/stickers/a3_discoball.png",
+    stickerTopLeft: "./assets/stickers/card03_tl_prism.png",
+    stickerBottomRight: "./assets/stickers/card03_br_wish.png",
   },
   {
     id: 4,
