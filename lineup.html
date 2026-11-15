@@ -102,8 +102,7 @@
             <img
               src="./src/soundwave-logo-patch.jpg"
               alt="Lineup Embroidered Patch"
-              class="deck-patch-thumb"
-            />
+              class="deck-patch-thumb" loading="lazy" decoding="async" />
             <div class="deck-patch-meta">
               <h3>SOUNDWAVE LINEUP</h3>
               <span>OFFICIAL FESTIVAL POSTER</span>
@@ -219,8 +218,7 @@
             alt="Single Color Hand-Stitched Embroidered Drums Patch"
             class="wristband-patch-img"
             style="width: 82px; height: 82px;"
-            title="Hand-Stitched Embroidered Drum Kit Badge"
-          />
+            title="Hand-Stitched Embroidered Drum Kit Badge" loading="lazy" decoding="async" />
           <div>
             <h2>Official 2026 Festival Lineup Poster</h2>
           </div>
@@ -280,8 +278,7 @@
               <img
                 src="./src/speaker-wall-graphic.jpg"
                 alt="SoundWave Screenprinted Speaker Wall Stack"
-                class="club-speaker-img-duotone"
-              />
+                class="club-speaker-img-duotone" loading="lazy" decoding="async" />
             </div>
 
             <div class="club-date-block-compact">
@@ -458,6 +455,23 @@
         <button type="button" class="schedule-day-pill" data-genre="Acoustic" onclick="filterArtistsByGenre('Acoustic', this)">Acoustic</button>
         <button type="button" class="schedule-day-pill" data-genre="Special" onclick="filterArtistsByGenre('Special', this)">VIP SkyDeck Special</button>
       </div>
+      <div class="lineup-controls-row">
+        <div class="lineup-day-pills" role="group" aria-label="Filter festival sets by day">
+          <button type="button" class="schedule-day-pill active-day-pill" data-day="ALL" onclick="filterArtistsByDay('ALL', this)">All Days</button>
+          <button type="button" class="schedule-day-pill" data-day="FRI" onclick="filterArtistsByDay('FRI', this)">Fri</button>
+          <button type="button" class="schedule-day-pill" data-day="SAT" onclick="filterArtistsByDay('SAT', this)">Sat</button>
+          <button type="button" class="schedule-day-pill" data-day="SUN" onclick="filterArtistsByDay('SUN', this)">Sun</button>
+        </div>
+        <select id="lineup-stage-filter" class="lineup-filter-select" aria-label="Filter festival sets by stage" onchange="filterArtistsByStage(this.value)">
+          <option value="ALL">All Stages</option>
+          <option value="Horizon Arena">Horizon Arena</option>
+          <option value="Analog Dome">Analog Dome</option>
+          <option value="Vinyl Lawn">Vinyl Lawn</option>
+          <option value="VIP Cabanas &amp; SkyDeck">VIP Cabanas &amp; SkyDeck</option>
+        </select>
+        <input type="search" id="lineup-search-input" class="lineup-search-input" placeholder="Search artist, stage, or genre..." aria-label="Search lineup sets" oninput="searchLineupArtists(this.value)" />
+        <a id="lineup-schedule-shortcut" class="lineup-schedule-shortcut" href="./schedule-builder.html">Open My Schedule &rarr;</a>
+      </div>
       <div id="js-artist-results" class="js-panel-grid"></div>
     </section>
 
@@ -576,8 +590,7 @@
           <img
             src="./src/soundwave-logo-patch.jpg"
             alt="SoundWave 2026 Embroidered Patch Logo"
-            class="footer-patch-logo"
-          />
+            class="footer-patch-logo" loading="lazy" decoding="async" />
           <div>
             <h2 class="footer-festival-title">SOUNDWAVE 2026</h2>
             <span class="footer-festival-subtitle">AN INVITATION TO MUSIC, ART &amp; WHIMSY</span>

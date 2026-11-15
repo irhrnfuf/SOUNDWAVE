@@ -1920,3 +1920,159 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
+
+/* 7. Stage Quick-Switcher Subnav */
+.stage-subnav {
+  background: #161415;
+  border-bottom: 2px solid #111111;
+  padding: 0.5rem 1.25rem;
+}
+
+.stage-subnav-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.stage-subnav-back,
+.stage-subnav-pill {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  color: #f4ede0;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.stage-subnav-back {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffe600;
+}
+
+.stage-subnav-pill:hover,
+.stage-subnav-back:hover {
+  border-color: #ffe600;
+  color: #ffe600;
+}
+
+.stage-subnav-pill.is-active {
+  background: #ff2a85;
+  border-color: #ff2a85;
+  color: #ffffff;
+}
+
+/* 8. Tighter Hero Vertical Rhythm for Faster Above-the-Fold Scanability */
+.big-hero-inner {
+  padding-top: 1.15rem !important;
+  padding-bottom: 1.35rem !important;
+}
+
+.big-hero-monument {
+  margin-bottom: 1rem !important;
+}
+
+/* 9. Interactive Lineup Multi-Filter & Quick Schedule Actions */
+.lineup-controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.lineup-day-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.lineup-filter-select,
+.lineup-search-input {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.45rem 0.75rem;
+  border: 2px solid #111111;
+  border-radius: 6px;
+  background: #fffdf7;
+  color: #111111;
+}
+
+.lineup-search-input {
+  flex: 1 1 200px;
+  min-width: 180px;
+}
+
+.lineup-schedule-shortcut {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  border: 2px solid #111111;
+  background: #ffe600;
+  color: #111111;
+  white-space: nowrap;
+}
+
+.lineup-schedule-shortcut:hover {
+  background: #111111;
+  color: #ffe600;
+}
+
+.js-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.lineup-add-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  border: 2px solid #111111;
+  background: #ffffff;
+  color: #111111;
+  cursor: pointer;
+}
+
+.lineup-add-btn:hover {
+  background: #ffe600;
+}
+
+.lineup-add-btn.is-saved {
+  background: #10b981;
+  color: #ffffff;
+}
+
+/* 10. Console Reduced-Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .footer-marquee-track,
+  .hero-live-dot,
+  .live-status-dot,
+  .vu-led-seg {
+    animation: none !important;
+  }
+
+  .entrance-curtain,
+  .portal-card,
+  .nav-cta-btn,
+  .secondary-btn,
+  .portal-card-cta,
+  .console-cta-button {
+    transition: none !important;
+  }
+}

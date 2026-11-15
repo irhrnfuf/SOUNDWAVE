@@ -57,44 +57,141 @@ function selectPassTierFromCard(tierValue) {
 }
 
 // 1. UNIT VI: Filter Artists using Array of Objects, FOR Loop & IF/ELSE
-function filterArtistsByGenre(selectedGenre, btnEl) {
+const activeLineupFilters = {
+  genre: "ALL",
+  day: "ALL",
+  stage: "ALL",
+  query: ""
+};
+
+function escapeHtmlAttr(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function updateLineupScheduleShortcut() {
+  const shortcut = document.getElementById("lineup-schedule-shortcut");
+  if (!shortcut) return;
+  const count = Array.isArray(activeScheduleItems) ? activeScheduleItems.length : 0;
+  shortcut.textContent = count > 0
+    ? "View My Schedule (" + count + " saved) \u2192"
+    : "Open My Schedule \u2192";
+}
+
+function toggleArtistScheduleFromLineup(btnEl) {
+  if (!btnEl) return;
+  const scheduleStr = btnEl.getAttribute("data-schedule") || "";
+  if (!scheduleStr) return;
+
+  const existingIndex = activeScheduleItems.indexOf(scheduleStr);
+  if (existingIndex === -1) {
+    addArtistDirectly(scheduleStr);
+  } else {
+    removeArtistFromSchedule(existingIndex);
+  }
+  renderFilteredLineup();
+}
+
+function renderFilteredLineup() {
   const container = document.getElementById("js-artist-results");
   const countSpan = document.getElementById("js-artist-count");
   if (!container || !countSpan) return;
 
   const filterNav = document.getElementById("lineup-filter-nav");
   if (filterNav) {
-    const pills = filterNav.querySelectorAll(".schedule-day-pill");
-    pills.forEach((pill) => {
-      const targetGenre = pill.getAttribute("data-genre");
-      const isActive = btnEl ? pill === btnEl : targetGenre === selectedGenre;
-      pill.classList.toggle("active-day-pill", isActive);
+    filterNav.querySelectorAll(".schedule-day-pill[data-genre]").forEach((pill) => {
+      pill.classList.toggle("active-day-pill", pill.getAttribute("data-genre") === activeLineupFilters.genre);
+    });
+    filterNav.querySelectorAll(".schedule-day-pill[data-day]").forEach((pill) => {
+      pill.classList.toggle("active-day-pill", pill.getAttribute("data-day") === activeLineupFilters.day);
     });
   }
 
   let htmlCards = "";
   let matchedCount = 0;
+  const normalizedQuery = activeLineupFilters.query.trim().toLowerCase();
 
   for (let i = 0; i < FESTIVAL_ARTISTS.length; i++) {
     const artist = FESTIVAL_ARTISTS[i];
-    if (selectedGenre === "ALL" || artist.genre === selectedGenre) {
+    const matchesGenre = activeLineupFilters.genre === "ALL" || artist.genre === activeLineupFilters.genre;
+    const matchesDay = activeLineupFilters.day === "ALL" || artist.dayCode === activeLineupFilters.day;
+    const matchesStage = activeLineupFilters.stage === "ALL" || artist.stage === activeLineupFilters.stage;
+    const matchesQuery = !normalizedQuery ||
+      artist.name.toLowerCase().includes(normalizedQuery) ||
+      artist.stage.toLowerCase().includes(normalizedQuery) ||
+      artist.genre.toLowerCase().includes(normalizedQuery);
+
+    if (matchesGenre && matchesDay && matchesStage && matchesQuery) {
       matchedCount++;
+      const isSaved = Array.isArray(activeScheduleItems) && activeScheduleItems.includes(artist.scheduleStr);
       const accessTag = artist.access === "VIP / Platinum Only"
-        ? '<span style="display:inline-block;margin-top:0.35rem;padding:2px 7px;border-radius:999px;font-size:0.7rem;font-weight:800;background:#ffe082;border:1.5px solid #111;color:#111;">VIP / PLATINUM ONLY</span>'
-        : '<span style="display:inline-block;margin-top:0.35rem;padding:2px 7px;border-radius:999px;font-size:0.7rem;font-weight:800;background:#e8f5e9;border:1.5px solid #111;color:#111;">GA / VIP / PLATINUM</span>';
+        ? '<span style="display:inline-block;padding:2px 7px;border-radius:999px;font-size:0.7rem;font-weight:800;background:#ffe082;border:1.5px solid #111;color:#111;">VIP / PLATINUM ONLY</span>'
+        : '<span style="display:inline-block;padding:2px 7px;border-radius:999px;font-size:0.7rem;font-weight:800;background:#e8f5e9;border:1.5px solid #111;color:#111;">GA / VIP / PLATINUM</span>';
+
+      const scheduleBtn =
+        '<button type="button" class="lineup-add-btn' + (isSaved ? " is-saved" : "") + '"' +
+        ' data-schedule="' + escapeHtmlAttr(artist.scheduleStr) + '"' +
+        ' onclick="toggleArtistScheduleFromLineup(this)">' +
+        (isSaved ? "In My Schedule \u2713" : "+ Add to Schedule") +
+        "</button>";
 
       htmlCards +=
         '<div class="js-card">' +
           "<h4>" + artist.name + "</h4>" +
           "<p><b>" + artist.genre + "</b> &bull; " + artist.stage + "<br />" +
           artist.day + " &bull; " + artist.duration + " &bull; Score: " + artist.rating + "/5</p>" +
-          accessTag +
+          '<div class="js-card-actions">' + accessTag + scheduleBtn + "</div>" +
         "</div>";
     }
   }
 
+  if (matchedCount === 0) {
+    htmlCards =
+      '<div class="js-card" style="grid-column:1 / -1; text-align:center; padding:1.5rem;">' +
+        "<h4>No sets match those filters</h4>" +
+        '<p style="margin-bottom:0.75rem;">Try clearing one of your genre, day, stage, or search filters.</p>' +
+        '<button type="button" class="schedule-day-pill active-day-pill" onclick="resetLineupFilters()">Reset All Filters</button>' +
+      "</div>";
+  }
+
   container.innerHTML = htmlCards;
   countSpan.innerText = matchedCount + " of " + FESTIVAL_ARTISTS.length + " sets shown";
+  updateLineupScheduleShortcut();
+}
+
+function filterArtistsByGenre(selectedGenre, btnEl) {
+  activeLineupFilters.genre = selectedGenre || "ALL";
+  renderFilteredLineup();
+}
+
+function filterArtistsByDay(selectedDay, btnEl) {
+  activeLineupFilters.day = selectedDay || "ALL";
+  renderFilteredLineup();
+}
+
+function filterArtistsByStage(selectedStage) {
+  activeLineupFilters.stage = selectedStage || "ALL";
+  renderFilteredLineup();
+}
+
+function searchLineupArtists(query) {
+  activeLineupFilters.query = query || "";
+  renderFilteredLineup();
+}
+
+function resetLineupFilters() {
+  activeLineupFilters.genre = "ALL";
+  activeLineupFilters.day = "ALL";
+  activeLineupFilters.stage = "ALL";
+  activeLineupFilters.query = "";
+  const stageSelect = document.getElementById("lineup-stage-filter");
+  if (stageSelect) stageSelect.value = "ALL";
+  const searchInput = document.getElementById("lineup-search-input");
+  if (searchInput) searchInput.value = "";
+  renderFilteredLineup();
 }
 
 // --- Persistent Cart Storage & Retrieval ---
@@ -766,6 +863,10 @@ function addArtistDirectly(artistStr) {
     activeScheduleItems.push(normalizedStr);
     persistActiveSchedule();
     renderLineupList();
+    if (typeof renderFilteredLineup === "function" && document.getElementById("js-artist-results")) {
+      renderFilteredLineup();
+    }
+    if (typeof updateLineupScheduleShortcut === "function") updateLineupScheduleShortcut();
     showScheduleFeedback("Added & auto-saved: " + normalizedStr.split("-")[0].trim() + " ✓", "success");
   } else {
     showScheduleFeedback("Already in your schedule!", "warning");
@@ -777,6 +878,10 @@ function removeArtistFromSchedule(index) {
     const removed = activeScheduleItems.splice(index, 1)[0];
     persistActiveSchedule();
     renderLineupList();
+    if (typeof renderFilteredLineup === "function" && document.getElementById("js-artist-results")) {
+      renderFilteredLineup();
+    }
+    if (typeof updateLineupScheduleShortcut === "function") updateLineupScheduleShortcut();
     showScheduleFeedback("Removed & synced: " + removed.split("-")[0].trim(), "info");
   }
 }
@@ -786,6 +891,10 @@ function clearSavedLineup() {
   activeScheduleItems = [];
   persistActiveSchedule();
   renderLineupList();
+  if (typeof renderFilteredLineup === "function" && document.getElementById("js-artist-results")) {
+    renderFilteredLineup();
+  }
+  if (typeof updateLineupScheduleShortcut === "function") updateLineupScheduleShortcut();
   showScheduleFeedback("Saved schedule cleared", "info");
 }
 

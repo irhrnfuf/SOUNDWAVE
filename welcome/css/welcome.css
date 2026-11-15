@@ -588,6 +588,7 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
   text-align: center;
 }
 
+.people-hero h2,
 .people-hero h3 {
   font-family: var(--sw-display);
   font-size: clamp(1.65rem, 3.2vw, 2.5rem);
@@ -1554,11 +1555,53 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
 }
 
 /* Gateway Skip Link & Keyboard Focus Visibility */
+.dj-gateway-meta {
+  position: fixed;
+  bottom: 1.95rem;
+  left: 2rem;
+  z-index: 25;
+  font-family: var(--sw-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: rgba(244, 237, 224, 0.88);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.signal-subline {
+  font-family: var(--sw-mono);
+  font-size: 0.82rem;
+  color: rgba(244, 237, 224, 0.85);
+  max-width: 620px;
+  margin: 0.65rem auto 1.25rem;
+  line-height: 1.5;
+}
+
+.signal-direct-link {
+  color: #ffe600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.signal-direct-link:hover {
+  color: #00f0ff;
+}
+
 .dj-gateway-skip {
   position: fixed;
   bottom: 1.75rem;
   right: 2rem;
   z-index: 25;
+}
+
+@media (max-width: 720px) {
+  .dj-gateway-meta {
+    left: 1rem;
+    right: 1rem;
+    bottom: 3.9rem;
+    text-align: center;
+    font-size: 0.64rem;
+  }
 }
 
 .dj-gateway-skip:focus-visible,

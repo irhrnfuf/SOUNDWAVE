@@ -50,15 +50,26 @@
       </a>
 
       <ul>
-        <li><a href="./index.html?tab=gallery">&larr; Back to All Stages</a></li>
-        <li><a href="./stage-horizon.html" class="active-nav-link">Horizon Arena</a></li>
-        <li><a href="./stage-analog.html">Analog Dome</a></li>
-        <li><a href="./stage-vinyl.html">Vinyl Lawn</a></li>
-        <li><a href="./stage-vip.html">VIP Cabanas & SkyDeck</a></li>
-        <li><a href="./passes.html#book-pass" class="nav-cta-btn">Book Wristband &rarr;</a></li>
+        <li><a href="./index.html?skip=1">&larr; Welcome Hub</a></li>
+        <li><a href="./lineup.html">Lineup &amp; Poster</a></li>
+        <li><a href="./schedule-builder.html">My Schedule</a></li>
+        <li><a href="./stages.html" class="active-nav-link">All Stages &amp; Media</a></li>
+        <li><a href="./passes.html">Passes &amp; Checkout</a></li>
+        <li><a href="./shuttles-orders.html">Shuttles &amp; Orders</a></li>
       </ul>
     </div>
   </nav>
+
+  <!-- Stage Quick-Switcher Subnav -->
+  <div class="stage-subnav" role="navigation" aria-label="Stage Pages">
+    <div class="stage-subnav-inner">
+      <a href="./stages.html" class="stage-subnav-back">&larr; All 4 Stages</a>
+      <a href="./stage-horizon.html" class="stage-subnav-pill is-active">01 &middot; Horizon Arena</a>
+      <a href="./stage-analog.html" class="stage-subnav-pill">02 &middot; Analog Dome</a>
+      <a href="./stage-vinyl.html" class="stage-subnav-pill">03 &middot; Vinyl Lawn</a>
+      <a href="./stage-vip.html" class="stage-subnav-pill">04 &middot; VIP Cabanas &amp; SkyDeck</a>
+    </div>
+  </div>
 
   <!-- Hero Banner with Embroidered Logo Patch + New Embroidered Stage Patch -->
     <!-- ======================================================================
@@ -116,8 +127,7 @@
             <img
               src="./src/stage-patches.jpg"
               alt="Horizon Arena Embroidered Patch"
-              class="deck-patch-thumb"
-            />
+              class="deck-patch-thumb" loading="lazy" decoding="async" />
             <div class="deck-patch-meta">
               <h3>HORIZON ARENA</h3>
               <span>48,500 CAPACITY BOWL</span>
@@ -534,8 +544,7 @@
           <img
             src="./src/soundwave-logo-patch.jpg"
             alt="SoundWave 2026 Embroidered Patch Logo"
-            class="footer-patch-logo"
-          />
+            class="footer-patch-logo" loading="lazy" decoding="async" />
           <div>
             <h2 class="footer-festival-title">SOUNDWAVE 2026</h2>
             <span class="footer-festival-subtitle">AN INVITATION TO MUSIC, ART &amp; WHIMSY</span>
