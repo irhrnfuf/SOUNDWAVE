@@ -73,7 +73,7 @@
   <!-- Side Navigation Rail (Quick scene jumping) -->
   <nav class="scene-rail" aria-label="Scene Index Navigation">
     <button class="rail-dot active" data-target="scene-signal" data-label="01 Signal" aria-label="Scene 01: The Signal"></button>
-    <button class="rail-dot" data-target="scene-archive" data-label="02 Archive" aria-label="Scene 02: The Archive"></button>
+    <button class="rail-dot" data-target="scene-archive" data-label="02 Stuck Here" aria-label="Scene 02: Mentally Stuck Here"></button>
     <button class="rail-dot" data-target="scene-people" data-label="03 People" aria-label="Scene 03: The People"></button>
     <button class="rail-dot" data-target="scene-frequency" data-label="04 Frequency" aria-label="Scene 04: The Frequency"></button>
     <button class="rail-dot" data-target="scene-invitation" data-label="05 Invitation" aria-label="Scene 05: The Invitation"></button>
@@ -103,23 +103,17 @@
   </section>
 
   <!-- ======================================================================
-       SCENE 02: THE ARCHIVE (The Archivist's Table)
+       SCENE 02: MENTALLY STUCK HERE (Hover Stack Reviews)
        ====================================================================== -->
-  <section id="scene-archive" class="scene-section" aria-label="Scene 02: The Archive">
-    <div class="archive-header">
-      <div class="archive-title-group">
-        <h2>The Archivist&rsquo;s Table</h2>
-        <p>12 YEARS OF MEMORABILIA · POSTERS, BADGES, ACCESS TIERS &amp; FIELD NOTES</p>
-      </div>
-      <div class="discovery-counter" id="discovery-count" aria-live="polite">
-        0/3 Discovered
-      </div>
+  <section id="scene-archive" class="scene-section" aria-label="Scene 02: Mentally Stuck Here">
+    <div class="stuck-header">
+      <span class="stuck-eyebrow">POST-FESTIVAL AFTERGLOW · STILL HEARING THE BASS</span>
+      <h2>Mentally Stuck Here</h2>
+      <p>Hover any card so they can pop out &mdash; seven festival echoes we still haven&rsquo;t left behind.</p>
     </div>
 
-    <div class="archive-table-container">
-      <div class="archive-grid" id="archive-grid">
-        <!-- Rendered dynamically by main.js from data/archive-items.js -->
-      </div>
+    <div class="hover-stack-root" id="archive-grid">
+      <!-- Rendered dynamically by main.js -->
     </div>
   </section>
 

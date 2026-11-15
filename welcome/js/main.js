@@ -4,7 +4,7 @@
  * Orchestrates 5 scenes, Frequency Canvas, Audio Synthesis, and Transition into index.html
  */
 
-import { ARCHIVE_ITEMS, PEOPLE_GALLERY } from '../data/archive-items.js';
+import { PEOPLE_GALLERY } from '../data/archive-items.js';
 
 // --- STATE MANAGEMENT ---
 const state = {
@@ -317,131 +317,290 @@ function getTicketMarkup(component, size = '13.5px') {
   }
 }
 
-// --- INITIALIZE THE ARCHIVIST'S TABLE (Scene 02) ---
+// --- INITIALIZE MENTALLY STUCK HERE (Scene 02: Hover Stack Cards) ---
+const HOVER_STACK_REVIEWS = [
+  {
+    id: 1,
+    quote: "Review 01 — Your festival review goes here.",
+    tag: "Afterglow 01",
+    bg: "#E4FF1A",
+    textColor: "#1A1A1A",
+    stickerTopLeft: null,
+    stickerBottomRight: null,
+  },
+  {
+    id: 2,
+    quote: "Review 02 — Your festival review goes here.",
+    tag: "Afterglow 02",
+    bg: "#DD1155",
+    textColor: "#FFFFFF",
+    stickerTopLeft: null,
+    stickerBottomRight: null,
+  },
+  {
+    id: 3,
+    quote: "Review 03 — Your festival review goes here.",
+    tag: "Afterglow 03",
+    bg: "#FF5714",
+    textColor: "#1A1A1A",
+    stickerTopLeft: null,
+    stickerBottomRight: null,
+  },
+  {
+    id: 4,
+    quote: "Review 04 — Your festival review goes here.",
+    tag: "Afterglow 04",
+    bg: "#E980FC",
+    textColor: "#1A1A1A",
+    stickerTopLeft: null,
+    stickerBottomRight: null,
+  },
+  {
+    id: 5,
+    quote: "Review 05 — Your festival review goes here.",
+    tag: "Afterglow 05",
+    bg: "#67D6A3",
+    textColor: "#1A1A1A",
+    stickerTopLeft: null,
+    stickerBottomRight: null,
+  },
+  {
+    id: 6,
+    quote: "Review 06 — Your festival review goes here.",
+    tag: "Afterglow 06",
+    bg: "#3454D1",
+    textColor: "#FFFFFF",
+    stickerTopLeft: null,
+    stickerBottomRight: null,
+  },
+  {
+    id: 7,
+    quote: "Review 07 — Your festival review goes here.",
+    tag: "Afterglow 07",
+    bg: "#B98CFF",
+    textColor: "#1A1A1A",
+    stickerTopLeft: null,
+    stickerBottomRight: null,
+  },
+];
+
 function renderArchiveTable() {
-  if (!elements.archiveGrid) return;
-  elements.archiveGrid.innerHTML = '';
+  const container = elements.archiveGrid;
+  if (!container) return;
 
-  ARCHIVE_ITEMS.forEach((item, index) => {
-    const card = document.createElement('div');
-    card.className = 'archive-card';
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('role', 'button');
-    card.setAttribute('aria-label', `View ${item.title}`);
+  if (typeof container._hoverStackCleanup === 'function') {
+    container._hoverStackCleanup();
+  }
+  container.innerHTML = '';
 
-    // Random gentle tilt for physical layout feel
-    const randomTilt = ((index % 5) - 2) * 2.2;
-    card.style.setProperty('--rot', `${randomTilt}deg`);
+  const PRESET_ROTATIONS = [-8, 4, -3, 5, -4, 6, 3, -6, 2, -5];
+  const BREAKPOINT = 1025;
+  const CFG = {
+    cardWidth: 280,
+    cardHeight: 360,
+    overlap: 96,
+    hoverLift: 30,
+    pushDistance: 185,
+    spread: 24,
+    rotation: 7,
+    duration: 0.35,
+  };
 
-    // Render HTML component vs Image
-    if (item.type === 'poster' || item.type === 'flyer') {
-      card.innerHTML = `
-        <div class="archive-card-image-wrap">
-          <img src="${item.thumb}" alt="${item.title}" loading="lazy" />
-        </div>
-        <span class="archive-card-tag">${item.edition} · ${item.title}</span>
-      `;
-    } else if (item.type === 'ticket-html') {
-      if (item.component === 'pass-crew') {
-        card.innerHTML = `
-          <article class="mem pass-crew mem-paper" style="--mem-size: 14.5px">
-            <span class="pass-crew__hole"></span>
-            <div class="pass-crew__band"><span>ED. 08</span><span>2021</span></div>
-            <p class="pass-crew__title ink-worn">CREW</p>
-            <p class="pass-crew__brand">SOUNDWAVE</p>
-            <span class="pass-crew__number">#047</span>
-            <div class="pass-crew__fields">Zone: Analog Dome<br/>Access: All areas</div>
-          </article>
-          <span class="archive-card-tag">Crew Pass · ${item.title}</span>
-        `;
-      } else {
-        const ticketHtml = getTicketMarkup(item.component, '13.5px');
-        card.innerHTML = `
-          ${ticketHtml}
-          <span class="archive-card-tag">${item.edition} · ${item.title}</span>
-        `;
+  let activeIndex = null;
+  let isSmallScreen = null;
+  let cardEls = [];
+  let stageEl = null;
+
+  const prefersReduced = () =>
+    window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+
+  const getDesktopScale = () => {
+    const avail = Math.max(760, (container.clientWidth || window.innerWidth) - 160);
+    const idealTotal = (HOVER_STACK_REVIEWS.length - 1) * CFG.overlap + CFG.cardWidth;
+    return Math.min(1, avail / (idealTotal + 120));
+  };
+
+  const buildStickerMarkup = (src, posClass, altText) => {
+    if (!src) return '';
+    return `<img src="${src}" alt="${altText}" class="hs-sticker ${posClass}" draggable="false" />`;
+  };
+
+  const applyDesktopStyles = () => {
+    if (!stageEl || isSmallScreen) return;
+    const scale = getDesktopScale();
+    const cardW = Math.round(CFG.cardWidth * scale);
+    const cardH = Math.round(CFG.cardHeight * scale);
+    const overlap = Math.round(CFG.overlap * scale);
+    const pushDist = Math.round(CFG.pushDistance * scale);
+    const hoverLift = Math.round(CFG.hoverLift * scale);
+    const spread = Math.round(CFG.spread * scale);
+    const totalW = (HOVER_STACK_REVIEWS.length - 1) * overlap + cardW;
+    const reduce = prefersReduced();
+
+    stageEl.style.width = `${totalW}px`;
+    stageEl.style.height = `${cardH + (reduce ? 0 : hoverLift) + 28}px`;
+
+    const activeMs = Math.max(0, CFG.duration) * 1000;
+    const hasActive = activeIndex !== null;
+
+    cardEls.forEach((el, index) => {
+      const card = HOVER_STACK_REVIEWS[index];
+      const baseX = index * overlap;
+      const presetRot =
+        PRESET_ROTATIONS[index % PRESET_ROTATIONS.length] + (index % 2 === 0 ? 0 : 1);
+      const isActive = activeIndex === index;
+
+      el.style.width = `${cardW}px`;
+      el.style.height = `${cardH}px`;
+      el.classList.toggle('is-active', isActive);
+
+      let x = baseX;
+      let y = 0;
+      let rotate = presetRot * (CFG.rotation / 7);
+      let zIndex = index + 1;
+      let cardScale = 1;
+
+      if (reduce) {
+        if (isActive) zIndex = 999;
+        el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg) scale(1)`;
+        el.style.zIndex = String(zIndex);
+        el.style.transition = 'none';
+        return;
       }
-    } else if (item.isDiscovery) {
-      if (item.component === 'note-secret') {
-        card.innerHTML = `
-          <div class="mem note" style="--mem-size: 13.5px">
-            <span class="tape"></span>
-            <p>Meet at the Vinyl Lawn at sunset — same spot as last year ♥</p>
-          </div>
-          <span class="archive-card-tag">Discovery · ${item.title}</span>
-        `;
-      } else if (item.component === 'fragment-schedule') {
-        card.innerHTML = `
-          <div class="mem mem-paper fragment" style="--mem-size: 14px">
-            <h5>SAT · HORIZON ARENA</h5>
-            <ol>
-              <li><time>17:00</time> Gates open</li>
-              <li><time>18:45</time> <span class="circled">Sunset set</span></li>
-              <li><time>21:00</time> Headline set</li>
-            </ol>
-          </div>
-          <span class="archive-card-tag">Discovery · ${item.title}</span>
-        `;
-      } else if (item.component === 'map-fragment') {
-        card.innerHTML = `
-          <div class="mem mem-paper map-fragment" style="--mem-size: 13.5px">
-            <svg viewBox="0 0 220 160" role="img" aria-label="Four stages map">
-              <path d="M0 128 C40 118 70 140 110 130 S180 116 220 126 L220 160 L0 160 Z" fill="#3e5a74" opacity=".35"/>
-              <g fill="none" stroke="#1b1714" stroke-width="1.4">
-                <path d="M30 30 h48 v26 h-48 z"/><circle cx="148" cy="44" r="18"/><path d="M40 84 q30 -14 60 0 v14 h-60 z"/><rect x="140" y="80" width="40" height="22" rx="4"/>
-              </g>
-              <text x="31" y="24">HORIZON</text><text x="128" y="20">DOME</text>
-              <text x="40" y="110">VINYL</text><text x="132" y="114">VIP</text>
-            </svg>
-          </div>
-          <span class="archive-card-tag">Discovery · ${item.title}</span>
-        `;
+
+      if (hasActive) {
+        if (index < activeIndex) {
+          x -= pushDist;
+          y -= spread * 0.4;
+        } else if (index > activeIndex) {
+          x += pushDist;
+          y += spread * 0.4;
+        }
+        if (isActive) {
+          x = baseX;
+          y = -hoverLift;
+          rotate = 0;
+          zIndex = 999;
+          cardScale = 1.035;
+        }
       }
+
+      const transition = isActive
+        ? `transform ${activeMs}ms cubic-bezier(0.22, 1.6, 0.32, 1)`
+        : hasActive
+          ? `transform ${activeMs}ms cubic-bezier(0.22, 1, 0.36, 1)`
+          : `transform ${Math.round(activeMs * (480 / 700))}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+
+      el.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg) scale(${cardScale})`;
+      el.style.zIndex = String(zIndex);
+      el.style.transition = transition;
+    });
+  };
+
+  const applyMobileStyles = () => {
+    cardEls.forEach((el, index) => {
+      el.classList.toggle('is-active', activeIndex === index);
+    });
+  };
+
+  const setActive = (nextIndex) => {
+    if (activeIndex === nextIndex) return;
+    activeIndex = nextIndex;
+    if (nextIndex !== null) {
+      playSubtlePulse(240 + nextIndex * 20, 0.08);
     }
+    if (isSmallScreen) applyMobileStyles();
+    else applyDesktopStyles();
+  };
 
-    // Modal Interaction
-    card.addEventListener('click', () => openArchiveDetail(item));
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openArchiveDetail(item);
+  const createCardElement = (card, index) => {
+    const el = document.createElement('div');
+    el.className = 'hs-card';
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'article');
+    el.setAttribute('aria-label', `Festival review ${String(index + 1).padStart(2, '0')}: ${card.quote}`);
+    el.style.color = card.textColor;
+
+    el.innerHTML = `
+      ${buildStickerMarkup(card.stickerTopLeft, 'hs-sticker--tl', '')}
+      <div class="hs-card-surface" style="background: ${card.bg}; color: ${card.textColor};">
+        <div class="hs-card-quote-wrap">
+          <p class="hs-card-quote">&ldquo;${card.quote}&rdquo;</p>
+        </div>
+        <div class="hs-card-footer">
+          <div class="hs-card-divider"></div>
+          <div class="hs-card-meta-row">
+            <div class="hs-card-explore">
+              <span class="hs-card-arrow" aria-hidden="true">&#8599;</span>
+              <span class="hs-card-tag">${card.tag}</span>
+            </div>
+            <span class="hs-card-num">${String(index + 1).padStart(2, '0')}</span>
+          </div>
+        </div>
+      </div>
+      ${buildStickerMarkup(card.stickerBottomRight, 'hs-sticker--br', '')}
+    `;
+
+    el.addEventListener('mouseenter', () => {
+      if (!isSmallScreen) setActive(index);
+    });
+    el.addEventListener('mouseleave', () => {
+      if (!isSmallScreen && activeIndex === index) setActive(null);
+    });
+    el.addEventListener('focus', () => setActive(index));
+    el.addEventListener('blur', () => {
+      if (activeIndex === index) setActive(null);
+    });
+    el.addEventListener('click', () => {
+      if (isSmallScreen) {
+        setActive(activeIndex === index ? null : index);
       }
     });
 
-    // Simple Drag affordance for desktop
-    if (item.isDraggable) {
-      setupCardDragging(card);
+    return el;
+  };
+
+  const buildLayout = () => {
+    const nextSmall = window.innerWidth < BREAKPOINT;
+    if (nextSmall === isSmallScreen) {
+      if (!isSmallScreen) applyDesktopStyles();
+      return;
     }
 
-    elements.archiveGrid.appendChild(card);
-  });
-}
+    isSmallScreen = nextSmall;
+    activeIndex = null;
+    container.innerHTML = '';
 
-function setupCardDragging(card) {
-  let isDown = false;
-  let startX, startY;
+    const wrapper = document.createElement('div');
+    wrapper.className = isSmallScreen ? 'hs-mobile-list' : 'hs-stage';
+    stageEl = isSmallScreen ? null : wrapper;
 
-  card.addEventListener('mousedown', (e) => {
-    isDown = true;
-    card.classList.add('is-dragging');
-    startX = e.clientX;
-    startY = e.clientY;
-  });
+    cardEls = HOVER_STACK_REVIEWS.map((card, index) => {
+      const cardEl = createCardElement(card, index);
+      wrapper.appendChild(cardEl);
+      return cardEl;
+    });
 
-  window.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    card.style.transform = `translate(${dx}px, ${dy}px) scale(1.05)`;
-  });
+    container.appendChild(wrapper);
 
-  window.addEventListener('mouseup', () => {
-    if (isDown) {
-      isDown = false;
-      card.classList.remove('is-dragging');
-      playSubtlePulse(120, 0.1);
+    if (isSmallScreen) applyMobileStyles();
+    else applyDesktopStyles();
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === 'Escape' && activeIndex !== null) {
+      setActive(null);
     }
-  });
+  };
+
+  buildLayout();
+  window.addEventListener('resize', buildLayout);
+  window.addEventListener('keydown', onKeyDown);
+
+  container._hoverStackCleanup = () => {
+    window.removeEventListener('resize', buildLayout);
+    window.removeEventListener('keydown', onKeyDown);
+  };
 }
 
 // --- INITIALIZE THE PEOPLE EXHIBITION (Scene 03: GSAP Flip Card Gallery) ---
