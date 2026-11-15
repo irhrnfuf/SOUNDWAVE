@@ -111,7 +111,7 @@
           </div>
 
           <p class="deck-narrative-lead">
-            <strong>Featuring over 85 curated artists</strong> across synthwave, indie rock, underground techno, and acoustic roots on Biscayne Bay.
+            <strong>Featuring 16 curated artist sets</strong> across synthwave, indie rock, underground techno, and acoustic roots on Biscayne Bay.
           </p>
 
           <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: #8c8273;">
@@ -167,7 +167,7 @@
           <div class="telemetry-grid">
             <div class="telemetry-item">
               <span class="telemetry-label">TOTAL ACTS:</span>
-              <span class="telemetry-val">85+ ARTISTS</span>
+              <span class="telemetry-val">16 BILLED SETS</span>
             </div>
             <div class="telemetry-item">
               <span class="telemetry-label">HEADLINERS:</span>
@@ -307,9 +307,9 @@
             <!-- Friday 12/18 -->
             <div class="club-day-col">
               <div class="club-day-header">FRIDAY 12/18 &bull; SUNSET IGNITION</div>
-              <div class="club-headliner-compact">AURORA ECHOES &bull; THE MIDNIGHT CHORDS</div>
+              <div class="club-headliner-compact">AURORA ECHOES &bull; DJ SOLARIS</div>
               <div class="club-undercard-compact">
-                GLASS HARBOR &bull; BASSLINE SYNDICATE &bull; COASTLINE &bull; THE VELVET SUNS &bull; EVENING QUARTET
+                THE VELVET SUNS &bull; BASSLINE SYNDICATE &bull; THE MIDNIGHT CHORDS &bull; EVENING STRING QUARTET
               </div>
             </div>
 
@@ -318,16 +318,16 @@
               <div class="club-day-header">SATURDAY 12/19 &bull; ELECTRIC FEVER</div>
               <div class="club-headliner-compact">STATIC VELOCITY &bull; GLASS HARBOR</div>
               <div class="club-undercard-compact">
-                LUNA &amp; THE STRINGS &bull; ACID CATHEDRAL &bull; MODULAR ENSEMBLE &bull; NOVA TWINS &bull; KLANGWERK
+                LUNA &amp; THE STRINGS &bull; MODULAR ENSEMBLE &bull; ACID CATHEDRAL (LIVE 303)
               </div>
             </div>
 
             <!-- Sunday 12/20 -->
             <div class="club-day-col">
               <div class="club-day-header">SUNDAY 12/20 &bull; MOONLIGHT FINALE</div>
-              <div class="club-headliner-compact">NEON PULSE &bull; DJ SOLARIS</div>
+              <div class="club-headliner-compact">NEON PULSE (CLOSING) &bull; DJ SOLARIS 360 FINALE</div>
               <div class="club-undercard-compact">
-                THE CHROMATICS &bull; SUBZERO &bull; CYBERNETIC PULSE &bull; HARBOR FOLK &bull; ALL-STAR FINALE
+                THE SUNBIRDS &bull; THE MIDNIGHT CHORDS JAM &bull; ALL-STAR BACKSTAGE FINALE (VIP SKYDECK)
               </div>
             </div>
           </div>
@@ -442,6 +442,25 @@
       </div>
     </section>
 
+    <!-- Interactive Genre Lineup Directory (Synced with canonical SOUNDWAVE_DATA) -->
+    <section id="lineup-filter-nav" class="ui-panel" style="margin-bottom: 2rem;">
+      <div class="panel-header">
+        <div>
+          <h2>Interactive Lineup Directory</h2>
+          <span style="font-size: 0.84rem; color: #57554f;">Synced directly to canonical stage times, set durations, and wristband tiers</span>
+        </div>
+        <span id="js-artist-count" style="font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; font-weight: 800;">16 of 16 sets shown</span>
+      </div>
+      <div class="artist-filter-bar" role="group" aria-label="Filter festival sets by genre">
+        <button type="button" class="schedule-day-pill active-day-pill" data-genre="ALL" onclick="filterArtistsByGenre('ALL', this)">All 16 Sets</button>
+        <button type="button" class="schedule-day-pill" data-genre="Rock" onclick="filterArtistsByGenre('Rock', this)">Rock</button>
+        <button type="button" class="schedule-day-pill" data-genre="Electronic" onclick="filterArtistsByGenre('Electronic', this)">Electronic</button>
+        <button type="button" class="schedule-day-pill" data-genre="Acoustic" onclick="filterArtistsByGenre('Acoustic', this)">Acoustic</button>
+        <button type="button" class="schedule-day-pill" data-genre="Special" onclick="filterArtistsByGenre('Special', this)">VIP SkyDeck Special</button>
+      </div>
+      <div id="js-artist-results" class="js-panel-grid"></div>
+    </section>
+
     <!-- Unit I & III: Stage Timetable Table -->
     <section class="ui-panel active-panel" style="margin-bottom: 2rem;">
       <div class="panel-header">
@@ -465,41 +484,57 @@
             <td><b>FRI &ndash; 06:00 PM</b></td>
             <td>The Velvet Suns</td>
             <td>Bassline Syndicate</td>
-            <td>Luna &amp; The Strings</td>
-            <td>Champagne Sunset Lounge</td>
-            <td>GA / VIP / Platinum</td>
+            <td>The Midnight Chords</td>
+            <td>Champagne Sunset Lounge <small>(VIP+)</small></td>
+            <td>3 Public Stages: GA+ &bull; SkyDeck: VIP+</td>
           </tr>
           <tr>
             <td><b>FRI &ndash; 09:30 PM</b></td>
-            <td><b>AURORA ECHOES</b></td>
+            <td><b>Aurora Echoes</b></td>
             <td>DJ Solaris</td>
             <td>Evening String Quartet</td>
-            <td>Acoustic Trio Secret Set</td>
-            <td>GA / VIP / Platinum</td>
+            <td>Acoustic Trio Secret Set <small>(VIP+)</small></td>
+            <td>3 Public Stages: GA+ &bull; SkyDeck: VIP+</td>
+          </tr>
+          <tr>
+            <td><b>SAT &ndash; 06:00 PM</b></td>
+            <td>&mdash; Gates Open &amp; Soundcheck &mdash;</td>
+            <td>&mdash; Dome Doors 6:30 PM &mdash;</td>
+            <td>Luna &amp; The Strings</td>
+            <td>VIP Sunset Reception <small>(VIP+)</small></td>
+            <td>Vinyl Lawn: GA+ &bull; SkyDeck: VIP+</td>
           </tr>
           <tr>
             <td><b>SAT &ndash; 07:00 PM</b></td>
             <td>Static Velocity</td>
             <td>Modular Ensemble</td>
-            <td>Live LP Lathe Pressing</td>
-            <td>Craft Sommelier Tasting</td>
-            <td>GA / VIP / Platinum</td>
+            <td>&mdash; Vinyl Lathe Pressing &mdash;</td>
+            <td>Craft Sommelier Tasting <small>(VIP+)</small></td>
+            <td>3 Public Stages: GA+ &bull; SkyDeck: VIP+</td>
           </tr>
           <tr>
             <td><b>SAT &ndash; 10:30 PM</b></td>
             <td>Glass Harbor</td>
             <td>Acid Cathedral (Live 303)</td>
+            <td>&mdash; Acoustic Encore Screen &mdash;</td>
+            <td>Midnight B2B Club Session <small>(VIP+)</small></td>
+            <td>3 Public Stages: GA+ &bull; SkyDeck: VIP+</td>
+          </tr>
+          <tr>
+            <td><b>SUN &ndash; 07:30 PM</b></td>
+            <td>&mdash; Mainstage Twilight Reset &mdash;</td>
+            <td>&mdash; Dome 360 Calibration &mdash;</td>
             <td>The Sunbirds</td>
-            <td>Midnight B2B Club Session</td>
-            <td>GA / VIP / Platinum</td>
+            <td>Twilight Mixology Hour <small>(VIP+)</small></td>
+            <td>Vinyl Lawn: GA+ &bull; SkyDeck: VIP+</td>
           </tr>
           <tr>
             <td><b>SUN &ndash; 10:00 PM</b></td>
-            <td><b>NEON PULSE (CLOSING)</b></td>
+            <td><b>Neon Pulse (Closing)</b></td>
             <td>DJ Solaris 360 Finale</td>
             <td>The Midnight Chords Jam</td>
-            <td>All-Star Backstage Finale</td>
-            <td>GA / VIP / Platinum</td>
+            <td><b>All-Star Backstage Finale</b></td>
+            <td>Public Stages: GA+ &bull; SkyDeck: VIP / Platinum Only</td>
           </tr>
         </tbody>
         <tfoot>
@@ -550,7 +585,7 @@
         </div>
 
         <p class="footer-narrative">
-          A three-day gathering uniting 45,000 music lovers along Biscayne Bay with four distinct soundscapes, live vinyl lacquer cutting, kinetic sculptures, and ocean stewardship.
+          A three-day gathering uniting 82,000+ music lovers along Biscayne Bay with four distinct soundscapes, live vinyl lacquer cutting, kinetic sculptures, and ocean stewardship.
         </p>
 
         <!-- Live Festival Pulse Capsule -->

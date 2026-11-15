@@ -9,15 +9,41 @@ var FESTIVAL_SERVICE_FEE = 12.50;
 var IS_EARLY_BIRD_ACTIVE = true;
 var globalPassCounter = 100;
 
-// --- UNIT VI: JavaScript Array of Objects ---
-const FESTIVAL_ARTISTS = [
-  { name: "Neon Pulse", genre: "Electronic", stage: "Horizon Arena", day: "Sunday • 10:00 PM", rating: 4.9 },
-  { name: "Aurora Echoes", genre: "Rock", stage: "Horizon Arena", day: "Friday • 09:30 PM", rating: 4.8 },
-  { name: "DJ Solaris", genre: "Electronic", stage: "Analog Dome", day: "Friday • 09:30 PM", rating: 4.9 },
-  { name: "The Midnight Chords", genre: "Acoustic", stage: "Vinyl Lawn", day: "Friday • 06:00 PM", rating: 4.7 },
-  { name: "Static Velocity", genre: "Rock", stage: "Horizon Arena", day: "Saturday • 07:00 PM", rating: 4.6 },
-  { name: "Luna & The Strings", genre: "Acoustic", stage: "Vinyl Lawn", day: "Saturday • 06:00 PM", rating: 4.8 }
+// --- UNIT VI: JavaScript Array of Objects (Derived from canonical SOUNDWAVE_DATA) ---
+const FALLBACK_PERFORMANCES = [
+  { artist: "The Velvet Suns", genre: "Rock", stage: "Horizon Arena", dayDisplay: "Friday • 06:00 PM", duration: "90m", rating: 4.8, access: "GA / VIP / Platinum" },
+  { artist: "Bassline Syndicate", genre: "Electronic", stage: "Analog Dome", dayDisplay: "Friday • 06:00 PM", duration: "90m", rating: 4.8, access: "GA / VIP / Platinum" },
+  { artist: "The Midnight Chords", genre: "Acoustic", stage: "Vinyl Lawn", dayDisplay: "Friday • 06:00 PM", duration: "90m", rating: 4.7, access: "GA / VIP / Platinum" },
+  { artist: "Aurora Echoes", genre: "Rock", stage: "Horizon Arena", dayDisplay: "Friday • 09:30 PM", duration: "105m", rating: 4.8, access: "GA / VIP / Platinum" },
+  { artist: "DJ Solaris", genre: "Electronic", stage: "Analog Dome", dayDisplay: "Friday • 09:30 PM", duration: "105m", rating: 4.9, access: "GA / VIP / Platinum" },
+  { artist: "Evening String Quartet", genre: "Acoustic", stage: "Vinyl Lawn", dayDisplay: "Friday • 09:30 PM", duration: "90m", rating: 4.7, access: "GA / VIP / Platinum" },
+  { artist: "Luna & The Strings", genre: "Acoustic", stage: "Vinyl Lawn", dayDisplay: "Saturday • 06:00 PM", duration: "75m", rating: 4.8, access: "GA / VIP / Platinum" },
+  { artist: "Static Velocity", genre: "Rock", stage: "Horizon Arena", dayDisplay: "Saturday • 07:00 PM", duration: "105m", rating: 4.6, access: "GA / VIP / Platinum" },
+  { artist: "Modular Ensemble", genre: "Electronic", stage: "Analog Dome", dayDisplay: "Saturday • 07:00 PM", duration: "90m", rating: 4.7, access: "GA / VIP / Platinum" },
+  { artist: "Glass Harbor", genre: "Rock", stage: "Horizon Arena", dayDisplay: "Saturday • 10:30 PM", duration: "105m", rating: 4.8, access: "GA / VIP / Platinum" },
+  { artist: "Acid Cathedral (Live 303)", genre: "Electronic", stage: "Analog Dome", dayDisplay: "Saturday • 10:30 PM", duration: "120m", rating: 4.9, access: "GA / VIP / Platinum" },
+  { artist: "The Sunbirds", genre: "Acoustic", stage: "Vinyl Lawn", dayDisplay: "Sunday • 07:30 PM", duration: "90m", rating: 4.7, access: "GA / VIP / Platinum" },
+  { artist: "The Midnight Chords Jam", genre: "Acoustic", stage: "Vinyl Lawn", dayDisplay: "Sunday • 10:00 PM", duration: "120m", rating: 4.8, access: "GA / VIP / Platinum" },
+  { artist: "Neon Pulse (Closing)", genre: "Electronic", stage: "Horizon Arena", dayDisplay: "Sunday • 10:00 PM", duration: "120m", rating: 4.9, access: "GA / VIP / Platinum" },
+  { artist: "DJ Solaris 360 Finale", genre: "Electronic", stage: "Analog Dome", dayDisplay: "Sunday • 10:00 PM", duration: "120m", rating: 4.9, access: "GA / VIP / Platinum" },
+  { artist: "All-Star Backstage Finale", genre: "Special", stage: "VIP Cabanas & SkyDeck", dayDisplay: "Sunday • 10:00 PM", duration: "120m", rating: 5.0, access: "VIP / Platinum Only" }
 ];
+
+const FESTIVAL_ARTISTS = (
+  typeof window !== "undefined" &&
+  window.SOUNDWAVE_DATA &&
+  Array.isArray(window.SOUNDWAVE_DATA.performances)
+    ? window.SOUNDWAVE_DATA.performances
+    : FALLBACK_PERFORMANCES
+).map((perf) => ({
+  name: perf.artist,
+  genre: perf.genre,
+  stage: perf.stage,
+  day: perf.dayDisplay || (perf.dayName + " • " + perf.time),
+  duration: perf.duration || "90m",
+  rating: perf.rating || 4.8,
+  access: perf.access || (perf.stage === "VIP Cabanas & SkyDeck" ? "VIP / Platinum Only" : "GA / VIP / Platinum")
+}));
 
 // Quick-select a Pass Tier from the Tier Cards directly into the Checkout Form
 function selectPassTierFromCard(tierValue) {
@@ -31,10 +57,20 @@ function selectPassTierFromCard(tierValue) {
 }
 
 // 1. UNIT VI: Filter Artists using Array of Objects, FOR Loop & IF/ELSE
-function filterArtistsByGenre(selectedGenre) {
+function filterArtistsByGenre(selectedGenre, btnEl) {
   const container = document.getElementById("js-artist-results");
   const countSpan = document.getElementById("js-artist-count");
   if (!container || !countSpan) return;
+
+  const filterNav = document.getElementById("lineup-filter-nav");
+  if (filterNav) {
+    const pills = filterNav.querySelectorAll(".schedule-day-pill");
+    pills.forEach((pill) => {
+      const targetGenre = pill.getAttribute("data-genre");
+      const isActive = btnEl ? pill === btnEl : targetGenre === selectedGenre;
+      pill.classList.toggle("active-day-pill", isActive);
+    });
+  }
 
   let htmlCards = "";
   let matchedCount = 0;
@@ -43,17 +79,22 @@ function filterArtistsByGenre(selectedGenre) {
     const artist = FESTIVAL_ARTISTS[i];
     if (selectedGenre === "ALL" || artist.genre === selectedGenre) {
       matchedCount++;
+      const accessTag = artist.access === "VIP / Platinum Only"
+        ? '<span style="display:inline-block;margin-top:0.35rem;padding:2px 7px;border-radius:999px;font-size:0.7rem;font-weight:800;background:#ffe082;border:1.5px solid #111;color:#111;">VIP / PLATINUM ONLY</span>'
+        : '<span style="display:inline-block;margin-top:0.35rem;padding:2px 7px;border-radius:999px;font-size:0.7rem;font-weight:800;background:#e8f5e9;border:1.5px solid #111;color:#111;">GA / VIP / PLATINUM</span>';
+
       htmlCards +=
         '<div class="js-card">' +
           "<h4>" + artist.name + "</h4>" +
           "<p><b>" + artist.genre + "</b> &bull; " + artist.stage + "<br />" +
-          artist.day + " &bull; Score: " + artist.rating + "/5</p>" +
+          artist.day + " &bull; " + artist.duration + " &bull; Score: " + artist.rating + "/5</p>" +
+          accessTag +
         "</div>";
     }
   }
 
   container.innerHTML = htmlCards;
-  countSpan.innerText = matchedCount + " of " + FESTIVAL_ARTISTS.length + " acts shown";
+  countSpan.innerText = matchedCount + " of " + FESTIVAL_ARTISTS.length + " sets shown";
 }
 
 // --- Persistent Cart Storage & Retrieval ---
@@ -128,21 +169,21 @@ function calculateLivePassTotal() {
   const promoCode = promoInput ? promoInput.value.trim().toUpperCase() : "";
 
   let basePrice = 129;
-  let tierPerkText = "Four-Stage General Access";
+  let tierPerkText = "3 Main Public Stages + Waterfront Promenade (SkyDeck excluded)";
 
   // Unit VI: switch statement
   switch (selectedTier) {
     case "General Admission ($129)":
       basePrice = 129;
-      tierPerkText = "General Lawn & Arena Access";
+      tierPerkText = "3 Main Public Stages + Waterfront Promenade (SkyDeck excluded)";
       break;
     case "VIP Gold Pass ($249)":
       basePrice = 249;
-      tierPerkText = "VIP Viewing Terrace + Priority Lane";
+      tierPerkText = "All 4 Stages incl. VIP Cabanas & SkyDeck + Front-Wave Pits";
       break;
     case "Backstage All-Access ($499)":
       basePrice = 499;
-      tierPerkText = "Backstage Lounge + Artist Meet & Greet";
+      tierPerkText = "All 4 Stages, Side-Stage Wings, SkyDeck & Private Suites";
       break;
     default:
       basePrice = 129;
@@ -554,11 +595,36 @@ function parseItemSlot(itemStr) {
   return null;
 }
 
-// Session-based in-memory working schedule.
-// localStorage stores finalized/locked schedules under SCHEDULE_STORAGE_KEY.
+// Persists active working schedule in localStorage and syncs notice banners
+function persistActiveSchedule() {
+  try {
+    if (activeScheduleItems.length > 0) {
+      localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(activeScheduleItems));
+    } else {
+      localStorage.removeItem(SCHEDULE_STORAGE_KEY);
+    }
+  } catch (e) {
+    console.warn("Could not save to localStorage:", e);
+  }
+  updateScheduleNoticeBanner();
+}
+
+// Auto-loads saved weekend schedule from localStorage so builder edits persist across reloads
 function loadSavedLineup() {
-  // Fresh session begins empty on the active builder workspace
   activeScheduleItems = [];
+  try {
+    const raw = localStorage.getItem(SCHEDULE_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        activeScheduleItems = parsed
+          .filter(item => typeof item === "string" && item.trim().length > 0)
+          .map(item => item.replace(/\uFFFD/g, "-"));
+      }
+    }
+  } catch (e) {
+    console.warn("Could not load saved schedule from localStorage:", e);
+  }
   renderLineupList();
   setupDragAndDropListeners();
   setupKeyboardAccessibility();
@@ -698,8 +764,9 @@ function addArtistDirectly(artistStr) {
   const normalizedStr = artistStr.replace(/\uFFFD/g, "-");
   if (!activeScheduleItems.includes(normalizedStr)) {
     activeScheduleItems.push(normalizedStr);
+    persistActiveSchedule();
     renderLineupList();
-    showScheduleFeedback("Added: " + normalizedStr.split("-")[0].trim() + " ✓", "success");
+    showScheduleFeedback("Added & auto-saved: " + normalizedStr.split("-")[0].trim() + " ✓", "success");
   } else {
     showScheduleFeedback("Already in your schedule!", "warning");
   }
@@ -708,16 +775,18 @@ function addArtistDirectly(artistStr) {
 function removeArtistFromSchedule(index) {
   if (index >= 0 && index < activeScheduleItems.length) {
     const removed = activeScheduleItems.splice(index, 1)[0];
+    persistActiveSchedule();
     renderLineupList();
-    showScheduleFeedback("Removed: " + removed.split("-")[0].trim(), "info");
+    showScheduleFeedback("Removed & synced: " + removed.split("-")[0].trim(), "info");
   }
 }
 
 function clearSavedLineup() {
   if (activeScheduleItems.length === 0) return;
   activeScheduleItems = [];
+  persistActiveSchedule();
   renderLineupList();
-  showScheduleFeedback("Working session reset", "info");
+  showScheduleFeedback("Saved schedule cleared", "info");
 }
 
 // Sophisticated time interval conflict detection: checks if [startA, endA) overlaps [startB, endB) on same day
@@ -828,13 +897,8 @@ function saveScheduleForLater() {
     alert("Please add at least one performance before saving.");
     return;
   }
-  try {
-    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(activeScheduleItems));
-  } catch (e) {
-    console.warn("Could not save to localStorage:", e);
-  }
+  persistActiveSchedule();
   openScheduleSavedModal(activeScheduleItems, "Saved for Later");
-  updateScheduleNoticeBanner();
 }
 
 // Lock passes & attach schedule to checkout
@@ -843,11 +907,7 @@ function lockScheduleAndProceed() {
     alert("Please add at least one performance before locking your passes.");
     return;
   }
-  try {
-    localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(activeScheduleItems));
-  } catch (e) {
-    console.warn("Could not save to localStorage:", e);
-  }
+  persistActiveSchedule();
   window.location.href = "./passes.html?from=schedule#book-pass";
 }
 

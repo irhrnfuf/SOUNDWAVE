@@ -1546,4 +1546,65 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
   .dj-mixer-unit {
     width: 90vw;
   }
+
+  .dj-gateway-skip {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Gateway Skip Link & Keyboard Focus Visibility */
+.dj-gateway-skip {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 2rem;
+  z-index: 25;
+}
+
+.dj-gateway-skip:focus-visible,
+#dj-mixer-unit:focus-visible,
+.btn-sound:focus-visible,
+.btn-skip:focus-visible {
+  outline: 2px solid #00f0ff;
+  outline-offset: 4px;
+}
+
+/* Comprehensive Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .dj-mixer-unit,
+  .dj-ambient-glow::before,
+  .dj-power-line,
+  .dj-led,
+  .dj-screen-glow,
+  .dj-ring,
+  .scene-bg-photo,
+  .stage-glow {
+    animation: none !important;
+  }
+
+  .dj-mixer-unit {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+
+  .dj-shutter,
+  .veil-shutter,
+  .archive-hud,
+  .scene-rail {
+    transition: none !important;
+  }
 }

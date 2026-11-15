@@ -605,15 +605,21 @@ function renderArchiveTable() {
 
 // --- INITIALIZE THE PEOPLE EXHIBITION (Scene 03: GSAP Flip Card Gallery) ---
 function createFlipGalleryItems(photos) {
-  return photos.slice(0, 5).map((photo, idx) => ({
-    id: photo.id || `people-${idx}`,
-    image: photo.full || photo.thumb,
-    alt: `${photo.title} — ${photo.location}`,
-    title: photo.title,
-    meta: `${photo.location} / SoundWave Archive / ${photo.timestamp}`,
-    description: photo.caption,
-    caption: `Captured on 35mm film at ${photo.location}. Part of the SoundWave Living Archive Collection.`,
-  }));
+  return photos.slice(0, 5).map((photo, idx) => {
+    const thumbSrc = photo.thumb || photo.full;
+    const fullSrc = photo.full || photo.thumb;
+    return {
+      id: photo.id || `people-${idx}`,
+      thumb: thumbSrc,
+      full: fullSrc,
+      image: thumbSrc,
+      alt: `${photo.title} — ${photo.location}`,
+      title: photo.title,
+      meta: `${photo.location} / SoundWave Archive / ${photo.timestamp}`,
+      description: photo.caption,
+      caption: `Captured on 35mm film at ${photo.location}. Part of the SoundWave Living Archive Collection.`,
+    };
+  });
 }
 
 function renderPeopleGallery() {
@@ -780,6 +786,14 @@ function renderPeopleGallery() {
     desktopEls.cards.forEach((card, itemIndex) => {
       const slot = order.indexOf(itemIndex);
       const isHero = itemIndex === heroItemIndex;
+      const item = items[itemIndex];
+      const imgEl = card.querySelector('img');
+      if (imgEl && item) {
+        const targetSrc = opened && isHero ? (item.full || item.image) : (item.thumb || item.image);
+        if (imgEl.getAttribute('src') !== targetSrc) {
+          imgEl.setAttribute('src', targetSrc);
+        }
+      }
       card.classList.toggle('is-hero', opened && isHero);
       card.setAttribute('aria-current', opened && isHero ? 'true' : 'false');
       card.tabIndex = !opened ? (slot === 0 ? 0 : -1) : (isHero ? -1 : 0);
@@ -882,7 +896,7 @@ function renderPeopleGallery() {
     if (!mobileEls) return;
     const heroIdx = order[0];
     const heroItem = items[heroIdx];
-    mobileEls.heroImg.src = heroItem.image;
+    mobileEls.heroImg.src = heroItem.full || heroItem.image;
     mobileEls.heroImg.alt = heroItem.alt;
     transitionText(mobileEls.content, mobileEls.text, mobileEls.counterCur, heroIdx);
 
@@ -893,7 +907,7 @@ function renderPeopleGallery() {
       btn.type = 'button';
       btn.className = 'hxs-flip-mobile-thumb';
       btn.setAttribute('aria-label', `${item.title} — ${item.meta}`);
-      btn.innerHTML = `<img src="${item.image}" alt="${item.alt}" draggable="false" />`;
+      btn.innerHTML = `<img src="${item.thumb || item.image}" alt="${item.alt}" draggable="false" />`;
       btn.addEventListener('click', () => selectItem(itemIndex));
       mobileEls.thumbsWrap.appendChild(btn);
     });
@@ -1128,21 +1142,21 @@ function initFrequencyCanvas() {
 
   const ctx1 = c1.getContext('2d');
   const ctx4 = c4.getContext('2d');
+  if (!ctx1 || !ctx4) return;
 
   let width = (c1.width = c4.width = window.innerWidth);
   let height = (c1.height = c4.height = window.innerHeight);
 
-  window.addEventListener('resize', () => {
-    width = c1.width = c4.width = window.innerWidth;
-    height = c1.height = c4.height = window.innerHeight;
-  });
-
   let t = 0;
+  let rafId = null;
+  let isSignalVisible = true;
+  let isFreqVisible = false;
+  let isPageVisible = !document.hidden;
 
-  function draw() {
-    t += 0.025;
+  const reducedMotionQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+  let reduceMotion = reducedMotionQuery?.matches ?? false;
 
-    // --- Scene 01 Signal Line: Slow pulse, heartbeat cadence ---
+  function drawSignalFrame() {
     ctx1.clearRect(0, 0, width, height);
     ctx1.beginPath();
     ctx1.lineWidth = 2.2;
@@ -1150,7 +1164,6 @@ function initFrequencyCanvas() {
 
     const centerY = height * 0.58;
     for (let x = 0; x < width; x += 4) {
-      // Natural packet envelope (sine pulse)
       const distFromCenter = Math.abs(x - width / 2) / (width / 2);
       const envelope = Math.exp(-distFromCenter * 3.5);
       const wave = Math.sin(x * 0.015 - t * 2.5) * Math.sin(x * 0.005) * 45 * envelope;
@@ -1160,13 +1173,13 @@ function initFrequencyCanvas() {
       else ctx1.lineTo(x, y);
     }
     ctx1.stroke();
+  }
 
-    // --- Scene 04 Frequency Field: Multi-layered harmonizing wave lines ---
+  function drawFrequencyFrame() {
     ctx4.clearRect(0, 0, width, height);
     for (let layer = 0; layer < 4; layer++) {
       ctx4.beginPath();
       ctx4.lineWidth = 1.2;
-      // In Scene 04 Frequency Field: sleek muted archival monochrome waves
       ctx4.strokeStyle = layer === 0 ? 'rgba(244, 237, 224, 0.45)' : (layer === 1 ? 'rgba(244, 237, 224, 0.28)' : 'rgba(244, 237, 224, 0.16)');
 
       const layerY = height * 0.52 + (layer - 1.5) * 35;
@@ -1177,11 +1190,73 @@ function initFrequencyCanvas() {
       }
       ctx4.stroke();
     }
-
-    requestAnimationFrame(draw);
   }
 
-  draw();
+  function syncLoopState() {
+    const shouldAnimate = !reduceMotion && isPageVisible && (isSignalVisible || isFreqVisible);
+    if (shouldAnimate && rafId === null) {
+      rafId = requestAnimationFrame(tick);
+    } else if (!shouldAnimate && rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  function tick() {
+    rafId = null;
+    if (reduceMotion || !isPageVisible || (!isSignalVisible && !isFreqVisible)) {
+      return;
+    }
+    t += 0.025;
+    if (isSignalVisible) drawSignalFrame();
+    if (isFreqVisible) drawFrequencyFrame();
+    rafId = requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('resize', () => {
+    width = c1.width = c4.width = window.innerWidth;
+    height = c1.height = c4.height = window.innerHeight;
+    drawSignalFrame();
+    drawFrequencyFrame();
+  });
+
+  if ('IntersectionObserver' in window) {
+    const sceneSignal = document.getElementById('scene-signal');
+    const sceneFrequency = document.getElementById('scene-frequency');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.target === sceneSignal) isSignalVisible = entry.isIntersecting;
+        if (entry.target === sceneFrequency) isFreqVisible = entry.isIntersecting;
+      });
+      if (isSignalVisible) drawSignalFrame();
+      if (isFreqVisible) drawFrequencyFrame();
+      syncLoopState();
+    }, { threshold: 0.02 });
+
+    if (sceneSignal) observer.observe(sceneSignal);
+    if (sceneFrequency) observer.observe(sceneFrequency);
+  } else {
+    isSignalVisible = true;
+    isFreqVisible = true;
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    isPageVisible = !document.hidden;
+    syncLoopState();
+  });
+
+  reducedMotionQuery?.addEventListener?.('change', (e) => {
+    reduceMotion = e.matches;
+    if (reduceMotion) {
+      drawSignalFrame();
+      drawFrequencyFrame();
+    }
+    syncLoopState();
+  });
+
+  drawSignalFrame();
+  drawFrequencyFrame();
+  syncLoopState();
 }
 
 // --- SCENE NAVIGATION RAIL & OBSERVER ---
@@ -1250,10 +1325,14 @@ function setupEnterTransition() {
     elements.btnEnter.addEventListener('click', handleFestivalTransition);
   }
 
-  // Also handle "Skip to Festival" link in top HUD
+  // Also handle "Skip to Festival" links in top HUD and DJ gateway
   const btnSkip = document.getElementById('btn-skip-to-festival');
   if (btnSkip) {
     btnSkip.addEventListener('click', handleFestivalTransition);
+  }
+  const btnGatewaySkip = document.getElementById('btn-gateway-skip');
+  if (btnGatewaySkip) {
+    btnGatewaySkip.addEventListener('click', handleFestivalTransition);
   }
 
   // Sound toggle button
@@ -1261,7 +1340,8 @@ function setupEnterTransition() {
     elements.btnSound.addEventListener('click', () => {
       initAudio();
       state.soundEnabled = !state.soundEnabled;
-      elements.btnSound.textContent = state.soundEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+      elements.btnSound.setAttribute('aria-pressed', String(state.soundEnabled));
+      elements.btnSound.textContent = state.soundEnabled ? 'SOUND ON' : 'SOUND OFF';
       if (state.soundEnabled) playSubtlePulse(220, 0.2);
     });
   }
@@ -1334,16 +1414,92 @@ function playDjDropSound() {
 function setupDjGateway() {
   const gateway = document.getElementById('dj-gateway');
   const mixer = document.getElementById('dj-mixer-unit');
+  const skipLink = document.getElementById('btn-gateway-skip');
   const sceneSignal = document.getElementById('scene-signal');
   const hud = document.querySelector('.archive-hud');
 
   if (!gateway || !mixer) return;
 
   let isActivating = false;
+  let portalDismissed = false;
+
+  const backgroundNodes = [
+    hud,
+    document.querySelector('.scene-rail'),
+    ...Array.from(document.querySelectorAll('.scene-section')),
+    elements.modal
+  ].filter(Boolean);
+
+  function setBackgroundInert(locked) {
+    backgroundNodes.forEach((node) => {
+      node.inert = locked;
+      if (locked) {
+        node.setAttribute('aria-hidden', 'true');
+      } else {
+        node.removeAttribute('aria-hidden');
+      }
+    });
+  }
+
+  function getFocusableElements() {
+    return [mixer, skipLink].filter((el) => el && el.offsetParent !== null && !el.disabled);
+  }
+
+  function handleGatewayKeydown(e) {
+    if (portalDismissed) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      triggerDjDrop();
+      return;
+    }
+
+    if (e.key === 'Tab') {
+      const focusables = getFocusableElements();
+      if (focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+
+      if (!gateway.contains(active)) {
+        e.preventDefault();
+        first.focus();
+        return;
+      }
+
+      if (e.shiftKey) {
+        if (active === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  // Trap focus & mark background landmarks inert while modal gateway is open
+  setBackgroundInert(true);
+  document.addEventListener('keydown', handleGatewayKeydown);
+  requestAnimationFrame(() => {
+    if (!portalDismissed) {
+      mixer.focus({ preventScroll: true });
+    }
+  });
 
   function triggerDjDrop() {
     if (isActivating) return;
     isActivating = true;
+    portalDismissed = true;
+    document.removeEventListener('keydown', handleGatewayKeydown);
+
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+    const openDelay = reduceMotion ? 0 : 140;
+    const hudDelay = reduceMotion ? 0 : 350;
+    const unlockDelay = reduceMotion ? 20 : 980;
+    const hideDelay = reduceMotion ? 30 : 1300;
 
     // Initialize audio context on user interaction
     initAudio();
@@ -1363,26 +1519,36 @@ function setupDjGateway() {
       if (sceneSignal) {
         sceneSignal.classList.add('scene-revealed');
       }
-    }, 140);
+    }, openDelay);
 
     // 4. Reveal top HUD smoothly
     setTimeout(() => {
       if (hud) {
         hud.classList.add('hud-revealed');
       }
-    }, 350);
+    }, hudDelay);
 
-    // 5. Dismiss gateway overlay and unlock scroll
+    // 5. Dismiss gateway overlay, restore background interactivity & focus, unlock scroll
     setTimeout(() => {
       gateway.classList.add('portal-dismissed');
+      gateway.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('dj-portal-locked');
+      setBackgroundInert(false);
       window.scrollTo(0, 0);
-    }, 980);
+
+      const firstFocusTarget = hud?.querySelector('.hud-brand') || sceneSignal;
+      if (firstFocusTarget) {
+        if (!firstFocusTarget.hasAttribute('tabindex') && firstFocusTarget === sceneSignal) {
+          firstFocusTarget.setAttribute('tabindex', '-1');
+        }
+        firstFocusTarget.focus({ preventScroll: true });
+      }
+    }, unlockDelay);
 
     // 6. Clean up after transition completes
     setTimeout(() => {
       gateway.style.display = 'none';
-    }, 1300);
+    }, hideDelay);
   }
 
   // Click & Keydown triggers on the DJ mixer
