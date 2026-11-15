@@ -521,6 +521,12 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
   transform: scale(0.65) rotate(-14deg);
 }
 
+.hs-sticker--tl[src*="b4_radiohead"] {
+  top: 4px;
+  left: -12px;
+  max-width: 108px;
+}
+
 .hs-sticker--br {
   bottom: -18px;
   right: -18px;
