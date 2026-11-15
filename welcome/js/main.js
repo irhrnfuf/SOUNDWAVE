@@ -325,8 +325,8 @@ const HOVER_STACK_REVIEWS = [
     tag: "Roy Anderson",
     bg: "#E4FF1A",
     textColor: "#1A1A1A",
-    stickerTopLeft: null,
-    stickerBottomRight: null,
+    stickerTopLeft: "./assets/stickers/a1_leopard.png",
+    stickerBottomRight: "./assets/stickers/a4_martini.png",
   },
   {
     id: 2,
@@ -334,8 +334,8 @@ const HOVER_STACK_REVIEWS = [
     tag: "Kathy",
     bg: "#DD1155",
     textColor: "#FFFFFF",
-    stickerTopLeft: null,
-    stickerBottomRight: null,
+    stickerTopLeft: "./assets/stickers/a5_lips.png",
+    stickerBottomRight: "./assets/stickers/a8_dj_turntable.png",
   },
   {
     id: 3,
@@ -343,8 +343,8 @@ const HOVER_STACK_REVIEWS = [
     tag: "Jonathan Dan",
     bg: "#FF5714",
     textColor: "#1A1A1A",
-    stickerTopLeft: null,
-    stickerBottomRight: null,
+    stickerTopLeft: "./assets/stickers/b1_acdc.png",
+    stickerBottomRight: "./assets/stickers/a3_discoball.png",
   },
   {
     id: 4,
@@ -352,8 +352,8 @@ const HOVER_STACK_REVIEWS = [
     tag: "Ferran Ramos",
     bg: "#E980FC",
     textColor: "#1A1A1A",
-    stickerTopLeft: null,
-    stickerBottomRight: null,
+    stickerTopLeft: "./assets/stickers/b16_gengar_sprite.png",
+    stickerBottomRight: "./assets/stickers/b17_pixel_espeon.png",
   },
   {
     id: 5,
@@ -361,8 +361,8 @@ const HOVER_STACK_REVIEWS = [
     tag: "Cassie",
     bg: "#67D6A3",
     textColor: "#1A1A1A",
-    stickerTopLeft: null,
-    stickerBottomRight: null,
+    stickerTopLeft: "./assets/stickers/b1_acdc.png",
+    stickerBottomRight: "./assets/stickers/a16_driving_poster.png",
   },
   {
     id: 6,
@@ -370,8 +370,8 @@ const HOVER_STACK_REVIEWS = [
     tag: "Pamela Lovejoy",
     bg: "#3454D1",
     textColor: "#FFFFFF",
-    stickerTopLeft: null,
-    stickerBottomRight: null,
+    stickerTopLeft: "./assets/stickers/b4_radiohead_horizontal.png",
+    stickerBottomRight: "./assets/stickers/b5_3d_gengar.png",
   },
   {
     id: 7,
@@ -379,8 +379,8 @@ const HOVER_STACK_REVIEWS = [
     tag: "Melo",
     bg: "#B98CFF",
     textColor: "#1A1A1A",
-    stickerTopLeft: null,
-    stickerBottomRight: null,
+    stickerTopLeft: "./assets/stickers/b18_bullet_bill.png",
+    stickerBottomRight: "./assets/stickers/a17_red_7ball.png",
   },
 ];
 

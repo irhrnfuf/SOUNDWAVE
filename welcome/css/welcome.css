@@ -503,36 +503,38 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
 /* Hover-only symmetrical stickers (Top-Left & Bottom-Right) */
 .hs-sticker {
   position: absolute;
-  width: 74px;
-  height: 74px;
+  width: 78px;
+  height: 78px;
+  max-width: 110px;
+  max-height: 85px;
   object-fit: contain;
   pointer-events: none;
-  z-index: 6;
+  z-index: 10;
   opacity: 0;
-  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45));
-  transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.22, 1.6, 0.32, 1);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  transition: opacity 0.28s ease, transform 0.35s cubic-bezier(0.22, 1.6, 0.32, 1);
 }
 
 .hs-sticker--tl {
-  top: -22px;
-  left: -22px;
-  transform: scale(0.7) rotate(-14deg);
+  top: -18px;
+  left: -18px;
+  transform: scale(0.65) rotate(-14deg);
 }
 
 .hs-sticker--br {
-  bottom: -22px;
-  right: -22px;
-  transform: scale(0.7) rotate(12deg);
+  bottom: -18px;
+  right: -18px;
+  transform: scale(0.65) rotate(12deg);
 }
 
 .hs-card.is-active .hs-sticker--tl {
   opacity: 1;
-  transform: scale(1) rotate(-10deg);
+  transform: scale(1) rotate(-8deg);
 }
 
 .hs-card.is-active .hs-sticker--br {
   opacity: 1;
-  transform: scale(1) rotate(8deg);
+  transform: scale(1) rotate(6deg);
 }
 
 .hs-card:focus-visible .hs-card-surface {
