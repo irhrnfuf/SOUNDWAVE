@@ -436,11 +436,11 @@ body:has(#dj-gateway:not(.portal-dismissed)) #scene-signal.scene-revealed {
 .hs-card-quote {
   margin: 0;
   font-family: var(--sw-sans);
-  font-size: clamp(1.35rem, 1.75vw, 1.8rem);
+  font-size: clamp(1.15rem, 1.4vw, 1.48rem);
   font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  max-width: 94%;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  max-width: 96%;
 }
 
 .hs-card-footer {

@@ -321,8 +321,8 @@ function getTicketMarkup(component, size = '13.5px') {
 const HOVER_STACK_REVIEWS = [
   {
     id: 1,
-    quote: "Review 01 — Your festival review goes here.",
-    tag: "Afterglow 01",
+    quote: "Went for my daughter, but left the festival screaming higher than her",
+    tag: "Roy Anderson",
     bg: "#E4FF1A",
     textColor: "#1A1A1A",
     stickerTopLeft: null,
@@ -330,8 +330,8 @@ const HOVER_STACK_REVIEWS = [
   },
   {
     id: 2,
-    quote: "Review 02 — Your festival review goes here.",
-    tag: "Afterglow 02",
+    quote: "Nothing short of spectacular - the beach, the food, the lawn and most importantly the music",
+    tag: "Kathy",
     bg: "#DD1155",
     textColor: "#FFFFFF",
     stickerTopLeft: null,
@@ -339,8 +339,8 @@ const HOVER_STACK_REVIEWS = [
   },
   {
     id: 3,
-    quote: "Review 03 — Your festival review goes here.",
-    tag: "Afterglow 03",
+    quote: "Idk which was more crazier, the whole festival or proposing to my gf mid-concert lmao",
+    tag: "Jonathan Dan",
     bg: "#FF5714",
     textColor: "#1A1A1A",
     stickerTopLeft: null,
@@ -348,8 +348,8 @@ const HOVER_STACK_REVIEWS = [
   },
   {
     id: 4,
-    quote: "Review 04 — Your festival review goes here.",
-    tag: "Afterglow 04",
+    quote: "I came alone, but I left with people who I now call mi familia❤️",
+    tag: "Ferran Ramos",
     bg: "#E980FC",
     textColor: "#1A1A1A",
     stickerTopLeft: null,
@@ -357,8 +357,8 @@ const HOVER_STACK_REVIEWS = [
   },
   {
     id: 5,
-    quote: "Review 05 — Your festival review goes here.",
-    tag: "Afterglow 05",
+    quote: "Loved every moment of it",
+    tag: "Cassie",
     bg: "#67D6A3",
     textColor: "#1A1A1A",
     stickerTopLeft: null,
@@ -366,8 +366,8 @@ const HOVER_STACK_REVIEWS = [
   },
   {
     id: 6,
-    quote: "Review 06 — Your festival review goes here.",
-    tag: "Afterglow 06",
+    quote: "Someone take me back to Miami 😣",
+    tag: "Pamela Lovejoy",
     bg: "#3454D1",
     textColor: "#FFFFFF",
     stickerTopLeft: null,
@@ -375,8 +375,8 @@ const HOVER_STACK_REVIEWS = [
   },
   {
     id: 7,
-    quote: "Review 07 — Your festival review goes here.",
-    tag: "Afterglow 07",
+    quote: "Soundwave is my place of refuge from now on",
+    tag: "Melo",
     bg: "#B98CFF",
     textColor: "#1A1A1A",
     stickerTopLeft: null,
